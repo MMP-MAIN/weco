@@ -155,6 +155,7 @@ const projectView = document.getElementById('projectView')
 const openProjects = () => {
   projectView.classList.add('open')
   if (window.__lenis) window.__lenis.stop() // Lenis 정지 → 오버레이 네이티브 스크롤 복구
+  document.documentElement.style.overflow = 'hidden' // html도 잠가야 뒤 본문이 안 밀림
   document.body.style.overflow = 'hidden'
   document.body.classList.add('motion-paused') // 오버레이 동안 히어로 캔버스 정지(부하 절감)
   // 커버 이미지 강제 로드 (오버레이 안에서 lazy 로딩이 안 걸리는 문제 방지)
@@ -164,7 +165,7 @@ const openProjects = () => {
     if (s && !img.complete) img.setAttribute('src', s)
   })
 }
-const closeProjects = () => { projectView.classList.remove('open'); document.body.style.overflow = ''; if (window.__lenis) window.__lenis.start() }
+const closeProjects = () => { projectView.classList.remove('open'); document.documentElement.style.overflow = ''; document.body.style.overflow = ''; if (window.__lenis) window.__lenis.start() }
 document.getElementById('closeProjects')?.addEventListener('click', closeProjects)
 // PROJECT 진입점: 섹션 버튼 + 내비/히어로의 #portfolio 링크
 document.querySelectorAll('[data-open-projects], a[href="#portfolio"]').forEach(el => {
