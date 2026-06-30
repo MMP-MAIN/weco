@@ -235,7 +235,8 @@ typeCards?.addEventListener('click', (e) => {
   b.classList.add('active'); selectedType = b.dataset.value
 })
 
-const configReady = firebaseConfig.apiKey && !firebaseConfig.apiKey.includes('YOUR_')
+// 견적문의 → FormSubmit.co (계정 불필요, 이메일로 수신)
+const INQUIRY_ENDPOINT = 'https://formsubmit.co/ajax/storm2119@gmail.com'
 
 const setStatus = (msg, ok) => {
   formStatus.textContent = msg
@@ -252,30 +253,30 @@ form.addEventListener('submit', async (e) => {
     return
   }
 
-  if (!configReady) {
-    setStatus(`현재 온라인 접수 준비 중입니다. 전화(${PHONE})로 문의해주세요.`, false)
-    return
-  }
-
   submitBtn.disabled = true
   submitBtn.classList.add('sending')
   try {
-    const { initializeApp } = await import('https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js')
-    const { getDatabase, ref, push } = await import('https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js')
-    const app = initializeApp(firebaseConfig)
-    const db = getDatabase(app)
-    await push(ref(db, 'inquiries'), {
-      name,
-      phone,
-      type: selectedType,
-      budget: form.budget.value.trim(),
-      message: form.message.value.trim(),
-      status: 'new',
-      source: 'homepage',
-      createdAt: new Date().toISOString()
+    const res = await fetch(INQUIRY_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        _subject: '[위코컴퍼니] 새 견적문의',
+        _template: 'table',
+        _captcha: 'false',
+        이름: name,
+        연락처: phone,
+        유형: selectedType,
+        예산: form.budget.value.trim() || '미입력',
+        문의내용: form.message.value.trim() || '미입력'
+      })
     })
-    form.reset()
-    setStatus('의뢰서가 접수되었습니다. 검토 후 진행 가능 여부와 함께 연락드리겠습니다.', true)
+    const data = await res.json().catch(() => ({}))
+    if (res.ok && (data.success === 'true' || data.success === true)) {
+      form.reset()
+      setStatus('의뢰서가 접수되었습니다. 검토 후 진행 가능 여부와 함께 연락드리겠습니다.', true)
+    } else {
+      throw new Error(data.message || 'submit failed')
+    }
   } catch (err) {
     console.error(err)
     setStatus(`접수 중 오류가 발생했습니다. 전화(${PHONE})로 문의해주세요.`, false)
