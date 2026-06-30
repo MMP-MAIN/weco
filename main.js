@@ -378,7 +378,7 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
   // 3열 그리드 갤러리
   const gv = document.createElement('div')
   gv.className = 'gallery-view'
-  gv.innerHTML = `<div class="gv-bar container"><span class="gv-title"></span><button class="gv-close" aria-label="닫기">&times;</button></div><div class="gv-scroll"><div class="gv-grid"></div></div>`
+  gv.innerHTML = `<div class="gv-bar container"><span class="gv-title"></span><button class="gv-close" aria-label="닫기">&times;</button></div><div class="gv-scroll" data-lenis-prevent><div class="gv-grid"></div></div>`
   document.body.appendChild(gv)
   const gvTitle = gv.querySelector('.gv-title')
   const gvGrid = gv.querySelector('.gv-grid')
