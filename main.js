@@ -174,6 +174,12 @@ document.querySelectorAll('[data-open-projects], a[href="#portfolio"]').forEach(
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && projectView.classList.contains('open') && !document.querySelector('.lightbox.open')) closeProjects()
 })
+// 오버레이 휠 → pv-scroll 직접 스크롤 (Lenis·이벤트 라우팅과 무관하게 보장)
+projectView.addEventListener('wheel', (e) => {
+  if (!projectView.classList.contains('open')) return
+  const sc = projectView.querySelector('.pv-scroll')
+  if (sc) { sc.scrollTop += e.deltaY; e.preventDefault() }
+}, { passive: false })
 
 // ---- 스크롤 리빌 모션 ----
 const revealTargets = document.querySelectorAll(
