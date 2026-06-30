@@ -152,7 +152,17 @@ if (filterTabs) {
 
 // ---- PROJECT 전용 오버레이 열기/닫기 ----
 const projectView = document.getElementById('projectView')
-const openProjects = () => { projectView.classList.add('open'); document.body.style.overflow = 'hidden' }
+const openProjects = () => {
+  projectView.classList.add('open')
+  document.body.style.overflow = 'hidden'
+  document.body.classList.add('motion-paused') // 오버레이 동안 히어로 캔버스 정지(부하 절감)
+  // 커버 이미지 강제 로드 (오버레이 안에서 lazy 로딩이 안 걸리는 문제 방지)
+  projectView.querySelectorAll('.proj-card .proj-img img').forEach((img) => {
+    img.loading = 'eager'
+    const s = img.getAttribute('src')
+    if (s && !img.complete) img.setAttribute('src', s)
+  })
+}
 const closeProjects = () => { projectView.classList.remove('open'); document.body.style.overflow = '' }
 document.getElementById('closeProjects')?.addEventListener('click', closeProjects)
 // PROJECT 진입점: 섹션 버튼 + 내비/히어로의 #portfolio 링크
