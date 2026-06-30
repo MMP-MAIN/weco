@@ -95,8 +95,13 @@ html.no-intro .intro{display:none;}
 @media (prefers-reduced-motion:reduce){.hero-slide{transition:none;}.hero-slide.on{animation:none;transform:none;}}
 .hero-veil{position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(11,10,9,0) 45%, rgba(11,10,9,.35) 100%),
-    linear-gradient(180deg, rgba(11,10,9,.20) 0%, rgba(11,10,9,.10) 45%, rgba(11,10,9,.50) 100%);}
+    radial-gradient(ellipse 88% 64% at 50% 48%, rgba(12,11,10,.56) 0%, rgba(12,11,10,.30) 58%, rgba(12,11,10,.16) 100%),
+    linear-gradient(180deg, rgba(12,11,10,.46) 0%, rgba(12,11,10,.30) 42%, rgba(12,11,10,.66) 100%);}
+/* 시네마틱 슬로우 줌 (켄번즈) */
+.hero-kb{animation:heroZoom 24s ease-out forwards;will-change:transform;}
+@keyframes heroZoom{from{transform:scale(1.0)}to{transform:scale(1.12)}}
+.motion-paused .hero-kb{animation-play-state:paused;}
+@media (prefers-reduced-motion:reduce){.hero-kb{animation:none;}}
 .hero-inner{position:relative;width:100%;padding-top:72px;padding-bottom:40px;}
 .hero-eyebrow{font-family:var(--label);font-size:11px;letter-spacing:6px;color:rgba(255,255,255,.6);font-weight:500;margin-bottom:34px;}
 .hero-en{font-family:'Pretendard',sans-serif;font-style:normal;font-weight:800;
