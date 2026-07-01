@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.weco.kr/sitemap.xml
+Sitemap: https://mmp-main.github.io/weco/sitemap.xml
