@@ -181,6 +181,23 @@ projectView.addEventListener('wheel', (e) => {
   if (sc) { sc.scrollTop += e.deltaY; e.preventDefault() }
 }, { passive: false })
 
+// ---- 컨설팅/마케팅 탭 필터 ----
+;(() => {
+  const tabs = document.getElementById('clientTabs')
+  if (!tabs) return
+  const items = [...document.querySelectorAll('#clientList li')]
+  tabs.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return
+    tabs.querySelectorAll('button').forEach(x => x.classList.remove('active'))
+    b.classList.add('active')
+    const f = b.dataset.filter
+    items.forEach(li => {
+      const t = (li.querySelector('small') || {}).textContent
+      li.style.display = (f === 'all' || t === f) ? '' : 'none'
+    })
+  })
+})()
+
 // ---- 스크롤 리빌 모션 ----
 const revealTargets = document.querySelectorAll(
   '.section-eyebrow, .section-title, .section-desc, .standard-grid article, ' +
