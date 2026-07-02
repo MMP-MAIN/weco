@@ -544,3 +544,12 @@ html.has-cursor, html.has-cursor *{cursor:none !important;}
   .client-list li{font-size:12.5px;padding:9px 14px;}
   .pv-cat-title{font-size:18px;}
 }
+
+/* 견적도구 CTA 카드 */
+.est-tool{display:block;margin:28px 0 4px;padding:24px 26px;background:var(--panel);
+  border:1px solid var(--line);border-radius:14px;text-decoration:none;
+  transition:border-color .25s,transform .25s;}
+.est-tool:hover{border-color:var(--accent);transform:translateY(-2px);}
+.est-tool em{font-style:normal;display:block;font-size:12.5px;color:var(--dim);letter-spacing:.3px;margin-bottom:9px;}
+.est-tool strong{display:block;font-size:clamp(17px,2.4vw,20px);font-weight:800;color:var(--ink);letter-spacing:-.3px;margin-bottom:9px;}
+.est-tool span{display:block;font-size:13px;color:var(--dim);line-height:1.7;}
