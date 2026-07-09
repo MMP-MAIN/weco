@@ -6,4 +6,6 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url><loc>https://mmp-main.github.io/weco/en.html</loc></url>
+  <url><loc>https://mmp-main.github.io/weco/vi.html</loc></url>
 </urlset>

@@ -270,6 +270,21 @@ typeCards?.addEventListener('click', (e) => {
   b.classList.add('active'); selectedType = b.dataset.value
 })
 
+
+// 폼 메시지 다국어 (페이지 lang 기준)
+const FORM_MSG = ({
+  en: { need: 'Please enter your name and phone number.',
+        ok: 'Your request has been received. We will get back to you shortly.',
+        err: `Something went wrong. Please call ${PHONE}.` },
+  vi: { need: 'Vui lòng nhập họ tên và số điện thoại.',
+        ok: 'Yêu cầu của bạn đã được gửi. Chúng tôi sẽ liên hệ lại sớm.',
+        err: `Có lỗi xảy ra. Vui lòng gọi ${PHONE}.` }
+})[document.documentElement.lang] || {
+  need: '이름과 연락처를 입력해주세요.',
+  ok: '의뢰서가 접수되었습니다. 검토 후 진행 가능 여부와 함께 연락드리겠습니다.',
+  err: `접수 중 오류가 발생했습니다. 전화(${PHONE})로 문의해주세요.`
+}
+
 // 견적문의 → FormSubmit.co (계정 불필요, 이메일로 수신)
 const INQUIRY_ENDPOINT = 'https://formsubmit.co/ajax/storm2119@gmail.com'
 
@@ -284,7 +299,7 @@ form.addEventListener('submit', async (e) => {
   const phone = form.phone.value.trim()
 
   if (!name || !phone) {
-    setStatus('이름과 연락처를 입력해주세요.', false)
+    setStatus(FORM_MSG.need, false)
     return
   }
 
@@ -308,13 +323,13 @@ form.addEventListener('submit', async (e) => {
     const data = await res.json().catch(() => ({}))
     if (res.ok && (data.success === 'true' || data.success === true)) {
       form.reset()
-      setStatus('의뢰서가 접수되었습니다. 검토 후 진행 가능 여부와 함께 연락드리겠습니다.', true)
+      setStatus(FORM_MSG.ok, true)
     } else {
       throw new Error(data.message || 'submit failed')
     }
   } catch (err) {
     console.error(err)
-    setStatus(`접수 중 오류가 발생했습니다. 전화(${PHONE})로 문의해주세요.`, false)
+    setStatus(FORM_MSG.err, false)
   } finally {
     submitBtn.disabled = false
     submitBtn.classList.remove('sending')
