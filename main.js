@@ -1,7 +1,5 @@
-// ===== 클로드 인테리어 홈페이지 스크립트 =====
-import { firebaseConfig } from './firebase-config.js'
-
-const PHONE = '010-6330-5226' // 실제 번호로 교체
+// ===== 위코컴퍼니 홈페이지 스크립트 =====
+const PHONE = '010-6330-5226'
 
 // ---- 인트로 리빌 종료 ----
 ;(() => {
@@ -10,8 +8,15 @@ const PHONE = '010-6330-5226' // 실제 번호로 교체
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.classList.add('no-intro'); return
   }
-  const close = () => { intro.classList.add('done'); setTimeout(() => intro.remove(), 900) }
-  setTimeout(close, 2100)
+  try {
+    if (sessionStorage.getItem('wecoIntroSeen')) {
+      intro.remove()
+      return
+    }
+    sessionStorage.setItem('wecoIntroSeen', '1')
+  } catch (_) {}
+  const close = () => { intro.classList.add('done'); setTimeout(() => intro.remove(), 650) }
+  setTimeout(close, 1200)
   intro.addEventListener('click', close)
 })()
 
@@ -24,8 +29,16 @@ window.addEventListener('scroll', () => {
 // ---- 모바일 메뉴 ----
 const menuToggle = document.getElementById('menuToggle')
 const gnb = document.getElementById('gnb')
-menuToggle.addEventListener('click', () => gnb.classList.toggle('open'))
-gnb.querySelectorAll('a').forEach(a => a.addEventListener('click', () => gnb.classList.remove('open')))
+const setMenuOpen = (open) => {
+  gnb.classList.toggle('open', open)
+  menuToggle.setAttribute('aria-expanded', String(open))
+  menuToggle.setAttribute('aria-label', open
+    ? ({ en: 'Close menu', vi: 'Đóng menu' }[document.documentElement.lang] || '메뉴 닫기')
+    : ({ en: 'Open menu', vi: 'Mở menu' }[document.documentElement.lang] || '메뉴 열기'))
+  document.body.classList.toggle('menu-open', open)
+}
+menuToggle.addEventListener('click', () => setMenuOpen(!gnb.classList.contains('open')))
+gnb.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenuOpen(false)))
 
 // ---- 히어로 모션 배경 (코드로 만든 흐르는 빛 — 영상 대체) ----
 ;(() => {
@@ -152,8 +165,12 @@ if (filterTabs) {
 
 // ---- PROJECT 전용 오버레이 열기/닫기 ----
 const projectView = document.getElementById('projectView')
+const closeProjectsButton = document.getElementById('closeProjects')
+let projectTrigger = null
 const openProjects = () => {
+  projectTrigger = document.activeElement
   projectView.classList.add('open')
+  projectView.setAttribute('aria-hidden', 'false')
   if (window.__lenis) window.__lenis.stop() // Lenis 정지 → 오버레이 네이티브 스크롤 복구
   document.documentElement.style.overflow = 'hidden' // html도 잠가야 뒤 본문이 안 밀림
   document.body.style.overflow = 'hidden'
@@ -164,12 +181,20 @@ const openProjects = () => {
     const s = img.getAttribute('src')
     if (s && !img.complete) img.setAttribute('src', s)
   })
+  closeProjectsButton?.focus()
 }
-const closeProjects = () => { projectView.classList.remove('open'); document.documentElement.style.overflow = ''; document.body.style.overflow = ''; if (window.__lenis) window.__lenis.start() }
-document.getElementById('closeProjects')?.addEventListener('click', closeProjects)
+const closeProjects = () => {
+  projectView.classList.remove('open')
+  projectView.setAttribute('aria-hidden', 'true')
+  document.documentElement.style.overflow = ''
+  document.body.style.overflow = ''
+  if (window.__lenis) window.__lenis.start()
+  if (projectTrigger instanceof HTMLElement) projectTrigger.focus()
+}
+closeProjectsButton?.addEventListener('click', closeProjects)
 // PROJECT 진입점: 섹션 버튼 + 내비/히어로의 #portfolio 링크
 document.querySelectorAll('[data-open-projects], a[href="#portfolio"]').forEach(el => {
-  el.addEventListener('click', (e) => { e.preventDefault(); e.stopImmediatePropagation(); gnb.classList.remove('open'); openProjects() })
+  el.addEventListener('click', (e) => { e.preventDefault(); e.stopImmediatePropagation(); setMenuOpen(false); openProjects() })
 })
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && projectView.classList.contains('open') && !document.querySelector('.lightbox.open')) closeProjects()
@@ -266,8 +291,13 @@ const typeCards = document.getElementById('typeCards')
 let selectedType = '상가'
 typeCards?.addEventListener('click', (e) => {
   const b = e.target.closest('button'); if (!b) return
-  typeCards.querySelectorAll('button').forEach(x => x.classList.remove('active'))
-  b.classList.add('active'); selectedType = b.dataset.value
+  typeCards.querySelectorAll('button').forEach(x => {
+    x.classList.remove('active')
+    x.setAttribute('aria-pressed', 'false')
+  })
+  b.classList.add('active')
+  b.setAttribute('aria-pressed', 'true')
+  selectedType = b.dataset.value
 })
 
 
@@ -316,6 +346,7 @@ form.addEventListener('submit', async (e) => {
         이름: name,
         연락처: phone,
         유형: selectedType,
+        개인정보동의: '동의',
         예산: form.budget.value.trim() || '미입력',
         문의내용: form.message.value.trim() || '미입력'
       })
