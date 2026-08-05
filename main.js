@@ -149,7 +149,7 @@ gnb.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu
   requestAnimationFrame(loop)
 })()
 
-// ---- 시공사례 필터 ----
+// ---- 포트폴리오 필터 ----
 const filterTabs = document.getElementById('filterTabs')
 if (filterTabs) {
   const works = document.querySelectorAll('#portfolioGrid .work')

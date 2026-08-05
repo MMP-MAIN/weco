@@ -154,7 +154,7 @@ html.no-intro .intro{display:none;}
 .section-desc strong{color:var(--ink);}
 .align-left{text-align:left !important;}
 
-/* ===== 시공사례 — 갤러리 ===== */
+/* ===== 포트폴리오 — 갤러리 ===== */
 .filter-tabs{display:flex;gap:8px 34px;margin:18px 0 56px;flex-wrap:wrap;}
 .filter-tabs button{background:transparent;border:none;color:#c9c9c4;
   padding:0;font-size:clamp(22px,2.8vw,32px);font-weight:800;letter-spacing:-.5px;cursor:pointer;
@@ -227,7 +227,7 @@ html.no-intro .intro{display:none;}
 .msg-ask{margin-top:34px;font-size:clamp(18px,4.4vw,30px);font-weight:500;color:var(--dim) !important;}
 .msg-ask.in{color:var(--ink) !important;}
 
-/* ===== HISTORY — 시공 타임라인 (모바일 우선) ===== */
+/* ===== HISTORY — 프로젝트 타임라인 (모바일 우선) ===== */
 .history{list-style:none;position:relative;padding-left:30px;}
 .history::before{content:'';position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line);}
 .hist-item{position:relative;margin-bottom:40px;}
