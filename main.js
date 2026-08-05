@@ -286,9 +286,9 @@ const form = document.getElementById('inquiryForm')
 const submitBtn = document.getElementById('submitBtn')
 const formStatus = document.getElementById('formStatus')
 
-// 유형 선택 (상가/아파트/브랜딩)
+// 프로젝트 유형 선택
 const typeCards = document.getElementById('typeCards')
-let selectedType = '상가'
+let selectedType = typeCards?.querySelector('.active')?.dataset.value || ''
 typeCards?.addEventListener('click', (e) => {
   const b = e.target.closest('button'); if (!b) return
   typeCards.querySelectorAll('button').forEach(x => {
@@ -315,7 +315,7 @@ const FORM_MSG = ({
   err: `접수 중 오류가 발생했습니다. 전화(${PHONE})로 문의해주세요.`
 }
 
-// 견적문의 → FormSubmit.co (계정 불필요, 이메일로 수신)
+// 프로젝트 문의 → FormSubmit.co (계정 불필요, 이메일로 수신)
 const INQUIRY_ENDPOINT = 'https://formsubmit.co/ajax/storm2119@gmail.com'
 
 const setStatus = (msg, ok) => {
@@ -340,7 +340,7 @@ form.addEventListener('submit', async (e) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
-        _subject: '[위코컴퍼니] 새 견적문의',
+        _subject: '[위코컴퍼니] 새 프로젝트 문의',
         _template: 'table',
         _captcha: 'false',
         이름: name,
