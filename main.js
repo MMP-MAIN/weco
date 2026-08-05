@@ -167,6 +167,25 @@ if (filterTabs) {
 const projectView = document.getElementById('projectView')
 const closeProjectsButton = document.getElementById('closeProjects')
 let projectTrigger = null
+const trapFocusWithin = (root, e) => {
+  if (e.key !== 'Tab') return
+  const focusable = [...root.querySelectorAll(
+    'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  )].filter(el => {
+    const style = getComputedStyle(el)
+    return style.display !== 'none' && style.visibility !== 'hidden'
+  })
+  if (!focusable.length) return
+  const first = focusable[0]
+  const last = focusable[focusable.length - 1]
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault()
+    last.focus()
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault()
+    first.focus()
+  }
+}
 const openProjects = () => {
   projectTrigger = document.activeElement
   projectView.classList.add('open')
@@ -175,11 +194,11 @@ const openProjects = () => {
   document.documentElement.style.overflow = 'hidden' // html도 잠가야 뒤 본문이 안 밀림
   document.body.style.overflow = 'hidden'
   document.body.classList.add('motion-paused') // 오버레이 동안 히어로 캔버스 정지(부하 절감)
-  // 커버 이미지 강제 로드 (오버레이 안에서 lazy 로딩이 안 걸리는 문제 방지)
-  projectView.querySelectorAll('.proj-card .proj-img img').forEach((img) => {
-    img.loading = 'eager'
+  // 첫 화면에 보이는 커버만 우선 로드하고 나머지는 네이티브 lazy loading 유지
+  projectView.querySelectorAll('.proj-card .proj-img img').forEach((img, index) => {
+    img.loading = index < 6 ? 'eager' : 'lazy'
     const s = img.getAttribute('src')
-    if (s && !img.complete) img.setAttribute('src', s)
+    if (index < 6 && s && !img.complete) img.setAttribute('src', s)
   })
   closeProjectsButton?.focus()
 }
@@ -188,6 +207,7 @@ const closeProjects = () => {
   projectView.setAttribute('aria-hidden', 'true')
   document.documentElement.style.overflow = ''
   document.body.style.overflow = ''
+  document.body.classList.remove('motion-paused')
   if (window.__lenis) window.__lenis.start()
   if (projectTrigger instanceof HTMLElement) projectTrigger.focus()
 }
@@ -197,7 +217,10 @@ document.querySelectorAll('[data-open-projects], a[href="#portfolio"]').forEach(
   el.addEventListener('click', (e) => { e.preventDefault(); e.stopImmediatePropagation(); setMenuOpen(false); openProjects() })
 })
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && projectView.classList.contains('open') && !document.querySelector('.lightbox.open')) closeProjects()
+  if (e.key === 'Tab' && projectView.classList.contains('open') && !document.querySelector('.gallery-view.open, .lightbox.open')) {
+    trapFocusWithin(projectView, e)
+  }
+  if (e.key === 'Escape' && projectView.classList.contains('open') && !document.querySelector('.gallery-view.open, .lightbox.open')) closeProjects()
 })
 // 오버레이 휠 → pv-scroll 직접 스크롤 (Lenis·이벤트 라우팅과 무관하게 보장)
 projectView.addEventListener('wheel', (e) => {
@@ -408,7 +431,6 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
       .from('.hero-en .ch', { yPercent: 115, opacity: 0, duration: 1, stagger: .035 }, '-=.4')
       .from('.hero-en .spark', { scale: 0, rotation: -120, opacity: 0, duration: .7, ease: 'back.out(2.2)' }, '-=.45')
       .from('.hero-promise', { y: 22, opacity: 0, duration: .8 }, '-=.55')
-      .from('.hero-actions .btn', { y: 18, opacity: 0, duration: .6, stagger: .12 }, '-=.5')
     intro.eventCallback('onComplete', () => intro.kill())
     // rAF가 멈추는 환경(백그라운드 탭 등)에서도 히어로가 반드시 보이도록 보장
     setTimeout(() => { if (intro.progress() < 1) intro.progress(1) }, 3500)
@@ -425,7 +447,7 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
       photos: list.length ? list : (thumb ? [big(thumb.src)] : []),
       title: w.querySelector('.proj-meta h3')?.textContent || '',
       meta: w.querySelector('.proj-meta p')?.textContent || '',
-      trigger: w.querySelector('.proj-img')
+      trigger: w
     }
   }).filter(i => i.photos.length)
   if (!items.length) return
@@ -433,7 +455,11 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
   // 3열 그리드 갤러리
   const gv = document.createElement('div')
   gv.className = 'gallery-view'
-  gv.innerHTML = `<div class="gv-bar container"><span class="gv-title"></span><button class="gv-close" aria-label="닫기">&times;</button></div><div class="gv-scroll" data-lenis-prevent><div class="gv-grid"></div></div>`
+  gv.setAttribute('role', 'dialog')
+  gv.setAttribute('aria-modal', 'true')
+  gv.setAttribute('aria-hidden', 'true')
+  gv.setAttribute('aria-labelledby', 'galleryViewTitle')
+  gv.innerHTML = `<div class="gv-bar container"><span class="gv-title" id="galleryViewTitle"></span><button class="gv-close" type="button" aria-label="닫기">&times;</button></div><div class="gv-scroll" data-lenis-prevent><div class="gv-grid"></div></div>`
   document.body.appendChild(gv)
   const gvTitle = gv.querySelector('.gv-title')
   const gvGrid = gv.querySelector('.gv-grid')
@@ -442,10 +468,33 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
   // 확대 라이트박스
   const lb = document.createElement('div')
   lb.className = 'lightbox'
-  lb.innerHTML = `<button class="lb-close" aria-label="닫기">&times;</button><button class="lb-prev" aria-label="이전">&#8249;</button><figure><img alt="" /><figcaption><strong></strong><b class="lb-count"></b></figcaption></figure><button class="lb-next" aria-label="다음">&#8250;</button>`
+  lb.setAttribute('role', 'dialog')
+  lb.setAttribute('aria-modal', 'true')
+  lb.setAttribute('aria-hidden', 'true')
+  lb.setAttribute('aria-labelledby', 'lightboxTitle')
+  lb.innerHTML = `<button class="lb-close" type="button" aria-label="닫기">&times;</button><button class="lb-prev" type="button" aria-label="이전">&#8249;</button><figure><img alt="" /><figcaption><strong id="lightboxTitle"></strong><b class="lb-count"></b></figcaption></figure><button class="lb-next" type="button" aria-label="다음">&#8250;</button>`
   document.body.appendChild(lb)
   const lbImg = lb.querySelector('img'), lbTitle = lb.querySelector('strong'), lbCount = lb.querySelector('.lb-count')
   let curPhoto = 0
+  let galleryTrigger = null
+  let lightboxTrigger = null
+  const lang = document.documentElement.lang
+  const photoLabel = (title, count) => lang === 'en'
+    ? `View ${title}, ${count} photos`
+    : lang === 'vi'
+      ? `Xem ${title}, ${count} ảnh`
+      : `${title} 사진 ${count}장 보기`
+  const zoomLabel = (title, index) => lang === 'en'
+    ? `Enlarge ${title} photo ${index}`
+    : lang === 'vi'
+      ? `Phóng to ảnh ${index} của ${title}`
+      : `${title} ${index}번 사진 확대 보기`
+  const updatePortfolioUrl = (index) => {
+    const url = new URL(window.location.href)
+    if (index === null) url.searchParams.delete('portfolio')
+    else url.searchParams.set('portfolio', String(index + 1))
+    history.replaceState({}, '', url)
+  }
   const renderLB = () => {
     const it = items[curItem]
     lbImg.src = it.photos[curPhoto]; lbImg.alt = it.title
@@ -453,29 +502,70 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
     lbCount.textContent = `${curPhoto + 1} / ${it.photos.length}`
   }
   const moveLB = (d) => { const n = items[curItem].photos.length; curPhoto = (curPhoto + d + n) % n; renderLB() }
-  const openLB = (idx) => { curPhoto = idx; renderLB(); lb.classList.add('open') }
-  const closeLB = () => lb.classList.remove('open')
+  const openLB = (idx, trigger) => {
+    lightboxTrigger = trigger || document.activeElement
+    curPhoto = idx
+    renderLB()
+    lb.classList.add('open')
+    lb.setAttribute('aria-hidden', 'false')
+    lb.querySelector('.lb-close').focus()
+  }
+  const closeLB = () => {
+    lb.classList.remove('open')
+    lb.setAttribute('aria-hidden', 'true')
+    if (lightboxTrigger instanceof HTMLElement) lightboxTrigger.focus()
+  }
 
-  const openGallery = (i) => {
+  const openGallery = (i, syncUrl = true) => {
     curItem = i
     const it = items[i]
+    galleryTrigger = it.trigger
     gvTitle.textContent = it.title
     gvGrid.innerHTML = ''
     it.photos.forEach((src, idx) => {
       const im = document.createElement('img')
-      im.loading = 'lazy'; im.src = src; im.alt = `${it.title} ${idx + 1}`
-      im.addEventListener('click', () => openLB(idx))
+      im.loading = 'lazy'
+      im.src = src
+      im.alt = `${it.title} ${idx + 1}`
+      im.tabIndex = 0
+      im.setAttribute('role', 'button')
+      im.setAttribute('aria-label', zoomLabel(it.title, idx + 1))
+      im.addEventListener('click', () => openLB(idx, im))
+      im.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          openLB(idx, im)
+        }
+      })
       gvGrid.appendChild(im)
     })
     gv.querySelector('.gv-scroll').scrollTop = 0
-    gv.classList.add('open'); document.body.style.overflow = 'hidden'
+    gv.classList.add('open')
+    gv.setAttribute('aria-hidden', 'false')
+    document.body.style.overflow = 'hidden'
+    if (syncUrl) updatePortfolioUrl(i)
+    gv.querySelector('.gv-close').focus()
   }
   const closeGallery = () => {
     gv.classList.remove('open')
+    gv.setAttribute('aria-hidden', 'true')
     document.body.style.overflow = projectView.classList.contains('open') ? 'hidden' : ''
+    updatePortfolioUrl(null)
+    if (galleryTrigger instanceof HTMLElement) galleryTrigger.focus()
   }
 
-  items.forEach((it, i) => it.trigger.addEventListener('click', (e) => { e.preventDefault(); openGallery(i) }))
+  items.forEach((it, i) => {
+    it.trigger.tabIndex = 0
+    it.trigger.setAttribute('role', 'button')
+    it.trigger.setAttribute('aria-label', photoLabel(it.title, it.photos.length))
+    it.trigger.addEventListener('click', (e) => { e.preventDefault(); openGallery(i) })
+    it.trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        openGallery(i)
+      }
+    })
+  })
   gv.querySelector('.gv-close').addEventListener('click', closeGallery)
   lb.querySelector('.lb-close').addEventListener('click', closeLB)
   lb.querySelector('.lb-prev').addEventListener('click', () => moveLB(-1))
@@ -483,11 +573,21 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
   lb.addEventListener('click', (e) => { if (e.target === lb) closeLB() })
   document.addEventListener('keydown', (e) => {
     if (lb.classList.contains('open')) {
+      trapFocusWithin(lb, e)
       if (e.key === 'Escape') closeLB()
       if (e.key === 'ArrowLeft') moveLB(-1)
       if (e.key === 'ArrowRight') moveLB(1)
-    } else if (gv.classList.contains('open') && e.key === 'Escape') closeGallery()
+    } else if (gv.classList.contains('open')) {
+      trapFocusWithin(gv, e)
+      if (e.key === 'Escape') closeGallery()
+    }
   })
+
+  const requestedPortfolio = Number(new URLSearchParams(window.location.search).get('portfolio'))
+  if (Number.isInteger(requestedPortfolio) && requestedPortfolio >= 1 && requestedPortfolio <= items.length) {
+    openProjects()
+    openGallery(requestedPortfolio - 1, false)
+  }
 })()
 
 // ---- 커스텀 커서 (데스크톱 전용) ----
