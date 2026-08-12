@@ -391,6 +391,10 @@ html.no-intro .intro{display:none;}
 .footer-inner{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;}
 .footer .brand{font-size:15px;}
 .footer-meta{margin-top:14px;font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.8;}
+.footer-social{margin-top:18px;}
+.footer-social a{display:inline-flex;align-items:center;gap:8px;font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:1.6px;color:var(--ink);border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:4px;transition:color .2s,border-color .2s;}
+.footer-social a:hover{color:var(--signal);border-color:var(--signal);}
+.footer-social span{font-size:14px;}
 .footer-copy{font-size:11.5px;color:rgba(255,255,255,.35);letter-spacing:.5px;}
 
 /* ===== 모바일 하단 고정 바 ===== */
