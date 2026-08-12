@@ -525,7 +525,7 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
     gvTitle.textContent = it.title
     gvGrid.innerHTML = ''
     it.photos.forEach((src, idx) => {
-      const shot = it.shotLabels[idx] || (idx === 0 ? 'OVERVIEW' : idx >= it.photos.length - 2 ? 'DETAIL' : 'INTERIOR')
+      const shot = it.shotLabels[idx] || (idx === 0 ? 'FACADE' : idx >= it.photos.length - 2 ? 'DETAIL' : 'INTERIOR')
       const figure = document.createElement('figure')
       figure.className = 'gv-shot'
       const im = document.createElement('img')
