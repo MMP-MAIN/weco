@@ -443,8 +443,10 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
   const items = [...document.querySelectorAll('.proj-card:not(.proj-soon)')].map(w => {
     const thumb = w.querySelector('.proj-img img')
     const list = (w.dataset.photos || '').split('|').filter(Boolean)
+    const labels = (w.dataset.shotLabels || '').split('|').filter(Boolean)
     return {
       photos: list.length ? list : (thumb ? [big(thumb.src)] : []),
+      shotLabels: labels,
       title: w.querySelector('.proj-meta h3')?.textContent || '',
       meta: w.querySelector('.proj-meta p')?.textContent || '',
       trigger: w
@@ -523,6 +525,9 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
     gvTitle.textContent = it.title
     gvGrid.innerHTML = ''
     it.photos.forEach((src, idx) => {
+      const shot = it.shotLabels[idx] || (idx === 0 ? 'OVERVIEW' : idx >= it.photos.length - 2 ? 'DETAIL' : 'INTERIOR')
+      const figure = document.createElement('figure')
+      figure.className = 'gv-shot'
       const im = document.createElement('img')
       im.loading = 'lazy'
       im.src = src
@@ -537,7 +542,10 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
           openLB(idx, im)
         }
       })
-      gvGrid.appendChild(im)
+      const caption = document.createElement('figcaption')
+      caption.innerHTML = `<span>${String(idx + 1).padStart(2, '0')}</span>${shot}`
+      figure.append(im, caption)
+      gvGrid.appendChild(figure)
     })
     gv.querySelector('.gv-scroll').scrollTop = 0
     gv.classList.add('open')

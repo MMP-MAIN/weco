@@ -709,6 +709,10 @@ html.has-cursor, html.has-cursor *{cursor:none !important;}
 .gv-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;cursor:pointer;border-radius:4px;
   background:var(--panel);transition:opacity .2s;}
 .gv-grid img:hover{opacity:.85;}
+.gv-shot{margin:0;min-width:0;}
+.gv-shot figcaption{display:flex;justify-content:space-between;align-items:center;padding:9px 2px 3px;
+  font-family:var(--label);font-size:9px;font-weight:600;letter-spacing:.16em;color:var(--dim);}
+.gv-shot figcaption span{color:var(--signal);font-variant-numeric:tabular-nums;}
 @media (min-width:961px){.gv-grid{gap:12px;}.gv-scroll{padding:28px;}}
 .lightbox figcaption strong{font-size:14px;letter-spacing:.5px;}
 
