@@ -713,7 +713,16 @@ html.has-cursor, html.has-cursor *{cursor:none !important;}
 .lightbox figcaption strong{font-size:14px;letter-spacing:.5px;}
 
 /* ===== 포트폴리오: 구분 없이 작품명만 노출 ===== */
-.pv-cat,.client-list,.client-tabs,.proj-soon{display:none!important;}
+.pv-cat,.client-tabs,.proj-soon{display:none!important;}
+.client-list{list-style:none;grid-column:1/-1;display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr));column-gap:22px;
+  margin:18px 0 0;padding:18px 0 0;border-top:1px solid var(--line);}
+.client-list li{min-width:0;padding:12px 2px;border-bottom:1px solid var(--line);
+  font-size:14px;font-weight:600;letter-spacing:-.1px;color:var(--ink);}
+@media (max-width:640px){
+  .client-list{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:8px;margin-top:8px;padding-top:10px;}
+  .client-list li{padding:10px 1px;font-size:12.5px;line-height:1.35;}
+}
 .ct-btn{font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:.5px;color:var(--dim);
   background:transparent;border:1px solid var(--line);padding:8px 18px;border-radius:999px;cursor:pointer;
   transition:color .2s,background .2s,border-color .2s;}
