@@ -359,6 +359,7 @@ form.addEventListener('submit', async (e) => {
     })
     const data = await res.json().catch(() => ({}))
     if (res.ok && (data.success === 'true' || data.success === true)) {
+      if (typeof window.fbq === 'function') window.fbq('track', 'Lead')
       form.reset()
       setStatus(FORM_MSG.ok, true)
     } else {
