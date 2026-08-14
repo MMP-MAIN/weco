@@ -374,6 +374,26 @@ form.addEventListener('submit', async (e) => {
   }
 })
 
+// 주요 광고 전환 행동 추적 (개인정보·유입 식별값은 외부로 전송하지 않음)
+const trackEvent = (name, params = {}) => {
+  if (typeof window.fbq === 'function') window.fbq('trackCustom', name, params)
+  if (typeof window.gtag === 'function') window.gtag('event', name, params)
+}
+
+document.addEventListener('click', (event) => {
+  const link = event.target.closest('a')
+  if (link) {
+    const href = link.getAttribute('href') || ''
+    if (href.startsWith('tel:')) trackEvent('PhoneClick')
+    else if (href.startsWith('mailto:')) trackEvent('EmailClick')
+    else if (/WECO_PORTFOLIO_2026\.pdf(?:$|[?#])/i.test(href)) trackEvent('PortfolioDownload')
+    else if (href === '#contact') trackEvent('ContactCTAClick')
+  }
+
+  const project = event.target.closest('.proj-card')
+  if (project) trackEvent('ProjectView')
+})
+
 // ===== 프리미엄 모션 (CDN 로드 실패 시 기본 동작 유지) =====
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
 
