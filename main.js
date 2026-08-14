@@ -361,7 +361,10 @@ form.addEventListener('submit', async (e) => {
     if (res.ok && (data.success === 'true' || data.success === true)) {
       if (typeof window.fbq === 'function') window.fbq('track', 'Lead')
       if (typeof window.gtag === 'function') {
-        window.gtag('event', 'generate_lead', { lead_type: selectedType || 'unspecified' })
+        window.gtag('event', 'generate_lead', {
+          lead_type: selectedType || 'unspecified',
+          page_language: document.documentElement.lang || 'ko'
+        })
       }
       form.reset()
       setStatus(FORM_MSG.ok, true)
@@ -384,17 +387,24 @@ const trackEvent = (name, params = {}) => {
 }
 
 document.addEventListener('click', (event) => {
+  const pageLanguage = document.documentElement.lang || 'ko'
   const link = event.target.closest('a')
   if (link) {
     const href = link.getAttribute('href') || ''
-    if (href.startsWith('tel:')) trackEvent('PhoneClick')
-    else if (href.startsWith('mailto:')) trackEvent('EmailClick')
-    else if (/WECO_PORTFOLIO_2026\.pdf(?:$|[?#])/i.test(href)) trackEvent('PortfolioDownload')
-    else if (href === '#contact') trackEvent('ContactCTAClick')
+    const linkParams = { page_language: pageLanguage, link_text: (link.textContent || '').trim().slice(0, 100) }
+    if (href.startsWith('tel:')) trackEvent('PhoneClick', linkParams)
+    else if (href.startsWith('mailto:')) trackEvent('EmailClick', linkParams)
+    else if (/WECO_PORTFOLIO_2026\.pdf(?:$|[?#])/i.test(href)) trackEvent('PortfolioDownload', linkParams)
+    else if (href === '#contact') trackEvent('ContactCTAClick', linkParams)
   }
 
   const project = event.target.closest('.proj-card')
-  if (project) trackEvent('ProjectView')
+  if (project) {
+    trackEvent('ProjectView', {
+      page_language: pageLanguage,
+      project_name: project.querySelector('.proj-meta h3')?.textContent?.trim() || 'unknown'
+    })
+  }
 })
 
 // ===== 프리미엄 모션 (CDN 로드 실패 시 기본 동작 유지) =====
