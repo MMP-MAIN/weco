@@ -360,6 +360,9 @@ form.addEventListener('submit', async (e) => {
     const data = await res.json().catch(() => ({}))
     if (res.ok && (data.success === 'true' || data.success === true)) {
       if (typeof window.fbq === 'function') window.fbq('track', 'Lead')
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', { lead_type: selectedType || 'unspecified' })
+      }
       form.reset()
       setStatus(FORM_MSG.ok, true)
     } else {
