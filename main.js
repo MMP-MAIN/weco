@@ -6,11 +6,11 @@ const PHONE = '010-6330-5226'
   const headline = document.getElementById('heroHeadline')
   if (!headline) return
   const messages = [
-    ['가능성을 발견하고', '더 큰 내일을 시작합니다.'],
-    ['오늘의 아이디어를', '내일의 브랜드로 이어갑니다.'],
-    ['당신의 가능성이', '사랑받는 브랜드로 자라납니다.'],
-    ['시장의 흐름을 읽고', '새로운 기회를 엽니다.'],
-    ['작은 시작에 방향을 더해', '오래 남는 브랜드를 만듭니다.']
+    ['왜 어떤 가게는', '오픈 전부터 기대될까요?'],
+    ['당신의 가게가', '선택받을 이유를 만듭니다.'],
+    ['좋은 아이디어를', '손님이 찾는 브랜드로.'],
+    ['잘될 브랜드는', '시작부터 방향이 다릅니다.'],
+    ['내 브랜드의 가능성,', '오픈 전에 먼저 확인하세요.']
   ]
   let previous = -1
   try { previous = Number(sessionStorage.getItem('wecoHeroVariant') ?? -1) } catch (_) {}
