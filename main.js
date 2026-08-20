@@ -351,9 +351,9 @@ form.addEventListener('submit', async (e) => {
         _captcha: 'false',
         이름: name,
         연락처: phone,
-        유형: selectedType,
+        희망업무: selectedType,
         개인정보동의: '동의',
-        예산: form.budget.value.trim() || '미입력',
+        프로젝트예상총예산: form.budget.value.trim() || '미입력',
         문의내용: form.message.value.trim() || '미입력'
       })
     })
