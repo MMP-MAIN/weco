@@ -636,6 +636,19 @@ html.has-cursor, html.has-cursor *{cursor:none !important;}
 #about .about-manifesto{grid-column:1/3;color:#121110;margin:0;border-top:1px solid rgba(18,17,16,.25);
   padding-top:34px;font-family:var(--serif);font-size:clamp(34px,5vw,65px);line-height:1.3;}
 #about .about-manifesto em{color:var(--signal);}
+
+/* ===== 비전: 공간 결과보다 브랜드의 미래를 먼저 보여주는 섹션 ===== */
+.vision-section{padding:clamp(88px,11vw,150px) 0;background:#171511;color:#f3efe6;}
+.vision-wrap{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(0,1.35fr);gap:clamp(52px,8vw,120px);align-items:start;}
+.vision-lead{position:sticky;top:130px;}
+.vision-lead .section-eyebrow{text-align:left;color:var(--signal);margin-bottom:22px;}
+.vision-lead h2{font-family:var(--serif);font-size:clamp(36px,5vw,66px);font-weight:500;line-height:1.08;letter-spacing:-2px;margin:0 0 28px;}
+.vision-lead>p:last-child{max-width:480px;color:rgba(243,239,230,.68);font-size:17px;line-height:1.8;}
+.vision-list{list-style:none;margin:0;padding:0;border-top:1px solid rgba(243,239,230,.2);}
+.vision-list li{display:grid;grid-template-columns:56px minmax(160px,.72fr) minmax(220px,1fr);gap:22px;padding:34px 0;border-bottom:1px solid rgba(243,239,230,.2);align-items:start;}
+.vision-list span{font-family:var(--label);font-size:11px;letter-spacing:2px;color:var(--signal);}
+.vision-list strong{font-size:clamp(20px,2vw,28px);font-weight:600;letter-spacing:-.8px;}
+.vision-list p{color:rgba(243,239,230,.64);line-height:1.75;margin:0;}
 #about .about-sub{grid-column:2;color:#5f5a52;margin:34px 0 70px;font-size:16px;}
 #about .about-points{grid-column:1/3;background:transparent;border-top:1px solid rgba(18,17,16,.28);
   border-bottom:1px solid rgba(18,17,16,.28);counter-reset:weco-point;}
@@ -686,6 +699,10 @@ html.has-cursor, html.has-cursor *{cursor:none !important;}
   #about .about-points li::before{margin-bottom:24px;}
   #process .section-title{font-size:46px;letter-spacing:-2.5px;}
   #process .process li{border-right:0;border-bottom:1px solid var(--line);}
+  .vision-wrap{grid-template-columns:1fr;gap:48px;}
+  .vision-lead{position:static;}
+  .vision-list li{grid-template-columns:38px 1fr;gap:12px 16px;padding:28px 0;}
+  .vision-list li p{grid-column:2;}
 }
 
 /* ===== 사진 준비중 카드 ===== */
