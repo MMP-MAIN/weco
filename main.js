@@ -190,6 +190,21 @@ if (filterTabs) {
 const projectView = document.getElementById('projectView')
 const closeProjectsButton = document.getElementById('closeProjects')
 let projectTrigger = null
+const shuffleProjectCards = () => {
+  projectView?.querySelectorAll('.proj-grid').forEach(grid => {
+    const cards = [...grid.querySelectorAll(':scope > .proj-card')]
+    if (cards.length < 2) return
+    const original = [...cards]
+    for (let i = cards.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[cards[i], cards[j]] = [cards[j], cards[i]]
+    }
+    if (cards.every((card, index) => card === original[index])) {
+      ;[cards[0], cards[1]] = [cards[1], cards[0]]
+    }
+    grid.append(...cards)
+  })
+}
 const trapFocusWithin = (root, e) => {
   if (e.key !== 'Tab') return
   const focusable = [...root.querySelectorAll(
@@ -212,6 +227,7 @@ const trapFocusWithin = (root, e) => {
 const openProjects = () => {
   trackEvent('PortfolioOpen', { page_language: document.documentElement.lang || 'ko' })
   projectTrigger = document.activeElement
+  shuffleProjectCards()
   projectView.classList.add('open')
   projectView.setAttribute('aria-hidden', 'false')
   if (window.__lenis) window.__lenis.stop() // Lenis 정지 → 오버레이 네이티브 스크롤 복구
