@@ -21,5 +21,20 @@ html,body{color:#10271b;font-family:Pretendard,-apple-system,BlinkMacSystemFont,
 .composer-hint,.form-privacy,.service-notice{color:#aaa398}
 .footer-meta{color:rgba(255,255,255,.68)}
 .footer-copy{color:rgba(255,255,255,.58)}
+#contact{color:#f5f0e4}
+#contact .section-eyebrow{color:#f1bd29}
+#contact .section-title{color:#f5f0e4}
+#contact .section-desc{color:#c8c1b6}
+#contact .contact-list li{color:#f5f0e4}
+#contact .contact-list li a{color:#f5f0e4}
+#contact .contact-list li span{color:#bdb6aa}
+#process{color:#f5f0e4}
+#process .section-eyebrow{color:#f1bd29}
+#process .section-title{color:#f5f0e4}
+#process .section-desc{color:#c8c1b6}
+#process .process h3{color:#f5f0e4}
+#process .process li p{color:#bdb6aa}
+.project-view,.gallery-view{color:#f5f0e4}
+.project-view .proj-meta h3,.gallery-view .gv-title{color:#f5f0e4}
 @media(max-width:980px){.hero{min-height:auto}.hero-inner{padding-top:132px;padding-bottom:90px}.hero-en,.hero-en strong{font-size:clamp(46px,9vw,72px)}}
 @media(max-width:640px){body{font-size:16px}.topbar-inner{height:72px}.brand-official{width:104px;height:36px}.brand-official img{width:104px;top:6px}.hero-inner{padding-top:112px}.hero-en,.hero-en strong{font-size:43px;line-height:1.04;letter-spacing:-.055em}.hero-promise{font-size:16px;line-height:1.7;margin-top:24px}.hero-intel{margin-top:40px}.intelligence-lead>p:last-child,.about-sub,.scope-heading>p:last-child,.scope-item>p,.vision-lead>p{font-size:16px}.section-title{font-size:36px;line-height:1.18}.btn{min-height:48px}}
