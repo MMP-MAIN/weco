@@ -136,6 +136,16 @@
   const button = $('metaAuthBtn')
   const number = new Intl.NumberFormat('ko-KR')
   const won = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW', maximumFractionDigits: 0 })
+  const hasWecoMetaAccount = Boolean(
+    config.metaAppId && !config.metaAppId.startsWith('YOUR_') &&
+    config.metaAdAccountId && !config.metaAdAccountId.startsWith('YOUR_')
+  )
+
+  if (!hasWecoMetaAccount) {
+    $('metaSection').hidden = true
+    button.hidden = true
+    return
+  }
 
   function metaStatus(message, error = false) {
     $('metaStatus').textContent = message
@@ -197,7 +207,6 @@
   }
   async function connectMeta() {
     try {
-      if (!config.metaAppId || config.metaAppId.startsWith('YOUR_') || !config.metaAdAccountId || config.metaAdAccountId.startsWith('YOUR_')) throw new Error('Meta 앱과 광고 계정 연결이 필요합니다.')
       await loadSdk()
       FB.login(response => {
         if (!response.authResponse) return metaStatus('Meta 로그인이 취소되었습니다.', true)
