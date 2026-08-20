@@ -1,5 +1,25 @@
 html,body{color:#10271b;font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{font-size:16px}.topbar-inner{height:82px}.topbar .gnb{gap:34px}.topbar .gnb a,.topbar .lang-sw a{font:700 12px/1 Pretendard,sans-serif;letter-spacing:.02em;color:#123c29}.brand-official{width:132px;height:42px}.brand-official img{width:132px;top:6px}
 .hero{min-height:860px}.hero-inner{padding-top:112px}.hero-eyebrow,.section-eyebrow{font-family:'WecoLabel',Poppins,sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em}.hero-en,.hero-en strong{font-family:Pretendard,sans-serif;font-weight:800;letter-spacing:-.065em;line-height:.98}.hero-promise{display:block!important;opacity:1;color:#274d39;font-family:Pretendard,sans-serif;font-size:clamp(17px,1.5vw,21px);font-weight:500;line-height:1.75;max-width:700px}.hero-intel{background:#fffdf7;border:1px solid rgba(0,77,49,.3);box-shadow:0 18px 55px rgba(20,48,33,.1)}.hero-intel dd{font-size:13px;color:#324f40}.btn{min-height:52px;font-size:13px;font-weight:750;letter-spacing:.02em}.btn-gl{background:rgba(255,255,255,.5)}
 .intelligence-lead h2,.section-title,.vision-lead h2,.scope-heading .section-title,.scope-item strong,.practice-copy strong,.footer-tagline{font-family:Pretendard,sans-serif;font-weight:750;letter-spacing:-.045em}.intelligence-lead>p:last-child,.about-sub,.scope-heading>p:last-child,.scope-item>p,.vision-lead>p{font-size:17px;line-height:1.85}.signal-board strong{font-size:20px}.signal-board p{font-size:14px;color:#c5c4bc}.about-manifesto{font-family:Pretendard,sans-serif;font-weight:700}.about-points strong{font-size:18px}.about-points span{font-size:15px;line-height:1.75}.scope-item h3{color:#315c45}.scope-item ul{font-size:13px;color:#4b6758}.practice-copy strong{color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.55)}
+
+/* 배경별 텍스트 대비 보정 */
+.scope-section{color:#14261d}
+.scope-section .section-eyebrow{color:#9b3f1d}
+.scope-heading>p:last-child,.scope-item>p{color:#3f574a}
+.scope-list{border-top-color:rgba(0,77,49,.24)}
+.scope-item{border-bottom-color:rgba(0,77,49,.24)}
+.scope-item h3,.scope-item ul{color:#315c45}
+.scope-item li::before{color:#006b3f}
+#about .about-points li::before{color:#006b3f}
+.hero-action-note{color:#40594c}
+.hero-axis{color:rgba(0,77,49,.8)}
+.hero-intel dd{color:#324f40}
+.evidence-grid small{color:#9b3f1d}
+.evidence-grid p{color:#40584b}
+.contact-list li span,.contact-form label,.block-label{color:#bdb6aa}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:#999287}
+.composer-hint,.form-privacy,.service-notice{color:#aaa398}
+.footer-meta{color:rgba(255,255,255,.68)}
+.footer-copy{color:rgba(255,255,255,.58)}
 @media(max-width:980px){.hero{min-height:auto}.hero-inner{padding-top:132px;padding-bottom:90px}.hero-en,.hero-en strong{font-size:clamp(46px,9vw,72px)}}
 @media(max-width:640px){body{font-size:16px}.topbar-inner{height:72px}.brand-official{width:104px;height:36px}.brand-official img{width:104px;top:6px}.hero-inner{padding-top:112px}.hero-en,.hero-en strong{font-size:43px;line-height:1.04;letter-spacing:-.055em}.hero-promise{font-size:16px;line-height:1.7;margin-top:24px}.hero-intel{margin-top:40px}.intelligence-lead>p:last-child,.about-sub,.scope-heading>p:last-child,.scope-item>p,.vision-lead>p{font-size:16px}.section-title{font-size:36px;line-height:1.18}.btn{min-height:48px}}

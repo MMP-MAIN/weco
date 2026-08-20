@@ -1,6 +1,27 @@
 // ===== 위코컴퍼니 홈페이지 스크립트 =====
 const PHONE = '010-6330-5226'
 
+// 접속할 때마다 위코의 비전을 다른 문장으로 보여줍니다.
+;(() => {
+  const headline = document.getElementById('heroHeadline')
+  if (!headline) return
+  const messages = [
+    ['가능성을 발견하고', '더 큰 내일을 시작합니다.'],
+    ['오늘의 아이디어를', '내일의 브랜드로 이어갑니다.'],
+    ['당신의 가능성이', '사랑받는 브랜드로 자라납니다.'],
+    ['시장의 흐름을 읽고', '새로운 기회를 엽니다.'],
+    ['작은 시작에 방향을 더해', '오래 남는 브랜드를 만듭니다.']
+  ]
+  let previous = -1
+  try { previous = Number(sessionStorage.getItem('wecoHeroVariant') ?? -1) } catch (_) {}
+  const candidates = messages.map((_, index) => index).filter(index => index !== previous)
+  const selected = candidates[Math.floor(Math.random() * candidates.length)] ?? 0
+  const [lead, vision] = messages[selected]
+  headline.innerHTML = `${lead}<br /><strong>${vision}</strong>`
+  window.WECO_HERO_VARIANT = selected + 1
+  try { sessionStorage.setItem('wecoHeroVariant', String(selected)) } catch (_) {}
+})()
+
 // ---- 인트로 리빌 종료 ----
 ;(() => {
   const intro = document.getElementById('intro')
@@ -385,8 +406,9 @@ form.addEventListener('submit', async (e) => {
 
 // 주요 광고 전환 행동 추적 (개인정보·유입 식별값은 외부로 전송하지 않음)
 const trackEvent = (name, params = {}) => {
-  if (typeof window.fbq === 'function') window.fbq('trackCustom', name, params)
-  if (typeof window.gtag === 'function') window.gtag('event', name, params)
+  const enriched = { hero_variant: window.WECO_HERO_VARIANT || 1, ...params }
+  if (typeof window.fbq === 'function') window.fbq('trackCustom', name, enriched)
+  if (typeof window.gtag === 'function') window.gtag('event', name, enriched)
 }
 
 document.addEventListener('click', (event) => {
