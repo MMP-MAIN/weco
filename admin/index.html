@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>WECO ADMIN — Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" />
+  <link rel="stylesheet" href="admin.css?v=1" />
+  <link rel="stylesheet" href="meta.css?v=1" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body class="locked">
+  <header class="topbar">
+    <a class="brand" href="../">WECO<span>ADMIN</span></a>
+    <div class="top-actions">
+      <span class="status" id="status"><i></i> 연결 대기</span>
+      <button class="btn ghost" id="refreshBtn" hidden>새로고침</button>
+      <button class="btn ghost" id="metaAuthBtn">Meta 광고 연결</button>
+      <button class="btn" id="authBtn">Google Analytics 연결</button>
+    </div>
+  </header>
+
+  <section class="login-wall" id="loginWall">
+    <div class="login-box">
+      <p class="eyebrow">PRIVATE ACCESS · WECO COMPANY</p>
+      <h1>관리자 전용<br /><em>성과 대시보드</em></h1>
+      <p>허용된 Google 계정의 비밀번호와 보안 인증을 통과한 경우에만 열립니다.</p>
+      <button class="btn login-btn" id="loginBtn">관리자 로그인</button>
+      <small>방문·광고 데이터는 이 기기에 저장되지 않습니다.</small>
+    </div>
+  </section>
+
+  <main>
+    <section class="intro">
+      <p class="eyebrow">BUSINESS SIGNALS · GA4 PROPERTY 535644624</p>
+      <h1>사람들이 위코를<br /><em>어떻게 발견하고 머무는지.</em></h1>
+      <div class="range" role="group" aria-label="조회 기간">
+        <button data-days="7">7일</button><button class="on" data-days="30">30일</button><button data-days="90">90일</button>
+      </div>
+    </section>
+
+    <section class="setup" id="setupPanel">
+      <div><span>01</span><h2>읽기 전용으로 연결합니다.</h2></div>
+      <p>위 버튼을 눌러 이 GA4 속성에 접근 가능한 Google 계정을 선택하세요. 방문 데이터는 이 화면에 표시될 뿐 저장되지 않습니다.</p>
+      <p class="setup-note" id="setupNote">Google OAuth 클라이언트 연결이 필요합니다.</p>
+    </section>
+
+    <section class="dashboard" id="dashboard" hidden>
+      <div class="live-card">
+        <div><span class="pulse"></span><p>지금 보고 있는 사람</p></div><strong id="liveUsers">–</strong><small>최근 30분 활성 사용자</small>
+      </div>
+
+      <div class="metrics">
+        <article><p>방문자</p><strong id="users">–</strong><small>활성 사용자</small></article>
+        <article><p>방문 횟수</p><strong id="sessions">–</strong><small>세션</small></article>
+        <article><p>평균 체류</p><strong id="engagement">–</strong><small>사용자당 참여시간</small></article>
+        <article><p>문의 행동</p><strong id="inquiries">–</strong><small>문의 클릭·완료 이벤트</small></article>
+      </div>
+
+      <div class="grid two">
+        <article class="panel"><header><div><p class="eyebrow">TRAFFIC TREND</p><h2>방문 흐름</h2></div></header><div class="chart" id="trendChart"></div></article>
+        <article class="panel"><header><div><p class="eyebrow">ACQUISITION</p><h2>어디에서 왔나</h2></div></header><div class="bars" id="sourceChart"></div></article>
+      </div>
+
+      <div class="grid two">
+        <article class="panel"><header><div><p class="eyebrow">CONTENT</p><h2>많이 본 페이지</h2></div></header><div class="table" id="pageTable"></div></article>
+        <article class="panel"><header><div><p class="eyebrow">DEVICE</p><h2>접속 환경</h2></div></header><div class="donut-wrap"><div class="donut" id="deviceDonut"></div><div class="legend" id="deviceLegend"></div></div></article>
+      </div>
+
+      <p class="updated" id="updatedAt"></p>
+    </section>
+
+    <section class="meta-section" id="metaSection">
+      <header class="section-head">
+        <div><p class="eyebrow">META ADS · CAMPAIGN PERFORMANCE</p><h2>광고가 실제 문의로 이어지는지.</h2></div>
+        <span class="meta-status" id="metaStatus">연결 대기</span>
+      </header>
+      <div class="meta-metrics">
+        <article><p>광고비</p><strong id="metaSpend">–</strong><small>선택 기간 지출</small></article>
+        <article><p>노출</p><strong id="metaImpressions">–</strong><small>Impressions</small></article>
+        <article><p>클릭</p><strong id="metaClicks">–</strong><small>Link clicks</small></article>
+        <article><p>문의 전환</p><strong id="metaLeads">–</strong><small>Meta Lead</small></article>
+        <article><p>문의당 비용</p><strong id="metaCpl">–</strong><small>Cost per lead</small></article>
+      </div>
+      <article class="panel meta-panel"><header><div><p class="eyebrow">CAMPAIGNS</p><h2>캠페인별 성과</h2></div></header><div class="table" id="metaCampaignTable"><p class="empty">Meta 광고 계정을 연결하면 캠페인 성과가 표시됩니다.</p></div></article>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="admin.js?v=2"></script>
+</body>
+</html>
