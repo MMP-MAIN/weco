@@ -5,7 +5,9 @@ const PHONE = '010-6330-5226'
 ;(() => {
   const intro = document.getElementById('intro')
   if (!intro) return
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const fastEntry = matchMedia('(prefers-reduced-motion: reduce), (max-width: 768px), (pointer: coarse)').matches
+  if (fastEntry) {
+    intro.remove()
     document.documentElement.classList.add('no-intro'); return
   }
   try {
@@ -187,6 +189,7 @@ const trapFocusWithin = (root, e) => {
   }
 }
 const openProjects = () => {
+  trackEvent('PortfolioOpen', { page_language: document.documentElement.lang || 'ko' })
   projectTrigger = document.activeElement
   projectView.classList.add('open')
   projectView.setAttribute('aria-hidden', 'false')
@@ -396,6 +399,7 @@ document.addEventListener('click', (event) => {
     else if (href.startsWith('mailto:')) trackEvent('EmailClick', linkParams)
     else if (/WECO_PORTFOLIO_2026\.pdf(?:$|[?#])/i.test(href)) trackEvent('PortfolioDownload', linkParams)
     else if (href === '#contact') trackEvent('ContactCTAClick', linkParams)
+    else if (href.includes('weco-brand-discovery.leeyounghwan.chatgpt.site')) trackEvent('BrandDiscoveryClick', linkParams)
   }
 
   const project = event.target.closest('.proj-card')
@@ -406,6 +410,29 @@ document.addEventListener('click', (event) => {
     })
   }
 })
+
+// 광고 유입 이후 실제 관심도를 단계별로 측정합니다.
+;(() => {
+  const sentDepths = new Set()
+  const reportDepth = () => {
+    const max = Math.max(document.documentElement.scrollHeight - innerHeight, 1)
+    const percent = Math.round(scrollY / max * 100)
+    ;[25, 50, 75, 90].forEach(depth => {
+      if (percent >= depth && !sentDepths.has(depth)) {
+        sentDepths.add(depth)
+        trackEvent('ScrollDepth', { depth, page_language: document.documentElement.lang || 'ko' })
+      }
+    })
+  }
+  addEventListener('scroll', reportDepth, { passive: true })
+
+  const inquiryForm = document.getElementById('inquiryForm')
+  inquiryForm?.addEventListener('focusin', () => {
+    if (inquiryForm.dataset.started) return
+    inquiryForm.dataset.started = 'true'
+    trackEvent('InquiryFormStart', { page_language: document.documentElement.lang || 'ko' })
+  })
+})()
 
 // ===== 프리미엄 모션 (CDN 로드 실패 시 기본 동작 유지) =====
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
