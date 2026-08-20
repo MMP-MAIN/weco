@@ -1,0 +1,4 @@
+.hero-en strong{white-space:normal}.topbar .brand::after{content:"BRAND CONSULTANCY"}
+@media(min-width:981px){.hero-copy{min-width:0}.hero-en{font-size:clamp(48px,5.6vw,86px)}}
+.brand-official img{position:static!important;display:block;width:118px!important;height:auto;margin-top:6px;mix-blend-mode:normal}
+@media(max-width:640px){.brand-official img{width:92px!important;height:auto;margin-top:6px}}
