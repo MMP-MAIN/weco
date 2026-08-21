@@ -528,8 +528,10 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
     const intro = gsap.timeline({ defaults: { ease: 'power4.out' } })
       .from('.hero-eyebrow', { y: 18, opacity: 0, duration: .8 })
       .from('.hero-en .ch', { yPercent: 115, opacity: 0, duration: 1, stagger: .035 }, '-=.4')
-      .from('.hero-en .spark', { scale: 0, rotation: -120, opacity: 0, duration: .7, ease: 'back.out(2.2)' }, '-=.45')
-      .from('.hero-promise', { y: 22, opacity: 0, duration: .8 }, '-=.55')
+    if (heroEn.querySelector('.spark')) {
+      intro.from('.hero-en .spark', { scale: 0, rotation: -120, opacity: 0, duration: .7, ease: 'back.out(2.2)' }, '-=.45')
+    }
+    intro.from('.hero-promise', { y: 22, opacity: 0, duration: .8 }, '-=.55')
     intro.eventCallback('onComplete', () => intro.kill())
     // rAF가 멈추는 환경(백그라운드 탭 등)에서도 히어로가 반드시 보이도록 보장
     setTimeout(() => { if (intro.progress() < 1) intro.progress(1) }, 3500)
