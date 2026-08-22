@@ -172,20 +172,6 @@ gnb.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu
   requestAnimationFrame(loop)
 })()
 
-// ---- 포트폴리오 필터 ----
-const filterTabs = document.getElementById('filterTabs')
-if (filterTabs) {
-  const works = document.querySelectorAll('#portfolioGrid .work')
-  filterTabs.addEventListener('click', (e) => {
-    const btn = e.target.closest('button')
-    if (!btn) return
-    filterTabs.querySelectorAll('button').forEach(b => b.classList.remove('active'))
-    btn.classList.add('active')
-    const f = btn.dataset.filter
-    works.forEach(w => w.classList.toggle('hidden', f !== 'all' && w.dataset.cat !== f))
-  })
-}
-
 // ---- PROJECT 전용 오버레이 열기/닫기 ----
 const projectView = document.getElementById('projectView')
 const closeProjectsButton = document.getElementById('closeProjects')
@@ -289,37 +275,14 @@ const reveal = () => {
 const quickFab = document.getElementById('quickFab')
 
 // scroll 이벤트 + 보조 타이머 이중화 (이벤트가 누락되는 환경 대비)
-// ---- 카운트업 숫자 ----
-const counters = [...document.querySelectorAll('[data-count]')]
-let countersDone = false
-const runCounters = () => {
-  countersDone = true
-  counters.forEach(el => {
-    const target = parseInt(el.dataset.count, 10)
-    const t0 = Date.now(), dur = 1400
-    const iv = setInterval(() => {
-      const p = Math.min(1, (Date.now() - t0) / dur)
-      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)))
-      if (p >= 1) clearInterval(iv)
-    }, 30)
-  })
-}
-
-const marqueeEl = document.querySelector('.marquee')
 const tick = () => {
   reveal()
-  if (!countersDone && counters.length &&
-      counters[0].getBoundingClientRect().top < window.innerHeight * 0.92) runCounters()
   quickFab.classList.toggle('show', window.scrollY > window.innerHeight * 0.7)
   // 화면 밖 무한 애니메이션 정지 (GPU 절약)
   const pastHero = window.scrollY > window.innerHeight * 1.1
   document.body.classList.toggle('motion-paused', pastHero)
   const hv = document.querySelector('#heroVideo video')
   if (hv && hv.src) { pastHero ? hv.pause() : (document.getElementById('heroVideo').classList.contains('playing') && hv.play().catch(() => {})) }
-  if (marqueeEl) {
-    const r = marqueeEl.getBoundingClientRect()
-    marqueeEl.classList.toggle('paused', r.bottom < 0 || r.top > window.innerHeight)
-  }
 }
 window.addEventListener('scroll', tick, { passive: true })
 window.addEventListener('resize', tick, { passive: true })

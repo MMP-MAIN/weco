@@ -157,15 +157,6 @@ html.no-intro .intro{display:none;}
 .section-desc strong{color:var(--ink);}
 .align-left{text-align:left !important;}
 
-/* ===== 포트폴리오 — 갤러리 ===== */
-.filter-tabs{display:flex;gap:8px 34px;margin:18px 0 56px;flex-wrap:wrap;}
-.filter-tabs button{background:transparent;border:none;color:#c9c9c4;
-  padding:0;font-size:clamp(22px,2.8vw,32px);font-weight:800;letter-spacing:-.5px;cursor:pointer;
-  transition:color .25s;border-radius:0;font-family:inherit;line-height:1.4;}
-.filter-tabs button:hover{color:var(--dim);}
-.filter-tabs button.active{color:var(--ink);}
-.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px 28px;}
-
 /* 분야별 대표 작업 */
 .practice-showcase{padding:clamp(88px,11vw,168px) 0;background:#f0ede5;color:#171713;}
 .practice-head{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,.6fr);gap:56px;align-items:end;margin-bottom:64px;}
@@ -221,24 +212,6 @@ html.no-intro .intro{display:none;}
   .scope-item{padding:34px 0;}
   .scope-item>p{font-size:14px;}
 }
-.work{background:transparent;}
-.work.hidden{display:none;}
-.work-img{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;position:relative;
-  overflow:hidden;border-radius:18px;}
-.work-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  filter:brightness(.94);transition:transform .8s cubic-bezier(.2,.6,.2,1),filter .4s;}
-.work:hover .work-img img{transform:scale(1.05);filter:brightness(1.02);}
-.ph-1{background:linear-gradient(150deg,#3a3633,#181614 70%);}
-.ph-2{background:linear-gradient(150deg,#2e3236,#141618 70%);}
-.ph-3{background:linear-gradient(150deg,#36323a,#161418 70%);}
-.ph-4{background:linear-gradient(150deg,#2f3733,#141816 70%);}
-.ph-5{background:linear-gradient(150deg,#3a3034,#181416 70%);}
-.ph-6{background:linear-gradient(150deg,#343434,#161616 70%);}
-.work figcaption{padding:18px 2px 0;text-align:center;}
-.work figcaption em{font-family:var(--label);font-style:normal;font-size:9.5px;color:var(--accent);font-weight:600;letter-spacing:3px;}
-.work figcaption h3{font-size:15px;font-weight:700;margin:9px 0 6px;line-height:1.5;letter-spacing:1.5px;}
-.work figcaption p{font-size:12.5px;color:var(--faint);letter-spacing:.3px;}
-
 /* ===== 문의 ===== */
 .contact-wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:64px;align-items:start;}
 .contact-info .section-eyebrow,.contact-info .section-title,.contact-info .section-desc{text-align:left;}
@@ -310,14 +283,6 @@ html.no-intro .intro{display:none;}
 .hist-next .hist-meta em{color:var(--accent);}
 .hist-next .hist-meta p{color:var(--accent);font-weight:600;}
 
-/* ===== 무빙 타이포 (마키) ===== */
-.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  padding:26px 0;background:var(--bg);}
-.marquee-track{display:flex;white-space:nowrap;width:max-content;animation:marquee 26s linear infinite;}
-.marquee.paused .marquee-track{animation-play-state:paused;}
-.marquee-track span{font-family:var(--serif);font-style:italic;font-size:clamp(26px,4vw,44px);font-weight:400;letter-spacing:4px;color:var(--accent);}
-@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-
 /* ===== 플로팅 문의 버튼 ===== */
 .quick-fab{position:fixed;right:28px;bottom:28px;z-index:95;width:88px;height:88px;border-radius:50%;
   background:var(--accent);color:#16120a;display:flex;align-items:center;justify-content:center;text-align:center;
@@ -336,7 +301,6 @@ html.no-intro .intro{display:none;}
 @media (prefers-reduced-motion: reduce){
   .rv{opacity:1;transform:none;transition:none;}
   .hero-photo img{animation:none;}
-  .marquee-track{animation:none;}
 }
 
 /* ===== ASK CLAUDE — 채팅형 Q&A ===== */
