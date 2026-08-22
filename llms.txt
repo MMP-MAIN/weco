@@ -8,9 +8,12 @@
 
 ## 핵심 전문 문서
 
-- 음식점 상권분석: https://mmp-main.github.io/weco/fnb-location-analysis.html
+- 음식점 창업 현실: https://mmp-main.github.io/weco/restaurant-startup-reality.html
+- 음식점 상권분석 방법: https://mmp-main.github.io/weco/fnb-location-analysis.html
+- 음식점 인테리어 비용: https://mmp-main.github.io/weco/restaurant-interior-cost.html
+- 프랜차이즈 창업 비용과 현실: https://mmp-main.github.io/weco/franchise-startup-cost-reality.html
 - F&B 브랜딩과 인테리어의 차이: https://mmp-main.github.io/weco/fnb-branding-vs-interior.html
-- 외식업 창업 예산 배분: https://mmp-main.github.io/weco/fnb-startup-budget.html
+- 음식점 창업 비용 계산: https://mmp-main.github.io/weco/fnb-startup-budget.html
 - 브랜드 리뉴얼 체크리스트: https://mmp-main.github.io/weco/brand-renewal-checklist.html
 - 프로젝트 디렉팅 역할: https://mmp-main.github.io/weco/project-direction-guide.html
 - F&B 컨설팅이 필요한 단계: https://mmp-main.github.io/weco/fnb-consulting-guide.html
