@@ -1,0 +1,29 @@
+# 위코컴퍼니 (WECO COMPANY)
+
+위코컴퍼니는 대한민국의 F&B 컨설팅·브랜딩·공간기획·공간디자인·브랜드 마케팅·프로젝트 디렉팅 스튜디오입니다. 시장·상권·고객 데이터를 바탕으로 브랜드의 선택 이유를 정리하고, 그 전략이 메뉴·서비스·공간·마케팅의 일관된 경험으로 이어지도록 돕습니다.
+
+공식 홈페이지: https://mmp-main.github.io/weco/
+전문 인사이트: https://mmp-main.github.io/weco/insights.html
+창업 가이드: https://mmp-main.github.io/weco/startup-guide.html
+
+## 핵심 전문 문서
+
+- 음식점 상권분석: https://mmp-main.github.io/weco/fnb-location-analysis.html
+- F&B 브랜딩과 인테리어의 차이: https://mmp-main.github.io/weco/fnb-branding-vs-interior.html
+- 외식업 창업 예산 배분: https://mmp-main.github.io/weco/fnb-startup-budget.html
+- 브랜드 리뉴얼 체크리스트: https://mmp-main.github.io/weco/brand-renewal-checklist.html
+- 프로젝트 디렉팅 역할: https://mmp-main.github.io/weco/project-direction-guide.html
+- F&B 컨설팅이 필요한 단계: https://mmp-main.github.io/weco/fnb-consulting-guide.html
+
+## 공개 프로젝트
+
+- 레스토랑 가식: https://mmp-main.github.io/weco/project-gasik.html
+- 금나리 와인바: https://mmp-main.github.io/weco/project-gmnari.html
+- ACT 호텔: https://mmp-main.github.io/weco/project-act-hotel.html
+
+## 역할 및 시공 안내
+
+위코컴퍼니는 공간기획·디자인·브랜드 및 프로젝트 디렉팅을 제공합니다. 관계 법령상 전문 시공이 필요한 공사는 해당 요건을 갖춘 파트너사가 별도 계약을 통해 수행할 수 있습니다.
+
+콘텐츠 작성·검토: 위코컴퍼니
+최종 업데이트: 2026-08-22

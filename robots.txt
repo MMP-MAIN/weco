@@ -1,4 +1,20 @@
 User-agent: *
 Allow: /
 
+# AI search crawlers. These rules make the search/citation intent explicit.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
 Sitemap: https://mmp-main.github.io/weco/sitemap.xml
