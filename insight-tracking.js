@@ -6,6 +6,7 @@
   window.dataLayer=window.dataLayer||[];
   window.gtag=window.gtag||function(){dataLayer.push(arguments)};
   gtag('js',new Date());
+  gtag('set','linker',{domains:['mmp-main.github.io','weco-brand-discovery.leeyounghwan.chatgpt.site']});
   gtag('config','G-45Q0B2B2XR');
 
   if(!window.fbq){
@@ -22,8 +23,11 @@
     if(!link)return;
     var href=link.getAttribute('href')||'';
     if(href.indexOf('#contact')>-1){
-      if(window.gtag)gtag('event','generate_lead',{content_type:'insight',link_url:href});
-      if(window.fbq)fbq('track','Contact');
+      if(window.gtag)gtag('event','contact_cta_click',{content_type:'insight',link_url:href});
+      if(window.fbq)fbq('trackCustom','ContactCTAClick',{content_type:'insight',link_url:href});
+    }else if(href.indexOf('weco-brand-discovery.leeyounghwan.chatgpt.site')>-1){
+      if(window.gtag)gtag('event','brand_discovery_click',{content_type:'insight',link_url:href});
+      if(window.fbq)fbq('trackCustom','BrandDiscoveryClick',{content_type:'insight',link_url:href});
     }else if(link.closest('.insight-card')){
       if(window.gtag)gtag('event','select_content',{content_type:'insight',item_id:href});
     }
