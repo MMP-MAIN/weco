@@ -401,6 +401,13 @@ document.addEventListener('click', (event) => {
     else if (/WECO_PORTFOLIO_2026\.pdf(?:$|[?#])/i.test(href)) trackEvent('PortfolioDownload', linkParams)
     else if (href === '#contact') trackEvent('ContactCTAClick', linkParams)
     else if (href.includes('weco-brand-discovery.leeyounghwan.chatgpt.site')) trackEvent('BrandDiscoveryClick', linkParams)
+    else if (href === '#portfolio') trackEvent('portfolio_open', linkParams)
+    else if (/^insights\.html(?:$|[?#])/i.test(href)) trackEvent('insights_click', linkParams)
+    else if (/^startup-guide\.html(?:$|[?#])/i.test(href)) trackEvent('startup_guide_click', linkParams)
+  }
+
+  if (event.target.closest('[data-open-projects]')) {
+    trackEvent('portfolio_open', { page_language: pageLanguage, link_text: 'project_view' })
   }
 
   const project = event.target.closest('.proj-card')
@@ -433,6 +440,39 @@ document.addEventListener('click', (event) => {
     inquiryForm.dataset.started = 'true'
     trackEvent('InquiryFormStart', { page_language: document.documentElement.lang || 'ko' })
   })
+
+  // 한 페이지 안에서도 방문자가 실제로 도달한 구간을 경로처럼 확인할 수 있게 합니다.
+  if ('IntersectionObserver' in window) {
+    const sectionEvents = [
+      ['.hero', 'view_hero', 'hero'],
+      ['.friction-section', 'view_problem', 'problem'],
+      ['.discovery-cta', 'view_brand_diagnosis', 'brand_diagnosis'],
+      ['#intelligence', 'view_intelligence', 'intelligence'],
+      ['#audience', 'view_audience', 'audience'],
+      ['#scope', 'view_services', 'services'],
+      ['#process', 'view_process', 'process'],
+      ['#contact', 'view_contact', 'contact']
+    ]
+    const viewedSections = new Set()
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return
+        const config = sectionEvents.find(([selector]) => entry.target.matches(selector))
+        if (!config || viewedSections.has(config[1])) return
+        viewedSections.add(config[1])
+        trackEvent(config[1], {
+          section_name: config[2],
+          page_language: document.documentElement.lang || 'ko'
+        })
+        sectionObserver.unobserve(entry.target)
+      })
+    }, { threshold: 0.15 })
+
+    sectionEvents.forEach(([selector]) => {
+      const section = document.querySelector(selector)
+      if (section) sectionObserver.observe(section)
+    })
+  }
 })()
 
 // ===== 프리미엄 모션 (CDN 로드 실패 시 기본 동작 유지) =====
