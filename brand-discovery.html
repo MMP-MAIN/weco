@@ -16,10 +16,23 @@
 </head>
 <body>
   <iframe
+    id="brand-discovery-frame"
     src="https://weco-brand-discovery.leeyounghwan.chatgpt.site/"
     title="위코컴퍼니 무료 브랜드 가능성 분석"
     allow="clipboard-read; clipboard-write"
   ></iframe>
-  <p class="fallback">화면이 열리지 않으면 <a href="https://weco-brand-discovery.leeyounghwan.chatgpt.site/">분석 페이지 바로가기</a></p>
+  <p class="fallback" id="brand-discovery-fallback" hidden>화면이 열리지 않으면 <a href="https://weco-brand-discovery.leeyounghwan.chatgpt.site/" target="_top">분석 페이지 바로가기</a></p>
+  <script>
+    const frame = document.getElementById('brand-discovery-frame');
+    const fallback = document.getElementById('brand-discovery-fallback');
+    let loaded = false;
+    frame.addEventListener('load', () => {
+      loaded = true;
+      fallback.hidden = true;
+    });
+    window.setTimeout(() => {
+      if (!loaded) fallback.hidden = false;
+    }, 8000);
+  </script>
 </body>
 </html>
