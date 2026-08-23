@@ -1,24 +1,6 @@
 // ===== 위코컴퍼니 홈페이지 스크립트 =====
 const PHONE = '010-6330-5226'
 
-// ---- 대표 프로젝트 슬라이더 (Embla Carousel · MIT) ----
-;(() => {
-  const viewport = document.querySelector('.work-embla')
-  if (!viewport || typeof window.EmblaCarousel !== 'function') return
-  const embla = window.EmblaCarousel(viewport, { align: 'start', loop: false, dragFree: true })
-  const prev = document.querySelector('.work-prev')
-  const next = document.querySelector('.work-next')
-  const sync = () => {
-    if (prev) prev.disabled = !embla.canScrollPrev()
-    if (next) next.disabled = !embla.canScrollNext()
-  }
-  prev?.addEventListener('click', () => embla.scrollPrev())
-  next?.addEventListener('click', () => embla.scrollNext())
-  embla.on('select', sync)
-  embla.on('reInit', sync)
-  sync()
-})()
-
 // 광고와 첫 화면의 약속을 동일하게 유지합니다.
 window.WECO_HERO_VARIANT = 1
 

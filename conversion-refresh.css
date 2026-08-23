@@ -25,21 +25,13 @@
   .friction-section{padding-top:72px;padding-bottom:72px}
   .friction-wrap{gap:32px}
 }
-/* Selected Work · Embla Carousel (MIT) */
-.selected-work{overflow:hidden;padding:112px 0;background:#ede7d9;color:#0b432e;border-top:1px solid rgba(11,67,46,.14)}
-.selected-work-head{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:42px}
-.selected-work .section-title{margin-bottom:0;color:#0b432e}
-.selected-work-actions{display:flex;gap:8px}
-.selected-work-actions button{width:48px;height:48px;border:1px solid rgba(11,67,46,.42);border-radius:50%;background:transparent;color:#0b432e;font-size:21px;cursor:pointer;transition:.2s ease}
-.selected-work-actions button:hover{background:#0b432e;color:#f5f0e4}.selected-work-actions button:disabled{opacity:.25;cursor:default}
-.work-embla{overflow:hidden;padding-left:max(24px,calc((100vw - var(--maxw))/2))}
-.work-embla__container{display:flex;gap:18px;touch-action:pan-y pinch-zoom}
-.work-slide{flex:0 0 min(38vw,510px);min-width:0}
-.work-slide a,.work-slide button{display:block;width:100%;padding:0;border:0;background:transparent;color:inherit;text-align:left;text-decoration:none;cursor:pointer;font:inherit}
-.work-slide img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#d8d0bf;filter:saturate(.86);transition:transform .45s ease,filter .35s ease}
-.work-slide a:hover img,.work-slide button:hover img{transform:scale(1.012);filter:saturate(1)}
-.work-slide span{display:block;margin-top:17px;font:700 10px/1.3 Poppins,sans-serif;letter-spacing:.11em;color:#63766c}
-.work-slide strong{display:block;margin-top:7px;font-size:25px;letter-spacing:-.045em}
-.work-slide em{display:block;margin-top:10px;font-style:normal;font-size:12px;font-weight:750}
-.selected-work-foot{margin-top:36px}.selected-work-foot button{border:0;border-bottom:1px solid currentColor;padding:0 0 6px;background:transparent;color:#0b432e;font:750 13px/1.4 inherit;cursor:pointer}.selected-work-foot span{margin-left:8px}
-@media(max-width:640px){.selected-work{padding:82px 0}.selected-work-head{align-items:flex-end;margin-bottom:30px}.selected-work-actions{display:none}.work-embla{padding-left:20px}.work-embla__container{gap:12px}.work-slide{flex-basis:82vw}.work-slide strong{font-size:22px}.selected-work-foot{margin-top:28px}}
+/* Compact homepage: keep the decision path concise. */
+.friction-section{padding-top:88px!important;padding-bottom:88px!important}
+.intelligence{padding-top:88px!important}
+.intelligence .strategy-flow{margin-top:68px!important}
+.scope-section{padding-top:96px!important;padding-bottom:96px!important}
+#process{padding-top:82px!important;padding-bottom:82px!important}
+#contact{padding-top:96px!important;padding-bottom:96px!important}
+.topbar .brand-official{overflow:visible!important;display:flex!important;align-items:center!important;height:44px!important;top:0!important;left:0!important;transform:none!important}
+.topbar .brand-official img{display:block!important;width:118px!important;height:auto!important;margin:0!important;transform:none!important}
+@media(max-width:640px){.friction-section,.intelligence,.scope-section,#process,#contact{padding-top:72px!important;padding-bottom:72px!important}.intelligence .strategy-flow{margin-top:48px!important}.topbar .brand-official{height:38px!important;top:50%!important;left:50%!important;transform:translate(-50%,-50%)!important}.topbar .brand-official img{width:92px!important;margin:0!important}}
