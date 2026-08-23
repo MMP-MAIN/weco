@@ -1,26 +1,8 @@
 // ===== 위코컴퍼니 홈페이지 스크립트 =====
 const PHONE = '010-6330-5226'
 
-// 접속할 때마다 위코의 비전을 다른 문장으로 보여줍니다.
-;(() => {
-  const headline = document.getElementById('heroHeadline')
-  if (!headline) return
-  const messages = [
-    ['아이디어를,', '손님이 찾는 브랜드로.'],
-    ['창업의 막연함을', '선택의 확신으로.'],
-    ['당신의 가능성을', '오래가는 브랜드로.'],
-    ['하나의 꿈을', '성장하는 브랜드로.'],
-    ['오늘의 가능성을', '내일의 브랜드로.']
-  ]
-  let previous = -1
-  try { previous = Number(sessionStorage.getItem('wecoHeroVariant') ?? -1) } catch (_) {}
-  const candidates = messages.map((_, index) => index).filter(index => index !== previous)
-  const selected = candidates[Math.floor(Math.random() * candidates.length)] ?? 0
-  const [lead, vision] = messages[selected]
-  headline.innerHTML = `${lead}<br /><strong>${vision}</strong>`
-  window.WECO_HERO_VARIANT = selected + 1
-  try { sessionStorage.setItem('wecoHeroVariant', String(selected)) } catch (_) {}
-})()
+// 광고와 첫 화면의 약속을 동일하게 유지합니다.
+window.WECO_HERO_VARIANT = 1
 
 // ---- 인트로 리빌 종료 ----
 ;(() => {
