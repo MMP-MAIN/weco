@@ -6,7 +6,7 @@
   window.dataLayer=window.dataLayer||[];
   window.gtag=window.gtag||function(){dataLayer.push(arguments)};
   gtag('js',new Date());
-  gtag('set','linker',{domains:['mmp-main.github.io','weco-brand-discovery.leeyounghwan.chatgpt.site']});
+  gtag('set','linker',{domains:['wecocompany.com','weco-brand-discovery.leeyounghwan.chatgpt.site']});
   gtag('config','G-45Q0B2B2XR');
 
   if(!window.fbq){
