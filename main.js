@@ -289,6 +289,7 @@ typeCards?.addEventListener('click', (e) => {
   b.classList.add('active')
   b.setAttribute('aria-pressed', 'true')
   selectedType = b.dataset.value
+  if (preferredWork) preferredWork.value = selectedType
 })
 
 
@@ -308,6 +309,7 @@ const FORM_MSG = ({
 
 // 프로젝트 문의 → FormSubmit.co (계정 불필요, 이메일로 수신)
 const INQUIRY_ENDPOINT = 'https://formsubmit.co/ajax/storm2119@gmail.com'
+const preferredWork = document.getElementById('preferredWork')
 
 const setStatus = (msg, ok) => {
   formStatus.textContent = msg
