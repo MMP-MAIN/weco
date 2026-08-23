@@ -1,8 +1,44 @@
 // ===== 위코컴퍼니 홈페이지 스크립트 =====
 const PHONE = '010-6330-5226'
 
-// 광고와 첫 화면의 약속을 동일하게 유지합니다.
-window.WECO_HERO_VARIANT = 1
+// 접속할 때마다 다른 관점의 첫 문장을 보여줍니다.
+;(() => {
+  const headline = document.getElementById('heroHeadline')
+  const promise = document.querySelector('.hero-promise')
+  if (!headline || !promise) return
+
+  const variants = [
+    {
+      headline: '아이디어를,<br><strong>손님이 찾는 브랜드로.</strong>',
+      promise: '시장과 고객의 신호를 읽고 브랜드, 공간과 마케팅이<br>하나의 성장 방향으로 움직이게 합니다.'
+    },
+    {
+      headline: '작은 가능성을,<br><strong>오래가는 브랜드로.</strong>',
+      promise: '막연한 아이디어 안에서 선택받을 이유를 찾고<br>지속할 수 있는 브랜드의 기준을 세웁니다.'
+    },
+    {
+      headline: '가게를 넘어,<br><strong>기억되는 브랜드로.</strong>',
+      promise: '이름과 메뉴, 공간과 서비스가 같은 이야기를 전하도록<br>고객이 기억할 하나의 경험으로 연결합니다.'
+    },
+    {
+      headline: '좋은 공간을,<br><strong>선택받는 경험으로.</strong>',
+      promise: '보기 좋은 장면을 넘어 고객의 방문과 재방문으로 이어지는<br>브랜드 경험의 방향을 설계합니다.'
+    },
+    {
+      headline: '막연한 창업을,<br><strong>선명한 브랜드로.</strong>',
+      promise: '상권과 고객, 운영 조건을 함께 살펴보고<br>지금 해야 할 선택의 순서를 분명하게 만듭니다.'
+    }
+  ]
+
+  let previous = -1
+  try { previous = Number(localStorage.getItem('wecoHeroVariant')) } catch (_) {}
+  const candidates = variants.map((_, i) => i).filter(i => i !== previous)
+  const selected = candidates[Math.floor(Math.random() * candidates.length)] ?? 0
+  headline.innerHTML = variants[selected].headline
+  promise.innerHTML = variants[selected].promise
+  window.WECO_HERO_VARIANT = selected + 1
+  try { localStorage.setItem('wecoHeroVariant', String(selected)) } catch (_) {}
+})()
 
 // ---- 인트로 리빌 종료 ----
 ;(() => {
