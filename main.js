@@ -6,11 +6,11 @@ const PHONE = '010-6330-5226'
   const headline = document.getElementById('heroHeadline')
   if (!headline) return
   const messages = [
-    ['왜 어떤 가게는', '오픈 전부터 기대될까요?'],
-    ['당신의 가게가', '선택받을 이유를 만듭니다.'],
     ['좋은 아이디어를', '손님이 찾는 브랜드로.'],
-    ['잘될 브랜드는', '시작부터 방향이 다릅니다.'],
-    ['내 브랜드의 가능성,', '오픈 전에 먼저 확인하세요.']
+    ['창업의 막연함을', '선택의 확신으로.'],
+    ['당신의 가능성을', '오래가는 브랜드로.'],
+    ['다음 가게가 아니라', '다음 브랜드를 시작하세요.'],
+    ['손님이 찾아올 이유를', '브랜드의 미래로 연결합니다.']
   ]
   let previous = -1
   try { previous = Number(sessionStorage.getItem('wecoHeroVariant') ?? -1) } catch (_) {}
@@ -363,12 +363,11 @@ form.addEventListener('submit', async (e) => {
     const data = await res.json().catch(() => ({}))
     if (res.ok && (data.success === 'true' || data.success === true)) {
       if (typeof window.fbq === 'function') window.fbq('track', 'Lead')
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', 'generate_lead', {
-          lead_type: selectedType || 'unspecified',
-          page_language: document.documentElement.lang || 'ko'
-        })
-      }
+      trackEvent('generate_lead', {
+        form_name: 'project_inquiry',
+        lead_type: selectedType || 'unspecified',
+        page_language: document.documentElement.lang || 'ko'
+      })
       form.reset()
       setStatus(FORM_MSG.ok, true)
     } else {
@@ -385,7 +384,16 @@ form.addEventListener('submit', async (e) => {
 
 // 주요 광고 전환 행동 추적 (개인정보·유입 식별값은 외부로 전송하지 않음)
 const trackEvent = (name, params = {}) => {
-  const enriched = { hero_variant: window.WECO_HERO_VARIANT || 1, ...params }
+  const query = new URLSearchParams(location.search)
+  const enriched = {
+    hero_variant: window.WECO_HERO_VARIANT || 1,
+    landing_path: location.pathname,
+    traffic_source: query.get('utm_source') || 'unknown',
+    traffic_medium: query.get('utm_medium') || 'unknown',
+    campaign_name: query.get('utm_campaign') || 'unknown',
+    campaign_content: query.get('utm_content') || 'unknown',
+    ...params
+  }
   if (typeof window.fbq === 'function') window.fbq('trackCustom', name, enriched)
   if (typeof window.gtag === 'function') window.gtag('event', name, enriched)
 }
@@ -396,11 +404,17 @@ document.addEventListener('click', (event) => {
   if (link) {
     const href = link.getAttribute('href') || ''
     const linkParams = { page_language: pageLanguage, link_text: (link.textContent || '').trim().slice(0, 100) }
-    if (href.startsWith('tel:')) trackEvent('PhoneClick', linkParams)
-    else if (href.startsWith('mailto:')) trackEvent('EmailClick', linkParams)
-    else if (/WECO_PORTFOLIO_2026\.pdf(?:$|[?#])/i.test(href)) trackEvent('PortfolioDownload', linkParams)
-    else if (href === '#contact') trackEvent('ContactCTAClick', linkParams)
-    else if (href.includes('weco-brand-discovery.leeyounghwan.chatgpt.site')) trackEvent('BrandDiscoveryClick', linkParams)
+    if (href.startsWith('tel:')) {
+      trackEvent('phone_click', linkParams)
+      if (typeof window.fbq === 'function') window.fbq('track', 'Contact')
+    }
+    else if (href.startsWith('mailto:')) trackEvent('email_click', linkParams)
+    else if (/WECO_PORTFOLIO_2026\.pdf(?:$|[?#])/i.test(href)) trackEvent('portfolio_download', linkParams)
+    else if (href === '#contact') trackEvent('contact_cta_click', linkParams)
+    else if (href.includes('weco-brand-discovery.leeyounghwan.chatgpt.site')) {
+      trackEvent('brand_discovery_click', linkParams)
+      if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent', { content_name: 'brand_discovery' })
+    }
     else if (href === '#portfolio') trackEvent('portfolio_open', linkParams)
     else if (/^insights\.html(?:$|[?#])/i.test(href)) trackEvent('insights_click', linkParams)
     else if (/^startup-guide\.html(?:$|[?#])/i.test(href)) trackEvent('startup_guide_click', linkParams)
@@ -428,7 +442,7 @@ document.addEventListener('click', (event) => {
     ;[25, 50, 75, 90].forEach(depth => {
       if (percent >= depth && !sentDepths.has(depth)) {
         sentDepths.add(depth)
-        trackEvent('ScrollDepth', { depth, page_language: document.documentElement.lang || 'ko' })
+        trackEvent('scroll_depth', { depth, page_language: document.documentElement.lang || 'ko' })
       }
     })
   }
@@ -438,8 +452,16 @@ document.addEventListener('click', (event) => {
   inquiryForm?.addEventListener('focusin', () => {
     if (inquiryForm.dataset.started) return
     inquiryForm.dataset.started = 'true'
-    trackEvent('InquiryFormStart', { page_language: document.documentElement.lang || 'ko' })
+    trackEvent('form_start', { form_name: 'project_inquiry', page_language: document.documentElement.lang || 'ko' })
   })
+
+  // 광고 클릭 수와 실제 관심 방문을 분리해 볼 수 있도록 10초 체류를 별도 기록합니다.
+  let qualifiedVisitSent = false
+  setTimeout(() => {
+    if (qualifiedVisitSent || document.visibilityState !== 'visible') return
+    qualifiedVisitSent = true
+    trackEvent('qualified_visit_10s', { page_language: document.documentElement.lang || 'ko' })
+  }, 10000)
 
   // 한 페이지 안에서도 방문자가 실제로 도달한 구간을 경로처럼 확인할 수 있게 합니다.
   if ('IntersectionObserver' in window) {
