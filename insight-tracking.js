@@ -25,7 +25,7 @@
     if(href.indexOf('#contact')>-1){
       if(window.gtag)gtag('event','contact_cta_click',{content_type:'insight',link_url:href});
       if(window.fbq)fbq('trackCustom','ContactCTAClick',{content_type:'insight',link_url:href});
-    }else if(href.indexOf('weco-brand-discovery.leeyounghwan.chatgpt.site')>-1){
+    }else if(href.indexOf('brand-discovery.html')>-1||href.indexOf('weco-brand-discovery.leeyounghwan.chatgpt.site')>-1){
       if(window.gtag)gtag('event','brand_discovery_click',{content_type:'insight',link_url:href});
       if(window.fbq)fbq('trackCustom','BrandDiscoveryClick',{content_type:'insight',link_url:href});
     }else if(link.closest('.insight-card')){

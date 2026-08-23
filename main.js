@@ -393,7 +393,7 @@ document.addEventListener('click', (event) => {
     else if (href.startsWith('mailto:')) trackEvent('email_click', linkParams)
     else if (/WECO_PORTFOLIO_2026\.pdf(?:$|[?#])/i.test(href)) trackEvent('portfolio_download', linkParams)
     else if (href === '#contact') trackEvent('contact_cta_click', linkParams)
-    else if (href.includes('weco-brand-discovery.leeyounghwan.chatgpt.site')) {
+    else if (href.includes('brand-discovery.html') || href.includes('weco-brand-discovery.leeyounghwan.chatgpt.site')) {
       trackEvent('brand_discovery_click', linkParams)
       if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent', { content_name: 'brand_discovery' })
     }
