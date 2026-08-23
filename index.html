@@ -87,7 +87,7 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
 <header class="topbar" id="topbar">
   <div class="container topbar-inner">
     <button class="menu-toggle" id="menuToggle" type="button" aria-label="메뉴 열기" aria-controls="gnb" aria-expanded="false"><span></span><span></span><span></span></button>
-    <a href="#" class="brand brand-official" aria-label="위코컴퍼니"><img src="brand-assets/Weco_weco-transparent.png" alt="" width="852" height="192" decoding="async" fetchpriority="high" /><span>위코컴퍼니</span></a>
+    <a href="/" class="brand brand-official" aria-label="위코컴퍼니"><img src="brand-assets/Weco_weco-transparent.png" alt="" width="852" height="192" decoding="async" fetchpriority="high" /><span>위코컴퍼니</span></a>
     <nav class="gnb" id="gnb">
       <a href="insights.html">인사이트</a>
       <a href="#scope">솔루션</a>
@@ -234,6 +234,30 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
       </article>
     </div>
   </div>
+</section>
+
+<!-- ===== 대표 프로젝트 — Embla Carousel (MIT) ===== -->
+<section class="selected-work" id="selectedWork" aria-labelledby="selectedWorkTitle">
+  <div class="container selected-work-head">
+    <div>
+      <p class="section-eyebrow">SELECTED WORK</p>
+      <h2 class="section-title" id="selectedWorkTitle">브랜드의 방향이<br />공간의 장면이 된 순간.</h2>
+    </div>
+    <div class="selected-work-actions" aria-label="프로젝트 슬라이드 이동">
+      <button type="button" class="work-prev" aria-label="이전 프로젝트">←</button>
+      <button type="button" class="work-next" aria-label="다음 프로젝트">→</button>
+    </div>
+  </div>
+  <div class="work-embla" aria-label="위코컴퍼니 대표 프로젝트">
+    <div class="work-embla__container">
+      <article class="work-slide"><a href="project-gasik.html"><img src="images/gasik-01.jpg" alt="레스토랑 가식 외관과 브랜드 경험" loading="lazy" decoding="async" /><span>RESTAURANT · BRAND EXPERIENCE</span><strong>레스토랑 가식</strong><em>프로젝트 보기 →</em></a></article>
+      <article class="work-slide"><a href="project-gmnari.html"><img src="images/gmnari-08.jpg" alt="금나리 와인바 공간과 브랜드 경험" loading="lazy" decoding="async" /><span>WINE BAR · BRAND EXPERIENCE</span><strong>금나리 와인바</strong><em>프로젝트 보기 →</em></a></article>
+      <article class="work-slide"><a href="project-act-hotel.html"><img src="images/act-hotel-01.jpg" alt="ACT 호텔 외관과 게스트 경험" loading="lazy" decoding="async" /><span>HOTEL · GUEST EXPERIENCE</span><strong>ACT 호텔</strong><em>프로젝트 보기 →</em></a></article>
+      <article class="work-slide"><button type="button" data-open-projects><img src="images/arrangement-06-cover.jpg" alt="어레인지먼트 카페 공간 디자인" loading="lazy" decoding="async" /><span>CAFE · SPATIAL EXPERIENCE</span><strong>어레인지먼트</strong><em>전체 프로젝트 보기 →</em></button></article>
+      <article class="work-slide"><button type="button" data-open-projects><img src="images/woobok-01.jpg" alt="우복금 본점 공간 디자인" loading="lazy" decoding="async" /><span>RESTAURANT · BRAND SPACE</span><strong>우복금 본점</strong><em>전체 프로젝트 보기 →</em></button></article>
+    </div>
+  </div>
+  <div class="container selected-work-foot"><button type="button" data-open-projects>전체 프로젝트 보기 <span>↗</span></button></div>
 </section>
 
 <!-- ===== PROJECT VIEW (오버레이) ===== -->
@@ -474,7 +498,7 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
 
 <!-- ===== 모바일 하단 고정 바 ===== -->
 <div class="sticky-bar" id="stickyBar">
-  <a href="tel:010-6330-5226" class="sb-call">전화 문의</a>
+  <a href="brand-discovery.html" class="sb-call" data-conversion="brand_discovery">무료 브랜드 분석</a>
   <a href="#contact" class="sb-consult">프로젝트 문의</a>
 </div>
 
@@ -538,6 +562,7 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
   "inLanguage": "ko"
 }
 </script>
-  <script type="module" src="main.js?v=106"></script>
+  <script src="https://cdn.jsdelivr.net/npm/embla-carousel@8.6.0/embla-carousel.umd.js"></script>
+  <script type="module" src="main.js?v=107"></script>
 </body>
 </html>
