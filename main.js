@@ -295,7 +295,7 @@ const quickFab = document.getElementById('quickFab')
 // scroll 이벤트 + 보조 타이머 이중화 (이벤트가 누락되는 환경 대비)
 const tick = () => {
   reveal()
-  quickFab.classList.toggle('show', window.scrollY > window.innerHeight * 0.7)
+  if (quickFab) quickFab.classList.toggle('show', window.scrollY > window.innerHeight * 0.7)
   // 화면 밖 무한 애니메이션 정지 (GPU 절약)
   const pastHero = window.scrollY > window.innerHeight * 1.1
   document.body.classList.toggle('motion-paused', pastHero)
