@@ -37,9 +37,9 @@
 @media(max-width:640px){.friction-section,.intelligence,.scope-section,#process,#contact{padding-top:72px!important;padding-bottom:72px!important}.intelligence .strategy-flow{margin-top:48px!important}.topbar .brand-official{height:38px!important;top:50%!important;left:50%!important;transform:translate(-50%,-50%)!important}.topbar .brand-official img{width:92px!important;margin:0!important}}
 
 /* Project shortcut: makes the visual portfolio available from every scroll position. */
-.work-fab{position:fixed;right:36px;bottom:126px;z-index:96;width:72px;height:72px;border:1px solid rgba(0,77,49,.32);border-radius:50%;background:rgba(245,240,228,.94);color:#004d31;box-shadow:0 12px 32px rgba(0,45,29,.13);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;transition:transform .2s ease,background .2s ease,color .2s ease}
-.work-fab svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7}
-.work-fab span{font:700 9px/1 Poppins,sans-serif;letter-spacing:.12em}
-.work-fab:hover{transform:translateY(-3px);background:#004d31;color:#f5f0e4}
+.work-fab{position:fixed;right:28px;bottom:130px;z-index:96;min-width:144px;height:58px;padding:0 20px;border:1px solid #004d31;border-radius:999px;background:#004d31;color:#f5f0e4;box-shadow:0 14px 34px rgba(0,45,29,.28);display:flex;flex-direction:row;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:transform .2s ease,background .2s ease,color .2s ease}
+.work-fab svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;flex:0 0 auto}
+.work-fab span{font:800 13px/1 Pretendard,sans-serif;letter-spacing:-.02em;white-space:nowrap}
+.work-fab:hover{transform:translateY(-3px);background:#f1bd29;color:#004d31;border-color:#f1bd29}
 .project-view.open~.work-fab{opacity:0;pointer-events:none}
-@media(max-width:640px){.work-fab{right:16px;bottom:calc(82px + env(safe-area-inset-bottom));width:56px;height:56px;background:#f5f0e4;border-color:#006b3f;box-shadow:0 8px 24px rgba(0,45,29,.2)}.work-fab svg{width:20px;height:20px}.work-fab span{font-size:8px}}
+@media(max-width:640px){.work-fab{right:14px;bottom:calc(82px + env(safe-area-inset-bottom));min-width:126px;height:50px;padding:0 16px;background:#004d31;color:#f5f0e4;border-color:#004d31;box-shadow:0 10px 26px rgba(0,45,29,.3)}.work-fab svg{width:18px;height:18px}.work-fab span{font-size:12px}}
