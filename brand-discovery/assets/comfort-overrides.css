@@ -1,0 +1,24 @@
+/* A calmer questionnaire rhythm for desktop and mobile. */
+.survey-layout{grid-template-columns:minmax(240px,26%) minmax(0,680px);gap:clamp(72px,9vw,138px)}
+.form-panel{max-width:680px;padding-top:78px}
+.field{margin-bottom:58px}
+.field>span{margin-bottom:17px;font-size:13px;line-height:1.65}
+.field input,.field textarea{padding:15px 0;line-height:1.6}
+.two{gap:48px}
+.options{gap:11px}
+.options button{min-height:58px;padding:16px 17px;line-height:1.55}
+.conditional{margin:10px 0 52px;padding:26px 28px}
+.section-intro{margin-bottom:48px;padding:22px 0 26px}
+.form-footer{margin-top:72px}
+
+@media (max-width:800px){
+  .survey-layout{display:block;padding-top:30px}
+  .form-panel{max-width:none;padding-top:42px}
+  .field{margin-bottom:44px}
+  .field>span{margin-bottom:15px;font-size:14px}
+  .options{gap:10px}
+  .options button{min-height:58px;padding:15px 14px}
+  .conditional{margin-bottom:44px;padding:22px 18px}
+  .section-intro{margin-bottom:38px}
+  .form-footer{margin-top:60px}
+}
