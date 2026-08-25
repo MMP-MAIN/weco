@@ -4,7 +4,7 @@ html,body{color:#10271b;font-family:Pretendard,-apple-system,BlinkMacSystemFont,
 
 /* 배경별 텍스트 대비 보정 */
 .scope-section{color:#14261d}
-.scope-section .section-eyebrow{color:#9b3f1d}
+.scope-section .section-eyebrow{color:#52665a}
 .scope-heading>p:last-child,.scope-item>p{color:#3f574a}
 .scope-list{border-top-color:rgba(0,77,49,.24)}
 .scope-item{border-bottom-color:rgba(0,77,49,.24)}
@@ -14,7 +14,7 @@ html,body{color:#10271b;font-family:Pretendard,-apple-system,BlinkMacSystemFont,
 .hero-action-note{color:#40594c}
 .hero-axis{color:rgba(0,77,49,.8)}
 .hero-intel dd{color:#324f40}
-.evidence-grid small{color:#9b3f1d}
+.evidence-grid small{color:#52665a}
 .evidence-grid p{color:#40584b}
 .contact-list li span,.contact-form label,.block-label{color:#bdb6aa}
 .contact-form input::placeholder,.contact-form textarea::placeholder{color:#999287}
@@ -22,14 +22,14 @@ html,body{color:#10271b;font-family:Pretendard,-apple-system,BlinkMacSystemFont,
 .footer-meta{color:rgba(255,255,255,.68)}
 .footer-copy{color:rgba(255,255,255,.58)}
 #contact{color:#f5f0e4}
-#contact .section-eyebrow{color:#f1bd29}
+#contact .section-eyebrow{color:#d8d1c2}
 #contact .section-title{color:#f5f0e4}
 #contact .section-desc{color:#c8c1b6}
 #contact .contact-list li{color:#f5f0e4}
 #contact .contact-list li a{color:#f5f0e4}
 #contact .contact-list li span{color:#bdb6aa}
 #process{color:#f5f0e4}
-#process .section-eyebrow{color:#f1bd29}
+#process .section-eyebrow{color:#d8d1c2}
 #process .section-title{color:#f5f0e4}
 #process .section-desc{color:#c8c1b6}
 #process .process h3{color:#f5f0e4}

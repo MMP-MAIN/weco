@@ -40,6 +40,6 @@
 .work-fab{position:fixed;right:28px;bottom:130px;z-index:96;min-width:144px;height:58px;padding:0 20px;border:1px solid #004d31;border-radius:999px;background:#004d31;color:#f5f0e4;box-shadow:0 14px 34px rgba(0,45,29,.28);display:flex;flex-direction:row;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:transform .2s ease,background .2s ease,color .2s ease}
 .work-fab svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;flex:0 0 auto}
 .work-fab span{font:800 13px/1 Pretendard,sans-serif;letter-spacing:-.02em;white-space:nowrap}
-.work-fab:hover{transform:translateY(-3px);background:#f1bd29;color:#004d31;border-color:#f1bd29}
+.work-fab:hover{transform:translateY(-3px);background:#d8d1c2;color:#063d2d;border-color:#d8d1c2}
 .project-view.open~.work-fab{opacity:0;pointer-events:none}
 @media(max-width:640px){.work-fab{right:14px;bottom:calc(82px + env(safe-area-inset-bottom));min-width:126px;height:50px;padding:0 16px;background:#004d31;color:#f5f0e4;border-color:#004d31;box-shadow:0 10px 26px rgba(0,45,29,.3)}.work-fab svg{width:18px;height:18px}.work-fab span{font-size:12px}}

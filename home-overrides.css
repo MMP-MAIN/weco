@@ -27,4 +27,11 @@ html{scroll-behavior:smooth}body{overflow-x:hidden}.container{width:min(calc(100
   .work-fab{bottom:calc(76px + env(safe-area-inset-bottom))}.sticky-bar{padding-left:10px;padding-right:10px}.sticky-bar a{min-height:52px}
   img{height:auto}.practice-card img,.proj-img img{content-visibility:auto}
 }
+
+/* 2026-08 muted brand palette: keep accents editorial and low-saturation. */
+#contact .section-eyebrow,
+#process .section-eyebrow{color:#d8d1c2}
+.btn-kakao{border-color:#164f3a;background:#164f3a;color:#fff}
+.friction-head .section-eyebrow,
+.friction-grid span{color:#52665a}
 @media(max-width:380px){.hero-fit+.hero-actions{grid-template-columns:1fr}.hero-en,.hero-en strong{font-size:36px}.topbar .brand-official{width:84px!important}.topbar .brand-official img{width:84px!important}.sticky-bar a,.sticky-bar button{font-size:11px!important}}
