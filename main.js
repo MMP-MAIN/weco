@@ -439,6 +439,10 @@ document.addEventListener('click', (event) => {
       trackEvent('brand_discovery_click', linkParams)
       if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent', { content_name: 'brand_discovery' })
     }
+    else if (href.includes('mpmarketing.co.kr')) {
+      trackEvent('marketing_site_click', linkParams)
+      if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent', { content_name: 'mp_marketing' })
+    }
     else if (href === '#portfolio') trackEvent('portfolio_open', linkParams)
     else if (/^insights\.html(?:$|[?#])/i.test(href)) trackEvent('insights_click', linkParams)
     else if (/^startup-guide\.html(?:$|[?#])/i.test(href)) trackEvent('startup_guide_click', linkParams)
