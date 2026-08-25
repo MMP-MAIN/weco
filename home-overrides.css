@@ -15,3 +15,15 @@ html,body{color:#10271b;font-family:Pretendard,-apple-system,BlinkMacSystemFont,
 .insights-more{display:inline-flex;align-items:center;margin-top:28px;color:#fff;border-bottom:1px solid currentColor;padding-bottom:5px;font-size:13px;font-weight:800;text-decoration:none;letter-spacing:-.02em}.project-page-link{position:relative;z-index:3;display:inline-block;margin-top:10px;color:inherit;font-size:11px;font-weight:800;text-decoration:underline;text-underline-offset:4px}
 @media(max-width:390px){.container{width:calc(100% - 32px)}.lang-sw a{min-width:27px;font-size:9px!important}.hero-en,.hero-en strong{font-size:38px}.hero-actions{grid-template-columns:1fr}.hero-actions .btn{min-height:48px}.hero-intel{padding:16px}.section-title,.intelligence-lead h2,.vision-lead h2{font-size:33px}}
 @media(max-width:640px){.hero-actions .marketing-site-btn{grid-column:1/-1}}
+
+/* Responsive hardening */
+html{scroll-behavior:smooth}body{overflow-x:hidden}.container{width:min(calc(100% - 48px),var(--maxw));padding-left:0;padding-right:0}.hero-copy,.hero-intel,.friction-wrap>* ,.audience-wrap>*{min-width:0}.btn,.gnb a,.sticky-bar a,.work-fab{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+@media(min-width:1441px){.container{max-width:1320px}.hero-inner{max-width:1320px;margin:0 auto}.hero-en,.hero-en strong{font-size:min(86px,5.6vw)}.hero-intel{max-width:560px;justify-self:end}}
+@media(max-width:640px){
+  .container{width:calc(100% - 32px)}
+  .hero-inner{padding-top:104px}.hero-en,.hero-en strong{font-size:clamp(36px,11vw,47px);overflow-wrap:normal}
+  .hero-actions .btn{min-height:52px;line-height:1.35}.discovery-link{min-height:54px}
+  .work-fab{bottom:calc(76px + env(safe-area-inset-bottom))}.sticky-bar{padding-left:10px;padding-right:10px}.sticky-bar a{min-height:52px}
+  img{height:auto}.practice-card img,.proj-img img{content-visibility:auto}
+}
+@media(max-width:380px){.hero-fit+.hero-actions{grid-template-columns:1fr}.hero-actions .marketing-site-btn{grid-column:auto}.hero-en,.hero-en strong{font-size:36px}.topbar .brand-official{width:84px!important}.topbar .brand-official img{width:84px!important}}
