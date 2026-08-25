@@ -449,7 +449,7 @@ document.addEventListener('click', (event) => {
     }
     else if (/WECO_PORTFOLIO_2026\.pdf(?:$|[?#])/i.test(href)) trackEvent('portfolio_download', linkParams)
     else if (href === '#contact') trackEvent('contact_cta_click', linkParams)
-    else if (href.includes('brand-discovery.html') || href.includes('weco-brand-discovery.leeyounghwan.chatgpt.site')) {
+    else if (href.includes('/brand-discovery') || href.includes('brand-discovery.html')) {
       trackEvent('brand_discovery_click', linkParams)
       if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent', { content_name: 'brand_discovery' })
     }
@@ -468,7 +468,7 @@ document.addEventListener('click', (event) => {
 
   const project = event.target.closest('.proj-card')
   if (project) {
-    trackEvent('ProjectView', {
+    trackEvent('project_view', {
       page_language: pageLanguage,
       project_name: project.querySelector('.proj-meta h3')?.textContent?.trim() || 'unknown'
     })
