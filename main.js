@@ -429,6 +429,10 @@ document.addEventListener('click', (event) => {
       if (typeof window.fbq === 'function') window.fbq('track', 'Contact')
     }
     else if (href.startsWith('mailto:')) trackEvent('email_click', linkParams)
+    else if (href.includes('open.kakao.com/o/sBasXuKi')) {
+      trackEvent('kakao_openchat_click', linkParams)
+      if (typeof window.fbq === 'function') window.fbq('track', 'Contact', { contact_method: 'kakao_openchat' })
+    }
     else if (/WECO_PORTFOLIO_2026\.pdf(?:$|[?#])/i.test(href)) trackEvent('portfolio_download', linkParams)
     else if (href === '#contact') trackEvent('contact_cta_click', linkParams)
     else if (href.includes('brand-discovery.html') || href.includes('weco-brand-discovery.leeyounghwan.chatgpt.site')) {
