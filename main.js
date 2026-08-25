@@ -1,6 +1,20 @@
 // ===== 위코컴퍼니 홈페이지 스크립트 =====
 const PHONE = '010-6330-5226'
 
+// 이미지가 없는 프로젝트는 깨진 썸네일 대신 작업 내용을 텍스트로 표시합니다.
+document.addEventListener('error', (event) => {
+  const image = event.target
+  if (!(image instanceof HTMLImageElement)) return
+  const card = image.closest('.proj-card')
+  const frame = image.closest('.proj-img')
+  if (!card || !frame || frame.classList.contains('missing-photo')) return
+  const title = card.querySelector('.proj-meta h3')?.textContent?.trim() || '프로젝트'
+  const category = card.querySelector('.proj-meta em')?.textContent?.trim() || 'WECO PROJECT'
+  const scope = card.querySelector('.proj-meta p')?.textContent?.trim() || 'BRAND · SPACE · EXPERIENCE'
+  frame.classList.add('missing-photo', 'proj-text-only')
+  frame.insertAdjacentHTML('beforeend', `<span>${category}</span><strong>${title}</strong><p>${scope}</p>`)
+}, true)
+
 // 접속할 때마다 다른 관점의 첫 문장을 보여줍니다.
 ;(() => {
   const headline = document.getElementById('heroHeadline')

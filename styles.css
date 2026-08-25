@@ -501,6 +501,8 @@ html.has-cursor, html.has-cursor *{cursor:none !important;}
 .proj-identity--sound .proj-cover{background:linear-gradient(145deg,#143b30 0%,#09251d 100%);}
 .proj-identity--usedbox .proj-cover{background:linear-gradient(145deg,#35322d 0%,#171614 100%);}
 .proj-identity--haeri .proj-cover{background:linear-gradient(145deg,#69281f 0%,#25130f 100%);}
+.proj-text-only{display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:24px;background:#1d211d;color:#f3efe6;border:1px solid rgba(243,239,230,.18)}
+.proj-text-only span{position:absolute;top:22px;left:24px;font-family:var(--label);font-size:8px;letter-spacing:2px;color:#b9c6bb}.proj-text-only strong{font-size:clamp(22px,2.5vw,34px);line-height:1.08;letter-spacing:-.05em}.proj-text-only p{margin:0;font-size:11px;line-height:1.55;color:#aeb9b0}.proj-img.missing-photo img,.proj-img.missing-photo .photo-count{display:none}
 .proj-meta{padding:12px 2px 0;}
 .proj-meta em,.proj-meta p,.project-view .photo-count{display:none;}
 .proj-meta h3{font-size:15px;font-weight:650;letter-spacing:-.2px;margin:0;}
