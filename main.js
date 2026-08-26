@@ -253,7 +253,17 @@ const visionLibrary = [
   ['images/gasik-07-interior-real-web.webp', 'GASIK', 'HOSPITALITY · SPACE'],
   ['images/brewery-07-material-real-web.webp', 'BREWERY', 'MATERIAL · EXPERIENCE'],
   ['images/nicekyou-interior-02.jpg', 'NICE KYOU', 'INTERIOR · HOSPITALITY'],
-  ['images/mimi-07-interior-real.png', 'MIMI', 'SPACE · BRAND EXPERIENCE']
+  ['images/mimi-07-interior-real.png', 'MIMI', 'SPACE · BRAND EXPERIENCE'],
+  ['images/concept-render/grill-dining-hero.jpg', 'GRILL DINING', 'CONCEPT RENDER · F&B SPACE'],
+  ['images/concept-render/grill-open-kitchen.jpg', 'OPEN KITCHEN', 'CONCEPT RENDER · OPERATION'],
+  ['images/concept-render/corner-bakery-facade.jpg', 'CORNER BAKERY', 'CONCEPT RENDER · FACADE'],
+  ['images/concept-render/corner-bakery-hero.jpg', 'CORNER BAKERY', 'CONCEPT RENDER · SPACE'],
+  ['images/concept-render/bakery-cafe-interior.jpg', 'BAKERY CAFE', 'CONCEPT RENDER · EXPERIENCE'],
+  ['images/concept-render/bakery-cafe-night.jpg', 'BAKERY CAFE', 'CONCEPT RENDER · FACADE'],
+  ['images/concept-render/soft-dining-hero.jpg', 'SOFT DINING', 'CONCEPT RENDER · HOSPITALITY'],
+  ['images/concept-render/soft-dining-kitchen.jpg', 'SOFT DINING', 'CONCEPT RENDER · KITCHEN'],
+  ['images/concept-render/espresso-bar-facade.jpg', 'ESPRESSO BAR', 'CONCEPT RENDER · FACADE'],
+  ['images/concept-render/espresso-bar-interior.jpg', 'ESPRESSO BAR', 'CONCEPT RENDER · SPACE']
 ].map(([src, title, meta]) => ({ src, title, meta }))
 
 if (visionWorkCards.length) {
