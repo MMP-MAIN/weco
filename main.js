@@ -559,6 +559,10 @@ document.addEventListener('click', (event) => {
     else if (href === '#portfolio') trackEvent('portfolio_open', linkParams)
     else if (/^insights\.html(?:$|[?#])/i.test(href)) trackEvent('insights_click', linkParams)
     else if (/^startup-guide\.html(?:$|[?#])/i.test(href)) trackEvent('startup_guide_click', linkParams)
+    else if (/^project-[a-z0-9-]+\.html(?:$|[?#])/i.test(href)) {
+      trackEvent('project_detail_click', { ...linkParams, project_path: href.split(/[?#]/)[0] })
+      if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent', { content_name: href.split(/[?#]/)[0], content_category: 'project_case' })
+    }
   }
 
   if (event.target.closest('[data-open-projects]')) {
