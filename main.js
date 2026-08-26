@@ -233,6 +233,39 @@ if (heroProjectSlides.length > 1) {
   }
 }
 
+// SELECTED WORK 네 칸도 서로 다른 프로젝트 묶음 안에서 순차적으로 전환
+const visionWorkCards = [...document.querySelectorAll('[data-vision-items]')]
+if (visionWorkCards.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  visionWorkCards.forEach((card, cardIndex) => {
+    const items = (card.dataset.visionItems || '').split('|').map(item => {
+      const [src, title, meta] = item.split('::')
+      return { src, title, meta }
+    }).filter(item => item.src && item.title)
+    if (items.length < 2) return
+    const image = card.querySelector('img')
+    const title = card.querySelector('b')
+    const meta = card.querySelector('em')
+    let index = Math.floor(Math.random() * items.length)
+    const showItem = () => {
+      image.classList.add('is-swapping')
+      window.setTimeout(() => {
+        const item = items[index]
+        image.src = item.src
+        image.alt = `${item.title} 위코 프로젝트`
+        title.textContent = item.title
+        meta.textContent = item.meta || ''
+        image.classList.remove('is-swapping')
+      }, 320)
+      index = (index + 1) % items.length
+    }
+    showItem()
+    window.setTimeout(() => {
+      showItem()
+      window.setInterval(showItem, 7000)
+    }, 7000 + cardIndex * 900)
+  })
+}
+
 const projectView = document.getElementById('projectView')
 const closeProjectsButton = document.getElementById('closeProjects')
 let projectTrigger = null
