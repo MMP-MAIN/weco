@@ -233,37 +233,65 @@ if (heroProjectSlides.length > 1) {
   }
 }
 
-// SELECTED WORK 네 칸도 서로 다른 프로젝트 묶음 안에서 순차적으로 전환
-const visionWorkCards = [...document.querySelectorAll('[data-vision-items]')]
-if (visionWorkCards.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  visionWorkCards.forEach((card, cardIndex) => {
-    const items = (card.dataset.visionItems || '').split('|').map(item => {
-      const [src, title, meta] = item.split('::')
-      return { src, title, meta }
-    }).filter(item => item.src && item.title)
-    if (items.length < 2) return
-    const image = card.querySelector('img')
-    const title = card.querySelector('b')
-    const meta = card.querySelector('em')
-    let index = Math.floor(Math.random() * items.length)
-    const showItem = () => {
-      image.classList.add('is-swapping')
-      window.setTimeout(() => {
-        const item = items[index]
+// SELECTED WORK: 넓은 이미지 풀에서 중복 없이 무작위 4장을 선택
+const visionWorkCards = [...document.querySelectorAll('.vision-work')]
+const visionLibrary = [
+  ['images/mild-16-portfolio-real.jpg', 'MILD HOUSE', 'BRAND EXPERIENCE · SPACE'],
+  ['images/waribashi-07-interior-real-web.webp', 'WARIBASHI', 'HOSPITALITY · SPACE'],
+  ['images/yohi-user-01-facade.jpg', 'YOHI', 'BRAND · FACADE'],
+  ['images/yohi-user-02-counter.jpg', 'YOHI COUNTER', 'BRAND TOUCHPOINT'],
+  ['images/yohi-user-03-detail.jpg', 'YOHI DETAIL', 'MATERIAL · EXPERIENCE'],
+  ['images/yohi-user-04-interior.jpg', 'YOHI INTERIOR', 'SPACE · EXPERIENCE'],
+  ['images/arrangement-05-web.webp', 'ARRANGEMENT', 'SPACE · OPERATION'],
+  ['images/arrangement-08-bar-real.png', 'ARRANGEMENT BAR', 'DETAIL · OPERATION'],
+  ['images/woobok-08-partition-real-web.webp', 'WOOBOK', 'SPACE · DETAIL'],
+  ['images/office-09-portfolio-real.jpg', 'OFFICE PROJECT', 'WORKPLACE · SPACE'],
+  ['images/gimijung-07-counter-real-web.webp', 'GIMIJUNG', 'MATERIAL · LIGHT'],
+  ['images/inedit-08-material-real-web.webp', 'INEDIT', 'TEXTURE · IDENTITY'],
+  ['images/buhair-07-detail-real.png', 'BUHAIR', 'OBJECT · EXPERIENCE'],
+  ['images/caveu-08-material-real-web.webp', 'CAVEU', 'MATERIAL · DETAIL'],
+  ['images/gasik-07-interior-real-web.webp', 'GASIK', 'HOSPITALITY · SPACE'],
+  ['images/brewery-07-material-real-web.webp', 'BREWERY', 'MATERIAL · EXPERIENCE'],
+  ['images/nicekyou-interior-02.jpg', 'NICE KYOU', 'INTERIOR · HOSPITALITY'],
+  ['images/mimi-07-interior-real.png', 'MIMI', 'SPACE · BRAND EXPERIENCE']
+].map(([src, title, meta]) => ({ src, title, meta }))
+
+if (visionWorkCards.length) {
+  visionLibrary.forEach(item => { const preload = new Image(); preload.src = item.src })
+  let visibleSources = new Set()
+  const shuffled = items => {
+    const copy = [...items]
+    for (let i = copy.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[copy[i], copy[j]] = [copy[j], copy[i]]
+    }
+    return copy
+  }
+  const refreshVisionGrid = (immediate = false) => {
+    const candidates = shuffled(visionLibrary.filter(item => !visibleSources.has(item.src)))
+    const nextItems = candidates.slice(0, visionWorkCards.length)
+    visibleSources = new Set(nextItems.map(item => item.src))
+    visionWorkCards.forEach((card, cardIndex) => {
+      const item = nextItems[cardIndex]
+      const image = card.querySelector('img')
+      const update = () => {
         image.src = item.src
         image.alt = `${item.title} 위코 프로젝트`
-        title.textContent = item.title
-        meta.textContent = item.meta || ''
+        card.querySelector('b').textContent = item.title
+        card.querySelector('em').textContent = item.meta
         image.classList.remove('is-swapping')
-      }, 320)
-      index = (index + 1) % items.length
-    }
-    showItem()
-    window.setTimeout(() => {
-      showItem()
-      window.setInterval(showItem, 7000)
-    }, 7000 + cardIndex * 900)
-  })
+      }
+      if (immediate) update()
+      else window.setTimeout(() => {
+        image.classList.add('is-swapping')
+        window.setTimeout(update, 320)
+      }, cardIndex * 180)
+    })
+  }
+  refreshVisionGrid(true)
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.setInterval(() => refreshVisionGrid(false), 8000)
+  }
 }
 
 const projectView = document.getElementById('projectView')
