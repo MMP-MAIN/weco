@@ -248,7 +248,7 @@ const visionLibrary = [
   ['images/office-09-portfolio-real.jpg', 'OFFICE PROJECT', 'WORKPLACE · SPACE'],
   ['images/gimijung-07-counter-real-web.webp', 'GIMIJUNG', 'MATERIAL · LIGHT'],
   ['images/inedit-08-material-real-web.webp', 'INEDIT', 'TEXTURE · IDENTITY'],
-  ['images/buhair-07-detail-real.png', 'BUHAIR', 'OBJECT · EXPERIENCE'],
+  ['images/buhair-07-detail-real-web.webp', 'BUHAIR', 'OBJECT · EXPERIENCE'],
   ['images/caveu-08-material-real-web.webp', 'CAVEU', 'MATERIAL · DETAIL'],
   ['images/gasik-07-interior-real-web.webp', 'GASIK', 'HOSPITALITY · SPACE'],
   ['images/brewery-07-material-real-web.webp', 'BREWERY', 'MATERIAL · EXPERIENCE'],
@@ -516,15 +516,29 @@ form.addEventListener('submit', async (e) => {
 })
 
 // 주요 광고 전환 행동 추적 (개인정보·유입 식별값은 외부로 전송하지 않음)
-const trackEvent = (name, params = {}) => {
+const getTrafficAttribution = () => {
   const query = new URLSearchParams(location.search)
+  const incoming = {
+    traffic_source: query.get('utm_source'),
+    traffic_medium: query.get('utm_medium'),
+    campaign_name: query.get('utm_campaign'),
+    campaign_content: query.get('utm_content'),
+    campaign_term: query.get('utm_term')
+  }
+  try {
+    const stored = JSON.parse(sessionStorage.getItem('weco_attribution') || '{}')
+    const merged = Object.fromEntries(Object.entries(incoming).map(([key, value]) => [key, value || stored[key] || 'unknown']))
+    if (Object.values(incoming).some(Boolean)) sessionStorage.setItem('weco_attribution', JSON.stringify(merged))
+    return merged
+  } catch (_) {
+    return Object.fromEntries(Object.entries(incoming).map(([key, value]) => [key, value || 'unknown']))
+  }
+}
+const trackEvent = (name, params = {}) => {
   const enriched = {
     hero_variant: window.WECO_HERO_VARIANT || 1,
     landing_path: location.pathname,
-    traffic_source: query.get('utm_source') || 'unknown',
-    traffic_medium: query.get('utm_medium') || 'unknown',
-    campaign_name: query.get('utm_campaign') || 'unknown',
-    campaign_content: query.get('utm_content') || 'unknown',
+    ...getTrafficAttribution(),
     ...params
   }
   if (typeof window.fbq === 'function') window.fbq('trackCustom', name, enriched)
