@@ -205,6 +205,34 @@ gnb.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu
 })()
 
 // ---- PROJECT 전용 오버레이 열기/닫기 ----
+// 메인 비주얼: 접속할 때마다 다른 프로젝트에서 시작해 차분하게 교차 전환
+const heroProjectSlides = [...document.querySelectorAll('.hero-project-slides img')]
+const heroScene = document.querySelector('[data-hero-scene]')
+const heroCopy = document.querySelector('[data-hero-copy]')
+if (heroProjectSlides.length > 1) {
+  let heroProjectIndex = Math.floor(Math.random() * heroProjectSlides.length)
+  const showHeroProject = (index) => {
+    heroProjectSlides.forEach((slide, slideIndex) => {
+      const active = slideIndex === index
+      slide.classList.toggle('is-active', active)
+      slide.setAttribute('aria-hidden', String(!active))
+    })
+    const activeSlide = heroProjectSlides[index]
+    if (heroScene) heroScene.textContent = activeSlide.dataset.scene || String(index + 1).padStart(2, '0')
+    if (heroCopy) {
+      const lines = (activeSlide.dataset.copy || '').split('|')
+      heroCopy.replaceChildren(...lines.flatMap((line, lineIndex) => lineIndex ? [document.createElement('br'), document.createTextNode(line)] : [document.createTextNode(line)]))
+    }
+  }
+  showHeroProject(heroProjectIndex)
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.setInterval(() => {
+      heroProjectIndex = (heroProjectIndex + 1) % heroProjectSlides.length
+      showHeroProject(heroProjectIndex)
+    }, 5000)
+  }
+}
+
 const projectView = document.getElementById('projectView')
 const closeProjectsButton = document.getElementById('closeProjects')
 let projectTrigger = null
