@@ -768,7 +768,7 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
   lb.setAttribute('aria-modal', 'true')
   lb.setAttribute('aria-hidden', 'true')
   lb.setAttribute('aria-labelledby', 'lightboxTitle')
-  lb.innerHTML = `<button class="lb-close" type="button" aria-label="닫기">&times;</button><button class="lb-prev" type="button" aria-label="이전">&#8249;</button><figure><img alt="" /><figcaption><strong id="lightboxTitle"></strong><b class="lb-count"></b></figcaption></figure><button class="lb-next" type="button" aria-label="다음">&#8250;</button>`
+  lb.innerHTML = `<button class="lb-close" type="button" aria-label="닫기">&times;</button><button class="lb-prev" type="button" aria-label="이전">&#8249;</button><figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" /><figcaption><strong id="lightboxTitle"></strong><b class="lb-count"></b></figcaption></figure><button class="lb-next" type="button" aria-label="다음">&#8250;</button>`
   document.body.appendChild(lb)
   const lbImg = lb.querySelector('img'), lbTitle = lb.querySelector('strong'), lbCount = lb.querySelector('.lb-count')
   let curPhoto = 0
