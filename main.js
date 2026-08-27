@@ -15,11 +15,20 @@ document.addEventListener('error', (event) => {
   frame.insertAdjacentHTML('beforeend', `<span>${category}</span><strong>${title}</strong><p>${scope}</p>`)
 }, true)
 
-// 접속할 때마다 다른 관점의 첫 문장을 보여줍니다.
+// 광고 유입은 소재와 같은 메시지를 유지하고, 일반 방문은 관점을 순환합니다.
 ;(() => {
   const headline = document.getElementById('heroHeadline')
   const promise = document.querySelector('.hero-promise')
   if (!headline || !promise) return
+
+  const query = new URLSearchParams(location.search)
+  let storedAttribution = {}
+  try { storedAttribution = JSON.parse(sessionStorage.getItem('weco_attribution') || '{}') } catch (_) {}
+  const source = String(query.get('utm_source') || storedAttribution.traffic_source || '').toLowerCase()
+  const medium = String(query.get('utm_medium') || storedAttribution.traffic_medium || '').toLowerCase()
+  const campaign = String(query.get('utm_campaign') || storedAttribution.campaign_name || '').toLowerCase()
+  const isPaidSocial = /^(ig|fb|instagram|facebook|meta)$/.test(source) && /(paid|cpc|ppc|social)/.test(medium)
+    || /(meta|instagram|facebook)/.test(campaign) && /(paid|cpc|conversion|traffic|lead)/.test(`${medium} ${campaign}`)
 
   const variants = [
     {
@@ -40,17 +49,23 @@ document.addEventListener('error', (event) => {
     },
     {
       headline: '막연한 창업을,<br><strong>선명한 브랜드로.</strong>',
-      promise: '상권과 고객, 운영 조건을 함께 살펴보고<br>지금 해야 할 선택의 순서를 분명하게 만듭니다.'
+      promise: '상권과 고객, 운영 조건을 함께 진단하고<br>지금 먼저 결정할 브랜드의 방향을 분명하게 만듭니다.'
     }
   ]
 
   let previous = -1
   try { previous = Number(localStorage.getItem('wecoHeroVariant')) } catch (_) {}
   const candidates = variants.map((_, i) => i).filter(i => i !== previous)
-  const selected = candidates[Math.floor(Math.random() * candidates.length)] ?? 0
+  const selected = isPaidSocial ? 4 : (candidates[Math.floor(Math.random() * candidates.length)] ?? 0)
   headline.innerHTML = variants[selected].headline
   promise.innerHTML = variants[selected].promise
   window.WECO_HERO_VARIANT = selected + 1
+  window.WECO_LANDING_SEGMENT = isPaidSocial ? 'paid_social' : 'general'
+  if (isPaidSocial) {
+    const discoveryButton = document.querySelector('.hero-actions [data-conversion="brand_discovery"]')
+    if (discoveryButton) discoveryButton.textContent = '무료 브랜드 분석'
+    document.body.dataset.landingSegment = 'paid-social'
+  }
   try { localStorage.setItem('wecoHeroVariant', String(selected)) } catch (_) {}
 })()
 
@@ -545,6 +560,7 @@ const getTrafficAttribution = () => {
 const trackEvent = (name, params = {}) => {
   const enriched = {
     hero_variant: window.WECO_HERO_VARIANT || 1,
+    landing_segment: window.WECO_LANDING_SEGMENT || 'general',
     landing_path: location.pathname,
     ...getTrafficAttribution(),
     ...params
@@ -629,6 +645,13 @@ document.addEventListener('click', (event) => {
     qualifiedVisitSent = true
     trackEvent('qualified_visit_10s', { page_language: document.documentElement.lang || 'ko' })
   }, 10000)
+
+  let engagedVisitSent = false
+  setTimeout(() => {
+    if (engagedVisitSent || document.visibilityState !== 'visible') return
+    engagedVisitSent = true
+    trackEvent('engaged_visit_30s', { page_language: document.documentElement.lang || 'ko' })
+  }, 30000)
 
   // 한 페이지 안에서도 방문자가 실제로 도달한 구간을 경로처럼 확인할 수 있게 합니다.
   if ('IntersectionObserver' in window) {
