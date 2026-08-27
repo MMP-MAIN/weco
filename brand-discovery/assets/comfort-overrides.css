@@ -22,3 +22,15 @@
   .section-intro{margin-bottom:38px}
   .form-footer{margin-top:60px}
 }
+
+/* Optional questions stay available without making every step feel compulsory. */
+.field.weco-optional-field{display:none}
+.form-panel.weco-show-optionals .field.weco-optional-field{display:flex}
+.weco-optional-toggle{width:100%;min-height:52px;margin:6px 0 42px;padding:0 4px;border:0;border-top:1px solid #c9c7bf;border-bottom:1px solid #c9c7bf;background:transparent;color:inherit;font:700 13px/1.4 inherit;text-align:left;cursor:pointer}
+.weco-optional-toggle span{float:right;font-size:18px;font-weight:400}
+@media(max-width:800px){
+  .field{margin-bottom:34px}
+  .options button{min-height:52px;padding:13px 14px}
+  .form-footer{width:100%;max-width:100%;margin-top:44px;box-sizing:border-box}
+  .weco-optional-toggle{margin-bottom:32px}
+}

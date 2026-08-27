@@ -20,6 +20,15 @@ html,body{color:#10271b;font-family:Pretendard,-apple-system,BlinkMacSystemFont,
 @media(max-width:390px){.container{width:calc(100% - 32px)}.lang-sw a{min-width:27px;font-size:9px!important}.hero-en,.hero-en strong{font-size:38px}.hero-actions{grid-template-columns:1fr}.hero-actions .btn{min-height:48px}.hero-intel{padding:16px}.section-title,.intelligence-lead h2,.vision-lead h2{font-size:33px}}
 @media(max-width:640px){.hero-fit+.hero-actions{grid-template-columns:1fr!important}.hero-actions .btn{min-height:54px;font-size:14px}.sticky-bar{gap:6px}.sticky-bar a,.sticky-bar button{padding:8px 5px!important;font-size:12px!important;white-space:nowrap}}
 @media(max-width:640px){.marketing-bridge{min-height:60px;margin-top:8px;padding:10px 13px}.marketing-bridge span{font-size:11px}.marketing-bridge strong{font-size:12px}.hero-action-note{margin-top:12px}.hero-analysis-note{margin-top:9px;font-size:11px;text-align:center}}
+
+/* 2026-08 conversion pass: repeated explanation sections are tightened so work and inquiry arrive sooner. */
+.friction-section{padding-top:clamp(82px,8vw,116px);padding-bottom:clamp(82px,8vw,116px)}
+.intelligence,.scope-section,#contact{padding-top:clamp(82px,8vw,116px)!important;padding-bottom:clamp(82px,8vw,116px)!important}
+.scope-item{padding-top:25px;padding-bottom:25px}
+@media(max-width:640px){
+  .friction-section,.intelligence,.scope-section,#contact{padding-top:68px!important;padding-bottom:68px!important}
+  .hero-inner{padding-bottom:46px}
+}
 @media(max-width:640px){.strategy-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 8px;overflow:visible!important;padding:26px 16px!important;white-space:normal;text-align:center;font-size:10px;letter-spacing:.06em}.strategy-flow i{display:none}}
 
 /* Responsive hardening */
