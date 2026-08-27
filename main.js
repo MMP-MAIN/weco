@@ -519,6 +519,7 @@ form.addEventListener('submit', async (e) => {
   submitBtn.disabled = true
   submitBtn.classList.add('sending')
   try {
+    const leadContext = getLeadContext()
     const res = await fetch(INQUIRY_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -531,7 +532,19 @@ form.addEventListener('submit', async (e) => {
         희망업무: selectedType,
         개인정보동의: '동의',
         프로젝트예상총예산: form.budget.value.trim() || '미입력',
-        문의내용: form.message.value.trim() || '미입력'
+        문의내용: form.message.value.trim() || '미입력',
+        최초유입: leadContext.first_touch,
+        최근유입: leadContext.last_touch,
+        광고캠페인: leadContext.campaign,
+        광고소재: leadContext.content,
+        검색어_광고키워드: leadContext.term,
+        광고클릭ID: leadContext.click_id,
+        최초방문페이지: leadContext.first_landing,
+        문의제출페이지: leadContext.submit_page,
+        상담전본페이지: leadContext.pages_viewed,
+        상담전본프로젝트: leadContext.projects_viewed,
+        상담전체류시간: leadContext.time_to_lead,
+        접속기기: leadContext.device
       })
     })
     const data = await res.json().catch(() => ({}))
@@ -564,17 +577,81 @@ const getTrafficAttribution = () => {
     traffic_medium: query.get('utm_medium'),
     campaign_name: query.get('utm_campaign'),
     campaign_content: query.get('utm_content'),
-    campaign_term: query.get('utm_term')
+    campaign_term: query.get('utm_term'),
+    click_id: query.get('fbclid') || query.get('gclid') || query.get('msclkid') || query.get('ttclid')
   }
   try {
     const stored = JSON.parse(sessionStorage.getItem('weco_attribution') || '{}')
+    const inferredSource = document.referrer ? new URL(document.referrer).hostname : 'direct'
+    const inferredMedium = inferredSource === 'direct' ? 'direct' : 'referral'
     const merged = Object.fromEntries(Object.entries(incoming).map(([key, value]) => [key, value || stored[key] || 'unknown']))
-    if (Object.values(incoming).some(Boolean)) sessionStorage.setItem('weco_attribution', JSON.stringify(merged))
+    if (merged.traffic_source === 'unknown') merged.traffic_source = inferredSource
+    if (merged.traffic_medium === 'unknown') merged.traffic_medium = inferredMedium
+    sessionStorage.setItem('weco_attribution', JSON.stringify(merged))
     return merged
   } catch (_) {
     return Object.fromEntries(Object.entries(incoming).map(([key, value]) => [key, value || 'unknown']))
   }
 }
+
+// 문의가 실제로 들어왔을 때 광고·검색·열람 흐름을 이메일에서도 확인할 수 있게 보존합니다.
+const SESSION_STARTED_AT = Number(sessionStorage.getItem('weco_session_started_at')) || Date.now()
+sessionStorage.setItem('weco_session_started_at', String(SESSION_STARTED_AT))
+
+const rememberLeadJourney = () => {
+  const attribution = getTrafficAttribution()
+  const touch = {
+    source: attribution.traffic_source,
+    medium: attribution.traffic_medium,
+    campaign: attribution.campaign_name,
+    content: attribution.campaign_content,
+    term: attribution.campaign_term,
+    click_id: attribution.click_id,
+    landing: location.pathname + location.search,
+    referrer: document.referrer || 'direct',
+    at: new Date().toISOString()
+  }
+  try {
+    if (!localStorage.getItem('weco_first_touch')) localStorage.setItem('weco_first_touch', JSON.stringify(touch))
+    localStorage.setItem('weco_last_touch', JSON.stringify(touch))
+    const pages = JSON.parse(sessionStorage.getItem('weco_pages_viewed') || '[]')
+    const current = location.pathname || '/'
+    if (!pages.includes(current)) pages.push(current)
+    sessionStorage.setItem('weco_pages_viewed', JSON.stringify(pages.slice(-20)))
+  } catch (_) {}
+}
+
+const getLeadContext = () => {
+  const attribution = getTrafficAttribution()
+  let first = {}
+  let last = {}
+  let pages = []
+  let projects = []
+  try {
+    first = JSON.parse(localStorage.getItem('weco_first_touch') || '{}')
+    last = JSON.parse(localStorage.getItem('weco_last_touch') || '{}')
+    pages = JSON.parse(sessionStorage.getItem('weco_pages_viewed') || '[]')
+    projects = JSON.parse(sessionStorage.getItem('weco_projects_viewed') || '[]')
+  } catch (_) {}
+  const touchLabel = touch => `${touch.source || 'unknown'} / ${touch.medium || 'unknown'}${touch.referrer ? ` / ${touch.referrer}` : ''}`
+  const seconds = Math.max(0, Math.round((Date.now() - SESSION_STARTED_AT) / 1000))
+  return {
+    first_touch: touchLabel(first),
+    last_touch: touchLabel(last),
+    campaign: attribution.campaign_name || 'unknown',
+    content: attribution.campaign_content || 'unknown',
+    term: attribution.campaign_term || 'unknown',
+    click_id: attribution.click_id || 'unknown',
+    first_landing: first.landing || location.pathname,
+    submit_page: location.pathname,
+    pages_viewed: pages.join(' → ') || location.pathname,
+    projects_viewed: projects.join(', ') || '없음',
+    time_to_lead: `${seconds}초`,
+    device: `${innerWidth < 768 ? '모바일' : innerWidth < 1100 ? '태블릿' : 'PC'} / ${navigator.platform || 'unknown'}`
+  }
+}
+
+rememberLeadJourney()
 const trackEvent = (name, params = {}) => {
   const enriched = {
     hero_variant: window.WECO_HERO_VARIANT || 1,
@@ -643,9 +720,15 @@ document.addEventListener('click', (event) => {
 
   const project = event.target.closest('.proj-card')
   if (project) {
+    const projectName = project.querySelector('.proj-meta h3')?.textContent?.trim() || 'unknown'
+    try {
+      const projects = JSON.parse(sessionStorage.getItem('weco_projects_viewed') || '[]')
+      if (!projects.includes(projectName)) projects.push(projectName)
+      sessionStorage.setItem('weco_projects_viewed', JSON.stringify(projects.slice(-20)))
+    } catch (_) {}
     trackEvent('project_view', {
       page_language: pageLanguage,
-      project_name: project.querySelector('.proj-meta h3')?.textContent?.trim() || 'unknown'
+      project_name: projectName
     })
   }
 })
