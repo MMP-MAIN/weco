@@ -64,6 +64,8 @@ document.addEventListener('error', (event) => {
   if (isPaidSocial) {
     const discoveryButton = document.querySelector('.hero-actions [data-conversion="brand_discovery"]')
     if (discoveryButton) discoveryButton.textContent = '무료 브랜드 분석'
+    const stickyDiscovery = document.querySelector('.sticky-bar [data-conversion="brand_discovery"]')
+    if (stickyDiscovery) stickyDiscovery.textContent = '무료 분석'
     document.body.dataset.landingSegment = 'paid-social'
   }
   try { localStorage.setItem('wecoHeroVariant', String(selected)) } catch (_) {}
@@ -569,9 +571,25 @@ const trackEvent = (name, params = {}) => {
   if (typeof window.gtag === 'function') window.gtag('event', name, enriched)
 }
 
+trackEvent('landing_view', {
+  page_language: document.documentElement.lang || 'ko',
+  is_paid_social: window.WECO_LANDING_SEGMENT === 'paid_social'
+})
+
 document.addEventListener('click', (event) => {
   const pageLanguage = document.documentElement.lang || 'ko'
   const link = event.target.closest('a')
+  const conversionTarget = event.target.closest('[data-conversion]')
+  if (conversionTarget) {
+    trackEvent('primary_cta_click', {
+      page_language: pageLanguage,
+      cta_name: conversionTarget.dataset.conversion || 'unknown',
+      cta_location: conversionTarget.closest('.sticky-bar') ? 'sticky_mobile'
+        : conversionTarget.closest('.hero-actions') ? 'hero'
+          : conversionTarget.closest('.marketing-bridge') ? 'hero_marketing'
+            : 'page'
+    })
+  }
   if (link) {
     const href = link.getAttribute('href') || ''
     const linkParams = { page_language: pageLanguage, link_text: (link.textContent || '').trim().slice(0, 100) }
@@ -652,6 +670,13 @@ document.addEventListener('click', (event) => {
     engagedVisitSent = true
     trackEvent('engaged_visit_30s', { page_language: document.documentElement.lang || 'ko' })
   }, 30000)
+
+  let highIntentVisitSent = false
+  setTimeout(() => {
+    if (highIntentVisitSent || document.visibilityState !== 'visible') return
+    highIntentVisitSent = true
+    trackEvent('high_intent_visit_60s', { page_language: document.documentElement.lang || 'ko' })
+  }, 60000)
 
   // 한 페이지 안에서도 방문자가 실제로 도달한 구간을 경로처럼 확인할 수 있게 합니다.
   if ('IntersectionObserver' in window) {
