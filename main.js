@@ -243,7 +243,7 @@ const visionLibrary = [
   ['images/yohi-user-03-detail.jpg', 'YOHI DETAIL', 'MATERIAL · EXPERIENCE'],
   ['images/yohi-user-04-interior.jpg', 'YOHI INTERIOR', 'SPACE · EXPERIENCE'],
   ['images/arrangement-05-web.webp', 'ARRANGEMENT', 'SPACE · OPERATION'],
-  ['images/arrangement-08-bar-real.png', 'ARRANGEMENT BAR', 'DETAIL · OPERATION'],
+  ['images/arrangement-08-bar-real-web.webp', 'ARRANGEMENT BAR', 'DETAIL · OPERATION'],
   ['images/woobok-08-partition-real-web.webp', 'WOOBOK', 'SPACE · DETAIL'],
   ['images/office-09-portfolio-real.jpg', 'OFFICE PROJECT', 'WORKPLACE · SPACE'],
   ['images/gimijung-07-counter-real-web.webp', 'GIMIJUNG', 'MATERIAL · LIGHT'],
@@ -253,7 +253,7 @@ const visionLibrary = [
   ['images/gasik-07-interior-real-web.webp', 'GASIK', 'HOSPITALITY · SPACE'],
   ['images/brewery-07-material-real-web.webp', 'BREWERY', 'MATERIAL · EXPERIENCE'],
   ['images/nicekyou-interior-02.jpg', 'NICE KYOU', 'INTERIOR · HOSPITALITY'],
-  ['images/mimi-07-interior-real.png', 'MIMI', 'SPACE · BRAND EXPERIENCE'],
+  ['images/mimi-07-interior-real-web.webp', 'MIMI', 'SPACE · BRAND EXPERIENCE'],
   ['images/concept-render/grill-dining-hero.jpg', 'GRILL DINING', 'CONCEPT RENDER · F&B SPACE'],
   ['images/concept-render/grill-open-kitchen.jpg', 'OPEN KITCHEN', 'CONCEPT RENDER · OPERATION'],
   ['images/concept-render/corner-bakery-facade.jpg', 'CORNER BAKERY', 'CONCEPT RENDER · FACADE'],
@@ -267,8 +267,9 @@ const visionLibrary = [
 ].map(([src, title, meta]) => ({ src, title, meta }))
 
 if (visionWorkCards.length) {
-  visionLibrary.forEach(item => { const preload = new Image(); preload.src = item.src })
-  let visibleSources = new Set()
+  // 첫 방문에는 현재 보이는 4장만 요청합니다. 나머지는 해당 섹션이 화면에 보일 때 교체 시점에 불러옵니다.
+  let visibleSources = new Set(visionWorkCards.map(card => card.querySelector('img')?.getAttribute('src')).filter(Boolean))
+  let visionVisible = false
   const shuffled = items => {
     const copy = [...items]
     for (let i = copy.length - 1; i > 0; i -= 1) {
@@ -298,9 +299,16 @@ if (visionWorkCards.length) {
       }, cardIndex * 180)
     })
   }
-  refreshVisionGrid(true)
+  const visionSection = document.querySelector('.selected-vision')
+  if ('IntersectionObserver' in window && visionSection) {
+    new IntersectionObserver(entries => { visionVisible = entries.some(entry => entry.isIntersecting) }, { rootMargin: '180px 0px', threshold: 0.01 }).observe(visionSection)
+  } else {
+    visionVisible = true
+  }
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    window.setInterval(() => refreshVisionGrid(false), 8000)
+    window.setInterval(() => {
+      if (document.visibilityState === 'visible' && visionVisible) refreshVisionGrid(false)
+    }, 8000)
   }
 }
 
@@ -658,10 +666,11 @@ document.addEventListener('click', (event) => {
 
 // ===== 프리미엄 모션 (CDN 로드 실패 시 기본 동작 유지) =====
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
+const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolean(navigator.connection?.saveData)
 
 // ---- Lenis 부드러운 관성 스크롤 ----
 ;(async () => {
-  if (REDUCED) return
+  if (LIGHTWEIGHT) return
   try {
     const { default: Lenis } = await import('https://cdn.jsdelivr.net/npm/lenis@1.3.4/+esm')
     const lenis = new Lenis({ autoRaf: true, duration: 1.15 })
@@ -680,7 +689,7 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
 
 // ---- GSAP 히어로 인트로 (글자 스태거) ----
 ;(async () => {
-  if (REDUCED) return
+  if (LIGHTWEIGHT) return
   try {
     const { gsap } = await import('https://cdn.jsdelivr.net/npm/gsap@3.13.0/+esm')
     const heroEn = document.querySelector('.hero-en')
