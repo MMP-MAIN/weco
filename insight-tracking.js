@@ -6,7 +6,7 @@
   window.dataLayer=window.dataLayer||[];
   window.gtag=window.gtag||function(){dataLayer.push(arguments)};
   gtag('js',new Date());
-  gtag('set','linker',{domains:['wecocompany.com']});
+  gtag('set','linker',{domains:['wecocompany.com','mpmarketing.co.kr']});
   gtag('config','G-45Q0B2B2XR');
 
   function attribution(){

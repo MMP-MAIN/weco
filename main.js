@@ -562,6 +562,11 @@ form.addEventListener('submit', async (e) => {
     }
   } catch (err) {
     console.error(err)
+    trackEvent('form_submit_error', {
+      form_name: 'project_inquiry',
+      error_type: err?.name || 'submit_error',
+      page_language: document.documentElement.lang || 'ko'
+    })
     setStatus(FORM_MSG.err, false)
   } finally {
     submitBtn.disabled = false
