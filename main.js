@@ -367,7 +367,7 @@ const trapFocusWithin = (root, e) => {
   }
 }
 const openProjects = () => {
-  trackEvent('PortfolioOpen', { page_language: document.documentElement.lang || 'ko' })
+  trackEvent('portfolio_open', { page_language: document.documentElement.lang || 'ko' })
   projectTrigger = document.activeElement
   shuffleProjectCards()
   projectView.classList.add('open')
