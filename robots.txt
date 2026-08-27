@@ -18,3 +18,4 @@ User-agent: Bingbot
 Allow: /
 
 Sitemap: https://wecocompany.com/sitemap.xml
+Sitemap: https://wecocompany.com/image-sitemap.xml
