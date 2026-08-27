@@ -31,37 +31,6 @@
     });
   }
 
-  function diagnosisMessage(payload) {
-    var diagnosis = {};
-    try {
-      diagnosis = JSON.parse(payload['무료 1차 브랜드 진단'] || '{}');
-    } catch (_) {}
-
-    var projectId = payload['프로젝트 ID'] || '-';
-    var brandName = payload['브랜드명'] || '고객 브랜드';
-    var lines = [
-      brandName + '님의 무료 브랜드 분석이 접수되었습니다.',
-      '',
-      '프로젝트 번호: ' + projectId,
-      '',
-      '[가장 강한 자산]',
-      diagnosis.CORE || '제출한 내용을 바탕으로 확인 중입니다.',
-      '',
-      '[선택할 고객과 순간]',
-      diagnosis.TARGET || '고객과 이용 순간을 구체화해보세요.',
-      '',
-      '[성장 방향]',
-      diagnosis.TO_BE || '원하는 미래상을 하나의 방향으로 좁혀보세요.',
-      '',
-      '[지금 먼저 확인할 일]',
-      diagnosis.CONFLICT || '시장과 운영 조건을 확인해 가능성을 구체화하세요.',
-      '',
-      '본 결과는 입력 내용을 바탕으로 한 무료 1차 진단이며 사업 성공을 보장하는 평가가 아닙니다.',
-      'WECO COMPANY · https://wecocompany.com/'
-    ];
-    return lines.join('\n');
-  }
-
   document.addEventListener('click', function (event) {
     var button = event.target.closest && event.target.closest('button.submit');
     if (!button) return;
@@ -95,8 +64,6 @@
       try {
         var mailBody = JSON.parse(nextOptions.body);
         mailBody['고객 이메일'] = emailValue;
-        mailBody._replyto = emailValue;
-        mailBody._autoresponse = diagnosisMessage(mailBody);
         nextOptions.body = JSON.stringify(mailBody);
       } catch (_) {}
     }
