@@ -236,16 +236,16 @@ if (heroProjectSlides.length > 1) {
 // SELECTED WORK: 넓은 이미지 풀에서 중복 없이 무작위 4장을 선택
 const visionWorkCards = [...document.querySelectorAll('.vision-work')]
 const visionLibrary = [
-  ['images/mild-16-portfolio-real.jpg', 'MILD HOUSE', 'BRAND EXPERIENCE · SPACE'],
+  ['images/mild-16-portfolio-real-web.webp', 'MILD HOUSE', 'BRAND EXPERIENCE · SPACE'],
   ['images/waribashi-07-interior-real-web.webp', 'WARIBASHI', 'HOSPITALITY · SPACE'],
-  ['images/yohi-user-01-facade.jpg', 'YOHI', 'BRAND · FACADE'],
-  ['images/yohi-user-02-counter.jpg', 'YOHI COUNTER', 'BRAND TOUCHPOINT'],
-  ['images/yohi-user-03-detail.jpg', 'YOHI DETAIL', 'MATERIAL · EXPERIENCE'],
-  ['images/yohi-user-04-interior.jpg', 'YOHI INTERIOR', 'SPACE · EXPERIENCE'],
+  ['images/yohi-user-01-facade-web.webp', 'YOHI', 'BRAND · FACADE'],
+  ['images/yohi-user-02-counter-web.webp', 'YOHI COUNTER', 'BRAND TOUCHPOINT'],
+  ['images/yohi-user-03-detail-web.webp', 'YOHI DETAIL', 'MATERIAL · EXPERIENCE'],
+  ['images/yohi-user-04-interior-web.webp', 'YOHI INTERIOR', 'SPACE · EXPERIENCE'],
   ['images/arrangement-05-web.webp', 'ARRANGEMENT', 'SPACE · OPERATION'],
   ['images/arrangement-08-bar-real-web.webp', 'ARRANGEMENT BAR', 'DETAIL · OPERATION'],
   ['images/woobok-08-partition-real-web.webp', 'WOOBOK', 'SPACE · DETAIL'],
-  ['images/office-09-portfolio-real.jpg', 'OFFICE PROJECT', 'WORKPLACE · SPACE'],
+  ['images/office-09-portfolio-real-web.webp', 'OFFICE PROJECT', 'WORKPLACE · SPACE'],
   ['images/gimijung-07-counter-real-web.webp', 'GIMIJUNG', 'MATERIAL · LIGHT'],
   ['images/inedit-08-material-real-web.webp', 'INEDIT', 'TEXTURE · IDENTITY'],
   ['images/buhair-07-detail-real-web.webp', 'BUHAIR', 'OBJECT · EXPERIENCE'],
@@ -254,16 +254,16 @@ const visionLibrary = [
   ['images/brewery-07-material-real-web.webp', 'BREWERY', 'MATERIAL · EXPERIENCE'],
   ['images/nicekyou-interior-02.jpg', 'NICE KYOU', 'INTERIOR · HOSPITALITY'],
   ['images/mimi-07-interior-real-web.webp', 'MIMI', 'SPACE · BRAND EXPERIENCE'],
-  ['images/concept-render/grill-dining-hero.jpg', 'GRILL DINING', 'CONCEPT RENDER · F&B SPACE'],
-  ['images/concept-render/grill-open-kitchen.jpg', 'OPEN KITCHEN', 'CONCEPT RENDER · OPERATION'],
-  ['images/concept-render/corner-bakery-facade.jpg', 'CORNER BAKERY', 'CONCEPT RENDER · FACADE'],
-  ['images/concept-render/corner-bakery-hero.jpg', 'CORNER BAKERY', 'CONCEPT RENDER · SPACE'],
-  ['images/concept-render/bakery-cafe-interior.jpg', 'BAKERY CAFE', 'CONCEPT RENDER · EXPERIENCE'],
-  ['images/concept-render/bakery-cafe-night.jpg', 'BAKERY CAFE', 'CONCEPT RENDER · FACADE'],
-  ['images/concept-render/soft-dining-hero.jpg', 'SOFT DINING', 'CONCEPT RENDER · HOSPITALITY'],
-  ['images/concept-render/soft-dining-kitchen.jpg', 'SOFT DINING', 'CONCEPT RENDER · KITCHEN'],
-  ['images/concept-render/espresso-bar-facade.jpg', 'ESPRESSO BAR', 'CONCEPT RENDER · FACADE'],
-  ['images/concept-render/espresso-bar-interior.jpg', 'ESPRESSO BAR', 'CONCEPT RENDER · SPACE']
+  ['images/concept-render/grill-dining-hero-web.webp', 'GRILL DINING', 'CONCEPT RENDER · F&B SPACE'],
+  ['images/concept-render/grill-open-kitchen-web.webp', 'OPEN KITCHEN', 'CONCEPT RENDER · OPERATION'],
+  ['images/concept-render/corner-bakery-facade-web.webp', 'CORNER BAKERY', 'CONCEPT RENDER · FACADE'],
+  ['images/concept-render/corner-bakery-hero-web.webp', 'CORNER BAKERY', 'CONCEPT RENDER · SPACE'],
+  ['images/concept-render/bakery-cafe-interior-web.webp', 'BAKERY CAFE', 'CONCEPT RENDER · EXPERIENCE'],
+  ['images/concept-render/bakery-cafe-night-web.webp', 'BAKERY CAFE', 'CONCEPT RENDER · FACADE'],
+  ['images/concept-render/soft-dining-hero-web.webp', 'SOFT DINING', 'CONCEPT RENDER · HOSPITALITY'],
+  ['images/concept-render/soft-dining-kitchen-web.webp', 'SOFT DINING', 'CONCEPT RENDER · KITCHEN'],
+  ['images/concept-render/espresso-bar-facade-web.webp', 'ESPRESSO BAR', 'CONCEPT RENDER · FACADE'],
+  ['images/concept-render/espresso-bar-interior-web.webp', 'ESPRESSO BAR', 'CONCEPT RENDER · SPACE']
 ].map(([src, title, meta]) => ({ src, title, meta }))
 
 if (visionWorkCards.length) {
