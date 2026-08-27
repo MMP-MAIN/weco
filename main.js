@@ -332,6 +332,19 @@ if (visionWorkCards.length) {
 const projectView = document.getElementById('projectView')
 const closeProjectsButton = document.getElementById('closeProjects')
 let projectTrigger = null
+const primaryProjectGrid = projectView?.querySelector('.pv-scroll > .proj-grid')
+const projectToggle = document.createElement('button')
+projectToggle.type = 'button'
+projectToggle.className = 'project-list-toggle'
+projectToggle.textContent = '프로젝트 더 보기 +'
+projectToggle.setAttribute('aria-expanded', 'false')
+if (primaryProjectGrid) primaryProjectGrid.insertAdjacentElement('afterend', projectToggle)
+projectToggle.addEventListener('click', () => {
+  const expanded = projectView.classList.toggle('show-all-projects')
+  projectToggle.textContent = expanded ? '대표 프로젝트만 보기 −' : '프로젝트 더 보기 +'
+  projectToggle.setAttribute('aria-expanded', String(expanded))
+  trackEvent('portfolio_expand', { expanded, page_language: document.documentElement.lang || 'ko' })
+})
 const shuffleProjectCards = () => {
   projectView?.querySelectorAll('.proj-grid').forEach(grid => {
     const cards = [...grid.querySelectorAll(':scope > .proj-card')]
@@ -368,6 +381,9 @@ const trapFocusWithin = (root, e) => {
 }
 const openProjects = () => {
   trackEvent('portfolio_open', { page_language: document.documentElement.lang || 'ko' })
+  projectView.classList.remove('show-all-projects')
+  projectToggle.textContent = '프로젝트 더 보기 +'
+  projectToggle.setAttribute('aria-expanded', 'false')
   projectTrigger = document.activeElement
   shuffleProjectCards()
   projectView.classList.add('open')
@@ -668,7 +684,7 @@ document.addEventListener('click', (event) => {
   setTimeout(() => {
     if (engagedVisitSent || document.visibilityState !== 'visible') return
     engagedVisitSent = true
-    trackEvent('engaged_visit_30s', { page_language: document.documentElement.lang || 'ko' })
+    trackEvent('engaged_30s', { page_language: document.documentElement.lang || 'ko' })
   }, 30000)
 
   let highIntentVisitSent = false
