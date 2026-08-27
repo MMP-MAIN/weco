@@ -49,6 +49,12 @@ html{scroll-behavior:smooth}body{overflow-x:hidden}.container{width:min(calc(100
 .friction-head .section-eyebrow,
 .friction-grid span{color:#52665a}
 @media(max-width:380px){.hero-fit+.hero-actions{grid-template-columns:1fr}.hero-en,.hero-en strong{font-size:36px}.topbar .brand-official{width:84px!important}.topbar .brand-official img{width:84px!important}.sticky-bar a,.sticky-bar button{font-size:11px!important}}
+
+/* iPhone safe-area + narrow-width fit for the three conversion actions. */
+@media(max-width:640px){
+  .sticky-bar{box-sizing:border-box;width:100%;max-width:100vw;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1.16fr) minmax(0,1fr);gap:5px;padding:8px max(8px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+  .sticky-bar a,.sticky-bar button{box-sizing:border-box;width:100%;min-width:0;max-width:100%;min-height:50px!important;padding:7px 3px!important;overflow:visible;font-size:clamp(10px,3vw,12px)!important;line-height:1.15!important;letter-spacing:-.035em;white-space:nowrap;text-align:center}
+}
 .project-view:not(.show-all-projects) .pv-scroll>.pv-cat+.proj-grid>.proj-card:nth-child(n+13){display:none}
 .project-list-toggle{display:flex;align-items:center;justify-content:center;width:min(100% - 48px,520px);min-height:52px;margin:28px auto 58px;border:1px solid rgba(245,240,228,.42);background:transparent;color:#f5f0e4;font:750 13px/1 Pretendard,sans-serif;cursor:pointer}
 .project-list-toggle:hover{background:#f5f0e4;color:#0f2f22}
