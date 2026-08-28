@@ -1,5 +1,5 @@
 // ===== 위코컴퍼니 홈페이지 스크립트 =====
-const PHONE = '010-6330-5226'
+const PHONE = '010-8606-2119'
 
 // 이미지가 없는 프로젝트는 깨진 썸네일 대신 작업 내용을 텍스트로 표시합니다.
 document.addEventListener('error', (event) => {
