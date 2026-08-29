@@ -43,6 +43,7 @@ document.addEventListener('error', (event) => {
   } catch (_) {}
 
   const industries = [
+    ['residential', /(주거|아파트|빌라|주택|홈.?인테리어|집.?인테리어|residential|apartment|home.?interior|house)/],
     ['salon', /(미용실|헤어|뷰티|salon|hair|beauty)/],
     ['clinic', /(병원|의원|클리닉|의료|보청기|clinic|hospital|medical)/],
     ['office', /(사무실|오피스|office|workplace)/],
@@ -55,20 +56,20 @@ document.addEventListener('error', (event) => {
 
   const variants = [
     {
-      headline: '아이디어를,<br><strong>손님이 찾는 브랜드로.</strong>',
-      promise: '시장과 고객의 신호를 읽고 브랜드, 공간과 마케팅이<br>하나의 성장 방향으로 움직이게 합니다.'
+      headline: '좋은 공간이,<br><strong>삶과 사업의 가능성이 되도록.</strong>',
+      promise: '상업공간과 주거공간을 기획하고 구현하며,<br>공간의 목적과 사용 경험을 하나의 기준으로 연결합니다.'
     },
     {
       headline: '작은 가능성을,<br><strong>오래가는 브랜드로.</strong>',
       promise: '막연한 아이디어 안에서 선택받을 이유를 찾고<br>지속할 수 있는 브랜드의 기준을 세웁니다.'
     },
     {
-      headline: '가게를 넘어,<br><strong>기억되는 브랜드로.</strong>',
-      promise: '이름과 메뉴, 공간과 서비스가 같은 이야기를 전하도록<br>고객이 기억할 하나의 경험으로 연결합니다.'
+      headline: '사는 곳도, 일하는 곳도,<br><strong>분명한 이유가 있는 공간으로.</strong>',
+      promise: '생활 방식과 운영 방식을 세심하게 읽고<br>오래 편안하고 기억되는 공간의 기준을 만듭니다.'
     },
     {
       headline: '좋은 공간을,<br><strong>선택받는 경험으로.</strong>',
-      promise: '보기 좋은 장면을 넘어 고객의 방문과 재방문으로 이어지는<br>브랜드 경험의 방향을 설계합니다.'
+      promise: '보기 좋은 장면을 넘어 생활의 편안함과 고객 경험으로 이어지는<br>공간의 방향을 설계합니다.'
     },
     {
       headline: '막연한 창업을,<br><strong>선명한 브랜드로.</strong>',
@@ -77,6 +78,7 @@ document.addEventListener('error', (event) => {
   ]
 
   const personalized = {
+    residential: { headline: '사는 공간을,<br><strong>우리의 생활을 닮은 집으로.</strong>', promise: '가족 구성과 생활 습관을 읽고 동선과 수납, 빛과 재료를<br>오래 편안한 하나의 공간으로 설계합니다.', cta: '주거 인테리어 상담 시작하기', image: 'images/apt21-09.jpg', imageAlt: '생활 방식과 동선을 반영한 아파트 주거 인테리어', imageCopy: '사는 방식을 읽고|오래 편안한 집을 만듭니다.' },
     salon: { headline: '미용실의 감각을,<br><strong>다시 찾는 브랜드로.</strong>', promise: '공간의 첫인상부터 고객 경험과 재방문까지<br>하나의 브랜드 기준으로 연결합니다.', cta: '내 미용실 프로젝트 진단하기', image: 'images/buhair-07-detail-real-web.webp', imageAlt: '미용실 브랜드 공간의 재료와 디테일', imageCopy: '감각적인 공간을|다시 찾는 브랜드로 만듭니다.' },
     clinic: { headline: '신뢰가 필요한 공간을,<br><strong>선택받는 의료 브랜드로.</strong>', promise: '전문성과 안심이 공간과 고객 경험에서<br>일관되게 전달되도록 기준을 설계합니다.', cta: '의료 공간 프로젝트 진단하기' },
     office: { headline: '일하는 공간을,<br><strong>조직의 브랜드 경험으로.</strong>', promise: '업무 방식과 조직의 태도가 공간에서 자연스럽게<br>느껴지도록 오피스의 기준을 설계합니다.', cta: '오피스 프로젝트 진단하기', image: 'images/office-09-portfolio-real-web.webp', imageAlt: '업무 방식과 브랜드를 반영한 오피스 공간', imageCopy: '일하는 방식이|공간의 인상이 됩니다.' },
@@ -304,6 +306,10 @@ if (heroProjectSlides.length > 1) {
 // SELECTED WORK: 넓은 이미지 풀에서 중복 없이 무작위 4장을 선택
 const visionWorkCards = [...document.querySelectorAll('.vision-work')]
 const visionLibrary = [
+  ['images/apt21-01.jpg', 'APARTMENT 21', 'RESIDENTIAL · LIVING'],
+  ['images/apt21-03.jpg', 'APARTMENT 21', 'RESIDENTIAL · MATERIAL'],
+  ['images/apt21-09.jpg', 'APARTMENT 21', 'RESIDENTIAL · SPACE'],
+  ['images/apt21-12.jpg', 'APARTMENT 21', 'RESIDENTIAL · DETAIL'],
   ['images/mild-16-portfolio-real-web.webp', 'MILD HOUSE', 'BRAND EXPERIENCE · SPACE'],
   ['images/waribashi-07-interior-real-web.webp', 'WARIBASHI', 'HOSPITALITY · SPACE'],
   ['images/yohi-user-01-facade-web.webp', 'YOHI', 'BRAND · FACADE'],
