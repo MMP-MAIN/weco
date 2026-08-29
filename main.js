@@ -78,18 +78,18 @@ document.addEventListener('error', (event) => {
   ]
 
   const personalized = {
-    residential: { headline: '사는 공간을,<br><strong>우리의 생활을 닮은 집으로.</strong>', promise: '가족 구성과 생활 습관을 읽고 동선과 수납, 빛과 재료를<br>오래 편안한 하나의 공간으로 설계합니다.', cta: '주거 인테리어 상담 시작하기', image: 'images/apt21-09.jpg', imageAlt: '생활 방식과 동선을 반영한 아파트 주거 인테리어', imageCopy: '사는 방식을 읽고|오래 편안한 집을 만듭니다.' },
-    salon: { headline: '미용실의 감각을,<br><strong>다시 찾는 브랜드로.</strong>', promise: '공간의 첫인상부터 고객 경험과 재방문까지<br>하나의 브랜드 기준으로 연결합니다.', cta: '내 미용실 프로젝트 진단하기', image: 'images/buhair-07-detail-real-web.webp', imageAlt: '미용실 브랜드 공간의 재료와 디테일', imageCopy: '감각적인 공간을|다시 찾는 브랜드로 만듭니다.' },
-    clinic: { headline: '신뢰가 필요한 공간을,<br><strong>선택받는 의료 브랜드로.</strong>', promise: '전문성과 안심이 공간과 고객 경험에서<br>일관되게 전달되도록 기준을 설계합니다.', cta: '의료 공간 프로젝트 진단하기' },
-    office: { headline: '일하는 공간을,<br><strong>조직의 브랜드 경험으로.</strong>', promise: '업무 방식과 조직의 태도가 공간에서 자연스럽게<br>느껴지도록 오피스의 기준을 설계합니다.', cta: '오피스 프로젝트 진단하기', image: 'images/office-09-portfolio-real-web.webp', imageAlt: '업무 방식과 브랜드를 반영한 오피스 공간', imageCopy: '일하는 방식이|공간의 인상이 됩니다.' },
-    cafe: { headline: '카페의 취향을,<br><strong>목적지가 되는 브랜드로.</strong>', promise: '메뉴와 공간, 고객이 기억할 장면을 연결해<br>다시 방문할 분명한 이유를 만듭니다.', cta: '내 카페 프로젝트 진단하기', image: 'images/concept-render/bakery-cafe-interior-web.webp', imageAlt: '브랜드 경험을 담은 베이커리 카페 공간', imageCopy: '머물고 싶은 장면을|찾아오는 이유로 만듭니다.' },
-    fnb: { headline: '식당의 가능성을,<br><strong>다시 찾는 브랜드로.</strong>', promise: '상권과 고객, 메뉴와 운영 조건을 함께 읽고<br>선택과 재방문으로 이어질 기준을 세웁니다.', cta: '내 식당 프로젝트 진단하기' },
-    interior: { headline: '상가 공간을,<br><strong>선택받는 브랜드 경험으로.</strong>', promise: '보기 좋은 인테리어를 넘어 고객이 발견하고<br>머물고 다시 찾을 공간의 이유를 설계합니다.', cta: '상가 공간 프로젝트 진단하기' },
-    marketing: { headline: '브랜드의 가능성을,<br><strong>고객이 발견할 성장으로.</strong>', promise: '브랜드와 공간의 강점을 콘텐츠와 광고에 연결해<br>고객 반응을 만드는 방향을 설계합니다.', cta: '브랜드 성장 방향 진단하기' },
-    paid_social: { headline: '광고에서 본 가능성을,<br><strong>실행할 프로젝트로.</strong>', promise: '업종과 현재 단계를 간단히 알려주시면<br>무엇부터 결정해야 할지 먼저 정리해드립니다.', cta: '1분 프로젝트 진단 시작하기' },
-    organic_search: { headline: '찾고 있던 답을,<br><strong>실행할 브랜드 기준으로.</strong>', promise: '검색으로 흩어진 정보 대신 지금 상황에 필요한<br>결정의 순서와 프로젝트 방향을 정리합니다.', cta: '내 상황에 맞는 방향 진단하기' },
-    social: { headline: '눈에 띈 장면을,<br><strong>방문할 이유가 있는 브랜드로.</strong>', promise: '좋아 보이는 이미지를 넘어 실제 고객 경험과<br>사업의 성장으로 이어질 기준을 만듭니다.', cta: '내 프로젝트 가능성 진단하기' },
-    returning: { headline: '다시 찾은 가능성을,<br><strong>실행할 다음 단계로.</strong>', promise: '고민하고 있는 브랜드와 공간의 현재 단계를<br>짧게 진단하고 먼저 결정할 일을 정리합니다.', cta: '이어서 프로젝트 진단하기' }
+    residential: { headline: '사는 공간을,<br><strong>우리의 생활을 닮은 집으로.</strong>', promise: '가족 구성과 생활 습관을 읽고 동선과 수납, 빛과 재료를<br>오래 편안한 하나의 공간으로 설계합니다.', cta: '주거 인테리어 상담 문의하기', image: 'images/apt21-09.jpg', imageAlt: '생활 방식과 동선을 반영한 아파트 주거 인테리어', imageCopy: '사는 방식을 읽고|오래 편안한 집을 만듭니다.' },
+    salon: { headline: '미용실의 감각을,<br><strong>다시 찾는 브랜드로.</strong>', promise: '공간의 첫인상부터 고객 경험과 재방문까지<br>하나의 브랜드 기준으로 연결합니다.', cta: '미용실 프로젝트 문의하기', image: 'images/buhair-07-detail-real-web.webp', imageAlt: '미용실 브랜드 공간의 재료와 디테일', imageCopy: '감각적인 공간을|다시 찾는 브랜드로 만듭니다.' },
+    clinic: { headline: '신뢰가 필요한 공간을,<br><strong>선택받는 의료 브랜드로.</strong>', promise: '전문성과 안심이 공간과 고객 경험에서<br>일관되게 전달되도록 기준을 설계합니다.', cta: '의료 공간 프로젝트 문의하기' },
+    office: { headline: '일하는 공간을,<br><strong>조직의 브랜드 경험으로.</strong>', promise: '업무 방식과 조직의 태도가 공간에서 자연스럽게<br>느껴지도록 오피스의 기준을 설계합니다.', cta: '오피스 프로젝트 문의하기', image: 'images/office-09-portfolio-real-web.webp', imageAlt: '업무 방식과 브랜드를 반영한 오피스 공간', imageCopy: '일하는 방식이|공간의 인상이 됩니다.' },
+    cafe: { headline: '카페의 취향을,<br><strong>목적지가 되는 브랜드로.</strong>', promise: '메뉴와 공간, 고객이 기억할 장면을 연결해<br>다시 방문할 분명한 이유를 만듭니다.', cta: '카페 프로젝트 문의하기', image: 'images/concept-render/bakery-cafe-interior-web.webp', imageAlt: '브랜드 경험을 담은 베이커리 카페 공간', imageCopy: '머물고 싶은 장면을|찾아오는 이유로 만듭니다.' },
+    fnb: { headline: '식당의 가능성을,<br><strong>다시 찾는 브랜드로.</strong>', promise: '상권과 고객, 메뉴와 운영 조건을 함께 읽고<br>선택과 재방문으로 이어질 기준을 세웁니다.', cta: '식당 프로젝트 문의하기' },
+    interior: { headline: '상가 공간을,<br><strong>선택받는 브랜드 경험으로.</strong>', promise: '보기 좋은 인테리어를 넘어 고객이 발견하고<br>머물고 다시 찾을 공간의 이유를 설계합니다.', cta: '상가 인테리어 문의하기' },
+    marketing: { headline: '브랜드의 가능성을,<br><strong>고객이 발견할 성장으로.</strong>', promise: '브랜드와 공간의 강점을 콘텐츠와 광고에 연결해<br>고객 반응을 만드는 방향을 설계합니다.', cta: '프로젝트 상담 문의하기' },
+    paid_social: { headline: '광고에서 본 가능성을,<br><strong>실행할 프로젝트로.</strong>', promise: '업종과 현재 단계를 간단히 알려주시면<br>무엇부터 결정해야 할지 먼저 정리해드립니다.', cta: '프로젝트 상담 문의하기' },
+    organic_search: { headline: '찾고 있던 답을,<br><strong>실행할 브랜드 기준으로.</strong>', promise: '검색으로 흩어진 정보 대신 지금 상황에 필요한<br>결정의 순서와 프로젝트 방향을 정리합니다.', cta: '프로젝트 상담 문의하기' },
+    social: { headline: '눈에 띈 장면을,<br><strong>방문할 이유가 있는 브랜드로.</strong>', promise: '좋아 보이는 이미지를 넘어 실제 고객 경험과<br>사업의 성장으로 이어질 기준을 만듭니다.', cta: '프로젝트 상담 문의하기' },
+    returning: { headline: '다시 찾은 가능성을,<br><strong>실행할 다음 단계로.</strong>', promise: '고민하고 있는 브랜드와 공간의 현재 단계를<br>짧게 진단하고 먼저 결정할 일을 정리합니다.', cta: '프로젝트 상담 문의하기' }
   }
 
   const segment = industry || (isPaidSocial ? 'paid_social' : isOrganicSearch ? 'organic_search' : isSocial ? 'social' : visits > 0 ? 'returning' : 'general')
@@ -98,7 +98,7 @@ document.addEventListener('error', (event) => {
   if (config) {
     headline.innerHTML = config.headline
     promise.innerHTML = config.promise
-    const discoveryButton = document.querySelector('.hero-actions [data-conversion="brand_discovery"]')
+    const discoveryButton = document.querySelector('.hero-actions [data-conversion="project_inquiry"]')
     if (discoveryButton) discoveryButton.innerHTML = `${config.cta} <span>↗</span>`
     const note = document.querySelector('.hero-analysis-note')
     if (note) note.textContent = '업종과 현재 단계를 알려주시면, 무엇부터 시작해야 할지 먼저 정리해드립니다.'
