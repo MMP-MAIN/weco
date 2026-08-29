@@ -49,33 +49,14 @@ document.addEventListener('error', (event) => {
     ['office', /(사무실|오피스|office|workplace)/],
     ['cafe', /(카페|커피|베이커리|cafe|coffee|bakery)/],
     ['fnb', /(식당|음식점|외식|고기집|육회|레스토랑|restaurant|food|fnb)/],
-    ['interior', /(상가.?인테리어|인테리어|공간|interior|commercial.?space)/],
-    ['marketing', /(마케팅|광고|콘텐츠|marketing|advertising)/]
+    ['interior', /(상가.?인테리어|인테리어|공간|interior|commercial.?space)/]
   ]
   const industry = industries.find(([, pattern]) => pattern.test(signal))?.[0] || ''
 
-  const variants = [
-    {
-      headline: '좋은 공간이,<br><strong>삶과 사업의 가능성이 되도록.</strong>',
-      promise: '상업공간과 주거공간을 기획하고 구현하며,<br>공간의 목적과 사용 경험을 하나의 기준으로 연결합니다.'
-    },
-    {
-      headline: '작은 가능성을,<br><strong>오래가는 브랜드로.</strong>',
-      promise: '막연한 아이디어 안에서 선택받을 이유를 찾고<br>지속할 수 있는 브랜드의 기준을 세웁니다.'
-    },
-    {
-      headline: '사는 곳도, 일하는 곳도,<br><strong>분명한 이유가 있는 공간으로.</strong>',
-      promise: '생활 방식과 운영 방식을 세심하게 읽고<br>오래 편안하고 기억되는 공간의 기준을 만듭니다.'
-    },
-    {
-      headline: '좋은 공간을,<br><strong>선택받는 경험으로.</strong>',
-      promise: '보기 좋은 장면을 넘어 생활의 편안함과 고객 경험으로 이어지는<br>공간의 방향을 설계합니다.'
-    },
-    {
-      headline: '막연한 창업을,<br><strong>선명한 브랜드로.</strong>',
-      promise: '상권과 고객, 운영 조건을 함께 진단하고<br>지금 먼저 결정할 브랜드의 방향을 분명하게 만듭니다.'
-    }
-  ]
+  const general = {
+    headline: '상업공간과 주거공간을,<br><strong>목적에 맞는 공간으로.</strong>',
+    promise: '사업의 운영 방식과 가족의 생활 방식을 읽고,<br>기획부터 인테리어 디자인까지 하나의 기준으로 연결합니다.'
+  }
 
   const personalized = {
     residential: { headline: '사는 공간을,<br><strong>우리의 생활을 닮은 집으로.</strong>', promise: '가족 구성과 생활 습관을 읽고 동선과 수납, 빛과 재료를<br>오래 편안한 하나의 공간으로 설계합니다.', cta: '주거 인테리어 상담 문의하기', image: 'images/apt21-09.jpg', imageAlt: '생활 방식과 동선을 반영한 아파트 주거 인테리어', imageCopy: '사는 방식을 읽고|오래 편안한 집을 만듭니다.' },
@@ -85,15 +66,13 @@ document.addEventListener('error', (event) => {
     cafe: { headline: '카페의 취향을,<br><strong>목적지가 되는 브랜드로.</strong>', promise: '메뉴와 공간, 고객이 기억할 장면을 연결해<br>다시 방문할 분명한 이유를 만듭니다.', cta: '카페 프로젝트 문의하기', image: 'images/concept-render/bakery-cafe-interior-web.webp', imageAlt: '브랜드 경험을 담은 베이커리 카페 공간', imageCopy: '머물고 싶은 장면을|찾아오는 이유로 만듭니다.' },
     fnb: { headline: '식당의 가능성을,<br><strong>다시 찾는 브랜드로.</strong>', promise: '상권과 고객, 메뉴와 운영 조건을 함께 읽고<br>선택과 재방문으로 이어질 기준을 세웁니다.', cta: '식당 프로젝트 문의하기' },
     interior: { headline: '상가 공간을,<br><strong>선택받는 브랜드 경험으로.</strong>', promise: '보기 좋은 인테리어를 넘어 고객이 발견하고<br>머물고 다시 찾을 공간의 이유를 설계합니다.', cta: '상가 인테리어 문의하기' },
-    marketing: { headline: '브랜드의 가능성을,<br><strong>고객이 발견할 성장으로.</strong>', promise: '브랜드와 공간의 강점을 콘텐츠와 광고에 연결해<br>고객 반응을 만드는 방향을 설계합니다.', cta: '프로젝트 상담 문의하기' },
     paid_social: { headline: '광고에서 본 가능성을,<br><strong>실행할 프로젝트로.</strong>', promise: '업종과 현재 단계를 간단히 알려주시면<br>무엇부터 결정해야 할지 먼저 정리해드립니다.', cta: '프로젝트 상담 문의하기' },
     organic_search: { headline: '찾고 있던 답을,<br><strong>실행할 브랜드 기준으로.</strong>', promise: '검색으로 흩어진 정보 대신 지금 상황에 필요한<br>결정의 순서와 프로젝트 방향을 정리합니다.', cta: '프로젝트 상담 문의하기' },
     social: { headline: '눈에 띈 장면을,<br><strong>방문할 이유가 있는 브랜드로.</strong>', promise: '좋아 보이는 이미지를 넘어 실제 고객 경험과<br>사업의 성장으로 이어질 기준을 만듭니다.', cta: '프로젝트 상담 문의하기' },
     returning: { headline: '다시 찾은 가능성을,<br><strong>실행할 다음 단계로.</strong>', promise: '고민하고 있는 브랜드와 공간의 현재 단계를<br>짧게 진단하고 먼저 결정할 일을 정리합니다.', cta: '프로젝트 상담 문의하기' }
   }
 
-  const segment = industry || (isPaidSocial ? 'paid_social' : isOrganicSearch ? 'organic_search' : isSocial ? 'social' : visits > 0 ? 'returning' : 'general')
-  let selected = 0
+  const segment = industry || 'general'
   const config = personalized[segment]
   if (config) {
     headline.innerHTML = config.headline
@@ -104,15 +83,10 @@ document.addEventListener('error', (event) => {
     if (note) note.textContent = '업종과 현재 단계를 알려주시면, 무엇부터 시작해야 할지 먼저 정리해드립니다.'
     if (config.image) window.WECO_HERO_PERSONALIZED_IMAGE = config
   } else {
-    let previous = -1
-    try { previous = Number(localStorage.getItem('wecoHeroVariant')) } catch (_) {}
-    const candidates = variants.map((_, i) => i).filter(i => i !== previous)
-    selected = candidates[Math.floor(Math.random() * candidates.length)] ?? 0
-    headline.innerHTML = variants[selected].headline
-    promise.innerHTML = variants[selected].promise
-    try { localStorage.setItem('wecoHeroVariant', String(selected)) } catch (_) {}
+    headline.innerHTML = general.headline
+    promise.innerHTML = general.promise
   }
-  window.WECO_HERO_VARIANT = config ? segment : selected + 1
+  window.WECO_HERO_VARIANT = segment
   window.WECO_LANDING_SEGMENT = segment
   window.WECO_IS_PAID_SOCIAL = isPaidSocial
   document.body.dataset.landingSegment = segment
@@ -306,39 +280,15 @@ if (heroProjectSlides.length > 1) {
 // SELECTED WORK: 넓은 이미지 풀에서 중복 없이 무작위 4장을 선택
 const visionWorkCards = [...document.querySelectorAll('.vision-work')]
 const visionLibrary = [
-  ['images/apt21-01.jpg', 'APARTMENT 21', 'RESIDENTIAL · LIVING'],
-  ['images/apt21-03.jpg', 'APARTMENT 21', 'RESIDENTIAL · MATERIAL'],
-  ['images/apt21-09.jpg', 'APARTMENT 21', 'RESIDENTIAL · SPACE'],
-  ['images/apt21-12.jpg', 'APARTMENT 21', 'RESIDENTIAL · DETAIL'],
-  ['images/mild-16-portfolio-real-web.webp', 'MILD HOUSE', 'BRAND EXPERIENCE · SPACE'],
-  ['images/waribashi-07-interior-real-web.webp', 'WARIBASHI', 'HOSPITALITY · SPACE'],
-  ['images/yohi-user-01-facade-web.webp', 'YOHI', 'BRAND · FACADE'],
-  ['images/yohi-user-02-counter-web.webp', 'YOHI COUNTER', 'BRAND TOUCHPOINT'],
-  ['images/yohi-user-03-detail-web.webp', 'YOHI DETAIL', 'MATERIAL · EXPERIENCE'],
-  ['images/yohi-user-04-interior-web.webp', 'YOHI INTERIOR', 'SPACE · EXPERIENCE'],
-  ['images/arrangement-05-web.webp', 'ARRANGEMENT', 'SPACE · OPERATION'],
-  ['images/arrangement-08-bar-real-web.webp', 'ARRANGEMENT BAR', 'DETAIL · OPERATION'],
-  ['images/woobok-08-partition-real-web.webp', 'WOOBOK', 'SPACE · DETAIL'],
-  ['images/office-09-portfolio-real-web.webp', 'OFFICE PROJECT', 'WORKPLACE · SPACE'],
-  ['images/gimijung-07-counter-real-web.webp', 'GIMIJUNG', 'MATERIAL · LIGHT'],
-  ['images/inedit-08-material-real-web.webp', 'INEDIT', 'TEXTURE · IDENTITY'],
-  ['images/buhair-07-detail-real-web.webp', 'BUHAIR', 'OBJECT · EXPERIENCE'],
-  ['images/caveu-08-material-real-web.webp', 'CAVEU', 'MATERIAL · DETAIL'],
-  ['images/gasik-07-interior-real-web.webp', 'GASIK', 'HOSPITALITY · SPACE'],
-  ['images/brewery-07-material-real-web.webp', 'BREWERY', 'MATERIAL · EXPERIENCE'],
-  ['images/nicekyou-interior-02.jpg', 'NICE KYOU', 'INTERIOR · HOSPITALITY'],
-  ['images/mimi-07-interior-real-web.webp', 'MIMI', 'SPACE · BRAND EXPERIENCE'],
-  ['images/concept-render/grill-dining-hero-web.webp', 'GRILL DINING', 'CONCEPT RENDER · F&B SPACE'],
-  ['images/concept-render/grill-open-kitchen-web.webp', 'OPEN KITCHEN', 'CONCEPT RENDER · OPERATION'],
-  ['images/concept-render/corner-bakery-facade-web.webp', 'CORNER BAKERY', 'CONCEPT RENDER · FACADE'],
-  ['images/concept-render/corner-bakery-hero-web.webp', 'CORNER BAKERY', 'CONCEPT RENDER · SPACE'],
-  ['images/concept-render/bakery-cafe-interior-web.webp', 'BAKERY CAFE', 'CONCEPT RENDER · EXPERIENCE'],
-  ['images/concept-render/bakery-cafe-night-web.webp', 'BAKERY CAFE', 'CONCEPT RENDER · FACADE'],
-  ['images/concept-render/soft-dining-hero-web.webp', 'SOFT DINING', 'CONCEPT RENDER · HOSPITALITY'],
-  ['images/concept-render/soft-dining-kitchen-web.webp', 'SOFT DINING', 'CONCEPT RENDER · KITCHEN'],
-  ['images/concept-render/espresso-bar-facade-web.webp', 'ESPRESSO BAR', 'CONCEPT RENDER · FACADE'],
-  ['images/concept-render/espresso-bar-interior-web.webp', 'ESPRESSO BAR', 'CONCEPT RENDER · SPACE']
-].map(([src, title, meta]) => ({ src, title, meta }))
+  ['images/apt21-01.jpg', 'APARTMENT 21', 'RESIDENTIAL · LIVING', 'residential'],
+  ['images/apt21-03.jpg', 'APARTMENT 21', 'RESIDENTIAL · MATERIAL', 'residential'],
+  ['images/apt21-09.jpg', 'APARTMENT 21', 'RESIDENTIAL · SPACE', 'residential'],
+  ['images/apt21-12.jpg', 'APARTMENT 21', 'RESIDENTIAL · DETAIL', 'residential'],
+  ['images/jewel-cover-polished.jpg', 'RETAIL SPACE', 'COMMERCIAL · RETAIL', 'commercial'],
+  ['images/office-09-portfolio-real-web.webp', 'OFFICE PROJECT', 'COMMERCIAL · WORKPLACE', 'commercial'],
+  ['images/buhair-07-detail-real-web.webp', 'BEAUTY SPACE', 'COMMERCIAL · DETAIL', 'commercial'],
+  ['images/scalp-03.jpg', 'CARE SPACE', 'COMMERCIAL · EXPERIENCE', 'commercial']
+].map(([src, title, meta, category]) => ({ src, title, meta, category }))
 
 if (visionWorkCards.length) {
   // 첫 방문에는 현재 보이는 4장만 요청합니다. 나머지는 해당 섹션이 화면에 보일 때 교체 시점에 불러옵니다.
@@ -353,8 +303,11 @@ if (visionWorkCards.length) {
     return copy
   }
   const refreshVisionGrid = (immediate = false) => {
-    const candidates = shuffled(visionLibrary.filter(item => !visibleSources.has(item.src)))
-    const nextItems = candidates.slice(0, visionWorkCards.length)
+    const available = visionLibrary.filter(item => !visibleSources.has(item.src))
+    const nextItems = [
+      ...shuffled(available.filter(item => item.category === 'commercial')).slice(0, 2),
+      ...shuffled(available.filter(item => item.category === 'residential')).slice(0, 2)
+    ]
     visibleSources = new Set(nextItems.map(item => item.src))
     visionWorkCards.forEach((card, cardIndex) => {
       const item = nextItems[cardIndex]
