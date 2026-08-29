@@ -53,10 +53,28 @@ document.addEventListener('error', (event) => {
   ]
   const industry = industries.find(([, pattern]) => pattern.test(signal))?.[0] || ''
 
-  const general = {
-    headline: '상업공간과 주거공간을,<br><strong>목적에 맞는 공간으로.</strong>',
-    promise: '사업의 운영 방식과 가족의 생활 방식을 읽고,<br>기획부터 인테리어 디자인까지 하나의 기준으로 연결합니다.'
-  }
+  const variants = [
+    {
+      headline: '상업공간과 주거공간을,<br><strong>목적에 맞는 공간으로.</strong>',
+      promise: '사업의 운영 방식과 가족의 생활 방식을 읽고,<br>기획부터 인테리어 디자인까지 하나의 기준으로 연결합니다.'
+    },
+    {
+      headline: '일하는 공간과 사는 공간을,<br><strong>더 나은 경험으로.</strong>',
+      promise: '매장과 오피스에는 분명한 운영의 기준을,<br>아파트와 주택에는 편안한 생활의 기준을 만듭니다.'
+    },
+    {
+      headline: '공간의 첫인상부터,<br><strong>오래 머무는 방식까지.</strong>',
+      promise: '상업공간의 고객 경험과 주거공간의 일상을 함께 읽고,<br>동선과 재료, 빛과 가구를 세심하게 설계합니다.'
+    },
+    {
+      headline: '사업에는 선택의 이유를,<br><strong>집에는 생활의 기준을.</strong>',
+      promise: '각 공간을 사용하는 사람과 목적에서 출발해<br>보기 좋고 오래 편안한 인테리어를 완성합니다.'
+    },
+    {
+      headline: '좋은 공간은,<br><strong>사람과 목적에서 시작됩니다.</strong>',
+      promise: '유행을 따르기보다 실제 운영과 생활에 필요한 것을 읽고,<br>공간마다 맞는 디자인의 기준을 세웁니다.'
+    }
+  ]
 
   const personalized = {
     residential: { headline: '사는 공간을,<br><strong>우리의 생활을 닮은 집으로.</strong>', promise: '가족 구성과 생활 습관을 읽고 동선과 수납, 빛과 재료를<br>오래 편안한 하나의 공간으로 설계합니다.', cta: '주거 인테리어 상담 문의하기', image: 'images/apt21-09.jpg', imageAlt: '생활 방식과 동선을 반영한 아파트 주거 인테리어', imageCopy: '사는 방식을 읽고|오래 편안한 집을 만듭니다.' },
@@ -83,8 +101,13 @@ document.addEventListener('error', (event) => {
     if (note) note.textContent = '업종과 현재 단계를 알려주시면, 무엇부터 시작해야 할지 먼저 정리해드립니다.'
     if (config.image) window.WECO_HERO_PERSONALIZED_IMAGE = config
   } else {
-    headline.innerHTML = general.headline
-    promise.innerHTML = general.promise
+    let previous = -1
+    try { previous = Number(sessionStorage.getItem('wecoHeroVariant')) } catch (_) {}
+    const candidates = variants.map((_, index) => index).filter(index => index !== previous)
+    const selected = candidates[Math.floor(Math.random() * candidates.length)] ?? 0
+    headline.innerHTML = variants[selected].headline
+    promise.innerHTML = variants[selected].promise
+    try { sessionStorage.setItem('wecoHeroVariant', String(selected)) } catch (_) {}
   }
   window.WECO_HERO_VARIANT = segment
   window.WECO_LANDING_SEGMENT = segment
