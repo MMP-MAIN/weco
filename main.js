@@ -758,10 +758,14 @@ document.addEventListener('click', (event) => {
   if (link) {
     const href = link.getAttribute('href') || ''
     const linkParams = { page_language: pageLanguage, link_text: (link.textContent || '').trim().slice(0, 100) }
-    if (href.startsWith('tel:')) trackEvent('contact_cta_click', { ...linkParams, contact_method: 'phone' })
+    if (href.startsWith('tel:')) {
+      trackEvent('contact_cta_click', { ...linkParams, contact_method: 'phone' })
+      trackEvent('phone_click', linkParams)
+    }
     else if (href.startsWith('mailto:')) trackEvent('contact_cta_click', { ...linkParams, contact_method: 'email' })
     else if (href.includes('open.kakao.com/o/sBasXuKi')) {
       trackEvent('contact_cta_click', { ...linkParams, contact_method: 'kakao_openchat' })
+      trackEvent('kakao_openchat_click', linkParams)
     }
     else if (/WECO_PORTFOLIO_2026\.pdf(?:$|[?#])/i.test(href)) trackEvent('portfolio_download', linkParams)
     else if (href === '#contact') trackEvent('contact_cta_click', { ...linkParams, contact_method: 'inquiry_form' })
@@ -798,6 +802,10 @@ document.addEventListener('click', (event) => {
       page_language: pageLanguage,
       project_name: projectName
     })
+    trackEvent('project_click', {
+      page_language: pageLanguage,
+      project_name: projectName
+    })
   }
 })
 
@@ -811,6 +819,7 @@ document.addEventListener('click', (event) => {
       if (percent >= depth && !sentDepths.has(depth)) {
         sentDepths.add(depth)
         trackEvent('scroll_depth', { depth, page_language: document.documentElement.lang || 'ko' })
+        if (depth === 50) trackEvent('scroll_50', { page_language: document.documentElement.lang || 'ko' })
       }
     })
   }
