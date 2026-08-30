@@ -636,6 +636,33 @@ const getTrafficAttribution = () => {
 const SESSION_STARTED_AT = Number(sessionStorage.getItem('weco_session_started_at')) || Date.now()
 sessionStorage.setItem('weco_session_started_at', String(SESSION_STARTED_AT))
 
+// 광고가 멈춰도 다시 찾아오는 방문이 남는지 측정합니다.
+// 개인 식별자는 만들지 않고, 같은 브라우저의 방문 횟수와 첫 방문 시점만 저장합니다.
+const getVisitProfile = () => {
+  const today = new Date().toISOString().slice(0, 10)
+  try {
+    const firstVisit = localStorage.getItem('weco_first_visit_date') || today
+    const lastCountedDate = localStorage.getItem('weco_last_counted_visit_date')
+    let visitCount = Number(localStorage.getItem('weco_visit_count') || 0)
+    if (lastCountedDate !== today) {
+      visitCount += 1
+      localStorage.setItem('weco_visit_count', String(visitCount))
+      localStorage.setItem('weco_last_counted_visit_date', today)
+    }
+    localStorage.setItem('weco_first_visit_date', firstVisit)
+    const daysSinceFirstVisit = Math.max(0, Math.floor((Date.parse(today) - Date.parse(firstVisit)) / 86400000))
+    return {
+      visitor_type: visitCount > 1 ? 'returning' : 'new',
+      visit_number: visitCount || 1,
+      days_since_first_visit: daysSinceFirstVisit
+    }
+  } catch (_) {
+    return { visitor_type: 'unknown', visit_number: 1, days_since_first_visit: 0 }
+  }
+}
+
+const VISIT_PROFILE = getVisitProfile()
+
 const rememberLeadJourney = () => {
   const attribution = getTrafficAttribution()
   const touch = {
@@ -695,6 +722,7 @@ const trackEvent = (name, params = {}) => {
     hero_variant: window.WECO_HERO_VARIANT || 1,
     landing_segment: window.WECO_LANDING_SEGMENT || 'general',
     landing_path: location.pathname,
+    ...VISIT_PROFILE,
     ...getTrafficAttribution(),
     ...params
   }
@@ -706,6 +734,12 @@ trackEvent('landing_view', {
   page_language: document.documentElement.lang || 'ko',
   is_paid_social: Boolean(window.WECO_IS_PAID_SOCIAL)
 })
+
+if (VISIT_PROFILE.visitor_type === 'returning') {
+  trackEvent('return_visit', {
+    page_language: document.documentElement.lang || 'ko'
+  })
+}
 
 document.addEventListener('click', (event) => {
   const pageLanguage = document.documentElement.lang || 'ko'
