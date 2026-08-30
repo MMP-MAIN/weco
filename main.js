@@ -582,7 +582,6 @@ form.addEventListener('submit', async (e) => {
     })
     const data = await res.json().catch(() => ({}))
     if (res.ok && (data.success === 'true' || data.success === true)) {
-      if (typeof window.fbq === 'function') window.fbq('track', 'Lead')
       trackEvent('generate_lead', {
         form_name: 'project_inquiry',
         lead_type: selectedType || 'unspecified',
@@ -745,7 +744,8 @@ document.addEventListener('click', (event) => {
   const pageLanguage = document.documentElement.lang || 'ko'
   const link = event.target.closest('a')
   const conversionTarget = event.target.closest('[data-conversion]')
-  if (conversionTarget) {
+  const conversionHref = conversionTarget?.closest('a')?.getAttribute('href') || ''
+  if (conversionTarget && !['#contact'].includes(conversionHref)) {
     trackEvent('primary_cta_click', {
       page_language: pageLanguage,
       cta_name: conversionTarget.dataset.conversion || 'unknown',
@@ -758,17 +758,13 @@ document.addEventListener('click', (event) => {
   if (link) {
     const href = link.getAttribute('href') || ''
     const linkParams = { page_language: pageLanguage, link_text: (link.textContent || '').trim().slice(0, 100) }
-    if (href.startsWith('tel:')) {
-      trackEvent('phone_click', linkParams)
-      if (typeof window.fbq === 'function') window.fbq('track', 'Contact')
-    }
-    else if (href.startsWith('mailto:')) trackEvent('email_click', linkParams)
+    if (href.startsWith('tel:')) trackEvent('contact_cta_click', { ...linkParams, contact_method: 'phone' })
+    else if (href.startsWith('mailto:')) trackEvent('contact_cta_click', { ...linkParams, contact_method: 'email' })
     else if (href.includes('open.kakao.com/o/sBasXuKi')) {
-      trackEvent('kakao_openchat_click', linkParams)
-      if (typeof window.fbq === 'function') window.fbq('track', 'Contact', { contact_method: 'kakao_openchat' })
+      trackEvent('contact_cta_click', { ...linkParams, contact_method: 'kakao_openchat' })
     }
     else if (/WECO_PORTFOLIO_2026\.pdf(?:$|[?#])/i.test(href)) trackEvent('portfolio_download', linkParams)
-    else if (href === '#contact') trackEvent('contact_cta_click', linkParams)
+    else if (href === '#contact') trackEvent('contact_cta_click', { ...linkParams, contact_method: 'inquiry_form' })
     else if (href.includes('/brand-discovery') || href.includes('brand-discovery.html')) {
       trackEvent('brand_discovery_click', linkParams)
       if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent', { content_name: 'brand_discovery' })

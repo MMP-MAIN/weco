@@ -32,7 +32,7 @@
     n.push=n;n.loaded=true;n.version='2.0';n.queue=[];
     var px=document.createElement('script');px.async=true;px.src='https://connect.facebook.net/en_US/fbevents.js';
     var first=document.getElementsByTagName('script')[0];first.parentNode.insertBefore(px,first);
-    fbq('init','1099004869049392');fbq('track','PageView');fbq('track','ViewContent');
+    fbq('init','1330320655850964');fbq('track','PageView');fbq('track','ViewContent');
   }
 
   document.addEventListener('click',function(event){
@@ -41,7 +41,7 @@
     var href=link.getAttribute('href')||'';
     if(href.indexOf('#contact')>-1){
       if(window.gtag)gtag('event','contact_cta_click',eventParams({content_type:'insight',link_url:href}));
-      if(window.fbq)fbq('trackCustom','ContactCTAClick',{content_type:'insight',link_url:href});
+      if(window.fbq)fbq('trackCustom','contact_cta_click',eventParams({content_type:'insight',link_url:href}));
     }else if(href.indexOf('/brand-discovery')>-1||href.indexOf('brand-discovery.html')>-1){
       if(window.gtag)gtag('event','brand_discovery_click',eventParams({content_type:'insight',link_url:href}));
       if(window.fbq)fbq('trackCustom','BrandDiscoveryClick',{content_type:'insight',link_url:href});
