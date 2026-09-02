@@ -1,6 +1,6 @@
 # 위코컴퍼니 (WECO COMPANY)
 
-위코컴퍼니는 대한민국의 F&B 컨설팅·브랜딩·공간기획·공간디자인·브랜드 마케팅·프로젝트 디렉팅 스튜디오입니다. 시장·상권·고객 데이터를 바탕으로 브랜드의 선택 이유를 정리하고, 그 전략이 메뉴·서비스·공간·마케팅의 일관된 경험으로 이어지도록 돕습니다.
+위코컴퍼니는 대한민국의 상업공간·주거공간 기획, 인테리어 디자인, 공간 브랜딩과 프로젝트 디렉팅 스튜디오입니다. 식당·카페·사무실·미용실·병원 등 상업공간과 아파트·주택 등 주거공간의 목적, 이용 방식과 운영 조건을 바탕으로 공간의 기준을 정리합니다.
 
 공식 홈페이지: https://wecocompany.com/
 전문 인사이트: https://wecocompany.com/insights.html
@@ -8,6 +8,10 @@
 
 ## 핵심 전문 문서
 
+- 카페테리아·구내식당 인테리어: https://wecocompany.com/cafeteria-interior-planning-guide.html
+- 상가 인테리어 비용·견적 비교: https://wecocompany.com/commercial-interior-quote-checklist.html
+- 주거 인테리어: https://wecocompany.com/residential.html
+- 아파트 인테리어 상담 체크리스트: https://wecocompany.com/apartment-interior-planning-checklist.html
 - 음식점 창업 현실: https://wecocompany.com/restaurant-startup-reality.html
 - 상권분석 사이트와 방법: https://wecocompany.com/fnb-location-analysis.html
 - 식당 인테리어 비용: https://wecocompany.com/restaurant-interior-cost.html
@@ -29,4 +33,4 @@
 위코컴퍼니는 공간기획·디자인·브랜드 및 프로젝트 디렉팅을 제공합니다. 관계 법령상 전문 시공이 필요한 공사는 해당 요건을 갖춘 파트너사가 별도 계약을 통해 수행할 수 있습니다.
 
 콘텐츠 작성·검토: 위코컴퍼니
-최종 업데이트: 2026-08-22
+최종 업데이트: 2026-09-03
