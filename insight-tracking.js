@@ -9,6 +9,14 @@
   gtag('set','linker',{domains:['wecocompany.com','mpmarketing.co.kr']});
   gtag('config','G-45Q0B2B2XR');
 
+  if(!window.__wecoPerformanceTrackingRequested){
+    window.__wecoPerformanceTrackingRequested=true;
+    var perf=document.createElement('script');
+    perf.defer=true;
+    perf.src='performance-tracking.js?v=1';
+    document.head.appendChild(perf);
+  }
+
   function attribution(){
     var q=new URLSearchParams(location.search);
     var incoming={traffic_source:q.get('utm_source'),traffic_medium:q.get('utm_medium'),campaign_name:q.get('utm_campaign'),campaign_content:q.get('utm_content'),campaign_term:q.get('utm_term')};

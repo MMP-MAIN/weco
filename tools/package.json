@@ -1,0 +1,14 @@
+{
+  "name": "weco-site-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "images:optimize": "node optimize-images.mjs",
+    "audit:mobile": "unlighthouse-ci --site https://wecocompany.com --mobile --reporter csvExpanded --output-path reports/mobile",
+    "audit:desktop": "unlighthouse-ci --site https://wecocompany.com --desktop --reporter csvExpanded --output-path reports/desktop"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.3",
+    "unlighthouse": "^0.18.0"
+  }
+}

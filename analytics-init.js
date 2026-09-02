@@ -16,4 +16,9 @@
     page_location: window.location.href,
     page_hostname: window.location.hostname
   });
+
+  var performanceTracking = document.createElement('script');
+  performanceTracking.defer = true;
+  performanceTracking.src = 'performance-tracking.js?v=1';
+  document.head.appendChild(performanceTracking);
 })();
