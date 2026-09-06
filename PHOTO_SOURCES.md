@@ -76,3 +76,19 @@ low-resolution search thumbnails were excluded.
 
 Before long-term commercial use, confirm that WECO or each venue has permission
 to republish third-party review photographs.
+
+## 가포 범어본점 — 2026-09-06 추가
+
+- 확인한 매장: 가포 범어본점, 대구 수성구 달구벌대로492길 9 1층.
+- 업체 정보: https://m.place.naver.com/restaurant/2034162958/information
+- 사진 출처: https://m.place.naver.com/restaurant/2034162958/photo?filterType=%EC%97%85%EC%B2%B4
+- 네이버 플레이스의 ‘업체’ 등록 사진에서 외관·공간 사진만 선별했다. 방문자 리뷰 사진은 사용하지 않았다.
+- WECO의 구체적 수행 범위나 촬영자·저작권 소유는 공개 사진만으로 추정하지 않았다. 업체 등록 사진이라는 표시는 별도의 재사용 라이선스를 뜻하지 않는다.
+- 홈페이지용 파일은 긴 변 1,800px JPEG로 최적화했고, 별도의 색보정·합성·워터마크 제거는 하지 않았다.
+
+| 홈페이지 파일 | 네이버 사진 | 원본 URL |
+| --- | --- | --- |
+| `images/범어동가포/01-외관.jpg` | business_5 | https://ldb-phinf.pstatic.net/20260830_154/1788097503129Nklsr_JPEG/KakaoTalk_Photo_2026-08-30-22-41-56_002.jpg |
+| `images/범어동가포/02-내부전경.jpg` | business_8 | https://ldb-phinf.pstatic.net/20260830_156/1788097503618MR6XD_JPEG/KakaoTalk_Photo_2026-08-30-22-41-23_005.jpg |
+| `images/범어동가포/03-창가좌석.jpg` | business_9 | https://ldb-phinf.pstatic.net/20260830_59/1788097502488qos8h_JPEG/KakaoTalk_Photo_2026-08-30-22-41-34_030.jpg |
+| `images/범어동가포/04-외부사인.jpg` | business_18 | https://ldb-phinf.pstatic.net/20260830_81/17880975032169rjnK_JPEG/KakaoTalk_Photo_2026-08-30-22-41-56_003.jpg |

@@ -1006,6 +1006,8 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
       trigger: w
     }
   }).filter(i => i.photos.length)
+  // 새 프로젝트를 추가해도 기존 ?portfolio= 공유 링크의 번호를 유지합니다.
+  items.sort((a, b) => (Number(a.trigger.dataset.galleryOrder) || 0) - (Number(b.trigger.dataset.galleryOrder) || 0))
   if (!items.length) return
 
   // 3열 그리드 갤러리
