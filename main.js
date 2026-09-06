@@ -43,7 +43,6 @@ document.addEventListener('error', (event) => {
   } catch (_) {}
 
   const industries = [
-    ['residential', /(주거|아파트|빌라|주택|홈.?인테리어|집.?인테리어|residential|apartment|home.?interior|house)/],
     ['salon', /(미용실|헤어|뷰티|salon|hair|beauty)/],
     ['clinic', /(병원|의원|클리닉|의료|보청기|clinic|hospital|medical)/],
     ['office', /(사무실|오피스|office|workplace)/],
@@ -55,29 +54,28 @@ document.addEventListener('error', (event) => {
 
   const variants = [
     {
-      headline: '상업공간과 주거공간을,<br><strong>목적에 맞는 공간으로.</strong>',
-      promise: '사업의 운영 방식과 가족의 생활 방식을 읽고,<br>기획부터 인테리어 디자인까지 하나의 기준으로 연결합니다.'
+      headline: '아이디어에 방향을,<br><strong>브랜드에 선택의 이유를.</strong>',
+      promise: '시장과 고객을 읽고 사업의 방향을 정리합니다.<br>브랜드 기획부터 디자인과 공간 경험까지 연결합니다.'
     },
     {
-      headline: '일하는 공간과 사는 공간을,<br><strong>더 나은 경험으로.</strong>',
-      promise: '매장과 오피스에는 분명한 운영의 기준을,<br>아파트와 주택에는 편안한 생활의 기준을 만듭니다.'
+      headline: '무엇을 만들지보다,<br><strong>왜 필요한지부터.</strong>',
+      promise: '누구를 위한 사업인지, 고객이 왜 선택해야 하는지.<br>브랜드를 시작하는 질문부터 함께 정리합니다.'
     },
     {
-      headline: '공간의 첫인상부터,<br><strong>오래 머무는 방식까지.</strong>',
-      promise: '상업공간의 고객 경험과 주거공간의 일상을 함께 읽고,<br>동선과 재료, 빛과 가구를 세심하게 설계합니다.'
+      headline: '흩어진 생각을,<br><strong>하나의 브랜드로.</strong>',
+      promise: '사업의 방향과 콘셉트, 이름과 디자인이<br>같은 이야기를 전하도록 기준을 세웁니다.'
     },
     {
-      headline: '사업에는 선택의 이유를,<br><strong>집에는 생활의 기준을.</strong>',
-      promise: '각 공간을 사용하는 사람과 목적에서 출발해<br>보기 좋고 오래 편안한 인테리어를 완성합니다.'
+      headline: '시작하는 사업에도,<br><strong>다음 단계가 필요한 브랜드에도.</strong>',
+      promise: '창업부터 리뉴얼까지 현재 조건을 살펴<br>먼저 풀어야 할 문제와 실행 순서를 정리합니다.'
     },
     {
-      headline: '좋은 공간은,<br><strong>사람과 목적에서 시작됩니다.</strong>',
-      promise: '유행을 따르기보다 실제 운영과 생활에 필요한 것을 읽고,<br>공간마다 맞는 디자인의 기준을 세웁니다.'
+      headline: '좋아 보이는 것을 넘어,<br><strong>이유가 있는 브랜드로.</strong>',
+      promise: '시장 분석과 브랜드 기획, 디자인과 고객 경험을<br>하나의 방향으로 연결합니다.'
     }
   ]
 
   const personalized = {
-    residential: { headline: '사는 공간을,<br><strong>우리의 생활을 닮은 집으로.</strong>', promise: '가족 구성과 생활 습관을 읽고 동선과 수납, 빛과 재료를<br>오래 편안한 하나의 공간으로 설계합니다.', cta: '주거 인테리어 상담 문의하기', image: 'images/apt21-09.jpg', imageAlt: '생활 방식과 동선을 반영한 아파트 주거 인테리어', imageCopy: '사는 방식을 읽고|오래 편안한 집을 만듭니다.' },
     salon: { headline: '미용실의 감각을,<br><strong>다시 찾는 브랜드로.</strong>', promise: '공간의 첫인상부터 고객 경험과 재방문까지<br>하나의 브랜드 기준으로 연결합니다.', cta: '미용실 프로젝트 문의하기', image: 'images/buhair-07-detail-real-web.webp', imageAlt: '미용실 브랜드 공간의 재료와 디테일', imageCopy: '감각적인 공간을|다시 찾는 브랜드로 만듭니다.' },
     clinic: { headline: '신뢰가 필요한 공간을,<br><strong>선택받는 의료 브랜드로.</strong>', promise: '전문성과 안심이 공간과 고객 경험에서<br>일관되게 전달되도록 기준을 설계합니다.', cta: '의료 공간 프로젝트 문의하기' },
     office: { headline: '일하는 공간을,<br><strong>조직의 브랜드 경험으로.</strong>', promise: '업무 방식과 조직의 태도가 공간에서 자연스럽게<br>느껴지도록 오피스의 기준을 설계합니다.', cta: '오피스 프로젝트 문의하기', image: 'images/office-09-portfolio-real-web.webp', imageAlt: '업무 방식과 브랜드를 반영한 오피스 공간', imageCopy: '일하는 방식이|공간의 인상이 됩니다.' },
@@ -310,7 +308,7 @@ const visionLibrary = [
   ['images/jewel-cover-polished.jpg', 'RETAIL SPACE', 'COMMERCIAL · RETAIL', 'commercial'],
   ['images/office-09-portfolio-real-web.webp', 'OFFICE PROJECT', 'COMMERCIAL · WORKPLACE', 'commercial'],
   ['images/buhair-07-detail-real-web.webp', 'BEAUTY SPACE', 'COMMERCIAL · DETAIL', 'commercial'],
-  ['images/scalp-03.jpg', 'CARE SPACE', 'COMMERCIAL · EXPERIENCE', 'commercial']
+  ['images/gasik-07-interior-real-web.webp', 'GASIK', 'BRAND EXPERIENCE · RESTAURANT', 'commercial']
 ].map(([src, title, meta, category]) => ({ src, title, meta, category }))
 
 if (visionWorkCards.length) {

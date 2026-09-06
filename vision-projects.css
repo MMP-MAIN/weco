@@ -30,4 +30,38 @@
 @media(max-width:980px){.hero-project-preview{min-height:520px;margin-top:44px}.selected-vision-grid{grid-template-columns:1fr 1fr;grid-template-rows:clamp(360px,58vw,520px) clamp(300px,46vw,420px)}.vision-work--wide,.vision-work--detail{grid-column:auto}.selected-vision-head{grid-template-columns:1fr;gap:28px}}
 @media(max-width:640px){.hero-project-preview{min-height:320px;margin-top:24px}.hero-project-preview figcaption{left:20px;right:20px;bottom:20px}.hero-project-preview figcaption strong{font-size:22px}.hero-project-preview figcaption a{margin-top:12px}.selected-vision{padding-top:78px}.selected-vision-head{margin-bottom:38px}.selected-vision-head h2{font-size:clamp(36px,11vw,48px);line-height:1.08}.selected-vision-head h2 br{display:none}.selected-vision-head>p{font-size:15px}.selected-vision-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,58vw);gap:2px}.vision-work,.vision-work--wide{grid-column:auto;grid-row:auto;width:100%;height:auto;min-height:0;border:0}.vision-work span{left:12px;right:12px;bottom:12px;display:block}.vision-work b{font-size:clamp(12px,3.4vw,15px);line-height:1.2}.vision-work em{display:none}.selected-vision-foot{display:block;padding-top:42px;padding-bottom:58px}.selected-vision-foot p{font-size:24px}.selected-vision-foot p br{display:none}.project-story-links{display:grid;gap:11px;margin-top:22px}.project-story-links a{width:max-content}.selected-vision-foot button{width:100%;margin-top:30px}}
 @media(prefers-reduced-motion:reduce){.hero-project-preview img{transition:none;transform:none}}
+/* Compact project introduction: let the work appear before another manifesto. */
+.hero-service-note{align-self:center;min-width:0;padding:36px;background:#254d3d;color:#f4f0e7}
+.hero-service-note .service-kicker{font-size:11px;letter-spacing:.14em;margin:0 0 22px}
+.hero-service-note h2{font-size:clamp(25px,2.4vw,34px);line-height:1.35;letter-spacing:-.04em;word-break:keep-all;margin:0 0 30px}
+.hero-service-note ol{list-style:none;margin:0;padding:0}
+.hero-service-note li{display:flex;gap:16px;padding:20px 0;border-top:1px solid #ffffff38}
+.hero-service-note li>span{font-size:11px;opacity:.7;padding-top:4px}
+.hero-service-note strong{font-size:17px;line-height:1.5}
+.hero-service-note li p{font-size:14px;line-height:1.7;color:#e0e6dd;margin:8px 0 0;word-break:keep-all}
+.hero-service-note>a{display:flex;justify-content:space-between;padding:16px 0 0;border-top:1px solid #ffffff38;color:inherit;font-size:13px}
+.service-summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px}
+.service-summary-grid article{padding:28px 0;border-top:1px solid #ffffff30;min-width:0}
+.service-summary-grid article>span{font-size:11px;letter-spacing:.1em;color:#c7cfc6}
+.service-summary-grid h3{font-size:25px;letter-spacing:-.035em;margin:14px 0 12px}
+.service-summary-grid p{max-width:470px;font-size:16px;line-height:1.8;word-break:keep-all;color:#d5dcd3;margin:0}
+@media(max-width:640px){.hero-service-note{padding:24px;margin-top:24px}.hero-service-note h2{font-size:26px}.service-summary-grid{grid-template-columns:1fr}.service-summary-grid article{padding:24px 0}.service-summary-grid h3{font-size:23px}}
+.selected-vision{padding-top:clamp(40px,5vw,72px)}
+.selected-vision-head{grid-template-columns:minmax(0,1fr) minmax(240px,.65fr);gap:32px;margin-bottom:26px}
+.selected-vision-head .section-eyebrow{margin-bottom:14px}
+.selected-vision-head h2{font-size:clamp(28px,3.3vw,46px);line-height:1.2;letter-spacing:-.045em}
+.selected-vision-head>p{font-size:15px;color:rgba(244,240,231,.8)}
+.selected-vision-grid{grid-template-rows:clamp(300px,34vw,460px) clamp(280px,30vw,420px)}
+.selected-vision-foot{padding-top:30px;padding-bottom:42px}
+.selected-vision-foot p{font-size:clamp(18px,2vw,25px)}
+.vision-work:focus-visible{outline:3px solid #f4f0e7;outline-offset:-5px}
+@media(max-width:640px){
+  .selected-vision-head{grid-template-columns:1fr;gap:14px;margin-bottom:22px}
+  .selected-vision-head h2{font-size:30px;line-height:1.25}
+  .selected-vision-grid{grid-template-columns:1fr;grid-template-rows:repeat(4,78vw)}
+  .vision-work span{left:20px;right:20px;bottom:20px}
+  .vision-work b{font-size:22px}
+  .vision-work em{display:block;margin-top:8px;font-size:10px;text-align:left;letter-spacing:.08em}
+  .selected-vision-foot p{font-size:20px}
+}
 @media(max-width:640px){.hero-project-preview{min-height:250px;margin-top:22px}.hero-project-preview figcaption{left:18px;right:18px;bottom:17px}}
