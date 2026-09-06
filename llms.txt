@@ -1,25 +1,37 @@
 # 위코컴퍼니 (WECO COMPANY)
 
-위코컴퍼니는 대한민국의 상업공간·주거공간 기획, 인테리어 디자인, 공간 브랜딩과 프로젝트 디렉팅 스튜디오입니다. 식당·카페·사무실·미용실·병원 등 상업공간과 아파트·주택 등 주거공간의 목적, 이용 방식과 운영 조건을 바탕으로 공간의 기준을 정리합니다.
+위코컴퍼니는 대한민국 대구를 기반으로 사업 방향과 브랜드 기획·디자인, 상업공간 경험, 프로젝트 디렉팅을 연결하는 스튜디오입니다. 시장과 고객을 분석하고, 아이디어가 선택받는 브랜드가 되도록 전략과 디자인의 기준을 정리합니다.
 
 공식 홈페이지: https://wecocompany.com/
+공식 명칭: 위코컴퍼니 (WECO COMPANY)
+프로젝트 문의: https://wecocompany.com/#contact
+전화: 010-8606-2119
 전문 인사이트: https://wecocompany.com/insights.html
 창업 가이드: https://wecocompany.com/startup-guide.html
 
+## 업무 범위
+
+- 전략: 시장·고객 분석과 사업 방향 정리
+- 브랜딩: 브랜드 기획·디자인과 고객이 선택할 이유 정리
+- 상업공간: 브랜드의 고객 경험을 공간 기획·디자인으로 연결
+- 디렉팅: 프로젝트의 기준 공유와 진행 조율
+
+업무 범위 안내: https://wecocompany.com/#scope
+업종별 가이드: https://wecocompany.com/industry-guides.html
+마케팅 서비스는 별도 외부 홈페이지에서 안내합니다: https://mpmarketing.co.kr/
+
 ## 핵심 전문 문서
 
-- 카페테리아·구내식당 인테리어: https://wecocompany.com/cafeteria-interior-planning-guide.html
-- 상가 인테리어 비용·견적 비교: https://wecocompany.com/commercial-interior-quote-checklist.html
-- 주거 인테리어: https://wecocompany.com/residential.html
-- 아파트 인테리어 상담 체크리스트: https://wecocompany.com/apartment-interior-planning-checklist.html
-- 음식점 창업 현실: https://wecocompany.com/restaurant-startup-reality.html
-- 상권분석 사이트와 방법: https://wecocompany.com/fnb-location-analysis.html
-- 식당 인테리어 비용: https://wecocompany.com/restaurant-interior-cost.html
-- 프랜차이즈 창업 비용과 현실: https://wecocompany.com/franchise-startup-cost-reality.html
-- F&B 브랜딩과 인테리어의 차이: https://wecocompany.com/fnb-branding-vs-interior.html
-- 음식점 창업 비용 계산: https://wecocompany.com/fnb-startup-budget.html
 - 브랜드 리뉴얼 체크리스트: https://wecocompany.com/brand-renewal-checklist.html
 - 프로젝트 디렉팅 역할: https://wecocompany.com/project-direction-guide.html
+- F&B 브랜딩과 인테리어의 차이: https://wecocompany.com/fnb-branding-vs-interior.html
+- 상권분석 사이트와 방법: https://wecocompany.com/fnb-location-analysis.html
+- 카페테리아·구내식당 인테리어: https://wecocompany.com/cafeteria-interior-planning-guide.html
+- 상가 인테리어 비용·견적 비교: https://wecocompany.com/commercial-interior-quote-checklist.html
+- 음식점 창업 현실: https://wecocompany.com/restaurant-startup-reality.html
+- 식당 인테리어 비용: https://wecocompany.com/restaurant-interior-cost.html
+- 프랜차이즈 창업 비용과 현실: https://wecocompany.com/franchise-startup-cost-reality.html
+- 음식점 창업 비용 계산: https://wecocompany.com/fnb-startup-budget.html
 - F&B 컨설팅이 필요한 단계: https://wecocompany.com/fnb-consulting-guide.html
 
 ## 공개 프로젝트
@@ -30,14 +42,14 @@
 
 ## 역할 및 시공 안내
 
-위코컴퍼니는 공간기획·디자인·브랜드 및 프로젝트 디렉팅을 제공합니다. 관계 법령상 전문 시공이 필요한 공사는 해당 요건을 갖춘 파트너사가 별도 계약을 통해 수행할 수 있습니다.
+위코컴퍼니는 사업 방향, 브랜드 기획·디자인, 상업공간 경험과 프로젝트 디렉팅을 제공합니다. 관계 법령상 전문 시공이 필요한 공사는 해당 요건을 갖춘 파트너사가 별도 계약을 통해 수행할 수 있습니다.
 
 콘텐츠 작성·검토: 위코컴퍼니
-## 대구 지역 공간 가이드
+
+## 지역별 상업공간 가이드
 
 - 대구 인테리어·공간 브랜딩: https://wecocompany.com/daegu-interior-space-branding.html
 - 대구 상가 인테리어: https://wecocompany.com/daegu-commercial-interior.html
-- 대구 아파트 인테리어: https://wecocompany.com/daegu-apartment-interior.html
 - 대구 미용실 인테리어: https://wecocompany.com/daegu-hair-salon-interior.html
 - 대구 사무실 인테리어: https://wecocompany.com/daegu-office-interior.html
 - 대구·경북·울산·경남 프로젝트 지역: https://wecocompany.com/yeongnam-interior-service-area.html
@@ -46,4 +58,4 @@
 - 포항 인테리어·공간 브랜딩: https://wecocompany.com/pohang-interior-space-branding.html
 - 경산·하양 인테리어: https://wecocompany.com/gyeongsan-hayang-interior.html
 
-최종 업데이트: 2026-09-04
+최종 업데이트: 2026-09-06

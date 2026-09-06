@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "check:company": "node check-company-info.mjs",
     "share:render": "node render-share-card.mjs",
     "images:optimize": "node optimize-images.mjs",
     "audit:mobile": "unlighthouse-ci --site https://wecocompany.com --mobile --reporter csvExpanded --output-path reports/mobile",
