@@ -55,37 +55,37 @@ document.addEventListener('error', (event) => {
   const variants = [
     {
       headline: '아이디어에 방향을,<br><strong>브랜드에 선택의 이유를.</strong>',
-      promise: '시장과 고객을 읽고 사업의 방향을 정리합니다.<br>브랜드 기획부터 디자인과 공간 경험까지 연결합니다.'
+      promise: '사업의 방향부터 브랜드·디자인·공간까지.'
     },
     {
       headline: '무엇을 만들지보다,<br><strong>왜 필요한지부터.</strong>',
-      promise: '누구를 위한 사업인지, 고객이 왜 선택해야 하는지.<br>브랜드를 시작하는 질문부터 함께 정리합니다.'
+      promise: '고객이 선택할 이유부터 정합니다.'
     },
     {
       headline: '흩어진 생각을,<br><strong>하나의 브랜드로.</strong>',
-      promise: '사업의 방향과 콘셉트, 이름과 디자인이<br>같은 이야기를 전하도록 기준을 세웁니다.'
+      promise: '기획과 디자인에 하나의 기준을 세웁니다.'
     },
     {
-      headline: '시작하는 사업에도,<br><strong>다음 단계가 필요한 브랜드에도.</strong>',
-      promise: '창업부터 리뉴얼까지 현재 조건을 살펴<br>먼저 풀어야 할 문제와 실행 순서를 정리합니다.'
+      headline: '브랜드의 시작부터,<br><strong>다음 단계까지.</strong>',
+      promise: '창업과 리뉴얼의 다음 단계를 함께합니다.'
     },
     {
       headline: '좋아 보이는 것을 넘어,<br><strong>이유가 있는 브랜드로.</strong>',
-      promise: '시장 분석과 브랜드 기획, 디자인과 고객 경험을<br>하나의 방향으로 연결합니다.'
+      promise: '전략을 디자인과 고객 경험으로 연결합니다.'
     }
   ]
 
   const personalized = {
-    salon: { headline: '미용실의 감각을,<br><strong>다시 찾는 브랜드로.</strong>', promise: '공간의 첫인상부터 고객 경험과 재방문까지<br>하나의 브랜드 기준으로 연결합니다.', cta: '미용실 프로젝트 문의하기', image: 'images/buhair-07-detail-real-web.webp', imageAlt: '미용실 브랜드 공간의 재료와 디테일', imageCopy: '감각적인 공간을|다시 찾는 브랜드로 만듭니다.' },
-    clinic: { headline: '신뢰가 필요한 공간을,<br><strong>선택받는 의료 브랜드로.</strong>', promise: '전문성과 안심이 공간과 고객 경험에서<br>일관되게 전달되도록 기준을 설계합니다.', cta: '의료 공간 프로젝트 문의하기' },
-    office: { headline: '일하는 공간을,<br><strong>조직의 브랜드 경험으로.</strong>', promise: '업무 방식과 조직의 태도가 공간에서 자연스럽게<br>느껴지도록 오피스의 기준을 설계합니다.', cta: '오피스 프로젝트 문의하기', image: 'images/office-09-portfolio-real-web.webp', imageAlt: '업무 방식과 브랜드를 반영한 오피스 공간', imageCopy: '일하는 방식이|공간의 인상이 됩니다.' },
-    cafe: { headline: '카페의 취향을,<br><strong>목적지가 되는 브랜드로.</strong>', promise: '메뉴와 공간, 고객이 기억할 장면을 연결해<br>다시 방문할 분명한 이유를 만듭니다.', cta: '카페 프로젝트 문의하기', image: 'images/concept-render/bakery-cafe-interior-web.webp', imageAlt: '브랜드 경험을 담은 베이커리 카페 공간', imageCopy: '머물고 싶은 장면을|찾아오는 이유로 만듭니다.' },
-    fnb: { headline: '식당의 가능성을,<br><strong>다시 찾는 브랜드로.</strong>', promise: '상권과 고객, 메뉴와 운영 조건을 함께 읽고<br>선택과 재방문으로 이어질 기준을 세웁니다.', cta: '식당 프로젝트 문의하기' },
-    interior: { headline: '상가 공간을,<br><strong>선택받는 브랜드 경험으로.</strong>', promise: '보기 좋은 인테리어를 넘어 고객이 발견하고<br>머물고 다시 찾을 공간의 이유를 설계합니다.', cta: '상가 인테리어 문의하기' },
-    paid_social: { headline: '광고에서 본 가능성을,<br><strong>실행할 프로젝트로.</strong>', promise: '업종과 현재 단계를 간단히 알려주시면<br>무엇부터 결정해야 할지 먼저 정리해드립니다.', cta: '프로젝트 상담 문의하기' },
-    organic_search: { headline: '찾고 있던 답을,<br><strong>실행할 브랜드 기준으로.</strong>', promise: '검색으로 흩어진 정보 대신 지금 상황에 필요한<br>결정의 순서와 프로젝트 방향을 정리합니다.', cta: '프로젝트 상담 문의하기' },
-    social: { headline: '눈에 띈 장면을,<br><strong>방문할 이유가 있는 브랜드로.</strong>', promise: '좋아 보이는 이미지를 넘어 실제 고객 경험과<br>사업의 성장으로 이어질 기준을 만듭니다.', cta: '프로젝트 상담 문의하기' },
-    returning: { headline: '다시 찾은 가능성을,<br><strong>실행할 다음 단계로.</strong>', promise: '고민하고 있는 브랜드와 공간의 현재 단계를<br>짧게 진단하고 먼저 결정할 일을 정리합니다.', cta: '프로젝트 상담 문의하기' }
+    salon: { headline: '미용실의 감각을,<br><strong>다시 찾는 브랜드로.</strong>', promise: '취향을 담은 공간과 브랜드를 만듭니다.', cta: '미용실 프로젝트 문의하기', image: 'images/buhair-07-detail-real-web.webp', imageAlt: '미용실 브랜드 공간의 재료와 디테일', imageCopy: '감각적인 공간을|다시 찾는 브랜드로 만듭니다.' },
+    clinic: { headline: '신뢰가 필요한 공간을,<br><strong>선택받는 의료 브랜드로.</strong>', promise: '신뢰를 전하는 브랜드와 공간을 만듭니다.', cta: '의료 공간 프로젝트 문의하기' },
+    office: { headline: '일하는 공간을,<br><strong>조직의 브랜드 경험으로.</strong>', promise: '일하는 방식을 공간에 담습니다.', cta: '오피스 프로젝트 문의하기', image: 'images/office-09-portfolio-real-web.webp', imageAlt: '업무 방식과 브랜드를 반영한 오피스 공간', imageCopy: '일하는 방식이|공간의 인상이 됩니다.' },
+    cafe: { headline: '카페의 취향을,<br><strong>목적지가 되는 브랜드로.</strong>', promise: '카페의 취향을 브랜드와 공간에 담습니다.', cta: '카페 프로젝트 문의하기', image: 'images/concept-render/bakery-cafe-interior-web.webp', imageAlt: '브랜드 경험을 담은 베이커리 카페 공간', imageCopy: '머물고 싶은 장면을|찾아오는 이유로 만듭니다.' },
+    fnb: { headline: '식당의 가능성을,<br><strong>다시 찾는 브랜드로.</strong>', promise: '상권과 메뉴, 운영에 맞는 방향을 잡습니다.', cta: '식당 프로젝트 문의하기' },
+    interior: { headline: '상가 공간을,<br><strong>선택받는 브랜드 경험으로.</strong>', promise: '사업에 맞는 브랜드와 공간을 설계합니다.', cta: '상가 인테리어 문의하기' },
+    paid_social: { headline: '광고에서 본 가능성을,<br><strong>실행할 프로젝트로.</strong>', promise: '지금의 고민을 실행 계획으로 정리합니다.', cta: '상담 문의' },
+    organic_search: { headline: '찾고 있던 답을,<br><strong>실행할 브랜드 기준으로.</strong>', promise: '현재 상황에 맞는 다음 단계를 찾습니다.', cta: '상담 문의' },
+    social: { headline: '눈에 띈 장면을,<br><strong>방문할 이유가 있는 브랜드로.</strong>', promise: '브랜드의 인상을 실제 경험으로 연결합니다.', cta: '상담 문의' },
+    returning: { headline: '다시 찾은 가능성을,<br><strong>실행할 다음 단계로.</strong>', promise: '고민을 구체적인 실행 계획으로 옮깁니다.', cta: '상담 문의' }
   }
 
   const segment = industry || 'general'
@@ -153,6 +153,7 @@ const setMenuOpen = (open) => {
 }
 menuToggle.addEventListener('click', () => setMenuOpen(!gnb.classList.contains('open')))
 gnb.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenuOpen(false)))
+document.querySelectorAll('a[href="#contact"]').forEach(a => a.addEventListener('click', () => setMenuOpen(false)))
 
 // ---- 히어로 모션 배경 (코드로 만든 흐르는 빛 — 영상 대체) ----
 ;(() => {
@@ -441,6 +442,13 @@ const closeProjects = () => {
   if (projectTrigger instanceof HTMLElement) projectTrigger.focus()
 }
 closeProjectsButton?.addEventListener('click', closeProjects)
+document.querySelector('[data-project-inquiry]')?.addEventListener('click', (e) => {
+  e.preventDefault()
+  closeProjects()
+  const contact = document.getElementById('contact')
+  contact?.scrollIntoView({ behavior: 'auto', block: 'start' })
+  contact?.focus({ preventScroll: true })
+})
 // PROJECT 진입점: 섹션 버튼 + 내비/히어로의 #portfolio 링크
 document.querySelectorAll('[data-open-projects], a[href="#portfolio"]').forEach(el => {
   el.addEventListener('click', (e) => { e.preventDefault(); e.stopImmediatePropagation(); setMenuOpen(false); openProjects() })
@@ -524,8 +532,8 @@ const FORM_MSG = ({
         err: `Có lỗi xảy ra. Vui lòng gọi ${PHONE}.` }
 })[document.documentElement.lang] || {
   need: '이름과 연락처를 입력해주세요.',
-  ok: '의뢰서가 접수되었습니다. 검토 후 진행 가능 여부와 함께 연락드리겠습니다.',
-  err: `접수 중 오류가 발생했습니다. 전화(${PHONE})로 문의해주세요.`
+  ok: '문의가 접수되었습니다. 내용을 확인한 뒤 연락드리겠습니다.',
+  err: '접수를 확인하지 못했습니다. 입력 내용은 유지됩니다. 중복 제출 전 카카오 상담으로 확인해주세요.'
 }
 
 // 프로젝트 문의 → FormSubmit.co (계정 불필요, 이메일로 수신)
@@ -549,10 +557,17 @@ form.addEventListener('submit', async (e) => {
 
   submitBtn.disabled = true
   submitBtn.classList.add('sending')
+  const submitLabel = submitBtn.querySelector('[data-submit-label]')
+  const originalLabel = submitLabel?.textContent
+  if (submitLabel) submitLabel.textContent = '보내는 중…'
+  form.setAttribute('aria-busy', 'true')
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 20000)
   try {
     const leadContext = getLeadContext()
     const res = await fetch(INQUIRY_ENDPOINT, {
       method: 'POST',
+      signal: controller.signal,
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
         _subject: '[위코컴퍼니] 새 프로젝트 문의',
@@ -560,7 +575,7 @@ form.addEventListener('submit', async (e) => {
         _captcha: 'false',
         이름: name,
         연락처: phone,
-        희망업무: selectedType,
+        ...(typeCards && selectedType ? { 희망업무: selectedType } : {}),
         개인정보동의: '동의',
         프로젝트예상총예산: form.budget.value.trim() || '미입력',
         문의내용: form.message.value.trim() || '미입력',
@@ -599,10 +614,30 @@ form.addEventListener('submit', async (e) => {
     })
     setStatus(FORM_MSG.err, false)
   } finally {
+    clearTimeout(timeout)
+    form.removeAttribute('aria-busy')
+    if (submitLabel) submitLabel.textContent = originalLabel
     submitBtn.disabled = false
     submitBtn.classList.remove('sending')
   }
 })
+
+// Keep mobile keyboard and fixed actions from competing with the inquiry form.
+;(() => {
+  if (!document.querySelector('.inquiry-submit')) return
+  const viewport = window.visualViewport
+  const editing = () => {
+    const active = document.activeElement
+    const isEditing = Boolean(active && form.contains(active) && active.matches('input:not([type="checkbox"]), textarea, select'))
+    document.body.classList.toggle('inquiry-editing', isEditing)
+    const keyboardOpen = isEditing && viewport && window.innerHeight - viewport.height > 120
+    document.body.classList.toggle('mobile-keyboard-open', Boolean(keyboardOpen))
+  }
+  form.addEventListener('focusin', editing)
+  form.addEventListener('focusout', () => requestAnimationFrame(editing))
+  viewport?.addEventListener('resize', editing)
+  window.addEventListener('pageshow', editing)
+})()
 
 // 주요 광고 전환 행동 추적 (개인정보·유입 식별값은 외부로 전송하지 않음)
 const getTrafficAttribution = () => {
@@ -1076,6 +1111,22 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
     document.body.style.overflow = projectView.classList.contains('open') ? 'hidden' : ''
     updatePortfolioUrl(null)
     if (galleryTrigger instanceof HTMLElement) galleryTrigger.focus()
+  }
+
+  if (document.querySelector('[data-project-inquiry]')) {
+    const inquiryLink = document.createElement('a')
+    inquiryLink.href = '#contact'
+    inquiryLink.className = 'project-inquiry-link'
+    inquiryLink.textContent = '프로젝트 문의 ↗'
+    gv.querySelector('.gv-close').before(inquiryLink)
+    inquiryLink.addEventListener('click', (event) => {
+      event.preventDefault()
+      closeGallery()
+      closeProjects()
+      setMenuOpen(false)
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'auto', block: 'start' })
+      document.getElementById('contact')?.focus({ preventScroll: true })
+    })
   }
 
   items.forEach((it, i) => {
