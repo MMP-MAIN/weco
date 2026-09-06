@@ -933,6 +933,7 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
     const { default: Lenis } = await import('https://cdn.jsdelivr.net/npm/lenis@1.3.4/+esm')
     const lenis = new Lenis({ autoRaf: true, duration: 1.15 })
     window.__lenis = lenis // 오버레이에서 정지/재개 위해 노출
+    if (document.body.classList.contains('studio-home') && document.body.classList.contains('menu-open')) lenis.stop()
     document.documentElement.style.scrollBehavior = 'auto'
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       const href = a.getAttribute('href')
@@ -948,7 +949,7 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
 
 // ---- GSAP 히어로 인트로 (글자 스태거) ----
 ;(async () => {
-  if (LIGHTWEIGHT) return
+  if (LIGHTWEIGHT || document.body.classList.contains('studio-home')) return
   try {
     const { gsap } = await import('https://cdn.jsdelivr.net/npm/gsap@3.13.0/+esm')
     const heroEn = document.querySelector('.hero-en')

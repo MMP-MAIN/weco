@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- deployment-refresh: 20260807-real-final -->
-<html lang="ko">
+<html lang="ko" class="studio-root">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -56,6 +56,7 @@
   <link rel="stylesheet" href="conversion-refresh.css?v=4" />
   <link rel="stylesheet" href="vision-projects.css?v=7" />
   <link rel="stylesheet" href="home-neutral.css?v=4" />
+  <link rel="stylesheet" href="studio-refresh.css?v=1" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-45Q0B2B2XR"></script>
 <script src="analytics-init.js?v=1"></script>
@@ -77,80 +78,107 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
 /></noscript>
 <!-- End Meta Pixel Code -->
 </head>
-<body>
+<body class="studio-home">
+<a class="skip-link" href="#scope">본문 바로가기</a>
 
 <!-- ===== 상단 내비게이션 (중앙 로고 · 미니멀) ===== -->
 <header class="topbar" id="topbar">
   <div class="container topbar-inner">
     <button class="menu-toggle" id="menuToggle" type="button" aria-label="메뉴 열기" aria-controls="gnb" aria-expanded="false"><span></span><span></span><span></span></button>
     <a href="/" class="brand brand-official" aria-label="위코컴퍼니"><img src="brand-assets/Weco_weco-transparent.png" alt="" width="852" height="192" decoding="async" fetchpriority="high" /><span>위코컴퍼니</span></a>
-    <nav class="gnb" id="gnb">
-      <a href="insights.html">인사이트</a>
-      <a href="#scope">솔루션</a>
-      <a href="#portfolio">프로젝트</a>
+    <nav class="gnb" id="gnb" data-lenis-prevent>
+      <a href="#scope">About / 위코가 하는 일</a>
+      <a href="#portfolio">Work / 프로젝트</a>
+      <a href="insights.html">Insight / 인사이트</a>
       <a href="https://mpmarketing.co.kr/?utm_source=wecocompany&amp;utm_medium=referral&amp;utm_campaign=weco_cross_site" target="_blank" rel="noopener noreferrer">마케팅 ↗</a>
-      <a href="#contact">프로젝트 문의</a>
+      <a href="#contact">Contact / 프로젝트 문의</a>
+      <div class="nav-languages" aria-label="언어 선택"><a href="index.html" aria-current="page">KO</a><a href="en.html">EN</a><a href="vi.html">VI</a></div>
     </nav>
     <div class="lang-sw"><a href="index.html" class="on">KO</a><a href="en.html">EN</a><a href="vi.html">VI</a></div>
-    <a href="#contact" class="topbar-cta">CONTACT</a>
+    <a href="#contact" class="topbar-cta">문의하기 ↗</a>
   </div>
 </header>
 
-<!-- ===== 히어로 — 풀스크린 무빙 배경 ===== -->
+<!-- ===== 타이포그래피 중심 첫 화면 ===== -->
 <section class="hero">
   <div class="hero-video" id="heroVideo" aria-hidden="true"></div>
-  <div class="hero-veil"></div>
   <div class="container hero-inner">
-    <div class="hero-copy">
-    <p class="hero-eyebrow">브랜드 기획 · 디자인 · 상업공간</p>
-    <h1 class="hero-en" id="heroHeadline">아이디어에 방향을,<br /><strong>브랜드에 선택의 이유를.</strong></h1>
-    <p class="hero-promise">사업의 방향부터 브랜드·디자인·공간까지.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn btn-cream btn-lg hero-primary-action" data-conversion="project_inquiry">상담 문의 <span>↗</span></a>
-      <button type="button" class="btn btn-gl btn-lg hero-secondary-action" data-open-projects>프로젝트 보기</button>
-      <a href="https://open.kakao.com/o/sBasXuKi" target="_blank" rel="noopener noreferrer" class="btn btn-gl btn-lg hero-secondary-action" data-conversion="kakao_openchat">카카오 상담</a>
+    <p class="studio-display" data-studio-display aria-hidden="true">
+      <span class="studio-display-line"><span data-studio-verb>Redefining</span></span>
+      <span class="studio-display-line"><span data-studio-noun>Brands.</span></span>
+    </p>
+    <div class="studio-hero-bottom">
+      <div>
+        <p class="hero-eyebrow">브랜드 기획 · 디자인 · 상업공간 · 디렉팅</p>
+        <p class="hero-reassurance">업무·예산이 정해지지 않아도 괜찮습니다.</p>
+        <button class="studio-motion-control" type="button" data-studio-motion aria-pressed="false" hidden>움직임 멈춤 Ⅱ</button>
+      </div>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-cream btn-lg hero-primary-action" data-conversion="project_inquiry">상담 문의 <span>↗</span></a>
+        <button type="button" class="btn btn-gl btn-lg hero-secondary-action" data-open-projects>프로젝트 보기</button>
+        <a href="https://open.kakao.com/o/sBasXuKi" target="_blank" rel="noopener noreferrer" class="btn btn-gl btn-lg hero-secondary-action" data-conversion="kakao_openchat">카카오 상담</a>
+      </div>
     </div>
-    <p class="hero-reassurance">업무·예산이 정해지지 않아도 괜찮습니다.</p>
-    <div class="hero-proof"><span>대표 프로젝트</span><p>레스토랑 가식 · 청우해장 · 구미 쌀알</p></div>
-    </div>
-    <div class="hero-axis" aria-hidden="true"><span>SINCE 2016</span><span>STRATEGY · BRAND · EXPERIENCE</span><span>WORKING ACROSS KOREA</span></div>
   </div>
 </section>
 
-<section class="selected-vision" id="portfolio-preview" aria-labelledby="selectedVisionTitle">
-  <div class="container selected-vision-head" id="scope">
-    <div><p class="section-eyebrow">HOW WE HELP</p><h2 id="selectedVisionTitle">위코가 하는 일</h2></div>
+<section class="selected-vision" id="portfolio-preview" aria-labelledby="heroHeadline">
+  <div class="container studio-intro-grid" id="scope" tabindex="-1">
+    <div class="studio-intro-copy hero-copy">
+      <p class="section-eyebrow">WECO COMPANY — 위코가 하는 일</p>
+      <h1 class="hero-en" id="heroHeadline">아이디어에 방향을,<br /><strong>브랜드에 선택의 이유를.</strong></h1>
+      <p class="hero-promise">사업의 방향부터 브랜드·디자인·공간까지.</p>
+    </div>
+    <div class="service-summary-grid">
+      <article><h3><a href="#contact" aria-label="사업 전략 상담">Strategy <span aria-hidden="true">↗</span></a></h3><p>사업 방향·시장 분석</p></article>
+      <article><h3><a href="#contact" aria-label="브랜드 기획과 디자인 상담">Branding <span aria-hidden="true">↗</span></a></h3><p>브랜드 기획·디자인</p></article>
+      <article><h3><a href="#contact" aria-label="상업공간 디자인 상담">Spatial <span aria-hidden="true">↗</span></a></h3><p>고객 경험·공간 디자인</p></article>
+      <article><h3><a href="#contact" aria-label="프로젝트 디렉팅 상담">Direction <span aria-hidden="true">↗</span></a></h3><p>프로젝트 총괄·조율</p></article>
+    </div>
   </div>
-  <div class="container service-summary-grid">
-    <article><span>01 / BUSINESS</span><h3>사업 방향·시장 분석</h3><p>시장·상권·고객을 읽고 사업의 방향을 잡습니다.</p></article>
-    <article><span>02 / BRAND</span><h3>브랜드 기획·디자인</h3><p>콘셉트와 이름, 브랜드의 모습을 만듭니다.</p></article>
-    <article><span>03 / EXPERIENCE</span><h3>고객 경험·공간 디자인</h3><p>브랜드에 맞는 고객 경험과 상업공간을 설계합니다.</p></article>
-    <article><span>04 / DIRECTION</span><h3>프로젝트 디렉팅</h3><p>파트너와 디자인 기준·일정·마감을 조율합니다.</p></article>
-  </div>
-  <div class="container selected-vision-foot">
-    <div>
+</section>
+
+<section class="studio-work" id="studioWork" aria-labelledby="studioWorkTitle">
+  <div class="container">
+    <div class="studio-section-head">
+      <h2 id="studioWorkTitle">Selected Work</h2>
+      <p>위코와 함께한 브랜드</p>
+    </div>
+    <ul class="studio-client-list">
+      <li><strong>레스토랑 가식</strong><span>삼덕 · 더현대 · 범어</span></li>
+      <li><strong>청우해장</strong><span>해장국 브랜드</span></li>
+      <li><strong>구미 쌀알</strong><span>한식 · 구미 문성</span></li>
+      <li><strong>의료기기</strong><span>브랜드 전략 · 아이덴티티 · 고객 경험</span></li>
+      <li><strong>스시해리</strong><span>스시 오마카세</span></li>
+      <li><strong>ACT 호텔</strong><span>호텔 · 게스트 경험</span></li>
+    </ul>
+    <div class="selected-vision-foot">
+      <button type="button" data-open-projects>전체 프로젝트 보기 <span aria-hidden="true">↗</span></button>
       <nav class="project-story-links" aria-label="프로젝트 상세 사례">
-        <a href="project-gasik.html">레스토랑 가식 사례</a>
-        <a href="project-gmnari.html">금나리 와인바 사례</a>
-        <a href="project-act-hotel.html">ACT 호텔 사례</a>
+        <a href="project-gasik.html">가식 사례 ↗</a>
+        <a href="project-gmnari.html">금나리 사례 ↗</a>
+        <a href="project-act-hotel.html">ACT 호텔 사례 ↗</a>
       </nav>
     </div>
-    <button type="button" data-open-projects>전체 프로젝트 보기 <span>↗</span></button>
   </div>
 </section>
 
 <section class="intelligence" id="intelligence">
-  <div class="container">
-    <p class="section-eyebrow">OUR APPROACH</p>
-    <h2>감각은 선명하게,<br />결정은 근거 있게.</h2>
-    <p>시장과 고객을 읽고, 기획을 실행으로 연결합니다.</p>
-    <nav class="compact-resource-links" aria-label="브랜드와 사업 가이드">
-      <a href="/brand-discovery" data-conversion="brand_discovery">브랜드 점검 ↗</a>
-      <a href="insights.html">인사이트 ↗</a>
-    </nav>
-    <a href="https://mpmarketing.co.kr/?utm_source=wecocompany&amp;utm_medium=referral&amp;utm_campaign=weco_cross_site" target="_blank" rel="noopener noreferrer" class="marketing-bridge scope-marketing-bridge" data-conversion="marketing_site">
-      <span>광고·마케팅</span><strong>MP Marketing ↗</strong>
-    </a>
+  <div class="container studio-approach-grid">
+    <div>
+      <p class="section-eyebrow">OUR APPROACH</p>
+      <h2>감각은 선명하게,<br />결정은 근거 있게.</h2>
+      <p class="studio-approach-copy">시장과 고객을 읽고, 기획을 실행으로 연결합니다.</p>
+    </div>
+    <div>
+      <nav class="compact-resource-links" aria-label="브랜드와 사업 가이드">
+        <a href="/brand-discovery" data-conversion="brand_discovery">브랜드 점검 ↗</a>
+        <a href="insights.html">인사이트 ↗</a>
+      </nav>
+      <a href="https://mpmarketing.co.kr/?utm_source=wecocompany&amp;utm_medium=referral&amp;utm_campaign=weco_cross_site" target="_blank" rel="noopener noreferrer" class="marketing-bridge scope-marketing-bridge" data-conversion="marketing_site">
+        <span>광고·마케팅</span><strong>MP Marketing ↗</strong>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -315,7 +343,7 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
 
     <div class="contact-info">
       <p class="section-eyebrow">PROJECT INQUIRY</p>
-      <h2 class="section-title">지금의 고민을 들려주세요.</h2>
+      <h2 class="section-title">어떤 시작을<br />생각하고 있나요?</h2>
       <p class="section-desc">내용을 확인하고, 필요한 업무와 진행 방향을 안내합니다.</p>
       <details class="contact-details"><summary>연락처·운영시간</summary>
       <ul class="contact-list">
@@ -456,6 +484,7 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
   "inLanguage": "ko"
 }
 </script>
-  <script type="module" src="main.js?v=136"></script>
+  <script type="module" src="main.js?v=137"></script>
+  <script type="module" src="studio-refresh.js?v=1"></script>
 </body>
 </html>
