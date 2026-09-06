@@ -47,6 +47,7 @@ html,body{color:#272622}
 .hero{min-height:0}
 .hero-inner{grid-template-columns:minmax(0,1fr);min-height:0;gap:32px;padding-top:120px;padding-bottom:44px}
 .hero-copy{padding-top:0}
+.hero-axis{display:none}
 .hero-en{max-width:1100px}
 .hero-promise{margin-top:24px}
 .selected-vision-head{grid-template-columns:1fr;scroll-margin-top:100px}

@@ -446,7 +446,8 @@ document.querySelector('[data-project-inquiry]')?.addEventListener('click', (e) 
   e.preventDefault()
   closeProjects()
   const contact = document.getElementById('contact')
-  contact?.scrollIntoView({ behavior: 'auto', block: 'start' })
+  if (window.__lenis && contact) window.__lenis.scrollTo(contact, { immediate: true, force: true, offset: -84 })
+  else contact?.scrollIntoView({ behavior: 'auto', block: 'start' })
   contact?.focus({ preventScroll: true })
 })
 // PROJECT 진입점: 섹션 버튼 + 내비/히어로의 #portfolio 링크
@@ -937,6 +938,7 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
       const href = a.getAttribute('href')
       if (href.length < 2) return
       a.addEventListener('click', (e) => {
+        if (e.defaultPrevented) return
         const target = document.querySelector(href)
         if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -40 }) }
       })
@@ -1124,8 +1126,10 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
       closeGallery()
       closeProjects()
       setMenuOpen(false)
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'auto', block: 'start' })
-      document.getElementById('contact')?.focus({ preventScroll: true })
+      const contact = document.getElementById('contact')
+      if (window.__lenis && contact) window.__lenis.scrollTo(contact, { immediate: true, force: true, offset: -84 })
+      else contact?.scrollIntoView({ behavior: 'auto', block: 'start' })
+      contact?.focus({ preventScroll: true })
     })
   }
 
