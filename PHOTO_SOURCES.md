@@ -77,7 +77,7 @@ low-resolution search thumbnails were excluded.
 Before long-term commercial use, confirm that WECO or each venue has permission
 to republish third-party review photographs.
 
-## 가포 범어본점 — 2026-09-06 추가
+## 가포 범어본점 — 초기 네이버 사진 기록 (현재 갤러리에서 미사용)
 
 - 확인한 매장: 가포 범어본점, 대구 수성구 달구벌대로492길 9 1층.
 - 업체 정보: https://m.place.naver.com/restaurant/2034162958/information
@@ -92,3 +92,24 @@ to republish third-party review photographs.
 | `images/범어동가포/02-내부전경.jpg` | business_8 | https://ldb-phinf.pstatic.net/20260830_156/1788097503618MR6XD_JPEG/KakaoTalk_Photo_2026-08-30-22-41-23_005.jpg |
 | `images/범어동가포/03-창가좌석.jpg` | business_9 | https://ldb-phinf.pstatic.net/20260830_59/1788097502488qos8h_JPEG/KakaoTalk_Photo_2026-08-30-22-41-34_030.jpg |
 | `images/범어동가포/04-외부사인.jpg` | business_18 | https://ldb-phinf.pstatic.net/20260830_81/17880975032169rjnK_JPEG/KakaoTalk_Photo_2026-08-30-22-41-56_003.jpg |
+
+## 가포 범어본점 — 2026-09-06 맥북 촬영 원본으로 교체
+
+- 사용자가 지정한 바탕화면의 `가포 인테리어 사진` 폴더에서 JPG 52장을 확인하고, 홈페이지 사용 승인을 받아 8장을 선별했다.
+- 외관, 오픈주방, 창가 좌석, 로고·조명·사인 디테일을 사용했다. 음식·맥주·인물 클로즈업은 제외했다.
+- 원본 52장과 ZIP 파일은 수정하지 않았다. 웹용 사본은 긴 변 1,800px, WebP 품질 84로 변환했다. 구도·색상·내용을 임의로 재생성하거나 합성하지 않았다.
+- 대표 썸네일은 같은 원본에서 긴 변 800px로 별도 생성했으며, 화면 크기에 맞춰 큰 버전을 선택할 수 있게 연결했다.
+- 웹용 파일은 EXIF·XMP·IPTC를 포함하지 않는다. 기존 네이버 사진은 참고 기록으로 남겨두되 가포 갤러리와 썸네일에서는 참조하지 않는다.
+- 기존 프로젝트 공유 주소 `?portfolio=33`과 문의 기능은 유지했다.
+
+| 웹용 파일 (`images/범어동가포/맥북원본/`) | 맥북 원본 파일 | 내용 |
+| --- | --- | --- |
+| `01-오픈주방전경.webp` | `4HY01628.jpg` | 브랜드 로고·바 좌석·오픈주방 |
+| `02-매장외관.webp` | `5HY01420.jpg` | 간판과 유리 파사드 정면 |
+| `03-바와출입구.webp` | `4HY01619.jpg` | 바 좌석에서 출입구 방향 |
+| `04-창가테이블.webp` | `4HY01624.jpg` | 창가 테이블과 민트색 벽면 |
+| `05-창가바좌석.webp` | `5HY01417.jpg` | 창가 바 좌석과 패턴 마감 |
+| `06-로고거울.webp` | `5HY01408.jpg` | GAPHO 로고 거울과 식재 |
+| `07-조명과식재.webp` | `5HY01414.jpg` | 금속망 선반·펜던트 조명·식재 |
+| `08-브랜드사인.webp` | `5HY01424.jpg` | 외부 벽면 브랜드 사인 |
+| `00-대표썸네일.webp` | `4HY01628.jpg` | 갤러리 1번과 동일한 표지 |
