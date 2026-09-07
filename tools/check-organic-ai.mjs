@@ -216,5 +216,37 @@ check('llms guide links to the new canonical URL', () => {
   assert.ok(urls.includes(guideUrl), `llms.txt does not link to ${guideUrl}`);
 });
 
+
+for (const file of ['brand-consulting-guide.html', 'brand-renewal-checklist.html', 'project-direction-guide.html', 'bar-startup-interior-guide.html', 'restaurant-marketing-guide.html']) {
+  check(`${file}: canonical, FAQ parity, references and complete RSS`, () => {
+    const html = read(file), url = origin + '/' + file;
+    assert.equal(tags(html, 'link').find(t => t.rel === 'canonical')?.href, url);
+    assert.equal([...html.matchAll(/<h1\b/gi)].length, 1);
+    const data = jsonLd(html);
+    assert.equal(data.filter(x => isType(x, 'Article')).length, 1);
+    assert.equal(data.find(x => isType(x, 'Article')).mainEntityOfPage, url);
+    assert.equal(data.find(x => isType(x, 'Article')).datePublished, ['brand-renewal-checklist.html', 'project-direction-guide.html'].includes(file) ? '2026-08-22' : '2026-09-07');
+    const visible = [...html.matchAll(/<details\b[^>]*>([\s\S]*?)<\/details>/gi)].map(m => {
+      const summary = m[1].match(/<summary[^>]*>([\s\S]*?)<\/summary>/i);
+      return [text(summary[1]), text(m[1].replace(summary[0], ''))];
+    });
+    const structured = data.find(x => isType(x, 'FAQPage')).mainEntity.map(x => [text(x.name), text(x.acceptedAnswer.text)]);
+    assert.deepEqual(structured, visible);
+    assert.ok(visible.length >= 6);
+    for (const link of internalHrefs(html, url)) {
+      assert.ok(existsSync(pagePath(link)), 'missing target: ' + link);
+      if (link.hash) assert.ok(readFileSync(pagePath(link), 'utf8').includes('id="' + decodeURIComponent(link.hash.slice(1)) + '"'), 'missing fragment: ' + link);
+    }
+    const items = [...read('rss.xml').matchAll(/<item\b[^>]*>([\s\S]*?)<\/item>/g)].map(m => m[1]).filter(i => i.includes('<guid>' + url + '</guid>'));
+    assert.equal(items.length, 1);
+    const encoded = items[0].match(/<content:encoded><!\[CDATA\[([\s\S]*?)\]\]><\/content:encoded>/)?.[1];
+    assert.ok(encoded, 'full RSS body missing');
+    const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)[1];
+    assert.equal(text(encoded), text(main.slice(main.indexOf('<article>'), main.lastIndexOf('</article>') + 10)));
+    assert.ok(read('sitemap.xml').includes('<loc>' + url + '</loc>'));
+    assert.ok(read('llms.txt').includes(url));
+  });
+}
+
 console.log(`\n${passed} passed; ${failures.length} failed. Read-only content checks; not proof of indexing or AI citation.`);
 if (failures.length) process.exitCode = 1;
