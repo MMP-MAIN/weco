@@ -1,0 +1,20 @@
+/* Scoped to retained, non-indexed legacy pages; never loaded by the homepage. */
+.service-archive-notice {
+  box-sizing: border-box;
+  max-width: 960px;
+  margin: 24px auto;
+  padding: clamp(18px, 4vw, 28px);
+  border: 1px solid #d7d7d2;
+  border-left: 4px solid #333;
+  background: #f5f5f1;
+  color: #222;
+  font: 16px/1.7 system-ui, sans-serif;
+  overflow-wrap: anywhere;
+}
+.service-archive-notice strong { display: block; font-size: 18px; }
+.service-archive-notice p { margin: 8px 0 12px; color: #444; }
+.service-archive-notice a { color: #222; font-weight: 700; text-decoration: underline; }
+@media (max-width: 1000px) {
+  .service-archive-notice { margin-inline: 16px; }
+}
+
