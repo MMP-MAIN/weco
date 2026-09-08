@@ -65,6 +65,7 @@ html.studio-root.studio-menu-open{overflow:hidden}
 .studio-home .studio-intro-copy>.section-eyebrow{color:#929292;margin:0 0 24px}
 .studio-home .service-summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 24px;width:100%;margin:0}
 .studio-home .service-summary-grid article{border:0;padding:0;min-width:0}
+.studio-home .service-summary-grid .service-education{grid-column:1 / -1}
 .studio-home .service-summary-grid h3{margin:0;font:400 clamp(19px,2vw,28px)/1.2 Arial,Helvetica,sans-serif;letter-spacing:-.03em}
 .studio-home .service-summary-grid h3 a{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #8a8a8a;border-radius:999px;padding:11px 18px;min-height:50px}
 .studio-home .service-summary-grid h3 a:hover{background:#fff;color:#050505;border-color:#fff}
