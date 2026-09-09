@@ -217,7 +217,7 @@ check('llms guide links to the new canonical URL', () => {
 });
 
 
-for (const file of ['brand-consulting-guide.html', 'brand-renewal-checklist.html', 'project-direction-guide.html', 'bar-startup-interior-guide.html', 'restaurant-marketing-guide.html']) {
+for (const file of ['brand-consulting-guide.html', 'brand-renewal-checklist.html', 'project-direction-guide.html', 'bar-startup-interior-guide.html', 'restaurant-marketing-guide.html', 'fnb-branding-vs-interior.html']) {
   check(`${file}: canonical, FAQ parity, references and complete RSS`, () => {
     const html = read(file), url = origin + '/' + file;
     assert.equal(tags(html, 'link').find(t => t.rel === 'canonical')?.href, url);
@@ -225,14 +225,14 @@ for (const file of ['brand-consulting-guide.html', 'brand-renewal-checklist.html
     const data = jsonLd(html);
     assert.equal(data.filter(x => isType(x, 'Article')).length, 1);
     assert.equal(data.find(x => isType(x, 'Article')).mainEntityOfPage, url);
-    assert.equal(data.find(x => isType(x, 'Article')).datePublished, ['brand-renewal-checklist.html', 'project-direction-guide.html'].includes(file) ? '2026-08-22' : '2026-09-07');
+    assert.equal(data.find(x => isType(x, 'Article')).datePublished, ['brand-renewal-checklist.html', 'project-direction-guide.html', 'fnb-branding-vs-interior.html'].includes(file) ? '2026-08-22' : '2026-09-07');
     const visible = [...html.matchAll(/<details\b[^>]*>([\s\S]*?)<\/details>/gi)].map(m => {
       const summary = m[1].match(/<summary[^>]*>([\s\S]*?)<\/summary>/i);
       return [text(summary[1]), text(m[1].replace(summary[0], ''))];
     });
     const structured = data.find(x => isType(x, 'FAQPage')).mainEntity.map(x => [text(x.name), text(x.acceptedAnswer.text)]);
     assert.deepEqual(structured, visible);
-    assert.ok(visible.length >= 6);
+    assert.ok(visible.length >= (file === 'fnb-branding-vs-interior.html' ? 3 : 6));
     for (const link of internalHrefs(html, url)) {
       assert.ok(existsSync(pagePath(link)), 'missing target: ' + link);
       if (link.hash) assert.ok(readFileSync(pagePath(link), 'utf8').includes('id="' + decodeURIComponent(link.hash.slice(1)) + '"'), 'missing fragment: ' + link);
