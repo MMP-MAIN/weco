@@ -1056,7 +1056,7 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
   const renderLB = () => {
     const it = items[curItem]
     lbImg.src = it.photos[curPhoto]; lbImg.alt = it.title
-    lbTitle.textContent = it.title
+    lbTitle.textContent = it.title + ((it.shotLabels[curPhoto] || '').includes('AI 보정') ? ' · 외관 AI 보정' : '')
     lbCount.textContent = `${curPhoto + 1} / ${it.photos.length}`
   }
   const moveLB = (d) => { const n = items[curItem].photos.length; curPhoto = (curPhoto + d + n) % n; renderLB() }
@@ -1084,6 +1084,7 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
       const shot = it.shotLabels[idx] || (idx === 0 ? 'FACADE' : idx >= it.photos.length - 2 ? 'DETAIL' : 'INTERIOR')
       const figure = document.createElement('figure')
       figure.className = 'gv-shot'
+      if (shot.includes('AI 보정')) figure.classList.add('gv-shot--retouched')
       const im = document.createElement('img')
       im.loading = 'lazy'
       im.src = src

@@ -706,6 +706,8 @@ html.has-cursor, html.has-cursor *{cursor:none !important;}
 .gv-grid img:hover{opacity:.85;}
 .gv-shot{margin:0;min-width:0;}
 .gv-shot figcaption{display:none;}
+.gv-shot--retouched figcaption{display:block;padding:6px 0;color:#ddd;font-size:11px;line-height:1.4;letter-spacing:0;}
+.gv-shot--retouched figcaption span{display:none;}
 .gv-shot figcaption span{color:var(--signal);font-variant-numeric:tabular-nums;}
 @media (min-width:961px){.gv-grid{gap:12px;}.gv-scroll{padding:28px;}}
 .lightbox figcaption strong{font-size:14px;letter-spacing:.5px;}
