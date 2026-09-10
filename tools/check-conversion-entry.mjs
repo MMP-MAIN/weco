@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+
+const read = (file) => readFileSync(new URL(`../${file}`, import.meta.url), 'utf8');
+const html = read('index.html');
+const css = read('studio-refresh.css');
+const hero = html.match(/<section class="hero">([\s\S]*?)<\/section>/)?.[1];
+const contact = html.match(/<section[^>]+id="contact"[\s\S]*?<\/section>/)?.[0];
+assert.ok(hero && contact);
+assert.match(hero, /class="studio-hero-value"/);
+assert.match(hero, /창업·리브랜딩/);
+assert.match(hero, /브랜드·디자인·공간으로 구체화합니다/);
+assert.match(hero, /data-studio-display aria-hidden="true"/); // Decorative motion stays separate from readable Korean copy.
+assert.match(hero, /data-conversion="project_inquiry"/);
+assert.match(hero, /data-open-projects/);
+assert.match(hero, /https:\/\/open\.kakao\.com\/o\/sBasXuKi/);
+assert.match(contact, /문자/);
+assert.match(contact, /평일 09:00–18:00/);
+assert.match(contact, /전화 상담이 필요하면 시간을 먼저 조율합니다/);
+assert.doesNotMatch(contact, /당일 회신|24시간 이내|즉시 연락/);
+assert.match(contact, /action="https:\/\/formsubmit\.co\/storm2119@gmail\.com"/);
+assert.match(contact, /name="privacyConsent" required/);
+assert.match(contact, /name="name"[^>]+required/);
+assert.match(contact, /name="phone"[^>]+required/);
+assert.doesNotMatch(contact, /name="(?:message|budget)"[^>]+required/);
+assert.match(css, /\.studio-home \.studio-hero-value/);
+assert.match(css, /@media\(max-width:640px\)/);
+assert.match(html, /href="studio-refresh\.css\?v=2"/);
+assert.match(html, /src="main\.js\?v=140"/);
+assert.match(html, /https:\/\/mpmarketing\.co\.kr\//);
+console.log('PASS: homepage proposition, contact expectations, short-form requirements and existing CTA destinations.');

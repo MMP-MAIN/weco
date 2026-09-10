@@ -1,0 +1,94 @@
+/* Shared monochrome identity for the entry, questionnaire and results. */
+:root {
+  --ink: #f5f5f3;
+  --paper: #111;
+  --paper2: #1c1c1c;
+  --accent: #fff;
+  --line: #454545;
+  --muted: #b4b4b4;
+  --discovery-font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+body { font-family: var(--discovery-font); word-break: keep-all; overflow-wrap: break-word; }
+[hidden] { display: none !important; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 5px;
+}
+.discovery-entry { min-height: 100dvh; padding: 0 clamp(20px, 5vw, 80px); display: flex; flex-direction: column; }
+.discovery-entry-header { min-height: 88px; display: flex; justify-content: space-between; align-items: center; gap: 20px; border-bottom: 1px solid var(--line); }
+.discovery-entry-logo { display: flex; align-items: baseline; gap: 9px; font-size: 30px; font-weight: 850; letter-spacing: -.07em; text-decoration: none; }
+.discovery-entry-logo span { font-size: 10px; letter-spacing: .12em; font-weight: 500; }
+.discovery-entry-logo img { width: 120px; height: auto; filter: brightness(0) invert(1); }
+.discovery-home-link { font-size: 12px; color: var(--muted); text-decoration: none; }
+.discovery-home-link span { margin-left: 12px; }
+.discovery-entry-main { width: 100%; max-width: 1180px; margin: auto; padding: clamp(48px, 7vw, 100px) 0 80px; }
+.discovery-entry-eyebrow, .discovery-path-label { color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .1em; }
+.discovery-entry-main h1 { margin: 26px 0 24px; font-size: clamp(36px, 5.5vw, 72px); font-weight: 650; line-height: 1.2; letter-spacing: -.065em; }
+.discovery-entry-lead { color: var(--muted); font-size: clamp(15px, 1.6vw, 18px); line-height: 1.85; }
+.discovery-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 54px; }
+.discovery-path { display: flex; flex-direction: column; align-items: stretch; border-top: 1px solid var(--line); padding-top: 24px; }
+.discovery-path h2 { font-size: clamp(20px, 2.3vw, 27px); font-weight: 600; letter-spacing: -.04em; line-height: 1.4; margin: 14px 0 16px; }
+.discovery-path > p:not(.discovery-path-label) { color: var(--muted); font-size: 15px; line-height: 1.8; margin: 0 0 24px; }
+.discovery-entry-primary, .discovery-entry-secondary { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 58px; padding: 17px 20px; font: 650 15px/1.4 var(--discovery-font); text-align: left; text-decoration: none; cursor: pointer; }
+.discovery-entry-primary { margin-top: auto; background: #f5f5f3; color: #111; border: 1px solid #f5f5f3; }
+.discovery-entry-secondary { background: transparent; color: var(--ink); border: 1px solid #777; }
+.discovery-entry-primary:hover { background: #ddd; border-color: #ddd; }
+.discovery-entry-secondary:hover { background: #262626; }
+.discovery-entry-secondary:disabled { opacity: .5; cursor: wait; }
+.discovery-path small { min-height: 36px; margin-top: 14px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+.discovery-preparation { margin: 0 0 24px; font-size: 13px; color: var(--muted); }
+.discovery-preparation summary { width: fit-content; min-height: 32px; cursor: pointer; color: var(--ink); list-style: revert; }
+.discovery-preparation p { max-width: 48em; line-height: 1.8; margin: 8px 0 0; }
+.discovery-entry-footer { align-items: center; gap: 18px; padding: 20px 0; font-size: 10px; letter-spacing: .05em; }
+.discovery-entry-footer a { color: var(--muted); }
+.discovery-fallback { font-size: 13px; line-height: 1.7; padding-top: 12px; }
+
+#root .site-shell { padding-top: 26px; }
+#root .topbar { align-items: center; height: 60px; }
+#root .wordmark { color: var(--ink); font-family: var(--discovery-font); }
+#root .topbar .wordmark { font-size: 0; width: 120px; min-height: 30px; }
+#root .topbar .wordmark span { display: none; }
+#root .topbar .wordmark::before { content: ""; display: block; width: 120px; height: 30px; background: url('/brand-assets/Weco_weco-transparent.png') left center / contain no-repeat; filter: brightness(0) invert(1); }
+#root .top-tools { color: var(--muted); font-size: 11px; }
+#root .survey-aside h2, #root .complete h1, #root .section-intro b,
+#root .ref-card h3, #root .upload-zone b, #root .project-ticket b,
+#root .review-card h3, #root .contact-card h3, #root .result-grid h2,
+#root .readiness-total strong, #root .readiness-total h2, #root .readiness-bars em {
+  font-family: var(--discovery-font); font-weight: 600; letter-spacing: -.04em;
+}
+#root .survey-aside h2 { font-size: clamp(28px, 3vw, 40px); line-height: 1.3; scroll-margin-top: 28px; }
+#root .complete h1 { line-height: 1.25; }
+#root .eyebrow, #root .step-list li, #root footer, #root .ref-copy li,
+#root .review-card dt, #root .result-grid p { color: var(--muted); }
+#root .step-list li.active { color: #fff; }
+#root .step-list li.done { color: #ccc; }
+#root .primary { background: #f5f5f3; color: #111; font-weight: 650; }
+#root .primary:hover { background: #ddd; }
+#root .options button { color: var(--ink); }
+#root .options button:hover { background: #252525; }
+#root .options button.selected { background: #f0f0ee; color: #111; border-color: #f0f0ee; }
+#root .options button.selected i { background: #111; color: #fff; border-color: #111; }
+#root .field input, #root .field textarea { color: var(--ink); border-color: #777; }
+#root .field input::placeholder, #root .field textarea::placeholder { color: #929292; }
+#root .field input:focus, #root .field textarea:focus { background: #202020; border-color: #fff; }
+#root .conditional, #root .conditional.fnb, #root .metrics, #root .taste-note,
+#root .privacy-box, #root .contact-card, #root .review-card, #root .readiness,
+#root .result-grid article, #root .result-grid article.next-action { background: #1c1c1c; border-color: var(--line); }
+#root .conditional > span, #root .conditional.fnb > span, #root .franchise > span { color: var(--ink); }
+#root .validation-error { color: #ffd2c9; background: #351e1b; border-color: #efb3a8; }
+#root .ref-card button.active.like, #root .ref-card button.active.avoid, #root .file-row span { background: #f5f5f3; color: #111; border-color: #f5f5f3; }
+#root .review-card dl div, #root .ref-copy li, #root .weco-optional-toggle { border-color: var(--line); }
+#root .form-footer { background: var(--paper); }
+
+@media (max-width: 800px) {
+  .discovery-entry-header { min-height: 72px; }
+  .discovery-entry-logo { font-size: 26px; }
+  .discovery-entry-logo span { font-size: 8px; }
+  .discovery-paths { grid-template-columns: 1fr; gap: 32px; margin-top: 36px; }
+  .discovery-entry-main { padding-bottom: 52px; }
+  .discovery-path > p:not(.discovery-path-label) { font-size: 14px; }
+  .discovery-entry-footer { flex-wrap: wrap; justify-content: space-between; }
+  #root .site-shell { padding-top: 12px; }
+  #root .form-footer { margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; }
+  #root .top-tools { font-size: 10px; }
+}

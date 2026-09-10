@@ -411,7 +411,16 @@ const trapFocusWithin = (root, e) => {
     first.focus()
   }
 }
-const openProjects = () => {
+const updateProjectLocation = (index, hash, replace = false) => {
+  const url = new URL(window.location.href)
+  if (index === null) url.searchParams.delete('portfolio')
+  else url.searchParams.set('portfolio', String(index + 1))
+  url.hash = hash
+  if (url.href !== window.location.href) history[replace ? 'replaceState' : 'pushState'](history.state, '', url)
+}
+const openProjects = (syncUrl = true) => {
+  if (syncUrl) updateProjectLocation(null, '#portfolio')
+  if (projectView.classList.contains('open')) return
   trackEvent('portfolio_open', { page_language: document.documentElement.lang || 'ko' })
   projectView.classList.remove('show-all-projects')
   projectToggle.textContent = '프로젝트 더 보기 +'
@@ -432,19 +441,21 @@ const openProjects = () => {
   })
   closeProjectsButton?.focus()
 }
-const closeProjects = () => {
+const closeProjects = (syncUrl = true, restoreFocus = true) => {
+  if (syncUrl) updateProjectLocation(null, window.location.hash === '#portfolio' ? '' : window.location.hash, true)
   projectView.classList.remove('open')
   projectView.setAttribute('aria-hidden', 'true')
   document.documentElement.style.overflow = ''
   document.body.style.overflow = ''
   document.body.classList.remove('motion-paused')
   if (window.__lenis) window.__lenis.start()
-  if (projectTrigger instanceof HTMLElement) projectTrigger.focus()
+  if (restoreFocus && projectTrigger instanceof HTMLElement) projectTrigger.focus({ preventScroll: true })
 }
 closeProjectsButton?.addEventListener('click', closeProjects)
 document.querySelector('[data-project-inquiry]')?.addEventListener('click', (e) => {
   e.preventDefault()
-  closeProjects()
+  closeProjects(false, false)
+  updateProjectLocation(null, '#contact')
   const contact = document.getElementById('contact')
   if (window.__lenis && contact) window.__lenis.scrollTo(contact, { immediate: true, force: true, offset: -84 })
   else contact?.scrollIntoView({ behavior: 'auto', block: 'start' })
@@ -533,7 +544,7 @@ const FORM_MSG = ({
         err: `Có lỗi xảy ra. Vui lòng gọi ${PHONE}.` }
 })[document.documentElement.lang] || {
   need: '이름과 연락처를 입력해주세요.',
-  ok: '문의가 접수되었습니다. 내용을 확인한 뒤 연락드리겠습니다.',
+  ok: '문의가 접수되었습니다. 평일 상담시간에 내용을 확인한 뒤 남겨주신 번호로 문자 안내를 드립니다.',
   err: '접수를 확인하지 못했습니다. 입력 내용은 유지됩니다. 중복 제출 전 카카오 상담으로 확인해주세요.'
 }
 
@@ -1047,12 +1058,6 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
     : lang === 'vi'
       ? `Phóng to ảnh ${index} của ${title}`
       : `${title} ${index}번 사진 확대 보기`
-  const updatePortfolioUrl = (index) => {
-    const url = new URL(window.location.href)
-    if (index === null) url.searchParams.delete('portfolio')
-    else url.searchParams.set('portfolio', String(index + 1))
-    history.replaceState({}, '', url)
-  }
   const renderLB = () => {
     const it = items[curItem]
     lbImg.src = it.photos[curPhoto]; lbImg.alt = it.title
@@ -1068,10 +1073,10 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
     lb.setAttribute('aria-hidden', 'false')
     lb.querySelector('.lb-close').focus()
   }
-  const closeLB = () => {
+  const closeLB = (restoreFocus = true) => {
     lb.classList.remove('open')
     lb.setAttribute('aria-hidden', 'true')
-    if (lightboxTrigger instanceof HTMLElement) lightboxTrigger.focus()
+    if (restoreFocus && lightboxTrigger instanceof HTMLElement) lightboxTrigger.focus({ preventScroll: true })
   }
 
   const openGallery = (i, syncUrl = true) => {
@@ -1108,15 +1113,16 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
     gv.classList.add('open')
     gv.setAttribute('aria-hidden', 'false')
     document.body.style.overflow = 'hidden'
-    if (syncUrl) updatePortfolioUrl(i)
+    if (syncUrl) updateProjectLocation(i, '#portfolio')
     gv.querySelector('.gv-close').focus()
   }
-  const closeGallery = () => {
+  const closeGallery = (syncUrl = true, restoreFocus = true) => {
+    if (lb.classList.contains('open')) closeLB(false)
     gv.classList.remove('open')
     gv.setAttribute('aria-hidden', 'true')
     document.body.style.overflow = projectView.classList.contains('open') ? 'hidden' : ''
-    updatePortfolioUrl(null)
-    if (galleryTrigger instanceof HTMLElement) galleryTrigger.focus()
+    if (syncUrl) updateProjectLocation(null, projectView.classList.contains('open') ? '#portfolio' : window.location.hash, true)
+    if (restoreFocus && galleryTrigger instanceof HTMLElement) galleryTrigger.focus({ preventScroll: true })
   }
 
   if (document.querySelector('[data-project-inquiry]')) {
@@ -1127,8 +1133,9 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
     gv.querySelector('.gv-close').before(inquiryLink)
     inquiryLink.addEventListener('click', (event) => {
       event.preventDefault()
-      closeGallery()
-      closeProjects()
+      closeGallery(false, false)
+      closeProjects(false, false)
+      updateProjectLocation(null, '#contact')
       setMenuOpen(false)
       const contact = document.getElementById('contact')
       if (window.__lenis && contact) window.__lenis.scrollTo(contact, { immediate: true, force: true, offset: -84 })
@@ -1166,11 +1173,35 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
     }
   })
 
-  const requestedPortfolio = Number(new URLSearchParams(window.location.search).get('portfolio'))
-  if (Number.isInteger(requestedPortfolio) && requestedPortfolio >= 1 && requestedPortfolio <= items.length) {
-    openProjects()
-    openGallery(requestedPortfolio - 1, false)
+  // 상세 페이지의 #portfolio 링크와 브라우저 뒤로/앞으로 이동을 같은 화면 상태로 복원합니다.
+  const syncProjectLocation = () => {
+    const requestedPortfolio = Number(new URLSearchParams(window.location.search).get('portfolio'))
+    const showGallery = window.location.hash !== '#contact' && Number.isInteger(requestedPortfolio) && requestedPortfolio >= 1 && requestedPortfolio <= items.length
+    const showProjects = showGallery || window.location.hash === '#portfolio'
+    const wasOpen = projectView.classList.contains('open')
+    if (showProjects) {
+      setMenuOpen(false)
+      openProjects(false)
+      if (showGallery) {
+        if (!gv.classList.contains('open') || curItem !== requestedPortfolio - 1) {
+          if (lb.classList.contains('open')) closeLB(false)
+          openGallery(requestedPortfolio - 1, false)
+        }
+      } else if (gv.classList.contains('open')) closeGallery(false)
+    } else {
+      if (gv.classList.contains('open')) closeGallery(false, false)
+      if (wasOpen) closeProjects(false, window.location.hash !== '#contact')
+      if (wasOpen && window.location.hash === '#contact') {
+        const contact = document.getElementById('contact')
+        if (window.__lenis && contact) window.__lenis.scrollTo(contact, { immediate: true, force: true, offset: -84 })
+        else contact?.scrollIntoView({ behavior: 'auto', block: 'start' })
+        contact?.focus({ preventScroll: true })
+      }
+    }
   }
+  window.addEventListener('hashchange', syncProjectLocation)
+  window.addEventListener('popstate', syncProjectLocation)
+  syncProjectLocation()
 })()
 
 // ---- 커스텀 커서 (데스크톱 전용) ----

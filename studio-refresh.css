@@ -45,6 +45,10 @@ html.studio-root.studio-menu-open{overflow:hidden}
   min-height:760px;min-height:100svh;max-width:1600px;padding:clamp(140px,20vh,200px) 0 32px;
 }
 .studio-home .studio-display{margin:0;font:400 clamp(70px,12.4vw,198px)/1.03 Arial,Helvetica,sans-serif;letter-spacing:-.065em;min-width:0}
+.studio-home .studio-hero-message{min-width:0}
+.studio-home .studio-hero-value{margin-top:32px;max-width:680px;text-align:left;word-break:keep-all;overflow-wrap:anywhere}
+.studio-home .studio-hero-question{margin:0 0 10px;color:#aaa;font:400 15px/1.6 Pretendard,Arial,sans-serif;letter-spacing:-.02em}
+.studio-home .studio-hero-answer{margin:0;color:#f7f7f5;font:500 clamp(23px,2.1vw,32px)/1.5 Pretendard,Arial,sans-serif;letter-spacing:-.035em}
 .studio-home .studio-display-line{display:block;min-height:1.03em}
 .studio-home .studio-display-line>span{display:inline-block;transition:opacity .35s,transform .45s cubic-bezier(.2,.8,.2,1)}
 .studio-home .studio-display.is-changing .studio-display-line>span{opacity:0;transform:translateY(.12em)}
@@ -101,6 +105,7 @@ html.studio-root.studio-menu-open{overflow:hidden}
 .studio-home #contact .section-eyebrow{color:#aaa;margin-bottom:26px}
 .studio-home #contact .section-title{font:400 clamp(32px,4.5vw,70px)/1.2 Pretendard,Arial,sans-serif;letter-spacing:-.05em;text-align:left;color:#f7f7f5;word-break:keep-all;overflow-wrap:anywhere}
 .studio-home #contact .section-desc{color:#aaa;font-size:16px;line-height:1.8;text-align:left;margin:24px 0 34px}
+.studio-home #contact .contact-response-note{margin:-14px 0 30px;color:#aaa;font:400 14px/1.8 Pretendard,Arial,sans-serif;word-break:keep-all}
 .studio-home .contact-form{padding:0;background:transparent;border:0;border-radius:0;box-shadow:none}
 .studio-home .contact-form label,.studio-home .contact-form .block-label{font:400 14px/1.6 Pretendard,Arial,sans-serif;letter-spacing:0;color:#ccc}
 .studio-home .contact-form :is(input:not([type="hidden"]):not([type="checkbox"]),textarea){
@@ -148,8 +153,11 @@ html.studio-root.studio-menu-open{overflow:hidden}
   .studio-home .topbar .topbar-cta{font-size:13px}
   .studio-home .topbar .gnb{inset:72px 0 0;height:calc(100dvh - 72px);padding:24px 24px calc(24px + env(safe-area-inset-bottom));gap:18px;justify-content:flex-start}
   .studio-home .topbar .gnb>a{font-size:34px!important;line-height:1.2}
-  .studio-home .hero-inner{min-height:calc(100svh - 72px - env(safe-area-inset-bottom));padding:146px 0 28px;gap:64px}
+  .studio-home .hero-inner{min-height:calc(100svh - 72px - env(safe-area-inset-bottom));padding:112px 0 28px;gap:40px}
   .studio-home .studio-display{font-size:clamp(42px,12.4vw,79px);line-height:1.04;letter-spacing:-.06em}
+  .studio-home .studio-hero-value{margin-top:26px}
+  .studio-home .studio-hero-question{font-size:13px;margin-bottom:10px}
+  .studio-home .studio-hero-answer{font-size:clamp(20px,5.45vw,27px);line-height:1.55}
   .studio-home .studio-hero-bottom{gap:24px}
   .studio-home .hero .hero-eyebrow{font-size:14px;max-width:none}
   .studio-home .hero-reassurance{font-size:13px}
