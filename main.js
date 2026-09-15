@@ -52,7 +52,28 @@ document.addEventListener('error', (event) => {
   ]
   const industry = industries.find(([, pattern]) => pattern.test(signal))?.[0] || ''
 
-  const variants = [
+  const variants = document.body.classList.contains('studio-home') ? [
+    {
+      headline: '브랜드의 성장을,<br><strong>장소의 새로운 가치로.</strong>',
+      promise: '사업 전략과 브랜드·공간 기획을 하나로 연결합니다.'
+    },
+    {
+      headline: '익숙한 공간에,<br><strong>새로운 방문의 이유를.</strong>',
+      promise: '공간이 가진 가능성을 브랜드와 경험으로 구체화합니다.'
+    },
+    {
+      headline: '좋은 아이디어를,<br><strong>찾아오는 브랜드로.</strong>',
+      promise: '시장과 고객을 읽고 사업의 방향을 설계합니다.'
+    },
+    {
+      headline: '한 번의 방문을,<br><strong>다시 찾고 싶은 경험으로.</strong>',
+      promise: '브랜드의 인상부터 공간에서의 경험까지 함께 기획합니다.'
+    },
+    {
+      headline: '브랜드 하나에서,<br><strong>동네의 다음 가능성까지.</strong>',
+      promise: '작은 변화가 장소의 활력으로 이어지는 방향을 찾습니다.'
+    }
+  ] : [
     {
       headline: '아이디어에 방향을,<br><strong>브랜드에 선택의 이유를.</strong>',
       promise: '사업의 방향부터 브랜드·디자인·공간까지.'

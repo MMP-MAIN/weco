@@ -8,8 +8,8 @@ const hero = html.match(/<section class="hero">([\s\S]*?)<\/section>/)?.[1];
 const contact = html.match(/<section[^>]+id="contact"[\s\S]*?<\/section>/)?.[0];
 assert.ok(hero && contact);
 assert.match(hero, /class="studio-hero-value"/);
-assert.match(hero, /창업·리브랜딩/);
-assert.match(hero, /브랜드·디자인·공간으로 구체화합니다/);
+assert.match(hero, /사업과 브랜드, 공간의 다음 가능성을 기획합니다/);
+assert.match(hero, /브랜드를 키우고,<br \/>장소의 가치를 새롭게/);
 assert.match(hero, /data-studio-display aria-hidden="true"/); // Decorative motion stays separate from readable Korean copy.
 assert.match(hero, /data-conversion="project_inquiry"/);
 assert.match(hero, /data-open-projects/);
@@ -26,6 +26,6 @@ assert.doesNotMatch(contact, /name="(?:message|budget)"[^>]+required/);
 assert.match(css, /\.studio-home \.studio-hero-value/);
 assert.match(css, /@media\(max-width:640px\)/);
 assert.match(html, /href="studio-refresh\.css\?v=3"/);
-assert.match(html, /src="main\.js\?v=140"/);
+assert.match(html, /src="main\.js\?v=141"/);
 assert.match(html, /https:\/\/mpmarketing\.co\.kr\//);
 console.log('PASS: homepage proposition, contact expectations, short-form requirements and existing CTA destinations.');

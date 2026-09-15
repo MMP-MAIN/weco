@@ -6,7 +6,7 @@
   const noun = document.querySelector('[data-studio-noun]');
   const control = document.querySelector('[data-studio-motion]');
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const phrases = [['Redefining', 'Brands.'], ['Reimagining', 'Business.'], ['Connecting', 'Experiences.']];
+  const phrases = [['Growing', 'Brands.'], ['Reimagining', 'Places.'], ['Creating', 'Value.']];
   let current = 0, paused = false, visible = true, timer = 0, swapTimer = 0;
   // Change the first English message on each visit as well as the Korean introduction.
   try {

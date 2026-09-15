@@ -20,7 +20,7 @@ assert.match(html, /class="container studio-resources-grid"/);
 assert.match(html, /data-conversion="marketing_site"/);
 assert.match(html, /data-conversion="brand_discovery"/);
 assert.match(html, /studio-refresh\.css\?v=3/);
-assert.match(html, /studio-refresh\.js\?v=2/);
+assert.match(html, /studio-refresh\.js\?v=3/);
 assert.match(js, /href === '#weco-about'/);
 assert.match(css, /\.studio-about-grid\{display:grid;grid-template-columns:minmax\(0,1\.15fr\) minmax\(0,1fr\)/);
 assert.match(css, /\.studio-about-grid,.*\{grid-template-columns:1fr/);
