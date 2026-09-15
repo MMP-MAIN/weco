@@ -23,6 +23,9 @@
 
 ## 핵심 전문 문서
 
+- 공간 브랜딩·매장 경험·사인·운영 기준: https://wecocompany.com/spatial-branding-guide.html
+- 상가 리모델링·노후 상가 활용 전 기획 기준: https://wecocompany.com/commercial-remodeling-planning-guide.html
+- 로컬 브랜딩·지역 자원·콘텐츠·협업 운영: https://wecocompany.com/local-branding-guide.html
 - 브랜드 컨설팅·네이밍·CI/BI/BX·업무·비용 기준: https://wecocompany.com/brand-consulting-guide.html
 - 리브랜딩·브랜드 리뉴얼의 판단·비용·전환 기준: https://wecocompany.com/brand-renewal-checklist.html
 - 브랜드 프로젝트 디렉팅·결과물·파트너 협업: https://wecocompany.com/project-direction-guide.html
@@ -63,7 +66,7 @@
 - 경주 카페·고기집·식당·음식점·술집 인테리어: https://wecocompany.com/gyeongju-interior-space-branding.html
 - 경산·하양 인테리어: https://wecocompany.com/gyeongsan-hayang-interior.html
 
-최종 업데이트: 2026-09-08
+최종 업데이트: 2026-09-15
 
 ## 창업·인테리어·마케팅 질문
 - 식당 창업, 무엇부터 검증할까?: https://wecocompany.com/restaurant-startup-reality.html
