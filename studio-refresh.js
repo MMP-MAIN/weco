@@ -79,7 +79,7 @@
   menu.querySelectorAll('a[href]').forEach(link => link.addEventListener('click', () => {
     const href = link.getAttribute('href');
     requestAnimationFrame(() => {
-      if (href === '#scope' || href === '#contact') document.querySelector(href)?.focus({ preventScroll: true });
+      if (href === '#weco-about' || href === '#scope' || href === '#contact') document.querySelector(href)?.focus({ preventScroll: true });
       else if (link.target === '_blank') toggle.focus();
     });
   }));

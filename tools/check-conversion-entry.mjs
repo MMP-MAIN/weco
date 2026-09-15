@@ -25,7 +25,7 @@ assert.match(contact, /name="phone"[^>]+required/);
 assert.doesNotMatch(contact, /name="(?:message|budget)"[^>]+required/);
 assert.match(css, /\.studio-home \.studio-hero-value/);
 assert.match(css, /@media\(max-width:640px\)/);
-assert.match(html, /href="studio-refresh\.css\?v=2"/);
+assert.match(html, /href="studio-refresh\.css\?v=3"/);
 assert.match(html, /src="main\.js\?v=140"/);
 assert.match(html, /https:\/\/mpmarketing\.co\.kr\//);
 console.log('PASS: homepage proposition, contact expectations, short-form requirements and existing CTA destinations.');
