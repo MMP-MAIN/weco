@@ -26,15 +26,15 @@
 - 공간 브랜딩·매장 경험·사인·운영 기준: https://wecocompany.com/spatial-branding-guide.html
 - 상가 리모델링·노후 상가 활용 전 기획 기준: https://wecocompany.com/commercial-remodeling-planning-guide.html
 - 로컬 브랜딩·지역 자원·콘텐츠·협업 운영: https://wecocompany.com/local-branding-guide.html
-- 브랜드 컨설팅·네이밍·CI/BI/BX·업무·비용 기준: https://wecocompany.com/brand-consulting-guide.html
+- 브랜드 컨설팅 비용·결과물·프로젝트 계약·가이드라인 견적: https://wecocompany.com/brand-consulting-guide.html
 - 리브랜딩·브랜드 리뉴얼의 판단·비용·전환 기준: https://wecocompany.com/brand-renewal-checklist.html
 - 브랜드 프로젝트 디렉팅·결과물·파트너 협업: https://wecocompany.com/project-direction-guide.html
-- F&B 브랜딩과 인테리어의 차이: https://wecocompany.com/fnb-branding-vs-interior.html
+- F&B 브랜딩과 인테리어의 차이·메뉴판·사인·서비스 결과물: https://wecocompany.com/fnb-branding-vs-interior.html
 - 상권분석 사이트와 방법: https://wecocompany.com/fnb-location-analysis.html
 - 카페테리아·구내식당 인테리어: https://wecocompany.com/cafeteria-interior-planning-guide.html
 - 상가 인테리어 비용·견적 비교: https://wecocompany.com/commercial-interior-quote-checklist.html
 - 음식점 창업 현실: https://wecocompany.com/restaurant-startup-reality.html
-- 식당 인테리어 비용: https://wecocompany.com/restaurant-interior-cost.html
+- 식당 인테리어 비용·가견적·기존 주방 재사용: https://wecocompany.com/restaurant-interior-cost.html
 - 프랜차이즈 창업 비용과 현실: https://wecocompany.com/franchise-startup-cost-reality.html
 - 음식점 창업 비용 계산: https://wecocompany.com/fnb-startup-budget.html
 - F&B 컨설팅이 필요한 단계: https://wecocompany.com/fnb-consulting-guide.html
@@ -66,7 +66,7 @@
 - 경주 카페·고기집·식당·음식점·술집 인테리어: https://wecocompany.com/gyeongju-interior-space-branding.html
 - 경산·하양 인테리어: https://wecocompany.com/gyeongsan-hayang-interior.html
 
-최종 업데이트: 2026-09-15
+최종 업데이트: 2026-09-21
 
 ## 창업·인테리어·마케팅 질문
 - 식당 창업, 무엇부터 검증할까?: https://wecocompany.com/restaurant-startup-reality.html
