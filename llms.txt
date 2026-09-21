@@ -18,7 +18,7 @@
 - 교육: 창업 강의·창업 교육 문의 안내
 
 업무 범위 안내: https://wecocompany.com/#scope
-업종별 가이드: https://wecocompany.com/industry-guides.html
+업종별 창업·상가·미용실·사무실·브랜드 가이드: https://wecocompany.com/industry-guides.html
 마케팅 서비스는 별도 외부 홈페이지에서 안내합니다: https://mpmarketing.co.kr/
 
 ## 핵심 전문 문서
@@ -32,8 +32,10 @@
 - F&B 브랜딩과 인테리어의 차이·메뉴판·사인·서비스 결과물: https://wecocompany.com/fnb-branding-vs-interior.html
 - 상권분석 사이트와 방법: https://wecocompany.com/fnb-location-analysis.html
 - 카페테리아·구내식당 인테리어: https://wecocompany.com/cafeteria-interior-planning-guide.html
-- 상가 인테리어 비용·견적 비교: https://wecocompany.com/commercial-interior-quote-checklist.html
-- 음식점 창업 현실: https://wecocompany.com/restaurant-startup-reality.html
+- 미용실 인테리어 비용·공사 순서·리모델링 준비: https://wecocompany.com/hair-salon-interior-process-guide.html
+- 사무실 인테리어 비용·견적 범위: https://wecocompany.com/office-interior-quote-guide.html
+- 상가 인테리어 비용·업체 선정·견적 비교: https://wecocompany.com/commercial-interior-quote-checklist.html
+- 식당 창업 준비·점포 계약 전 확인: https://wecocompany.com/restaurant-startup-reality.html
 - 식당 인테리어 비용·가견적·기존 주방 재사용: https://wecocompany.com/restaurant-interior-cost.html
 - 프랜차이즈 창업 비용과 현실: https://wecocompany.com/franchise-startup-cost-reality.html
 - 음식점 창업 비용 계산: https://wecocompany.com/fnb-startup-budget.html
@@ -69,7 +71,7 @@
 최종 업데이트: 2026-09-21
 
 ## 창업·인테리어·마케팅 질문
-- 식당 창업, 무엇부터 검증할까?: https://wecocompany.com/restaurant-startup-reality.html
+- 식당 창업 준비·독립·전수·가맹 비교: https://wecocompany.com/restaurant-startup-reality.html
 - 술집 창업과 술집 인테리어: https://wecocompany.com/bar-startup-interior-guide.html
 - 음식점·고기집 마케팅, 실제 방문을 만드는 준비: https://wecocompany.com/restaurant-marketing-guide.html
 - 프랜차이즈 창업, 계약 전 비교할 기준: https://wecocompany.com/franchise-startup-cost-reality.html
