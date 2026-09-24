@@ -1,5 +1,6 @@
 // ===== 위코컴퍼니 홈페이지 스크립트 =====
 import { applyInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=1'
+import { createInquiryTracking } from './inquiry-tracking.mjs?v=1'
 
 const PHONE = '010-8606-2119'
 
@@ -541,6 +542,11 @@ const form = document.getElementById('inquiryForm')
 const submitBtn = document.getElementById('submitBtn')
 const formStatus = document.getElementById('formStatus')
 const inquiryContext = applyInquiryContext(document, location.search)
+const inquiryTracking = createInquiryTracking(form, (event, params) => trackEvent(event, params), {
+  form_name: 'project_inquiry',
+  ...inquiryEventParams(inquiryContext),
+  page_language: document.documentElement.lang || 'ko'
+})
 
 // 프로젝트 유형 선택
 const typeCards = document.getElementById('typeCards')
@@ -583,10 +589,14 @@ const setStatus = (msg, ok) => {
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault()
+  if (submitBtn.disabled) return
+  inquiryTracking.attempt()
   const name = form.name.value.trim()
   const phone = form.phone.value.trim()
 
   if (!name || !phone) {
+    if (!name) inquiryTracking.validationError('name', 'value_missing')
+    if (!phone) inquiryTracking.validationError('phone', 'value_missing')
     setStatus(FORM_MSG.need, false)
     return
   }
@@ -636,6 +646,8 @@ form.addEventListener('submit', async (e) => {
     const data = await res.json().catch(() => ({}))
     if (res.ok && (data.success === 'true' || data.success === true)) {
       trackEvent('generate_lead', {
+        ...inquiryTracking.params(),
+        lead_status: 'accepted_by_form_service',
         form_name: 'project_inquiry',
         ...inquiryEventParams(inquiryContext),
         lead_type: selectedType || 'unspecified',
@@ -650,8 +662,9 @@ form.addEventListener('submit', async (e) => {
   } catch (err) {
     console.error(err)
     trackEvent('form_submit_error', {
+      ...inquiryTracking.params(),
       form_name: 'project_inquiry',
-      error_type: err?.name || 'submit_error',
+      error_type: err?.name === 'AbortError' ? 'timeout' : err?.name === 'TypeError' ? 'network_error' : 'response_error',
       page_language: document.documentElement.lang || 'ko'
     })
     setStatus(FORM_MSG.err, false)
@@ -667,6 +680,12 @@ form.addEventListener('submit', async (e) => {
 // Keep mobile keyboard and fixed actions from competing with the inquiry form.
 ;(() => {
   if (!document.querySelector('.inquiry-submit')) return
+  if ('IntersectionObserver' in window) {
+    const inquiryVisibility = new IntersectionObserver(([entry]) => {
+      document.body.classList.toggle('inquiry-visible', entry.isIntersecting)
+    }, { rootMargin: '-72px 0px -96px 0px', threshold: 0 })
+    inquiryVisibility.observe(form)
+  }
   const viewport = window.visualViewport
   const editing = () => {
     const active = document.activeElement
@@ -901,6 +920,7 @@ document.addEventListener('click', (event) => {
   addEventListener('scroll', reportDepth, { passive: true })
 
   const inquiryForm = document.getElementById('inquiryForm')
+  // Legacy focus metric; use inquiry_input_start for actual populated input.
   inquiryForm?.addEventListener('focusin', () => {
     if (inquiryForm.dataset.started) return
     inquiryForm.dataset.started = 'true'

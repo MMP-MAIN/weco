@@ -42,24 +42,27 @@ assert.match(home, /rel="canonical" href="https:\/\/wecocompany.com\/"/);
 // Execute the actual submit handler with mocked transport: never send a test lead.
 const submitCode = main.slice(main.indexOf("form.addEventListener('submit'"), main.indexOf('// Keep mobile keyboard'));
 assert.ok(submitCode.length > 1000);
-for (const outcome of ['success', 'failure']) {
+for (const outcome of ['success', 'failure', 'network', 'timeout', 'whitespace', 'busy']) {
   let handler, payload, resetCount = 0;
   const events = [];
   const form = {
-    name: { value: '테스트 이름' }, phone: { value: '01000000000' },
+    name: { value: outcome === 'whitespace' ? '   ' : '테스트 이름' }, phone: { value: '01000000000' },
     message: { value: '고객이 직접 쓴 문의' }, budget: { value: '' },
     addEventListener: (_, fn) => { handler = fn; }, setAttribute() {}, removeAttribute() {},
     reset() { resetCount++; }
   };
   const label = { textContent: '문의 보내기' };
-  const submitBtn = { disabled: false, classList: { add() {}, remove() {} }, querySelector: () => label };
+  const submitBtn = { disabled: outcome === 'busy', classList: { add() {}, remove() {} }, querySelector: () => label };
   const context = getInquiryContext('?inquiry=cafe-startup');
   const sandbox = {
     form, submitBtn, inquiryContext: context, inquiryEventParams, selectedType: '', typeCards: null,
+    inquiryTracking: { attempt() {}, validationError() {}, params: () => ({ attempt_number: 1 }) },
     FORM_MSG: { need: 'need', ok: 'ok', err: 'err' }, INQUIRY_ENDPOINT: 'mock-only',
     getLeadContext: () => ({ first_touch: 'naver / organic' }),
     fetch: async (_, opts) => {
       payload = JSON.parse(opts.body);
+      if (outcome === 'network') throw new TypeError('network unavailable');
+      if (outcome === 'timeout') throw Object.assign(new Error('timeout'), { name: 'AbortError' });
       return { ok: outcome === 'success', json: async () => ({ success: outcome === 'success' }) };
     },
     trackEvent: (name, params) => events.push({ name, params }), setStatus() {},
@@ -68,6 +71,12 @@ for (const outcome of ['success', 'failure']) {
   };
   vm.runInNewContext(submitCode, sandbox);
   await handler({ preventDefault() {} });
+  if (outcome === 'whitespace' || outcome === 'busy') {
+    assert.equal(payload, undefined, `${outcome}: no request sent`);
+    assert.equal(resetCount, 0);
+    assert.equal(events.some(e => e.name === 'generate_lead'), false);
+    continue;
+  }
   assert.equal(payload.문의내용, '고객이 직접 쓴 문의');
   assert.equal(payload.상담주제, context.topic);
   assert.equal(payload.상담연결글, 'https://wecocompany.com/cafe-startup-interior.html');
@@ -77,6 +86,11 @@ for (const outcome of ['success', 'failure']) {
   assert.equal(resetCount, outcome === 'success' ? 1 : 0);
   assert.equal(events.some(e => e.name === 'generate_lead'), outcome === 'success');
   if (outcome === 'success') assert.equal(events[0].params.inquiry_topic, 'cafe-startup');
+  else {
+    assert.equal(events[0].name, 'form_submit_error');
+    assert.equal(events[0].params.error_type, outcome === 'timeout' ? 'timeout' : outcome === 'network' ? 'network_error' : 'response_error');
+    assert.equal(form.message.value, '고객이 직접 쓴 문의', 'retain message on failed submission');
+  }
   assert.ok(!JSON.stringify(events).includes('01000000000'), 'no phone in analytics');
   assert.ok(!JSON.stringify(events).includes('고객이 직접 쓴 문의'), 'no message in analytics');
 }

@@ -139,7 +139,7 @@ html.studio-root.studio-menu-open{overflow:hidden}
 .studio-home .footer-guides{margin:16px 0}
 .studio-home #stickyBar{background:#050505;border-color:#383838}
 .studio-home #stickyBar :is(a,button){border:1px solid #555;background:#050505;color:#fff}
-.studio-home #stickyBar .sb-consult{background:#f7f7f5;color:#050505;border-color:#f7f7f5}
+.studio-home #stickyBar .sb-call{background:#f7f7f5;color:#050505;border-color:#f7f7f5;font-weight:700}
 .studio-home .work-fab{display:none!important}
 .studio-home :is(#weco-about,#scope,#intelligence,#studioWork){scroll-margin-top:100px}
 .studio-home :is(.contact-info,.contact-form,.section-eyebrow,.section-title,.section-desc).rv{opacity:1;transform:none}
@@ -201,15 +201,25 @@ html.studio-root.studio-menu-open{overflow:hidden}
   .studio-home .studio-resources-grid{grid-template-columns:1fr;gap:22px}
   .studio-home .intelligence .marketing-bridge{padding:20px 0 0;border-left:0;border-top:1px solid #bbb}
   .studio-home .marketing-bridge strong{font-size:20px}
-  .studio-home #contact{padding:64px 0!important;scroll-margin-top:72px}
-  .studio-home #contact .section-title{font-size:38px}
+  .studio-home #contact{padding:24px 0 40px!important;scroll-margin-top:72px}
+  .studio-home #contact .contact-wrap{gap:16px}
+  .studio-home #contact .section-eyebrow{display:none}
+  .studio-home #contact .section-title{font-size:30px;line-height:1.2;margin:0 0 12px}
+  .studio-home #contact .section-title br{display:none}
+  .studio-home #contact .section-desc{font-size:15px;line-height:1.6;margin:0 0 10px}
+  .studio-home #contact .contact-response-note{font-size:12px;line-height:1.6;margin:0 0 4px}
+  .studio-home #contact .contact-details{margin-top:0}
   .studio-home .contact-form .form-row{grid-template-columns:1fr 1fr;gap:16px}
   .studio-home .contact-form{padding:0}
-  .studio-home .contact-form .privacy-consent{font-size:13px}
+  .studio-home .contact-form label,.studio-home .contact-form .block-label{margin-bottom:10px}
+  .studio-home .contact-form .composer textarea{height:96px;min-height:96px;padding:8px 0 12px}
+  .studio-home .contact-form .budget-option{margin:4px 0}
+  .studio-home .contact-form .privacy-consent{font-size:13px;line-height:1.6;margin-top:10px}
+  .studio-home .contact-form .inquiry-submit{margin-top:12px}
   .studio-home .footer{padding:36px 0}
-  .studio-home #stickyBar{grid-template-columns:1fr 1fr 1fr;gap:6px;padding-top:8px;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+  .studio-home #stickyBar{grid-template-columns:1.3fr 1fr 1fr;gap:6px;padding-top:8px;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
   .studio-home #stickyBar :is(a,button){border-radius:999px;min-height:48px!important;white-space:normal;font-size:12px!important;line-height:1.3!important}
-  body.studio-home:is(.inquiry-editing,.mobile-keyboard-open,.menu-open) #stickyBar,.studio-home .project-view.open~#stickyBar{display:none!important}
+  body.studio-home:is(.inquiry-visible,.inquiry-editing,.mobile-keyboard-open,.menu-open) #stickyBar,.studio-home .project-view.open~#stickyBar{display:none!important}
 }
 @media(max-width:360px){
   .studio-home .service-summary-grid{grid-template-columns:1fr}
