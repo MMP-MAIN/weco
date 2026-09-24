@@ -32,10 +32,10 @@
 - F&B 브랜딩과 인테리어의 차이·메뉴판·사인·서비스 결과물: https://wecocompany.com/fnb-branding-vs-interior.html
 - 상권분석 사이트와 방법: https://wecocompany.com/fnb-location-analysis.html
 - 카페테리아·구내식당 인테리어: https://wecocompany.com/cafeteria-interior-planning-guide.html
-- 미용실 인테리어 비용·공사 순서·리모델링 준비: https://wecocompany.com/hair-salon-interior-process-guide.html
+- 10평·1인 미용실 인테리어 비용·견적·리모델링 준비: https://wecocompany.com/hair-salon-interior-process-guide.html
 - 사무실 인테리어 비용·견적 범위: https://wecocompany.com/office-interior-quote-guide.html
 - 상가 인테리어 비용·업체 선정·견적 비교: https://wecocompany.com/commercial-interior-quote-checklist.html
-- 식당 창업 준비·점포 계약 전 확인: https://wecocompany.com/restaurant-startup-reality.html
+- 초보·1인 식당 창업 준비·점포 계약 전 확인: https://wecocompany.com/restaurant-startup-reality.html
 - 식당 인테리어 비용·가견적·기존 주방 재사용: https://wecocompany.com/restaurant-interior-cost.html
 - 프랜차이즈 창업 비용과 현실: https://wecocompany.com/franchise-startup-cost-reality.html
 - 음식점 창업 비용 계산: https://wecocompany.com/fnb-startup-budget.html
@@ -59,7 +59,7 @@
 - 대구 고기집 인테리어·창업 공간기획: https://wecocompany.com/daegu-bbq-restaurant-interior.html
 - 대구 카페 인테리어·창업 공간기획: https://wecocompany.com/daegu-cafe-interior.html
 - 대구 음식점·식당·상가 인테리어: https://wecocompany.com/daegu-commercial-interior.html
-- 대구 미용실 인테리어: https://wecocompany.com/daegu-hair-salon-interior.html
+- 대구 미용실 인테리어 업체 선택·견적 준비: https://wecocompany.com/daegu-hair-salon-interior.html
 - 대구 사무실 인테리어: https://wecocompany.com/daegu-office-interior.html
 - 대구·경북·울산·경남 프로젝트 지역: https://wecocompany.com/yeongnam-interior-service-area.html
 - 울산 카페·고기집·식당·술집 인테리어와 공간 브랜딩: https://wecocompany.com/ulsan-interior-space-branding.html
@@ -75,3 +75,7 @@
 - 술집 창업과 술집 인테리어: https://wecocompany.com/bar-startup-interior-guide.html
 - 음식점·고기집 마케팅, 실제 방문을 만드는 준비: https://wecocompany.com/restaurant-marketing-guide.html
 - 프랜차이즈 창업, 계약 전 비교할 기준: https://wecocompany.com/franchise-startup-cost-reality.html
+
+- 고기집 창업 비용·정육식당 준비 가이드: https://wecocompany.com/meat-restaurant-startup-interior.html
+
+- 소규모 카페 창업 비용·준비물·공간기획 가이드: https://wecocompany.com/cafe-startup-interior.html
