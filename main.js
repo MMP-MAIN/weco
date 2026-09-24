@@ -1002,7 +1002,7 @@ const LIGHTWEIGHT = REDUCED || matchMedia('(pointer: coarse)').matches || Boolea
       a.addEventListener('click', (e) => {
         if (e.defaultPrevented) return
         const target = document.querySelector(href)
-        if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -40 }) }
+        if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: href === '#contact' ? -88 : -40 }) }
       })
     })
   } catch (e) { /* CDN 실패 시 네이티브 스크롤 유지 */ }

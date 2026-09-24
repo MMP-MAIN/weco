@@ -65,4 +65,5 @@ assert.match(css, /\.composer textarea\{height:96px;min-height:96px/);
 assert.match(html, /class="sb-call" data-conversion="project_inquiry">상담 문의/);
 assert.match(html, /autocomplete="name" required/);
 assert.match(html, /autocomplete="tel" inputmode="tel" required/);
+assert.match(read('main.js'), /offset: href === '#contact' \? -88 : -40/);
 console.log('PASS: input vs focus, autofill, native invalid fields, attempts/retries, deduplication, safe payloads, analytics failure isolation and mobile CTA rules. No live request sent.');
