@@ -162,7 +162,8 @@ for (const file of files) {
     assert.doesNotMatch(plain(inner(html, link)), residentialOffer, `${file}: no residential service link`);
     return target.href;
   });
-  for (const target of ['index.html#weco-about', 'index.html#contact']) {
+  const contactRoute = file === 'spatial-branding-guide.html' ? 'index.html?inquiry=space-consulting#contact' : 'index.html#contact';
+  for (const target of ['index.html#weco-about', contactRoute]) {
     assert.ok(destinations.includes(`${origin}/${target}`), `${file}: company introduction and inquiry routes`);
   }
   assert.ok(destinations.includes('https://mpmarketing.co.kr/'), `${file}: external marketing destination`);

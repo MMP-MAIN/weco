@@ -9,6 +9,7 @@ const origin = 'https://wecocompany.com/';
 const files = ['hair-salon-interior-process-guide.html', 'daegu-hair-salon-interior.html'];
 for (const file of files) {
   const html = read(file);
+  const expectedDate = file === 'hair-salon-interior-process-guide.html' ? '2026-09-25' : '2026-09-23';
   assert.equal((html.match(/<h1>/g) || []).length, 1, `${file}: one heading`);
   assert.ok(html.includes(`rel="canonical" href="${origin}${file}"`));
   assert.ok(html.includes('width=device-width,initial-scale=1'));
@@ -19,8 +20,8 @@ for (const file of files) {
   const visible = [...html.matchAll(/<details><summary>(.*?)<\/summary><p>(.*?)<\/p><\/details>/g)].map(m => [m[1], m[2]]);
   const faq = data.find(x => x['@type'] === 'FAQPage');
   assert.deepEqual(faq.mainEntity.map(q => [q.name, q.acceptedAnswer.text]), visible, `${file}: FAQ parity`);
-  assert.equal(data.find(x => x['@type'] === 'Article').dateModified, '2026-09-23');
-  assert.ok(read('sitemap.xml').includes(`<loc>${origin}${file}</loc><lastmod>2026-09-23</lastmod>`));
+  assert.equal(data.find(x => x['@type'] === 'Article').dateModified, expectedDate);
+  assert.ok(read('sitemap.xml').includes(`<loc>${origin}${file}</loc><lastmod>${expectedDate}</lastmod>`));
   for (const m of html.matchAll(/href="([^"]+)"/g)) {
     const url = new URL(m[1], origin + file);
     if (url.origin !== new URL(origin).origin) continue;

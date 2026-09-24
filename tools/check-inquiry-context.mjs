@@ -94,4 +94,4 @@ for (const outcome of ['success', 'failure', 'network', 'timeout', 'whitespace',
   assert.ok(!JSON.stringify(events).includes('01000000000'), 'no phone in analytics');
   assert.ok(!JSON.stringify(events).includes('고객이 직접 쓴 문의'), 'no message in analytics');
 }
-console.log('PASS: 5 contextual guide routes, safe URL allowlist, preserved input/attribution, submit success/failure and analytics privacy (mocked, no email sent).');
+console.log('PASS: 9 contextual guide routes, safe URL allowlist, preserved input/attribution, submit success/failure and analytics privacy (mocked, no email sent).');

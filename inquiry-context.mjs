@@ -1,5 +1,29 @@
 // Only fixed, public guide identifiers are accepted. No free text or personal data in URLs.
 export const INQUIRY_GUIDES = Object.freeze({
+  'brand-consulting': {
+  "topic": "브랜드 기획·디자인 상담",
+  "page": "brand-consulting-guide.html",
+  "title": "브랜드 컨설팅·결과물 가이드",
+  "placeholder": "예: 새로운 브랜드를 준비하고 있습니다. 현재 사업과 가장 해결하고 싶은 문제를 아는 만큼만 적어주세요."
+},
+  'space-consulting': {
+  "topic": "공간 기획·브랜딩 상담",
+  "page": "spatial-branding-guide.html",
+  "title": "공간 컨설팅·브랜딩 가이드",
+  "placeholder": "예: 운영 중인 매장의 공간을 바꾸려고 합니다. 이용 목적과 불편한 점, 유지하고 싶은 부분을 적어주세요."
+},
+  'brand-renewal': {
+  "topic": "브랜드 리뉴얼 상담",
+  "page": "brand-renewal-checklist.html",
+  "title": "리브랜딩·브랜드 리뉴얼 가이드",
+  "placeholder": "예: 이름은 유지하고 브랜드 이미지를 바꾸고 싶습니다. 현재 사업과 바꾸려는 이유만 적어주셔도 됩니다."
+},
+  'business-conversion': {
+  "topic": "매장 업종변경 준비 상담",
+  "page": "restaurant-business-conversion-guide.html",
+  "title": "음식점 업종변경·시설 재사용 가이드",
+  "placeholder": "예: 운영 중인 카페를 다른 업종으로 바꾸려고 합니다. 현재 업종과 바꾸고 싶은 방향, 가장 고민되는 점을 적어주세요."
+},
   'salon-process': {
     topic: '미용실 현장·견적 준비 상담',
     page: 'hair-salon-interior-process-guide.html',

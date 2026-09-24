@@ -13,10 +13,11 @@ const pages = {
 const feed = read('rss.xml');
 for (const [file, sections] of Object.entries(pages)) {
   const html = read(file);
+  const expectedDate = file === 'cafe-startup-interior.html' ? '2026-09-25' : '2026-09-23';
   assert.equal((html.match(/<h1>/g) || []).length, 1);
   assert.ok(html.includes(`rel="canonical" href="${origin}${file}"`));
   const data = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
-  assert.equal(data.find(x => x['@type'] === 'Article').dateModified, '2026-09-23');
+  assert.equal(data.find(x => x['@type'] === 'Article').dateModified, expectedDate);
   const faq = data.find(x => x['@type'] === 'FAQPage');
   const visible = [...html.matchAll(/<details><summary>(.*?)<\/summary><p>(.*?)<\/p><\/details>/g)].map(m => [m[1], m[2]]);
   assert.deepEqual(faq.mainEntity.map(q => [q.name, q.acceptedAnswer.text]), visible);
@@ -27,7 +28,7 @@ for (const [file, sections] of Object.entries(pages)) {
     assert.ok(existsSync(resolve(root, target)), target);
     if (u.hash) assert.ok(read(target).includes(`id="${decodeURIComponent(u.hash.slice(1))}"`), `${file}: ${u.hash}`);
   }
-  assert.ok(read('sitemap.xml').includes(`<loc>${origin}${file}</loc><lastmod>2026-09-23</lastmod>`));
+  assert.ok(read('sitemap.xml').includes(`<loc>${origin}${file}</loc><lastmod>${expectedDate}</lastmod>`));
   const items = [...feed.matchAll(/<item>[\s\S]*?<\/item>/g)].filter(m => m[0].includes(`<link>${origin}${file}</link>`));
   assert.equal(items.length, 1);
   for (const section of sections) {
