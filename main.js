@@ -1,4 +1,6 @@
 // ===== 위코컴퍼니 홈페이지 스크립트 =====
+import { applyInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=1'
+
 const PHONE = '010-8606-2119'
 
 // 이미지가 없는 프로젝트는 깨진 썸네일 대신 작업 내용을 텍스트로 표시합니다.
@@ -538,6 +540,7 @@ tick()
 const form = document.getElementById('inquiryForm')
 const submitBtn = document.getElementById('submitBtn')
 const formStatus = document.getElementById('formStatus')
+const inquiryContext = applyInquiryContext(document, location.search)
 
 // 프로젝트 유형 선택
 const typeCards = document.getElementById('typeCards')
@@ -612,6 +615,10 @@ form.addEventListener('submit', async (e) => {
         개인정보동의: '동의',
         프로젝트예상총예산: form.budget.value.trim() || '미입력',
         문의내용: form.message.value.trim() || '미입력',
+        ...(inquiryContext ? {
+          상담주제: inquiryContext.topic,
+          상담연결글: `https://wecocompany.com/${inquiryContext.page}`
+        } : {}),
         최초유입: leadContext.first_touch,
         최근유입: leadContext.last_touch,
         광고캠페인: leadContext.campaign,
@@ -630,10 +637,12 @@ form.addEventListener('submit', async (e) => {
     if (res.ok && (data.success === 'true' || data.success === true)) {
       trackEvent('generate_lead', {
         form_name: 'project_inquiry',
+        ...inquiryEventParams(inquiryContext),
         lead_type: selectedType || 'unspecified',
         page_language: document.documentElement.lang || 'ko'
       })
       form.reset()
+      applyInquiryContext(document, location.search)
       setStatus(FORM_MSG.ok, true)
     } else {
       throw new Error(data.message || 'submit failed')
@@ -895,7 +904,7 @@ document.addEventListener('click', (event) => {
   inquiryForm?.addEventListener('focusin', () => {
     if (inquiryForm.dataset.started) return
     inquiryForm.dataset.started = 'true'
-    trackEvent('form_start', { form_name: 'project_inquiry', page_language: document.documentElement.lang || 'ko' })
+    trackEvent('form_start', { form_name: 'project_inquiry', ...inquiryEventParams(inquiryContext), page_language: document.documentElement.lang || 'ko' })
   })
 
   // 광고 클릭 수와 실제 관심 방문을 분리해 볼 수 있도록 10초 체류를 별도 기록합니다.

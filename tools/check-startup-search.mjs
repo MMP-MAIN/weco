@@ -35,7 +35,7 @@ for (const [file, sections] of Object.entries(pages)) {
     assert.ok(items[0][0].includes(`id="${section}"`));
   }
   assert.ok(html.includes('insight-tracking.js?v=5'));
-  assert.ok(html.includes('href="index.html#contact"'));
+  assert.match(html, /href="index\.html\?inquiry=[a-z-]+#contact"/);
   console.log(`PASS: ${file}: sections, FAQ ${visible.length}, links, sitemap and RSS`);
 }
 assert.ok(read('cafe-startup-interior.html').includes('href="https://mpmarketing.co.kr/"'));
