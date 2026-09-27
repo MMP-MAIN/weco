@@ -63,5 +63,5 @@ assert.ok(read('industry-guides.html').includes(`href="${fresh}"`));
 assert.ok(read('cafe-startup-interior.html').includes(`href="${fresh}"`));
 assert.ok(read('brand-renewal-checklist.html').includes(`href="${fresh}"`));
 assert.ok(read('main.js').includes('inquiry-context.mjs?v=2'));
-assert.ok(read('index.html').includes('main.js?v=145'));
+assert.ok(read('index.html').includes('main.js?v=146'));
 console.log('PASS: new guide discoverable, versioned consultation routes, no live submission.');

@@ -837,13 +837,16 @@ if (VISIT_PROFILE.visitor_type === 'returning') {
 document.addEventListener('click', (event) => {
   const pageLanguage = document.documentElement.lang || 'ko'
   const link = event.target.closest('a')
+  const ctaLocation = event.target.closest('.sticky-bar')
+    ? (window.matchMedia('(max-width:640px)').matches ? 'sticky_mobile' : 'sticky_desktop')
+    : 'page'
   const conversionTarget = event.target.closest('[data-conversion]')
   const conversionHref = conversionTarget?.closest('a')?.getAttribute('href') || ''
   if (conversionTarget && !['#contact'].includes(conversionHref)) {
     trackEvent('primary_cta_click', {
       page_language: pageLanguage,
       cta_name: conversionTarget.dataset.conversion || 'unknown',
-      cta_location: conversionTarget.closest('.sticky-bar') ? 'sticky_mobile'
+      cta_location: conversionTarget.closest('.sticky-bar') ? ctaLocation
         : conversionTarget.closest('.hero-actions') ? 'hero'
           : conversionTarget.closest('.marketing-bridge') ? 'hero_marketing'
             : 'page'
@@ -851,7 +854,7 @@ document.addEventListener('click', (event) => {
   }
   if (link) {
     const href = link.getAttribute('href') || ''
-    const linkParams = { page_language: pageLanguage, link_text: (link.textContent || '').trim().slice(0, 100) }
+    const linkParams = { page_language: pageLanguage, link_text: (link.textContent || '').trim().slice(0, 100), cta_location: ctaLocation }
     if (href.startsWith('tel:')) {
       trackEvent('contact_cta_click', { ...linkParams, contact_method: 'phone' })
       trackEvent('phone_click', linkParams)

@@ -56,6 +56,13 @@ assert.doesNotThrow(() => {
 const read = file => readFileSync(new URL(`../${file}`, import.meta.url), 'utf8');
 const css = read('studio-refresh.css');
 const html = read('index.html');
+assert.match(html, /viewport-fit=cover/);
+assert.equal((html.match(/id="stickyBar"/g) || []).length, 1, 'reuse one banner');
+assert.match(html, /<nav class="sticky-bar" id="stickyBar" aria-label=/);
+assert.match(css, /#stickyBar\{display:grid!important/);
+assert.match(css, /padding-bottom:calc\(86px \+ env\(safe-area-inset-bottom\)\)/);
+assert.ok(css.indexOf('body.studio-home:is(.inquiry-visible') < css.indexOf('@media(max-width:640px)'), 'hide on desktop and mobile');
+assert.match(read('main.js'), /'sticky_mobile' : 'sticky_desktop'/);
 assert.match(css, /#stickyBar \.sb-call\{background:#f7f7f5/);
 assert.doesNotMatch(css, /#stickyBar \.sb-consult\{background:#f7f7f5/);
 assert.match(css, /grid-template-columns:1\.3fr 1fr 1fr/);
