@@ -7,7 +7,7 @@ const origin = 'https://wecocompany.com/';
 const pages = {
   'cafe-startup-interior.html': ['independent-cafe', 'consulting'],
   'hair-salon-interior-process-guide.html': ['solo-layout'],
-  'brand-consulting-guide.html': ['weco-fit'],
+  'brand-consulting-guide.html': ['weco-fit', 'quote-check'],
   'spatial-branding-guide.html': ['consulting'],
   'brand-renewal-checklist.html': ['keep-name'],
   'restaurant-business-conversion-guide.html': ['reason', 'reuse', 'budget', 'reopen', 'scope', 'faq'],
@@ -33,8 +33,9 @@ for (const [file, sections] of Object.entries(pages)) {
   const schema = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m => {
     const j = JSON.parse(m[1]); return j['@graph'] || [j];
   });
-  assert.equal(schema.find(n => n['@type'] === 'Article').dateModified, '2026-09-25');
-  assert.ok(html.includes('<time datetime="2026-09-25">2026.09.25</time>'));
+  const updated = ['brand-consulting-guide.html', 'spatial-branding-guide.html', 'hair-salon-interior-process-guide.html'].includes(file) ? '2026-09-29' : '2026-09-25';
+  assert.equal(schema.find(n => n['@type'] === 'Article').dateModified, updated);
+  assert.ok(html.includes(`<time datetime="${updated}">${updated.replaceAll('-', '.')}</time>`));
   const faq = schema.find(n => n['@type'] === 'FAQPage');
   if (faq) for (const q of faq.mainEntity) {
     assert.ok(html.includes(q.name), `${file}: visible FAQ question`);
@@ -48,7 +49,7 @@ for (const [file, sections] of Object.entries(pages)) {
     if (u.hash) assert.ok(read(target).includes(`id="${u.hash.slice(1)}"`), `${file}: ${href}`);
     if (u.searchParams.has('inquiry')) assert.equal(getInquiryContext(u.search)?.page, file);
   }
-  assert.ok(sitemap.includes(`<loc>${origin}${file}</loc><lastmod>2026-09-25</lastmod>`));
+  assert.ok(sitemap.includes(`<loc>${origin}${file}</loc><lastmod>${updated}</lastmod>`));
   const items = [...feed.matchAll(/<item>[\s\S]*?<\/item>/g)].filter(m => m[0].includes(`<link>${origin}${file}</link>`));
   assert.equal(items.length, 1, `${file}: unique RSS item`);
   for (const id of sections) {

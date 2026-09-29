@@ -9,7 +9,9 @@ const main = read('main.js');
 for (const [id, guide] of Object.entries(INQUIRY_GUIDES)) {
   const html = read(guide.page);
   const links = [...html.matchAll(/href="(index\.html\?inquiry=[^"]+)"/g)];
-  assert.equal(links.length, 2, `${guide.page}: header and final CTA`);
+  const examplePages = ['brand-consulting-guide.html', 'hair-salon-interior-process-guide.html', 'meat-restaurant-startup-interior.html', 'restaurant-startup-reality.html'];
+  const expectedLinks = (guide.page === 'brand-consulting-guide.html' ? 3 : 2) + Number(examplePages.includes(guide.page));
+  assert.equal(links.length, expectedLinks, `${guide.page}: header, final CTA, optional tool and worked-example CTAs`);
   for (const [, href] of links) {
     const url = new URL(href, 'https://wecocompany.com/');
     assert.equal(url.hash, '#contact');

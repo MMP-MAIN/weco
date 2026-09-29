@@ -1,0 +1,16 @@
+.guide-tools{margin:40px 0;padding:26px;border:1px solid var(--line);background:#faf8f2}
+.guide-tools h2{font-size:clamp(23px,4vw,30px);line-height:1.3;margin:0 0 16px;letter-spacing:-.04em}
+.guide-tools label{display:block;font-weight:650;font-size:15px}
+.guide-tools input,.guide-tools select,.guide-tools textarea{box-sizing:border-box;width:100%;min-width:0;max-width:100%;min-height:46px;margin-top:8px;padding:12px;border:1px solid #8a857b;border-radius:3px;background:#fff;color:#171713;font:inherit;font-size:16px}
+.guide-tools button{min-height:46px;padding:10px 16px;border:1px solid #171713;background:#171713;color:white;font-family:inherit;font-size:14px;font-weight:600;line-height:1.5;cursor:pointer}
+.guide-tools :is(input,select,button,textarea,a):focus-visible{outline:2px solid #171713;outline-offset:4px}
+.guide-tools .tool-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px}
+.guide-tools .tool-row p{margin:0;font-size:14px}
+.guide-question-links{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;margin:20px 0 0}
+.guide-question-links a{padding:14px 0;border-top:1px solid var(--line);font-size:15px;line-height:1.6;text-underline-offset:4px}
+.insight-card[hidden],[data-guide-empty][hidden]{display:none!important}
+.guide-tools fieldset{border:0;padding:0;margin:22px 0;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.guide-tools legend{font-weight:700;margin-bottom:18px}
+.guide-tools textarea{min-height:180px;font-size:14px;line-height:1.7;resize:vertical}
+.guide-tools [role=status]{font-size:14px;line-height:1.7}
+@media(max-width:640px){.guide-tools{padding:20px 16px}.guide-question-links,.guide-tools fieldset{grid-template-columns:1fr}.guide-tools .tool-row button{flex:1}.guide-tools{scroll-margin-top:90px}}

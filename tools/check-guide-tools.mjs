@@ -1,0 +1,48 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {QUOTE_ITEMS, summarizeQuote, matchesGuide, setupGuideTools} from '../guide-tools.mjs';
+const read = f => readFileSync(new URL(`../${f}`, import.meta.url), 'utf8');
+assert.equal(QUOTE_ITEMS.length, 8);
+assert.equal(new Set(QUOTE_ITEMS.map(x=>x[0])).size,8);
+assert.equal(summarizeQuote().confirmed,0);
+assert.equal(summarizeQuote({goal:'confirmed',research:'untrusted'}).confirmed,1);
+assert.equal(summarizeQuote(Object.fromEntries(QUOTE_ITEMS.map(([id])=>[id,'confirmed']))).missing.length,0);
+assert.match(summarizeQuote().text, /품질·가격 평가가 아닙니다/);
+assert.ok(matchesGuide('브랜드 컨설팅 비용과 견적', '브랜드컨설팅 비용'));
+assert.ok(matchesGuide('F&B 브랜드', 'f&b'));
+assert.ok(matchesGuide('상가', '   '));
+assert.equal(matchesGuide('브랜드 컨설팅', '<script>'),false);
+assert.equal(matchesGuide('카페 창업', '미용실'),false);
+const html=read('brand-consulting-guide.html');
+for(const [id,,question] of QUOTE_ITEMS){assert.ok(html.includes(`name="${id}"`));assert.ok(html.includes(question), 'questions readable without JS');}
+assert.match(html, /<textarea data-quote-memo readonly/);
+assert.match(html, /id="quote-check"/);
+assert.doesNotMatch(html, /<form\b/); // Avoid treating the comparison aid as a lead form.
+assert.match(read('insights.html'), /id="guide-results"/);
+assert.match(read('guide-tools.css'), /\.insight-card\[hidden\].*display:none!important/);
+assert.doesNotMatch(read('guide-tools.mjs'), /fetch\(|localStorage|sessionStorage|gtag\(|fbq\(|innerHTML/);
+// Exercise the enhancement with a lightweight document, including filtering and reset.
+const make = extra=>Object.assign({handlers:{},addEventListener(k,fn){this.handlers[k]=fn}},extra);
+const search=make({value:''}), clear=make({}), status={}, empty={};
+search.focus=()=>{};
+const cards=[{textContent:'브랜드 컨설팅',hidden:false},{textContent:'카페 창업 비용',hidden:false}];
+const doc={querySelector(s){return {'[data-guide-search]':search,'[data-guide-clear]':clear,'[data-guide-count]':status,'[data-guide-empty]':empty}[s]||null},querySelectorAll(){return cards}};
+setupGuideTools(doc,{});
+assert.equal(status.textContent,'2개의 안내');
+search.value='카페';search.handlers.input();assert.equal(cards[0].hidden,true);assert.equal(cards[1].hidden,false);
+search.value='없는 항목';search.handlers.input();assert.equal(empty.hidden,false);
+clear.handlers.click();assert.ok(cards.every(c=>!c.hidden));assert.equal(empty.hidden,true);
+const choices=Object.fromEntries(QUOTE_ITEMS.map(([id])=>[id,{value:'unknown'}]));
+const checker=make({querySelector:s=>choices[s.match(/name="([^"]+)"/)[1]]});
+const output={}, questions={replaceChildren(...children){this.children=children}}, memo={focus(){this.focused=true},select(){this.selected=true}}, copyStatus={};
+const copy=make({}), reset=make({});let clipboard='';
+const quoteDoc={querySelector(s){return {'[data-quote-check]':checker,'[data-quote-summary]':output,'[data-quote-questions]':questions,'[data-quote-memo]':memo,'[data-copy-status]':copyStatus,'[data-quote-copy]':copy,'[data-quote-reset]':reset}[s]||null},createElement(){return {}}};
+const win={navigator:{clipboard:{async writeText(text){clipboard=text}}}};
+setupGuideTools(quoteDoc,win);
+assert.equal(questions.children.length,8);
+choices.goal.value='confirmed';checker.handlers.change();assert.equal(questions.children.length,7);
+await copy.handlers.click();assert.match(clipboard,/\[확인\] 해결할 과제/);
+win.navigator.clipboard.writeText=async()=>{throw Error('denied')};
+await copy.handlers.click();assert.ok(memo.focused&&memo.selected);assert.match(copyStatus.textContent,/직접 복사/);
+reset.handlers.click();assert.equal(questions.children.length,8);assert.equal(choices.goal.value,'unknown');
+console.log('PASS: guide search/reset, eight comparison conditions, unknown/complete answers, static fallback, privacy and mobile CSS. No live inquiry sent.');

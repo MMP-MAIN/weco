@@ -13,7 +13,7 @@ const pages = {
 const feed = read('rss.xml');
 for (const [file, sections] of Object.entries(pages)) {
   const html = read(file);
-  const expectedDate = file === 'cafe-startup-interior.html' ? '2026-09-25' : '2026-09-23';
+  const expectedDate = file === 'cafe-startup-interior.html' ? '2026-09-25' : '2026-09-29';
   assert.equal((html.match(/<h1>/g) || []).length, 1);
   assert.ok(html.includes(`rel="canonical" href="${origin}${file}"`));
   const data = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
