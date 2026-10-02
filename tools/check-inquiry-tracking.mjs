@@ -69,7 +69,7 @@ assert.match(css, /grid-template-columns:1\.3fr 1fr 1fr/);
 assert.match(css, /\.inquiry-visible/);
 assert.match(css, /#contact\{padding:24px 0 40px!important/);
 assert.match(css, /\.composer textarea\{height:96px;min-height:96px/);
-assert.match(html, /class="sb-call" data-conversion="project_inquiry">상담 문의/);
+assert.match(html, /class="sb-call" data-conversion="project_inquiry">내 상황 상담/);
 assert.match(html, /autocomplete="name" required/);
 assert.match(html, /autocomplete="tel" inputmode="tel" required/);
 assert.match(read('main.js'), /offset: href === '#contact' \? -88 : -40/);

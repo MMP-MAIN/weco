@@ -12,8 +12,9 @@ assert.ok(start >= 0 && end > start, 'The production introduction handler must e
 const introduction = main.slice(start, end);
 const hero = html.match(/<section class="hero">([\s\S]*?)<\/section>/)?.[1];
 assert.ok(hero, 'The homepage hero must exist.');
-assert.match(hero, /사업과 브랜드, 공간의 다음 가능성을 기획합니다\./);
-assert.match(hero, /브랜드를 키우고,<br\s*\/>장소의 가치를 새롭게\./);
+assert.match(hero, /창업부터 브랜드·공간의 변화까지/);
+assert.match(hero, /무엇을 바꿀지보다,<br\s*\/>왜 바꿔야 하는지부터\./);
+assert.match(hero, /현재 고민과 예산을 바탕으로 필요한 일부터 정리하고/);
 assert.doesNotMatch(hero, /수익\s*보장|부동산\s*가격\s*상승/);
 assert.match(hero, /data-studio-display aria-hidden="true"/);
 assert.match(hero, /href="#contact"[^>]*data-conversion="project_inquiry"/);
@@ -35,7 +36,7 @@ function randomAt(value) {
 function korean({ isStudio = true, previous = -1, random = 0, term = '' } = {}) {
   const headline = { innerHTML: 'initial headline' };
   const promise = { innerHTML: 'initial promise' };
-  const cta = { innerHTML: '상담 문의 <span>↗</span>', href: '#contact' };
+  const cta = { innerHTML: '내 상황 상담하기 <span>↗</span>', href: '#contact' };
   const session = storage({ wecoHeroVariant: String(previous) });
   const body = { classList: { contains: name => isStudio && name === 'studio-home' }, dataset: {} };
   const document = {
@@ -70,7 +71,7 @@ for (let index = 0; index < 5; index += 1) {
   studioHeadlines.add(home.headline);
   assert.match(`${home.headline} ${home.promise}`, /브랜드|장소|공간|찾아/);
   assert.doesNotMatch(`${home.headline} ${home.promise}`, /수익\s*보장|부동산\s*가격\s*상승/);
-  assert.equal(home.cta.innerHTML, '상담 문의 <span>↗</span>', 'General visits keep the main inquiry action.');
+  assert.equal(home.cta.innerHTML, '내 상황 상담하기 <span>↗</span>', 'General visits keep the main inquiry action.');
   assert.equal(home.cta.href, '#contact');
   assert.equal(home.body.dataset.landingSegment, 'general');
 }

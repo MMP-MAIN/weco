@@ -53,7 +53,8 @@ assert.ok(llms.includes('창업 강의·창업 교육'));
 assert.ok(llms.includes(`${origin}/#scope`));
 assert.ok(llms.includes('010-8606-2119'));
 assert.ok(llms.includes('https://mpmarketing.co.kr/'));
-assert.doesNotMatch(llms, /주거|아파트|residential|apartment/, 'company guide must not promote residential services');
+assert.ok(llms.includes(`${origin}/residential.html`), 'apartment consultation is a separate guide');
+assert.ok(llms.includes('현장별 가능 범위와 시공 담당은 별도 협의'), 'do not promise unverified construction scope');
 for (const match of llms.matchAll(/https:\/\/wecocompany\.com\/([^\s#]*)/g)) {
   const path = match[1] || 'index.html';
   assert.ok(existsSync(resolve(root, decodeURIComponent(path))), `company guide target: ${path}`);

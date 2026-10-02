@@ -7,7 +7,7 @@ import { resolve } from 'node:path';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const origin = 'https://wecocompany.com';
 const read = (file) => readFileSync(resolve(root, file), 'utf8');
-const archived = new Set([
+const restored = new Set([
   'residential.html', 'apartment-interior-planning-checklist.html',
   'daegu-apartment-interior.html', 'old-apartment-remodeling-checklist.html',
   '30-pyeong-apartment-interior-guide.html',
@@ -21,7 +21,8 @@ const marketingPages = [
   'cafe-startup-interior.html', 'commercial-space-brand-consulting.html',
   'hair-salon-branding-interior.html', 'meat-restaurant-startup-interior.html',
 ];
-const changed = [...archived, ...regions, ...marketingPages, 'insights.html', 'rss.xml', 'sitemap.xml', 'service-archive.css'];
+const archived = new Set(); // No retired residential pages after the 2026-10-02 request.
+const changed = [...restored, ...regions, ...marketingPages, 'insights.html', 'rss.xml', 'sitemap.xml', 'service-archive.css'];
 const pathOf = (url) => decodeURIComponent(new URL(url, `${origin}/`).pathname).replace(/^\//, '');
 const sitemap = read('sitemap.xml');
 const rss = read('rss.xml');
@@ -32,17 +33,17 @@ for (const url of [...sitemapUrls, ...rssUrls]) {
   assert.equal(new URL(url).origin, origin, `discovery domain: ${url}`);
   assert.ok(!archived.has(pathOf(url)), `archived page still promoted: ${url}`);
 }
-for (const file of archived) {
+for (const file of restored) {
   const html = read(file);
-  assert.equal((html.match(/<meta name="robots"/g) || []).length, 1, `${file}: exactly one robots instruction`);
-  assert.ok(html.includes('name="robots" content="noindex,follow"'), `${file}: noindex`);
-  assert.ok(html.includes('data-service-status="archived"'), `${file}: archive state`);
-  assert.ok(html.includes('aria-label="이전 자료 안내"'), `${file}: visible notice`);
-  assert.ok(html.includes('href="service-archive.css?v=1"'), `${file}: notice style`);
-  assert.ok(html.includes(`rel="canonical" href="${origin}/${file}"`), `${file}: retain original URL`);
-  assert.ok(html.indexOf('이전 자료 안내') < html.indexOf('<h1'), `${file}: notice precedes article`);
-  assert.ok(!html.includes('href="index.html#contact"'), `${file}: obsolete sales CTA removed`);
-  assert.ok(!read('robots.txt').includes(`Disallow: /${file}`), `${file}: crawlers must read noindex`);
+  assert.equal((html.match(/<meta name="robots"/g) || []).length, 1);
+  assert.ok(html.includes('content="index,follow,max-image-preview:large"'), file);
+  assert.doesNotMatch(html, /data-service-status="archived"|service-archive-notice|이전 자료/);
+  assert.ok(html.includes(`rel="canonical" href="${origin}/${file}"`), file);
+  assert.ok(html.includes('#contact'), file + ': inquiry route');
+  assert.ok(sitemapUrls.includes(`${origin}/${file}`), file + ': sitemap');
+  assert.ok(rssUrls.includes(`${origin}/${file}`), file + ': RSS');
+  assert.ok(read('insights.html').includes(`href="${file}"`), file + ': discoverable');
+  assert.ok(!read('robots.txt').includes(`Disallow: /${file}`), file + ': crawl allowed');
 }
 assert.doesNotMatch(read('robots.txt'), /^Disallow:\s*\/\s*$/m, 'do not block the whole site');
 
@@ -61,7 +62,7 @@ for (const file of readdirSync(root).filter((name) => name.endsWith('.html') && 
   }
   for (const match of html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) JSON.parse(match[1]);
 }
-for (const file of [...regions, 'insights.html']) {
+for (const file of regions) {
   assert.doesNotMatch(read(file), /주거|아파트|주택|RESIDENTIAL/i, `${file}: obsolete residential positioning`);
 }
 for (const file of marketingPages) {
@@ -72,7 +73,7 @@ for (const file of marketingPages) {
   assert.ok(sales, `${file}: consultation CTA retained`);
   assert.doesNotMatch(sales, /마케팅/, `${file}: do not imply in-house marketing`);
 }
-console.log(`PASS: ${archived.size} retained archives excluded; ${sitemapUrls.length} active sitemap URLs; company/education links checked.`);
+console.log(`PASS: ${restored.size} apartment pages restored; ${sitemapUrls.length} active sitemap URLs; company/education links checked.`);
 
 // Verifies deployment bytes only, not that a search engine has recrawled them.
 if (process.argv.includes('--live')) {

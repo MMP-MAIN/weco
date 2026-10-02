@@ -1,5 +1,41 @@
 // Only fixed, public guide identifiers are accepted. No free text or personal data in URLs.
 export const INQUIRY_GUIDES = Object.freeze({
+  'water-damage': {
+    topic: '누수복구 인테리어 상담',
+    page: 'water-damage-restoration-interior.html',
+    title: '천장·도배·바닥 누수복구 안내',
+    placeholder: '지역·피해 위치·현재 누수 여부·원인 수리 여부를 아는 만큼 적어주세요. 예: 대구 아파트 거실 천장과 벽지 손상, 배관 수리는 완료했습니다.'
+  },
+  'apartment': {
+  "topic": "아파트 인테리어 기획·디자인 상담",
+  "page": "residential.html",
+  "title": "아파트 인테리어 기획·디자인 상담 안내",
+  "placeholder": "지역·평형·입주 예정일과 바꾸고 싶은 공간을 아는 만큼 적어주세요. 예: 32평 구축 아파트, 주방과 욕실을 바꾸고 싶습니다."
+},
+  'daegu-apartment': {
+  "topic": "대구 아파트 인테리어 상담",
+  "page": "daegu-apartment-interior.html",
+  "title": "대구 아파트 인테리어 상담 안내",
+  "placeholder": "지역·평형·입주 예정일과 바꾸고 싶은 공간을 아는 만큼 적어주세요. 예: 32평 구축 아파트, 주방과 욕실을 바꾸고 싶습니다."
+},
+  'apartment-planning': {
+  "topic": "아파트 인테리어 준비 상담",
+  "page": "apartment-interior-planning-checklist.html",
+  "title": "아파트 인테리어 준비 상담 안내",
+  "placeholder": "지역·평형·입주 예정일과 바꾸고 싶은 공간을 아는 만큼 적어주세요. 예: 32평 구축 아파트, 주방과 욕실을 바꾸고 싶습니다."
+},
+  'old-apartment': {
+  "topic": "구축 아파트 리모델링 상담",
+  "page": "old-apartment-remodeling-checklist.html",
+  "title": "구축 아파트 리모델링 상담 안내",
+  "placeholder": "지역·평형·입주 예정일과 바꾸고 싶은 공간을 아는 만큼 적어주세요. 예: 32평 구축 아파트, 주방과 욕실을 바꾸고 싶습니다."
+},
+  'apartment-cost': {
+  "topic": "30평대 아파트 비용·견적 상담",
+  "page": "30-pyeong-apartment-interior-guide.html",
+  "title": "30평대 아파트 비용·견적 상담 안내",
+  "placeholder": "지역·평형·입주 예정일과 바꾸고 싶은 공간을 아는 만큼 적어주세요. 예: 32평 구축 아파트, 주방과 욕실을 바꾸고 싶습니다."
+},
   'brand-consulting': {
   "topic": "브랜드 기획·디자인 상담",
   "page": "brand-consulting-guide.html",

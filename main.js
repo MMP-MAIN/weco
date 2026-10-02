@@ -1,5 +1,5 @@
 // ===== 위코컴퍼니 홈페이지 스크립트 =====
-import { applyInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=2'
+import { applyInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=3'
 import { createInquiryTracking } from './inquiry-tracking.mjs?v=1'
 
 const PHONE = '010-8606-2119'
@@ -57,24 +57,24 @@ document.addEventListener('error', (event) => {
 
   const variants = document.body.classList.contains('studio-home') ? [
     {
-      headline: '브랜드의 성장을,<br><strong>장소의 새로운 가치로.</strong>',
-      promise: '사업 전략과 브랜드·공간 기획을 하나로 연결합니다.'
+      headline: '브랜드를 바꾸기 전,<br><strong>해야 할 일부터 명확하게.</strong>',
+      promise: '현재 상황에 맞춰 필요한 업무와 순서를 정합니다. 진행 범위는 상담 후 함께 정합니다.'
     },
     {
-      headline: '익숙한 공간에,<br><strong>새로운 방문의 이유를.</strong>',
-      promise: '공간이 가진 가능성을 브랜드와 경험으로 구체화합니다.'
+      headline: '공간부터 고치기 전,<br><strong>쓰임부터 정합니다.</strong>',
+      promise: '누가 어떻게 이용할 공간인지 살펴보고, 필요한 변화의 범위를 정합니다.'
     },
     {
-      headline: '좋은 아이디어를,<br><strong>찾아오는 브랜드로.</strong>',
-      promise: '시장과 고객을 읽고 사업의 방향을 설계합니다.'
+      headline: '아이디어는 있는데,<br><strong>시작이 막막하다면.</strong>',
+      promise: '고객과 시장을 살펴 브랜드의 방향과 먼저 준비할 일을 정리합니다.'
     },
     {
-      headline: '한 번의 방문을,<br><strong>다시 찾고 싶은 경험으로.</strong>',
-      promise: '브랜드의 인상부터 공간에서의 경험까지 함께 기획합니다.'
+      headline: '브랜드와 공간이,<br><strong>따로 가지 않도록.</strong>',
+      promise: '기획에서 정한 기준을 디자인과 고객 경험까지 연결합니다.'
     },
     {
-      headline: '브랜드 하나에서,<br><strong>동네의 다음 가능성까지.</strong>',
-      promise: '작은 변화가 장소의 활력으로 이어지는 방향을 찾습니다.'
+      headline: '모두 바꾸기보다,<br><strong>필요한 변화부터.</strong>',
+      promise: '브랜드와 공간의 현재 상태를 살펴 유지할 것과 바꿀 것을 구분합니다.'
     }
   ] : [
     {
