@@ -34,11 +34,12 @@ for(const [file,id] of Object.entries(pages)) {
   assert.doesNotMatch(section, /<form\b|<script\b|<input\b/);
   assert.ok(html.includes('insights.css?v=2'));
   const schema=[...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m=>{const j=JSON.parse(m[1]);return j['@graph']||[j]});
-  assert.equal(schema.find(j=>j['@type']==='Article').dateModified,'2026-09-29');
+  const updated = ['brand-consulting-guide.html', 'commercial-interior-quote-checklist.html'].includes(file) ? '2026-10-06' : '2026-09-29';
+  assert.equal(schema.find(j=>j['@type']==='Article').dateModified,updated);
   for(const faq of schema.filter(j=>j['@type']==='FAQPage')) for(const q of faq.mainEntity) {
     assert.ok(html.includes(q.name)&&html.includes(q.acceptedAnswer.text),`${file}: visible FAQ`);
   }
-  assert.ok(sitemap.includes(`<loc>${origin}${file}</loc><lastmod>2026-09-29</lastmod>`));
+  assert.ok(sitemap.includes(`<loc>${origin}${file}</loc><lastmod>${updated}</lastmod>`));
   const items=[...feed.matchAll(/<item>[\s\S]*?<\/item>/g)].filter(m=>m[0].includes(`<link>${origin}${file}</link>`));
   assert.equal(items.length,1);
   assert.ok(items[0][0].includes(`id="${id}"`),`${file}: RSS updated`);

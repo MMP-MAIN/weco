@@ -1,5 +1,28 @@
 // Only fixed, public guide identifiers are accepted. No free text or personal data in URLs.
 export const INQUIRY_GUIDES = Object.freeze({
+  'daegu-commercial': {topic:'대구 상가·식당 공간기획 상담',page:'daegu-commercial-interior.html',title:'대구 상가·식당 설비·견적 준비 안내',placeholder:'대구 내 지역·면적·업종·계약 전후와 가장 고민되는 점을 아는 만큼 알려주세요.'},
+  'commercial-quote': {topic:'상가 인테리어 견적 준비 상담',page:'commercial-interior-quote-checklist.html',title:'상가 견적 포함·별도 항목 비교 안내',placeholder:'지역·면적·업종과 헷갈리는 견적 항목을 알려주세요. 견적서가 없다면 바꾸고 싶은 부분만 적어도 됩니다.'},
+  'restaurant-cost': {topic:'식당 공간·주방 설비 견적 준비 상담',page:'restaurant-interior-cost.html',title:'식당 인테리어·주방 설비 비용 안내',placeholder:'지역·면적·대표 메뉴·유지할 장비와 공사에서 궁금한 점을 아는 만큼 알려주세요.'},
+  'office': {topic:'사무실 인테리어·오피스 공간기획 상담',page:'office-branding-interior.html',title:'사무실 공간기획 안내',placeholder:'지역·면적·근무 인원·입주 일정과 가장 바꾸고 싶은 점을 알려주세요.'},
+  'office-quote': {topic:'사무실 인테리어 비용·견적 상담',page:'office-interior-quote-guide.html',title:'사무실 견적·이전 준비 안내',placeholder:'지역·면적·공사 범위·유지할 가구와 이전 일정을 아는 만큼 알려주세요.'},
+  'daegu-office': {topic:'대구 사무실 인테리어 상담',page:'daegu-office-interior.html',title:'대구 사무실 공간기획 안내',placeholder:'대구 내 지역·면적·근무 인원과 희망 입주일, 현재 고민을 알려주세요.'},
+  'small-office': {topic:'소형 사무실 인테리어 상담',page:'small-office-interior-guide.html',title:'10평·15평·20평 사무실 배치 안내',placeholder:'지역·면적·동시 근무 인원·회의와 통화 빈도·유지할 가구를 아는 만큼 알려주세요.'},
+  'house-remodeling': {
+    topic: '주택·단독주택 리모델링 상담', page: 'house-remodeling-guide.html', title: '주택·구옥 인테리어 준비 안내',
+    placeholder: '지역·집의 종류·대략적인 면적·거주 여부·바꾸고 싶은 부분을 알려주세요. 모르는 항목은 적지 않아도 됩니다.'
+  },
+  'small-apartment': {
+    topic: '20평대 아파트 인테리어 상담', page: '20-pyeong-apartment-interior-guide.html', title: '20평·24평·25평 생활·수납 계획',
+    placeholder: '지역·평형·입주 예정일·유지할 가구와 가장 불편한 공간을 알려주세요.'
+  },
+  'large-apartment': {
+    topic: '40평대 아파트 인테리어 상담', page: '40-pyeong-apartment-interior-guide.html', title: '40평대 공간별 공사 범위 안내',
+    placeholder: '지역·평형·방별 쓰임·유지할 부분과 희망 공사 시기를 아는 만큼 알려주세요.'
+  },
+  'partial-home': {
+    topic: '주거 부분 인테리어 상담', page: 'partial-home-interior-guide.html', title: '주방·욕실·도배·바닥 부분공사 안내',
+    placeholder: '지역·바꿀 공간·유지할 마감과 현재 거주 중인지 알려주세요. 예: 주방 가구와 거실 도배만 검토 중입니다.'
+  },
   'water-damage': {
     topic: '누수복구 인테리어 상담',
     page: 'water-damage-restoration-interior.html',
@@ -7,9 +30,9 @@ export const INQUIRY_GUIDES = Object.freeze({
     placeholder: '지역·피해 위치·현재 누수 여부·원인 수리 여부를 아는 만큼 적어주세요. 예: 대구 아파트 거실 천장과 벽지 손상, 배관 수리는 완료했습니다.'
   },
   'apartment': {
-  "topic": "아파트 인테리어 기획·디자인 상담",
+  "topic": "주택·아파트 인테리어 기획·디자인 상담",
   "page": "residential.html",
-  "title": "아파트 인테리어 기획·디자인 상담 안내",
+  "title": "주택·아파트 인테리어 기획·디자인 상담 안내",
   "placeholder": "지역·평형·입주 예정일과 바꾸고 싶은 공간을 아는 만큼 적어주세요. 예: 32평 구축 아파트, 주방과 욕실을 바꾸고 싶습니다."
 },
   'daegu-apartment': {

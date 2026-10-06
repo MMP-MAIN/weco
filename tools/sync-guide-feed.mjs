@@ -2,7 +2,7 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 const read = file => readFileSync(new URL(`../${file}`, import.meta.url), 'utf8');
 const origin = 'https://wecocompany.com/';
-const files = ['brand-consulting-guide.html', 'spatial-branding-guide.html', 'commercial-interior-quote-checklist.html', 'meat-restaurant-startup-interior.html', 'restaurant-startup-reality.html', 'hair-salon-interior-process-guide.html'];
+const files = ['brand-consulting-guide.html', 'spatial-branding-guide.html', 'commercial-interior-quote-checklist.html', 'meat-restaurant-startup-interior.html', 'restaurant-startup-reality.html', 'hair-salon-interior-process-guide.html', 'daegu-commercial-interior.html', 'restaurant-interior-cost.html'];
 let feed = read('rss.xml');
 for (const file of files) {
   const html = read(file);
@@ -14,6 +14,12 @@ for (const file of files) {
   feed = feed.replace(/<item>[\s\S]*?<\/item>/g, item => {
     if (!item.includes(`<link>${origin}${file}</link>`)) return item;
     count++;
+    const escapeXml = text => text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+    const title = html.match(/<title>([\s\S]*?)<\/title>/)?.[1];
+    const description = html.match(/<meta name="description" content="([^"]+)"/)?.[1];
+    if (!title || !description) throw new Error(`Missing metadata: ${file}`);
+    item = item.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeXml(title)}</title>`)
+      .replace(/<description>[\s\S]*?<\/description>/, `<description>${escapeXml(description)}</description>`);
     if(!item.includes('<content:encoded>')) return item; // Keep summary-only entries summary-only.
     return item.replace(/<content:encoded>[\s\S]*?<\/content:encoded>/, `<content:encoded><![CDATA[${article}]]></content:encoded>`);
   });

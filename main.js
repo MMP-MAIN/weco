@@ -1,5 +1,5 @@
 // ===== 위코컴퍼니 홈페이지 스크립트 =====
-import { applyInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=3'
+import { applyInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=6'
 import { createInquiryTracking } from './inquiry-tracking.mjs?v=1'
 
 const PHONE = '010-8606-2119'

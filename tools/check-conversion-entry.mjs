@@ -29,7 +29,7 @@ assert.doesNotMatch(contact, /name="(?:message|budget)"[^>]+required/);
 assert.match(css, /\.studio-home \.studio-hero-value/);
 assert.match(css, /@media\(max-width:640px\)/);
 assert.match(html, /href="studio-refresh\.css\?v=7"/);
-assert.match(html, /src="main\.js\?v=148"/);
+assert.match(html, /src="main\.js\?v=151"/);
 assert.match(html, /https:\/\/mpmarketing\.co\.kr\//);
 const work = html.match(/<section class="studio-work"[\s\S]*?<\/section>/)?.[0];
 const role = read('project-gasik.html');

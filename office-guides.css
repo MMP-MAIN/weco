@@ -1,0 +1,4 @@
+/* Office guides: retain the existing layout with narrow-screen safeguards. */
+:root{--green:#353535;--orange:#666}
+.article-hero h1{line-height:1.18;overflow-wrap:anywhere}.article-body,.next-card{min-width:0;overflow-wrap:anywhere}.faq summary{min-height:44px}
+@media(max-width:600px){.article-hero h1{font-size:clamp(30px,8.5vw,42px)}.insight-main{padding-inline:20px}.article-body h2{font-size:26px}.next-card{padding:24px}.insight-top{padding-inline:16px;gap:12px}.insight-logo{font-size:19px}.insight-cta{max-width:60%;text-align:center;font-size:12px}.answer{padding:20px}}
