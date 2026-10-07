@@ -23,6 +23,11 @@
 
 ## 핵심 전문 문서
 
+아래 메뉴·레시피 문서는 창업 준비를 위한 정보성 가이드입니다. 레시피 판매·조리 전수 교육의 제공을 의미하지 않습니다.
+- 업소용 레시피 표준화 | 식당 레시피·소스·대량 조리 준비: https://wecocompany.com/commercial-recipe-guide.html
+- 메뉴 개발 준비 가이드 | 식당·카페·술집 메뉴 구성과 테스트: https://wecocompany.com/restaurant-menu-development-guide.html
+- 전수창업 준비 체크리스트 | 레시피 전수·교육·재료 공급 확인: https://wecocompany.com/recipe-transfer-startup-guide.html
+
 - 브랜드 네이밍·슬로건 후보 비교와 적용 기준: https://wecocompany.com/brand-naming-slogan-guide.html
 - 프랜차이즈 브랜딩·2호점 확장 시 공통 기준: https://wecocompany.com/popup-franchise-branding.html#expansion
 

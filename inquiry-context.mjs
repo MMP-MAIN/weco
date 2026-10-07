@@ -1,5 +1,8 @@
 // Only fixed, public guide identifiers are accepted. No free text or personal data in URLs.
 export const INQUIRY_GUIDES = Object.freeze({
+  'commercial-recipe': {"topic":"레시피 관련 매장 기획 상담","page":"commercial-recipe-guide.html","title":"업소용 레시피 가이드","placeholder":"생각 중인 메뉴·현재 준비 단계와 브랜드나 공간에서 고민되는 점을 알려주세요. 비공개 배합은 적지 않아도 됩니다."},
+  'menu-planning': {"topic":"메뉴 관련 브랜드 기획 상담","page":"restaurant-menu-development-guide.html","title":"메뉴 개발 가이드","placeholder":"식당·카페·술집 중 어떤 매장을 준비하는지, 대표 메뉴와 브랜드 표현에서 고민되는 점을 알려주세요."},
+  'transfer-startup': {"topic":"전수창업 브랜드·공간 준비 상담","page":"recipe-transfer-startup-guide.html","title":"전수창업 준비 가이드","placeholder":"배우려는 메뉴·전수 교육 검토 단계·점포 유무와 브랜드나 공간에서 고민되는 점을 알려주세요."},
   'daegu-commercial': {topic:'대구 상가·식당 공간기획 상담',page:'daegu-commercial-interior.html',title:'대구 상가·식당 설비·견적 준비 안내',placeholder:'대구 내 지역·면적·업종·계약 전후와 가장 고민되는 점을 아는 만큼 알려주세요.'},
   'commercial-quote': {topic:'상가 인테리어 견적 준비 상담',page:'commercial-interior-quote-checklist.html',title:'상가 견적 포함·별도 항목 비교 안내',placeholder:'지역·면적·업종과 헷갈리는 견적 항목을 알려주세요. 견적서가 없다면 바꾸고 싶은 부분만 적어도 됩니다.'},
   'restaurant-cost': {topic:'식당 공간·주방 설비 견적 준비 상담',page:'restaurant-interior-cost.html',title:'식당 인테리어·주방 설비 비용 안내',placeholder:'지역·면적·대표 메뉴·유지할 장비와 공사에서 궁금한 점을 아는 만큼 알려주세요.'},
