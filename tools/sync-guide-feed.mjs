@@ -2,7 +2,7 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 const read = file => readFileSync(new URL(`../${file}`, import.meta.url), 'utf8');
 const origin = 'https://wecocompany.com/';
-const files = ['brand-consulting-guide.html', 'spatial-branding-guide.html', 'commercial-interior-quote-checklist.html', 'meat-restaurant-startup-interior.html', 'restaurant-startup-reality.html', 'hair-salon-interior-process-guide.html', 'daegu-commercial-interior.html', 'restaurant-interior-cost.html'];
+const files = ['brand-consulting-guide.html', 'spatial-branding-guide.html', 'commercial-interior-quote-checklist.html', 'meat-restaurant-startup-interior.html', 'restaurant-startup-reality.html', 'hair-salon-interior-process-guide.html', 'daegu-commercial-interior.html', 'restaurant-interior-cost.html', 'restaurant-business-conversion-guide.html'];
 let feed = read('rss.xml');
 for (const file of files) {
   const html = read(file);

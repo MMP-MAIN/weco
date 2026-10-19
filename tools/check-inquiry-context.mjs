@@ -9,7 +9,7 @@ const main = read('main.js');
 for (const [id, guide] of Object.entries(INQUIRY_GUIDES)) {
   const html = read(guide.page);
   const links = [...html.matchAll(/href="(index\.html\?inquiry=[^"]+)"/g)];
-  const examplePages = ['brand-consulting-guide.html', 'hair-salon-interior-process-guide.html', 'meat-restaurant-startup-interior.html', 'restaurant-startup-reality.html'];
+  const examplePages = ['brand-consulting-guide.html', 'hair-salon-interior-process-guide.html', 'meat-restaurant-startup-interior.html', 'restaurant-startup-reality.html', 'restaurant-interior-cost.html', 'restaurant-business-conversion-guide.html'];
   const expectedLinks = (guide.page === 'brand-consulting-guide.html' ? 3 : 2) + Number(examplePages.includes(guide.page));
   assert.equal(links.length, expectedLinks, `${guide.page}: header, final CTA, optional tool and worked-example CTAs`);
   for (const [, href] of links) {
@@ -40,6 +40,14 @@ assert.deepEqual(inquiryEventParams(null), {});
 assert.match(home, /id="inquiryContextNote" hidden/);
 assert.doesNotMatch(home, /name="(?:message|budget|상담주제|상담연결글)"[^>]*required/);
 assert.match(home, /rel="canonical" href="https:\/\/wecocompany.com\/"/);
+// Keep the short introduction before the form and optional help after it on mobile.
+const contact = home.slice(home.indexOf('id="contact"'), home.indexOf('<!-- ===== 푸터'));
+assert.ok(contact.indexOf('class="contact-info"') < contact.indexOf('id="inquiryForm"'));
+assert.ok(contact.indexOf('</form>') < contact.indexOf('class="contact-help"'));
+assert.ok(contact.indexOf('class="contact-help"') < contact.indexOf('class="contact-questions"'));
+assert.equal((contact.match(/id="inquiryForm"/g) || []).length, 1);
+assert.doesNotMatch(contact.slice(0, contact.indexOf('id="inquiryForm"')), /contact-questions|contact-response-note|contact-next-step/);
+assert.match(read('studio-refresh.css'), /grid-template-areas:"intro" "form" "help"/);
 
 // Execute the actual submit handler with mocked transport: never send a test lead.
 const submitCode = main.slice(main.indexOf("form.addEventListener('submit'"), main.indexOf('// Keep mobile keyboard'));

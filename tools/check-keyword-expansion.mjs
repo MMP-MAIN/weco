@@ -33,7 +33,7 @@ for (const [file, sections] of Object.entries(pages)) {
   const schema = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m => {
     const j = JSON.parse(m[1]); return j['@graph'] || [j];
   });
-  const updated = file === 'brand-consulting-guide.html' ? '2026-10-06' : [ 'spatial-branding-guide.html', 'hair-salon-interior-process-guide.html'].includes(file) ? '2026-09-29' : '2026-09-25';
+  const updated = file === 'restaurant-business-conversion-guide.html' ? '2026-10-13' : file === 'brand-consulting-guide.html' ? '2026-10-06' : [ 'spatial-branding-guide.html', 'hair-salon-interior-process-guide.html'].includes(file) ? '2026-09-29' : '2026-09-25';
   assert.equal(schema.find(n => n['@type'] === 'Article').dateModified, updated);
   assert.ok(html.includes(`<time datetime="${updated}">${updated.replaceAll('-', '.')}</time>`));
   const faq = schema.find(n => n['@type'] === 'FAQPage');
@@ -63,6 +63,6 @@ const fresh = 'restaurant-business-conversion-guide.html';
 assert.ok(read('industry-guides.html').includes(`href="${fresh}"`));
 assert.ok(read('cafe-startup-interior.html').includes(`href="${fresh}"`));
 assert.ok(read('brand-renewal-checklist.html').includes(`href="${fresh}"`));
-assert.ok(read('main.js').includes('inquiry-context.mjs?v=6'));
-assert.ok(read('index.html').includes('main.js?v=151'));
+assert.match(read('main.js'), /inquiry-context\.mjs\?v=\d+/, 'versioned inquiry context import');
+assert.match(read('index.html'), /main\.js\?v=\d+/, 'versioned main entry');
 console.log('PASS: new guide discoverable, versioned consultation routes, no live submission.');

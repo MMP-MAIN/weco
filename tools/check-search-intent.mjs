@@ -20,7 +20,8 @@ for(const [file,[id,section,term]]of Object.entries(pages)){
  assert.equal(getInquiryContext('?inquiry='+id).page,file);
  assert.ok(html.includes('href="index.html?inquiry='+id+'#contact"'));
  const schemas=[...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m=>{const s=JSON.parse(m[1]);return s['@graph']||[s]});
- assert.equal(schemas.find(s=>s['@type']==='Article').dateModified,'2026-10-06');
+ const updated = ['daegu-commercial-interior.html','restaurant-interior-cost.html'].includes(file) ? '2026-10-13' : '2026-10-06';
+ assert.equal(schemas.find(s=>s['@type']==='Article').dateModified,updated);
  for(const schema of schemas.filter(s=>s['@type']==='FAQPage'))for(const q of schema.mainEntity){
   assert.ok(html.includes('<summary>'+q.name+'</summary>'));
   assert.ok(html.includes(q.acceptedAnswer.text));
@@ -32,7 +33,7 @@ for(const [file,[id,section,term]]of Object.entries(pages)){
   if(u.hash)assert.ok(read(target).includes('id="'+u.hash.slice(1)+'"'),file+': '+href);
   assert.ok(!u.searchParams.has('utm_source'),'Internal CTA must preserve acquisition');
  }
- assert.ok(sitemap.includes('<loc>'+origin+file+'</loc><lastmod>2026-10-06</lastmod>'));
+ assert.ok(sitemap.includes('<loc>'+origin+file+'</loc><lastmod>'+updated+'</lastmod>'));
  const items=[...rss.matchAll(/<item>[\s\S]*?<\/item>/g)].filter(m=>m[0].includes('<link>'+origin+file+'</link>'));
  assert.equal(items.length,1);
  assert.ok(items[0][0].includes(term));
