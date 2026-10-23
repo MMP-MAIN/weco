@@ -33,7 +33,7 @@ for (const [file, sections] of Object.entries(pages)) {
   const schema = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m => {
     const j = JSON.parse(m[1]); return j['@graph'] || [j];
   });
-  const updated = file === 'restaurant-business-conversion-guide.html' ? '2026-10-13' : file === 'brand-consulting-guide.html' ? '2026-10-06' : [ 'spatial-branding-guide.html', 'hair-salon-interior-process-guide.html'].includes(file) ? '2026-09-29' : '2026-09-25';
+  const updated = file === 'restaurant-business-conversion-guide.html' ? '2026-10-13' : file === 'brand-consulting-guide.html' ? '2026-10-24' : [ 'spatial-branding-guide.html', 'hair-salon-interior-process-guide.html'].includes(file) ? '2026-09-29' : '2026-09-25';
   assert.equal(schema.find(n => n['@type'] === 'Article').dateModified, updated);
   assert.ok(html.includes(`<time datetime="${updated}">${updated.replaceAll('-', '.')}</time>`));
   const faq = schema.find(n => n['@type'] === 'FAQPage');

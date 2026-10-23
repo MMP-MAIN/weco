@@ -32,9 +32,9 @@ for(const [file,id] of Object.entries(pages)) {
   assert.ok(section.includes('가상')&&section.includes('예시'));
   assert.ok(section.includes('<caption>')&&section.includes('scope="col"')&&section.includes('scope="row"'));
   assert.doesNotMatch(section, /<form\b|<script\b|<input\b/);
-  assert.ok(html.includes('insights.css?v=2'));
+  assert.ok(html.includes('insights.css?v=' + (['brand-consulting-guide.html', 'commercial-interior-quote-checklist.html'].includes(file) ? '3' : '2')));
   const schema=[...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m=>{const j=JSON.parse(m[1]);return j['@graph']||[j]});
-  const updated = ['brand-consulting-guide.html', 'commercial-interior-quote-checklist.html'].includes(file) ? '2026-10-06' : '2026-09-29';
+  const updated = ['brand-consulting-guide.html', 'commercial-interior-quote-checklist.html'].includes(file) ? '2026-10-24' : '2026-09-29';
   assert.equal(schema.find(j=>j['@type']==='Article').dateModified,updated);
   for(const faq of schema.filter(j=>j['@type']==='FAQPage')) for(const q of faq.mainEntity) {
     assert.ok(html.includes(q.name)&&html.includes(q.acceptedAnswer.text),`${file}: visible FAQ`);

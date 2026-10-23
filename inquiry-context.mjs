@@ -1,5 +1,7 @@
 // Only fixed, public guide identifiers are accepted. No free text or personal data in URLs.
 export const INQUIRY_GUIDES = Object.freeze({
+  'logo-design': {topic:'로고·브랜드 디자인 상담',page:'logo-brand-design-guide.html',title:'로고 제작·CI·BI 결과물 가이드',placeholder:'회사·매장 소개와 필요한 로고·적용물, 이미 정한 이름과 목표 일정을 아는 만큼 알려주세요.'},
+  'menu-design': {topic:'메뉴판·가격표 브랜드 디자인 상담',page:'menu-board-design-guide.html',title:'메뉴판 디자인·제작 준비 가이드',placeholder:'어떤 매장인지, 벽·테이블·화면 중 필요한 메뉴판과 메뉴·가격 준비 여부를 알려주세요.'},
   'commercial-recipe': {"topic":"레시피 관련 매장 기획 상담","page":"commercial-recipe-guide.html","title":"업소용 레시피 가이드","placeholder":"생각 중인 메뉴·현재 준비 단계와 브랜드나 공간에서 고민되는 점을 알려주세요. 비공개 배합은 적지 않아도 됩니다."},
   'menu-planning': {"topic":"메뉴 관련 브랜드 기획 상담","page":"restaurant-menu-development-guide.html","title":"메뉴 개발 가이드","placeholder":"식당·카페·술집 중 어떤 매장을 준비하는지, 대표 메뉴와 브랜드 표현에서 고민되는 점을 알려주세요."},
   'transfer-startup': {"topic":"전수창업 브랜드·공간 준비 상담","page":"recipe-transfer-startup-guide.html","title":"전수창업 준비 가이드","placeholder":"배우려는 메뉴·전수 교육 검토 단계·점포 유무와 브랜드나 공간에서 고민되는 점을 알려주세요."},

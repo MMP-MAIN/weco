@@ -24,12 +24,13 @@ for (const [file, section] of Object.entries(pages)) {
   const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
   assert.equal(ids.length,new Set(ids).size,file+': unique IDs');
   assert.ok(ids.includes(section)&&html.includes('href="#'+section+'"'));
-  assert.ok(html.includes('insights.css?v=2'));
+  assert.ok(html.includes('insights.css?v=' + (file === 'restaurant-interior-cost.html' ? '3' : '2')));
   assert.ok(html.includes('width=device-width,initial-scale=1'));
   assert.ok(html.includes('rel="canonical" href="'+origin+file+'"'));
-  assert.ok(html.includes('<time datetime="2026-10-13">2026.10.13</time>'));
+  const updated = file === 'restaurant-interior-cost.html' ? '2026-10-24' : '2026-10-13';
+  assert.ok(html.includes('<time datetime="' + updated + '">' + updated.replaceAll('-', '.') + '</time>'));
   const schemas=[...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m=>{const s=JSON.parse(m[1]);return s['@graph']||[s]});
-  assert.equal(schemas.find(s=>s['@type']==='Article').dateModified,'2026-10-13');
+  assert.equal(schemas.find(s=>s['@type']==='Article').dateModified,updated);
   for(const s of schemas.filter(s=>s['@type']==='FAQPage')) for(const q of s.mainEntity) {
     assert.ok(html.includes(q.name)&&html.includes(q.acceptedAnswer.text));
   }
@@ -41,7 +42,7 @@ for (const [file, section] of Object.entries(pages)) {
     if(u.searchParams.has('inquiry')) assert.equal(getInquiryContext(u.search).page,file);
     assert.ok(!u.searchParams.has('utm_source'),'Internal links must preserve acquisition');
   }
-  assert.ok(sitemap.includes('<loc>'+origin+file+'</loc><lastmod>2026-10-13</lastmod>'));
+  assert.ok(sitemap.includes('<loc>'+origin+file+'</loc><lastmod>'+updated+'</lastmod>'));
   const items=[...feed.matchAll(/<item>[\s\S]*?<\/item>/g)].filter(m=>m[0].includes('<link>'+origin+file+'</link>'));
   assert.equal(items.length,1);
   if(items[0][0].includes('<content:encoded>')) assert.ok(items[0][0].includes('id="'+section+'"'));

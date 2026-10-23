@@ -8,7 +8,7 @@ const pages={
  'brand-consulting-guide.html':['brand-consulting','cost','브랜드 컨설팅 비용'],
  'daegu-commercial-interior.html':['daegu-commercial','prepare','대구 상가·식당'],
  'commercial-interior-quote-checklist.html':['commercial-quote','photos','상가 인테리어 견적 비교'],
- 'restaurant-interior-cost.html':['restaurant-cost','kitchen','주방 설비 비용']
+ 'restaurant-interior-cost.html':['restaurant-cost','kitchen','식당 인테리어 비용']
 };
 const rss=read('rss.xml'), sitemap=read('sitemap.xml');
 for(const [file,[id,section,term]]of Object.entries(pages)){
@@ -20,7 +20,7 @@ for(const [file,[id,section,term]]of Object.entries(pages)){
  assert.equal(getInquiryContext('?inquiry='+id).page,file);
  assert.ok(html.includes('href="index.html?inquiry='+id+'#contact"'));
  const schemas=[...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m=>{const s=JSON.parse(m[1]);return s['@graph']||[s]});
- const updated = ['daegu-commercial-interior.html','restaurant-interior-cost.html'].includes(file) ? '2026-10-13' : '2026-10-06';
+ const updated = file === 'daegu-commercial-interior.html' ? '2026-10-13' : '2026-10-24';
  assert.equal(schemas.find(s=>s['@type']==='Article').dateModified,updated);
  for(const schema of schemas.filter(s=>s['@type']==='FAQPage'))for(const q of schema.mainEntity){
   assert.ok(html.includes('<summary>'+q.name+'</summary>'));
