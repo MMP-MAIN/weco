@@ -636,6 +636,9 @@ form.addEventListener('submit', async (e) => {
         검색어_광고키워드: leadContext.term,
         광고클릭ID: leadContext.click_id,
         최초방문페이지: leadContext.first_landing,
+        이번방문시작페이지: leadContext.session_landing,
+        유입판단근거: leadContext.source_evidence,
+        외부유입참조: leadContext.external_referrer,
         문의제출페이지: leadContext.submit_page,
         상담전본페이지: leadContext.pages_viewed,
         상담전본프로젝트: leadContext.projects_viewed,
@@ -702,32 +705,11 @@ form.addEventListener('submit', async (e) => {
 
 // 주요 광고 전환 행동 추적 (개인정보·유입 식별값은 외부로 전송하지 않음)
 const getTrafficAttribution = () => {
-  const query = new URLSearchParams(location.search)
-  const incoming = {
-    traffic_source: query.get('utm_source'),
-    traffic_medium: query.get('utm_medium'),
-    campaign_name: query.get('utm_campaign'),
-    campaign_content: query.get('utm_content'),
-    campaign_term: query.get('utm_term'),
-    click_id: query.get('fbclid') || query.get('gclid') || query.get('msclkid') || query.get('ttclid')
-  }
-  try {
-    const stored = JSON.parse(sessionStorage.getItem('weco_attribution') || '{}')
-    const inferredSource = document.referrer ? new URL(document.referrer).hostname : 'direct'
-    const inferredMedium = inferredSource === 'direct' ? 'direct' : 'referral'
-    const merged = Object.fromEntries(Object.entries(incoming).map(([key, value]) => [key, value || stored[key] || 'unknown']))
-    if (merged.traffic_source === 'unknown') merged.traffic_source = inferredSource
-    if (merged.traffic_medium === 'unknown') merged.traffic_medium = inferredMedium
-    sessionStorage.setItem('weco_attribution', JSON.stringify(merged))
-    return merged
-  } catch (_) {
-    return Object.fromEntries(Object.entries(incoming).map(([key, value]) => [key, value || 'unknown']))
+  return window.WECO_JOURNEY?.analytics() || {
+    traffic_source: 'unknown', traffic_medium: 'unknown',
+    campaign_name: 'unknown', campaign_content: 'unknown', campaign_term: 'unknown'
   }
 }
-
-// 문의가 실제로 들어왔을 때 광고·검색·열람 흐름을 이메일에서도 확인할 수 있게 보존합니다.
-const SESSION_STARTED_AT = Number(sessionStorage.getItem('weco_session_started_at')) || Date.now()
-sessionStorage.setItem('weco_session_started_at', String(SESSION_STARTED_AT))
 
 // 광고가 멈춰도 다시 찾아오는 방문이 남는지 측정합니다.
 // 개인 식별자는 만들지 않고, 같은 브라우저의 방문 횟수와 첫 방문 시점만 저장합니다.
@@ -756,60 +738,24 @@ const getVisitProfile = () => {
 
 const VISIT_PROFILE = getVisitProfile()
 
-const rememberLeadJourney = () => {
-  const attribution = getTrafficAttribution()
-  const touch = {
-    source: attribution.traffic_source,
-    medium: attribution.traffic_medium,
-    campaign: attribution.campaign_name,
-    content: attribution.campaign_content,
-    term: attribution.campaign_term,
-    click_id: attribution.click_id,
-    landing: location.pathname + location.search,
-    referrer: document.referrer || 'direct',
-    at: new Date().toISOString()
-  }
-  try {
-    if (!localStorage.getItem('weco_first_touch')) localStorage.setItem('weco_first_touch', JSON.stringify(touch))
-    localStorage.setItem('weco_last_touch', JSON.stringify(touch))
-    const pages = JSON.parse(sessionStorage.getItem('weco_pages_viewed') || '[]')
-    const current = location.pathname || '/'
-    if (!pages.includes(current)) pages.push(current)
-    sessionStorage.setItem('weco_pages_viewed', JSON.stringify(pages.slice(-20)))
-  } catch (_) {}
-}
-
 const getLeadContext = () => {
-  const attribution = getTrafficAttribution()
-  let first = {}
-  let last = {}
-  let pages = []
   let projects = []
   try {
-    first = JSON.parse(localStorage.getItem('weco_first_touch') || '{}')
-    last = JSON.parse(localStorage.getItem('weco_last_touch') || '{}')
-    pages = JSON.parse(sessionStorage.getItem('weco_pages_viewed') || '[]')
-    projects = JSON.parse(sessionStorage.getItem('weco_projects_viewed') || '[]')
+    const storedProjects = JSON.parse(sessionStorage.getItem('weco_projects_viewed') || '[]')
+    if (Array.isArray(storedProjects)) projects = storedProjects.filter(item => typeof item === 'string').slice(-20)
   } catch (_) {}
-  const touchLabel = touch => `${touch.source || 'unknown'} / ${touch.medium || 'unknown'}${touch.referrer ? ` / ${touch.referrer}` : ''}`
-  const seconds = Math.max(0, Math.round((Date.now() - SESSION_STARTED_AT) / 1000))
   return {
-    first_touch: touchLabel(first),
-    last_touch: touchLabel(last),
-    campaign: attribution.campaign_name || 'unknown',
-    content: attribution.campaign_content || 'unknown',
-    term: attribution.campaign_term || 'unknown',
-    click_id: attribution.click_id || 'unknown',
-    first_landing: first.landing || location.pathname,
-    submit_page: location.pathname,
-    pages_viewed: pages.join(' → ') || location.pathname,
+    first_touch: 'unknown', last_touch: 'unknown', campaign: 'unknown', content: 'unknown',
+    term: 'unknown', click_id: 'unknown', first_landing: location.pathname,
+    session_landing: location.pathname, source_evidence: 'tracking_unavailable',
+    external_referrer: 'unknown', submit_page: location.pathname,
+    pages_viewed: location.pathname, time_to_lead: '측정 불가',
+    ...window.WECO_JOURNEY?.context(),
     projects_viewed: projects.join(', ') || '없음',
-    time_to_lead: `${seconds}초`,
     device: `${innerWidth < 768 ? '모바일' : innerWidth < 1100 ? '태블릿' : 'PC'} / ${navigator.platform || 'unknown'}`
   }
 }
 
-rememberLeadJourney()
 const trackEvent = (name, params = {}) => {
   const enriched = {
     hero_variant: window.WECO_HERO_VARIANT || 1,

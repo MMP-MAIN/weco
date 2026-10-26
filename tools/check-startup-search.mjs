@@ -35,7 +35,7 @@ for (const [file, sections] of Object.entries(pages)) {
     assert.ok(html.includes(`id="${section}"`) && html.includes(`href="#${section}"`));
     assert.ok(items[0][0].includes(`id="${section}"`));
   }
-  assert.ok(html.includes('insight-tracking.js?v=5'));
+  assert.ok(html.includes('insight-tracking.js?v=6'));
   assert.match(html, /href="index\.html\?inquiry=[a-z-]+#contact"/);
   console.log(`PASS: ${file}: sections, FAQ ${visible.length}, links, sitemap and RSS`);
 }

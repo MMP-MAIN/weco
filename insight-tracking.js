@@ -18,18 +18,7 @@
   }
 
   function attribution(){
-    var q=new URLSearchParams(location.search);
-    var incoming={traffic_source:q.get('utm_source'),traffic_medium:q.get('utm_medium'),campaign_name:q.get('utm_campaign'),campaign_content:q.get('utm_content'),campaign_term:q.get('utm_term')};
-    try{
-      var stored=JSON.parse(sessionStorage.getItem('weco_attribution')||'{}');
-      var merged={};
-      Object.keys(incoming).forEach(function(key){merged[key]=incoming[key]||stored[key]||'unknown'});
-      if(Object.keys(incoming).some(function(key){return !!incoming[key]}))sessionStorage.setItem('weco_attribution',JSON.stringify(merged));
-      return merged;
-    }catch(e){
-      Object.keys(incoming).forEach(function(key){incoming[key]=incoming[key]||'unknown'});
-      return incoming;
-    }
+    return window.WECO_JOURNEY ? window.WECO_JOURNEY.analytics() : {traffic_source:'unknown',traffic_medium:'unknown'};
   }
 
   function eventParams(extra){return Object.assign({landing_path:location.pathname},attribution(),extra||{})}

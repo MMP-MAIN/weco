@@ -29,7 +29,7 @@ for (const [file, sections] of Object.entries(pages)) {
   assert.equal((html.match(/<h1>/g) || []).length, 1);
   assert.ok(html.includes(`rel="canonical" href="${origin}${file}"`));
   assert.ok(html.includes('width=device-width,initial-scale=1'));
-  assert.ok(html.includes('insight-tracking.js?v=5'));
+  assert.ok(html.includes('insight-tracking.js?v=6'));
   const schema = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m => {
     const j = JSON.parse(m[1]); return j['@graph'] || [j];
   });
