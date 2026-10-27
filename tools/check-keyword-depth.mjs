@@ -31,8 +31,9 @@ for (const [file, sections] of Object.entries(pages)) {
   const schema = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m => {
     const j = JSON.parse(m[1]); return j['@graph'] || [j];
   });
-  assert.equal(schema.find(n => n['@type'] === 'Article').dateModified, '2026-09-27');
-  assert.ok(html.includes('<time datetime="2026-09-27">2026.09.27</time>'));
+  const modified = file === 'bar-startup-interior-guide.html' ? '2026-10-27' : '2026-09-27';
+  assert.equal(schema.find(n => n['@type'] === 'Article').dateModified, modified);
+  assert.ok(html.includes(`<time datetime="${modified}">${modified.replaceAll('-', '.')}</time>`));
   const faq = schema.find(n => n['@type'] === 'FAQPage');
   if (faq) for (const q of faq.mainEntity) {
     assert.ok(html.includes(q.name), `${file}: visible FAQ question`);
@@ -46,7 +47,7 @@ for (const [file, sections] of Object.entries(pages)) {
     if (u.hash) assert.ok(read(target).includes(`id="${u.hash.slice(1)}"`), `${file}: ${href}`);
     if (u.searchParams.has('inquiry')) assert.equal(getInquiryContext(u.search)?.page, file);
   }
-  assert.ok(sitemap.includes(`<loc>${origin}${file}</loc><lastmod>2026-09-27</lastmod>`));
+  assert.ok(sitemap.includes(`<loc>${origin}${file}</loc><lastmod>${modified}</lastmod>`));
   const items = [...feed.matchAll(/<item>[\s\S]*?<\/item>/g)].filter(m => m[0].includes(`<link>${origin}${file}</link>`));
   assert.equal(items.length, 1, `${file}: unique RSS item`);
   for (const id of sections) {

@@ -1,5 +1,8 @@
 // Only fixed, public guide identifiers are accepted. No free text or personal data in URLs.
 export const INQUIRY_GUIDES = Object.freeze({
+  'startup-consulting': {topic:'창업 준비·사업 방향 상담',page:'startup-consulting-guide.html',title:'창업 컨설팅 비용·상담 준비 안내',placeholder:'생각 중인 업종·상품, 준비 지역·점포 유무와 가장 막힌 일을 아는 만큼 알려주세요.'},
+  'kitchen-planning': {topic:'식당 주방·장비·공간 준비 상담',page:'restaurant-kitchen-equipment-guide.html',title:'식당 주방 인테리어·설비 견적 준비 안내',placeholder:'지역·면적·대표 메뉴와 점포 상태, 남길 장비가 있는지 아는 만큼 알려주세요.'},
+  'bar-startup': {topic:'술집·이자카야 창업·공간 준비 상담',page:'bar-startup-interior-guide.html',title:'술집 창업 비용·이자카야 인테리어 안내',placeholder:'지역·면적·메뉴·점포 계약 전후와 비어 있는 상가인지 기존 매장인지 알려주세요. 모르는 항목은 적지 않아도 됩니다.'},
   'logo-design': {topic:'로고·브랜드 디자인 상담',page:'logo-brand-design-guide.html',title:'로고 제작·CI·BI 결과물 가이드',placeholder:'회사·매장 소개와 필요한 로고·적용물, 이미 정한 이름과 목표 일정을 아는 만큼 알려주세요.'},
   'menu-design': {topic:'메뉴판·가격표 브랜드 디자인 상담',page:'menu-board-design-guide.html',title:'메뉴판 디자인·제작 준비 가이드',placeholder:'어떤 매장인지, 벽·테이블·화면 중 필요한 메뉴판과 메뉴·가격 준비 여부를 알려주세요.'},
   'commercial-recipe': {"topic":"레시피 관련 매장 기획 상담","page":"commercial-recipe-guide.html","title":"업소용 레시피 가이드","placeholder":"생각 중인 메뉴·현재 준비 단계와 브랜드나 공간에서 고민되는 점을 알려주세요. 비공개 배합은 적지 않아도 됩니다."},
