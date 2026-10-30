@@ -403,17 +403,20 @@ projectToggle.addEventListener('click', () => {
 })
 const shuffleProjectCards = () => {
   projectView?.querySelectorAll('.proj-grid').forEach(grid => {
-    const cards = [...grid.querySelectorAll(':scope > .proj-card')]
-    if (cards.length < 2) return
+    const allCards = [...grid.querySelectorAll(':scope > .proj-card')]
+    const featured = allCards.filter(card => Number(card.dataset.projectPriority) > 0)
+      .sort((a, b) => Number(a.dataset.projectPriority) - Number(b.dataset.projectPriority))
+    const cards = allCards.filter(card => !(Number(card.dataset.projectPriority) > 0))
+    if (allCards.length < 2) return
     const original = [...cards]
     for (let i = cards.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1))
       ;[cards[i], cards[j]] = [cards[j], cards[i]]
     }
-    if (cards.every((card, index) => card === original[index])) {
+    if (cards.length > 1 && cards.every((card, index) => card === original[index])) {
       ;[cards[0], cards[1]] = [cards[1], cards[0]]
     }
-    grid.append(...cards)
+    grid.append(...featured, ...cards)
   })
 }
 const trapFocusWithin = (root, e) => {

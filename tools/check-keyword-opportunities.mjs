@@ -81,6 +81,6 @@ assert.ok(startup.includes('href="#food-types"'));
 assert.ok(read('startup-guide.css').includes('min-width:640px') && read('startup-guide.css').includes('overflow-x:auto'));
 assert.ok(food.includes('영업신고 업종을 판정하는 표가 아닙니다'));
 assert.ok(read('commercial-remodeling-planning-guide.html').includes('id="vacancy-plan"'));
-assert.ok(read('index.html').includes('main.js?v=155'));
+assert.ok(read('index.html').includes('main.js?v=156'));
 assert.ok(read('main.js').includes('inquiry-context.mjs?v=9'));
 console.log('PASS: 12 food-business comparisons, bounded mobile table, vacancy/renewal guide and versioned inquiry routes.');

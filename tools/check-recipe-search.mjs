@@ -48,5 +48,5 @@ for (const id of pages) {
 const cards = [...read('insights.html').matchAll(/<a class="insight-card"[^>]*>([\s\S]*?)<\/a>/g)].map(m=>m[1].replace(/<[^>]+>/g,' '));
 for(const query of ['업소용 레시피','메뉴 개발','전수창업','카페 음료','술집']) assert.ok(cards.some(c=>matchesGuide(c,query)), `guide search: ${query}`);
 assert.ok(read('main.js').includes('inquiry-context.mjs?v=9'));
-assert.ok(read('index.html').includes('main.js?v=155'));
+assert.ok(read('index.html').includes('main.js?v=156'));
 console.log('PASS: guide search and inquiry cache versions');
