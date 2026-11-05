@@ -1,5 +1,13 @@
 # Portfolio photo sources
 
+## 대구 지역 페이지 보강 — 2026-11-05
+
+- `images/local-cases/woobok-*-720.webp`와 `*-1400.webp`는 기존 `woobok-01.jpg`, `woobok-04.jpg`, `woobok-05.jpg`에서 크기와 압축만 조정한 웹 사본이다.
+- `images/local-cases/gapho-*-720.webp`와 `*-1400.webp`는 아래에 기록된 사용자 제공 맥북 원본의 `01-오픈주방전경.webp`, `02-매장외관.webp`에서 만든 웹 사본이다.
+- `images/local-cases/salon-concept-720.webp`와 `salon-concept-1400.webp`는 사용자가 요청한 미용실 디자인 제안용 AI 렌더링이다. 완공 사례가 아니며 페이지의 그림 설명·본문·대체 텍스트에서 렌더링임을 표시한다.
+- 렌더링은 내장 image_gen으로 생성했다. 경대 두 자리, 안쪽 샴푸 공간, 수납과 이동 공간을 갖춘 소형 미용실의 공간 제안이며 특정 고객 매장이나 확인된 평면의 재현은 아니다.
+- 실제 프로젝트 사진에는 사진에서 관찰할 수 있는 공간 구성만 설명했다. 사진만으로 개별 공종의 수행 주체, 공사비나 사업 성과를 추정하지 않았다.
+
 Reference pages used to identify and curate the exterior and interior
 photographs added on 2026-07-29. Food-only images, unrelated venues, and
 low-resolution search thumbnails were excluded.
