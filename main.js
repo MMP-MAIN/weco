@@ -1,6 +1,7 @@
 // ===== 위코컴퍼니 홈페이지 스크립트 =====
 import { applyInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=11'
 import { createInquiryTracking } from './inquiry-tracking.mjs?v=1'
+import { getLeadContext, inquiryPayload, sendInquiry } from './inquiry-delivery.mjs?v=1'
 
 const PHONE = '010-8606-2119'
 
@@ -582,7 +583,6 @@ const FORM_MSG = ({
 }
 
 // 프로젝트 문의 → FormSubmit.co (계정 불필요, 이메일로 수신)
-const INQUIRY_ENDPOINT = 'https://formsubmit.co/ajax/storm2119@gmail.com'
 const preferredWork = document.getElementById('preferredWork')
 
 const setStatus = (msg, ok) => {
@@ -613,58 +613,25 @@ form.addEventListener('submit', async (e) => {
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 20000)
   try {
-    const leadContext = getLeadContext()
-    const res = await fetch(INQUIRY_ENDPOINT, {
-      method: 'POST',
-      signal: controller.signal,
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({
-        _subject: '[위코컴퍼니] 새 프로젝트 문의',
-        _template: 'table',
-        _captcha: 'false',
-        이름: name,
-        연락처: phone,
-        ...(typeCards && selectedType ? { 희망업무: selectedType } : {}),
-        개인정보동의: '동의',
-        프로젝트예상총예산: form.budget.value.trim() || '미입력',
-        문의내용: form.message.value.trim() || '미입력',
-        ...(inquiryContext ? {
-          상담주제: inquiryContext.topic,
-          상담연결글: `https://wecocompany.com/${inquiryContext.page}`
-        } : {}),
-        최초유입: leadContext.first_touch,
-        최근유입: leadContext.last_touch,
-        광고캠페인: leadContext.campaign,
-        광고소재: leadContext.content,
-        검색어_광고키워드: leadContext.term,
-        광고클릭ID: leadContext.click_id,
-        최초방문페이지: leadContext.first_landing,
-        이번방문시작페이지: leadContext.session_landing,
-        유입판단근거: leadContext.source_evidence,
-        외부유입참조: leadContext.external_referrer,
-        문의제출페이지: leadContext.submit_page,
-        상담전본페이지: leadContext.pages_viewed,
-        상담전본프로젝트: leadContext.projects_viewed,
-        상담전체류시간: leadContext.time_to_lead,
-        접속기기: leadContext.device
-      })
+    await sendInquiry(inquiryPayload({
+      name, phone,
+      preferredWork: typeCards && selectedType,
+      budget: form.budget.value.trim(),
+      message: form.message.value.trim(),
+      context: inquiryContext,
+      leadContext: getLeadContext()
+    }), controller.signal)
+    trackEvent('generate_lead', {
+      ...inquiryTracking.params(),
+      lead_status: 'accepted_by_form_service',
+      form_name: 'project_inquiry',
+      ...inquiryEventParams(inquiryContext),
+      lead_type: selectedType || 'unspecified',
+      page_language: document.documentElement.lang || 'ko'
     })
-    const data = await res.json().catch(() => ({}))
-    if (res.ok && (data.success === 'true' || data.success === true)) {
-      trackEvent('generate_lead', {
-        ...inquiryTracking.params(),
-        lead_status: 'accepted_by_form_service',
-        form_name: 'project_inquiry',
-        ...inquiryEventParams(inquiryContext),
-        lead_type: selectedType || 'unspecified',
-        page_language: document.documentElement.lang || 'ko'
-      })
-      form.reset()
-      applyInquiryContext(document, location.search)
-      setStatus(FORM_MSG.ok, true)
-    } else {
-      throw new Error(data.message || 'submit failed')
-    }
+    form.reset()
+    applyInquiryContext(document, location.search)
+    setStatus(FORM_MSG.ok, true)
   } catch (err) {
     console.error(err)
     trackEvent('form_submit_error', {
@@ -741,23 +708,6 @@ const getVisitProfile = () => {
 
 const VISIT_PROFILE = getVisitProfile()
 
-const getLeadContext = () => {
-  let projects = []
-  try {
-    const storedProjects = JSON.parse(sessionStorage.getItem('weco_projects_viewed') || '[]')
-    if (Array.isArray(storedProjects)) projects = storedProjects.filter(item => typeof item === 'string').slice(-20)
-  } catch (_) {}
-  return {
-    first_touch: 'unknown', last_touch: 'unknown', campaign: 'unknown', content: 'unknown',
-    term: 'unknown', click_id: 'unknown', first_landing: location.pathname,
-    session_landing: location.pathname, source_evidence: 'tracking_unavailable',
-    external_referrer: 'unknown', submit_page: location.pathname,
-    pages_viewed: location.pathname, time_to_lead: '측정 불가',
-    ...window.WECO_JOURNEY?.context(),
-    projects_viewed: projects.join(', ') || '없음',
-    device: `${innerWidth < 768 ? '모바일' : innerWidth < 1100 ? '태블릿' : 'PC'} / ${navigator.platform || 'unknown'}`
-  }
-}
 
 const trackEvent = (name, params = {}) => {
   const enriched = {

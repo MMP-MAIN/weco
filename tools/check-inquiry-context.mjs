@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
+import { inquiryPayload, sendInquiry } from '../inquiry-delivery.mjs';
 import { INQUIRY_GUIDES, getInquiryContext, applyInquiryContext, inquiryEventParams } from '../inquiry-context.mjs';
 
 const read = file => readFileSync(new URL(`../${file}`, import.meta.url), 'utf8');
@@ -67,7 +68,8 @@ for (const outcome of ['success', 'failure', 'network', 'timeout', 'whitespace',
   const sandbox = {
     form, submitBtn, inquiryContext: context, inquiryEventParams, selectedType: '', typeCards: null,
     inquiryTracking: { attempt() {}, validationError() {}, params: () => ({ attempt_number: 1 }) },
-    FORM_MSG: { need: 'need', ok: 'ok', err: 'err' }, INQUIRY_ENDPOINT: 'mock-only',
+    FORM_MSG: { need: 'need', ok: 'ok', err: 'err' }, inquiryPayload,
+    sendInquiry: (data, signal) => sendInquiry(data, signal, sandbox.fetch),
     getLeadContext: () => ({ first_touch: 'naver / organic' }),
     fetch: async (_, opts) => {
       payload = JSON.parse(opts.body);

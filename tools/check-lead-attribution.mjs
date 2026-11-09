@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import {readFileSync, readdirSync} from 'node:fs';
 import vm from 'node:vm';
+import { inquiryPayload, sendInquiry } from '../inquiry-delivery.mjs';
 const root = new URL('../', import.meta.url);
 const read = name => readFileSync(new URL(name, root), 'utf8');
 const code = read('lead-attribution.js');
@@ -111,8 +112,9 @@ for (const file of tracked) {
 }
 const main = read('main.js');
 assert.doesNotMatch(main, /const SESSION_STARTED_AT|rememberLeadJourney|const inferredSource/);
-assert.ok(main.includes('window.WECO_JOURNEY?.context()'));
-for (const field of ['이번방문시작페이지','유입판단근거','외부유입참조']) assert.ok(main.includes(field + ': leadContext.'));
+const delivery = read('inquiry-delivery.mjs');
+assert.ok(delivery.includes('window.WECO_JOURNEY?.context()'));
+for (const field of ['이번방문시작페이지','유입판단근거','외부유입참조']) assert.ok(delivery.includes(field + ': leadContext.'));
 assert.ok(read('insight-tracking.js').includes('window.WECO_JOURNEY.analytics()'));
 console.log('PASS: all ' + tracked.length + ' tracked HTML entries (including all sitemap URLs) load shared capture before analytics; email uses its context');
 
@@ -130,14 +132,15 @@ const sandbox = {
   location: new URL('https://wecocompany.com/index.html'), navigator: {platform: 'fixture'}, innerWidth: 390,
   inquiryTracking: {attempt() {}, params: () => ({attempt_number: 1})},
   typeCards: null, selectedType: '', inquiryContext: null, inquiryEventParams: () => ({}),
-  INQUIRY_ENDPOINT: 'mock-only', FORM_MSG: {ok: 'ok', err: 'err'}, setStatus() {}, applyInquiryContext() {},
+  inquiryPayload, sendInquiry: (data, signal) => sendInquiry(data, signal, sandbox.fetch),
+  FORM_MSG: {ok: 'ok', err: 'err'}, setStatus() {}, applyInquiryContext() {},
   document: {documentElement: {lang: 'ko'}}, trackEvent: (name, params) => events.push({name, params}),
   fetch: async (endpoint, options) => {
-    assert.equal(endpoint, 'mock-only'); payload = JSON.parse(options.body);
+    assert.equal(new URL(endpoint).hostname, 'formsubmit.co'); payload = JSON.parse(options.body);
     return {ok: true, json: async () => ({success: true})};
   }, AbortController, setTimeout, clearTimeout, console: {error() {}}
 };
-vm.runInNewContext(main.slice(main.indexOf('const getLeadContext ='), main.indexOf('const trackEvent =')), sandbox);
+vm.runInNewContext(delivery.slice(delivery.indexOf('export function getLeadContext'), delivery.indexOf('export function inquiryPayload')).replace('export ', ''), sandbox);
 vm.runInNewContext(main.slice(main.indexOf("form.addEventListener('submit'"), main.indexOf('// Keep mobile keyboard')), sandbox);
 await handler({preventDefault() {}});
 assert.equal(payload.이번방문시작페이지, '/gyeongju-interior-space-branding.html');
