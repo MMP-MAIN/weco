@@ -4,7 +4,8 @@ import { getLeadContext, inquiryPayload, sendInquiry } from './inquiry-delivery.
 
 const bar = document.getElementById('quick-consult')
 const form = bar.querySelector('form')
-const context = getInquiryContext(`?inquiry=${form.dataset.inquiry}`)
+const inquiryId = form.dataset.inquiry
+const context = inquiryId ? getInquiryContext(`?inquiry=${inquiryId}`) : null
 const submit = form.querySelector('button[type="submit"]')
 const status = form.querySelector('[role="status"]')
 const nameInput = form.elements.namedItem('name')
@@ -106,7 +107,7 @@ form.addEventListener('submit', async event => {
   }
 })
 
-if (context) {
+if (!form.hasAttribute('data-inquiry') || context) {
   bar.hidden = false
   syncSpace()
 }

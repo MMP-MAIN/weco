@@ -164,6 +164,13 @@ html.studio-root.studio-menu-open{overflow:hidden}
 .studio-home #stickyBar :is(a,button):hover{border-color:#fff}
 .studio-home #stickyBar .sb-call{background:#f7f7f5;color:#050505;border-color:#f7f7f5;font-weight:700}
 body.studio-home:is(.inquiry-visible,.inquiry-editing,.mobile-keyboard-open,.menu-open) #stickyBar,.studio-home .project-view.open~#stickyBar{display:none!important}
+/* Show one bottom bar, keeping the link bar available if the form cannot initialize. */
+body.studio-home:has(.quick-consult:not([hidden])){padding-bottom:var(--quick-consult-height,0px)}
+html:has(body.studio-home .quick-consult:not([hidden])){scroll-padding-bottom:var(--quick-consult-height,0px)}
+.studio-home:has(.quick-consult:not([hidden])) #stickyBar{display:none!important}
+.studio-home .quick-consult{z-index:90}
+.studio-home:is(.inquiry-editing,.mobile-keyboard-open,.menu-open) .quick-consult,
+.studio-home:has(:is(.project-view,.gallery-view,.lightbox).open) .quick-consult{visibility:hidden}
 .studio-home .work-fab{display:none!important}
 .studio-home :is(#weco-about,#scope,#intelligence,#studioWork){scroll-margin-top:100px}
 .studio-home :is(.contact-info,.contact-form,.section-eyebrow,.section-title,.section-desc).rv{opacity:1;transform:none}

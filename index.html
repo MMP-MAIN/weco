@@ -61,7 +61,8 @@
   <link rel="stylesheet" href="conversion-refresh.css?v=4" />
   <link rel="stylesheet" href="vision-projects.css?v=7" />
   <link rel="stylesheet" href="home-neutral.css?v=4" />
-<link rel="stylesheet" href="studio-refresh.css?v=8" />
+<link rel="stylesheet" href="studio-refresh.css?v=9" />
+  <link rel="stylesheet" href="quick-consult.css?v=2" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-45Q0B2B2XR"></script>
 <script src="analytics-init.js?v=1"></script>
@@ -461,6 +462,22 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
   <a href="https://open.kakao.com/o/sBasXuKi" class="sb-consult" target="_blank" rel="noopener noreferrer" data-conversion="kakao_openchat">카카오 상담</a>
 </nav>
 
+<aside class="quick-consult" id="quick-consult" aria-labelledby="quick-consult-title" hidden>
+  <form class="quick-consult-form" method="post">
+    <strong id="quick-consult-title">빠른 상담</strong>
+    <div class="quick-consult-fields">
+      <input type="text" name="name" aria-label="이름" placeholder="이름" autocomplete="name" maxlength="50" required>
+      <input type="tel" name="phone" aria-label="전화번호" placeholder="전화번호" autocomplete="tel" inputmode="tel" maxlength="30" required>
+      <button type="submit">보내기</button>
+    </div>
+    <div class="quick-consult-consent">
+      <label><input type="checkbox" name="privacyConsent" required> 개인정보 수집·이용 동의</label>
+      <a href="privacy.html" target="_blank" rel="noopener">내용 보기 <span aria-hidden="true">↗</span></a>
+    </div>
+    <p class="quick-consult-status" role="status" aria-live="polite"></p>
+  </form>
+</aside>
+
 <!-- 구조화 데이터: 검색엔진용 업체 정보 (화면에 표시되지 않음) -->
 <script type="application/ld+json">
 {
@@ -535,6 +552,7 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
 }
 </script>
   <script type="module" src="main.js?v=159"></script>
+  <script type="module" src="quick-consult.mjs?v=2"></script>
   <script type="module" src="studio-refresh.js?v=3"></script>
 </body>
 </html>
