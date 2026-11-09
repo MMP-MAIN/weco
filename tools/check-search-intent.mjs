@@ -20,7 +20,7 @@ for(const [file,[id,section,term]]of Object.entries(pages)){
  assert.equal(getInquiryContext('?inquiry='+id).page,file);
  assert.ok(html.includes('href="index.html?inquiry='+id+'#contact"'));
  const schemas=[...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m=>{const s=JSON.parse(m[1]);return s['@graph']||[s]});
- const updated = file === 'daegu-commercial-interior.html' ? '2026-10-13' : '2026-10-24';
+ const updated = file === 'daegu-commercial-interior.html' ? '2026-11-09' : '2026-10-24';
  assert.equal(schemas.find(s=>s['@type']==='Article').dateModified,updated);
  for(const schema of schemas.filter(s=>s['@type']==='FAQPage'))for(const q of schema.mainEntity){
   assert.ok(html.includes('<summary>'+q.name+'</summary>'));

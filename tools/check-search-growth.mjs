@@ -27,7 +27,7 @@ for (const [file, section] of Object.entries(pages)) {
   assert.ok(html.includes('insights.css?v=' + (file === 'restaurant-interior-cost.html' ? '3' : '2')));
   assert.ok(html.includes('width=device-width,initial-scale=1'));
   assert.ok(html.includes('rel="canonical" href="'+origin+file+'"'));
-  const updated = file === 'restaurant-interior-cost.html' ? '2026-10-24' : '2026-10-13';
+  const updated = {'restaurant-interior-cost.html':'2026-10-24','restaurant-business-conversion-guide.html':'2026-10-13','daegu-commercial-interior.html':'2026-11-09'}[file];
   assert.ok(html.includes('<time datetime="' + updated + '">' + updated.replaceAll('-', '.') + '</time>'));
   const schemas=[...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m=>{const s=JSON.parse(m[1]);return s['@graph']||[s]});
   assert.equal(schemas.find(s=>s['@type']==='Article').dateModified,updated);

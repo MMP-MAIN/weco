@@ -9,7 +9,8 @@ for (const file of files) {
   // The page's outer article may contain nested articles. Match until main ends, not first </article>.
   const start = html.indexOf('<article>'), end = html.lastIndexOf('</article>');
   if(start < 0 || end < start) throw new Error(`Missing article: ${file}`);
-  const article = html.slice(start, end + '</article>'.length).replace(/href="([^"]+)"/g, (_, href) => `href="${new URL(href, origin + file).href}"`);
+  const article = html.slice(start, end + '</article>'.length)
+    .replace(/\b(href|src)="([^"]+)"/g, (_, attribute, url) => `${attribute}="${new URL(url, origin + file).href}"`);
   let count = 0;
   feed = feed.replace(/<item>[\s\S]*?<\/item>/g, item => {
     if (!item.includes(`<link>${origin}${file}</link>`)) return item;

@@ -34,9 +34,10 @@ for (const file of updated) {
   assert.ok(!titles.has(title) && !descriptions.has(description), file + ': distinct intent');
   titles.add(title); descriptions.add(description);
   const data = schemas(html), article = data.find(j => j['@type'] === 'Article');
-  assert.equal(article.dateModified, '2026-10-24');
+  const modified = file === 'startup-guide.html' ? '2026-11-09' : '2026-10-24';
+  assert.equal(article.dateModified, modified);
   assert.ok(title.includes(article.headline));
-  assert.ok(sitemap.includes('<loc>' + origin + file + '</loc><lastmod>2026-10-24</lastmod>'));
+  assert.ok(sitemap.includes('<loc>' + origin + file + '</loc><lastmod>' + modified + '</lastmod>'));
   for (const [,href] of html.matchAll(/<a\b[^>]*href="([^"]+)"/g)) {
     const url = new URL(href.replaceAll('&amp;', '&'), origin + file);
     if (url.origin !== new URL(origin).origin) continue;
@@ -81,6 +82,6 @@ assert.ok(startup.includes('href="#food-types"'));
 assert.ok(read('startup-guide.css').includes('min-width:640px') && read('startup-guide.css').includes('overflow-x:auto'));
 assert.ok(food.includes('영업신고 업종을 판정하는 표가 아닙니다'));
 assert.ok(read('commercial-remodeling-planning-guide.html').includes('id="vacancy-plan"'));
-assert.ok(read('index.html').includes('main.js?v=156'));
-assert.ok(read('main.js').includes('inquiry-context.mjs?v=9'));
+assert.ok(read('index.html').includes('main.js?v=158'));
+assert.ok(read('main.js').includes('inquiry-context.mjs?v=11'));
 console.log('PASS: 12 food-business comparisons, bounded mobile table, vacancy/renewal guide and versioned inquiry routes.');

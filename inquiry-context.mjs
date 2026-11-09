@@ -1,5 +1,6 @@
 // Only fixed, public guide identifiers are accepted. No free text or personal data in URLs.
 export const INQUIRY_GUIDES = Object.freeze({
+  'startup-guide': {topic:'창업 준비 상담',page:'startup-guide.html',title:'창업 절차·업종별 준비 가이드',placeholder:'생각 중인 업종, 점포 계약 여부와 지금 막힌 부분을 아는 만큼 알려주세요.'},
   'startup-consulting': {topic:'창업 준비·사업 방향 상담',page:'startup-consulting-guide.html',title:'창업 컨설팅 비용·상담 준비 안내',placeholder:'생각 중인 업종·상품, 준비 지역·점포 유무와 가장 막힌 일을 아는 만큼 알려주세요.'},
   'kitchen-planning': {topic:'식당 주방·장비·공간 준비 상담',page:'restaurant-kitchen-equipment-guide.html',title:'식당 주방 인테리어·설비 견적 준비 안내',placeholder:'지역·면적·대표 메뉴와 점포 상태, 남길 장비가 있는지 아는 만큼 알려주세요.'},
   'bar-startup': {topic:'술집·이자카야 창업·공간 준비 상담',page:'bar-startup-interior-guide.html',title:'술집 창업 비용·이자카야 인테리어 안내',placeholder:'지역·면적·메뉴·점포 계약 전후와 비어 있는 상가인지 기존 매장인지 알려주세요. 모르는 항목은 적지 않아도 됩니다.'},
