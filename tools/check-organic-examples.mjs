@@ -32,7 +32,7 @@ for(const [file,id] of Object.entries(pages)) {
   assert.ok(section.includes('가상')&&section.includes('예시'));
   assert.ok(section.includes('<caption>')&&section.includes('scope="col"')&&section.includes('scope="row"'));
   assert.doesNotMatch(section, /<form\b|<script\b|<input\b/);
-  assert.ok(html.includes('insights.css?v=' + (['brand-consulting-guide.html', 'commercial-interior-quote-checklist.html', 'meat-restaurant-startup-interior.html'].includes(file) ? '3' : '2')));
+  assert.ok(html.includes('insights.css?v=' + (file === 'meat-restaurant-startup-interior.html' ? '4' : ['brand-consulting-guide.html', 'commercial-interior-quote-checklist.html', 'meat-restaurant-startup-interior.html'].includes(file) ? '3' : '2')));
   const schema=[...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m=>{const j=JSON.parse(m[1]);return j['@graph']||[j]});
   const updated = html.match(/<time datetime="(\d{4}-\d{2}-\d{2})"/)?.[1];
   assert.ok(updated, file + ': visible review date');

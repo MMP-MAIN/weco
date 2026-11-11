@@ -24,7 +24,7 @@ for (const [file, section] of Object.entries(pages)) {
   const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
   assert.equal(ids.length,new Set(ids).size,file+': unique IDs');
   assert.ok(ids.includes(section)&&html.includes('href="#'+section+'"'));
-  assert.ok(html.includes('insights.css?v=' + (['restaurant-interior-cost.html', 'restaurant-business-conversion-guide.html'].includes(file) ? '3' : '2')));
+  assert.ok(html.includes('insights.css?v=' + (file === 'restaurant-business-conversion-guide.html' ? '4' : ['restaurant-interior-cost.html', 'restaurant-business-conversion-guide.html'].includes(file) ? '3' : '2')));
   assert.ok(html.includes('width=device-width,initial-scale=1'));
   assert.ok(html.includes('rel="canonical" href="'+origin+file+'"'));
   const updated = html.match(/<time datetime="(\d{4}-\d{2}-\d{2})"/)?.[1];

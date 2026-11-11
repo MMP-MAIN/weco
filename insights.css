@@ -2,7 +2,7 @@
 .hero-shortcuts{display:flex;flex-wrap:wrap;gap:4px 20px;margin:22px 0;font-size:15px;line-height:1.6}
 .hero-shortcuts a{display:flex;align-items:center;min-height:44px;padding:6px 0;text-underline-offset:4px}
 .hero-shortcuts a:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
-.decision-example{min-width:0}
+.article-body,.decision-example{min-width:0}
 .decision-table{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;margin:24px 0;border:1px solid var(--line);background:#faf8f2}
 .decision-table table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:15px;line-height:1.7;text-align:left;overflow-wrap:anywhere}
 .decision-table caption{text-align:left;font-weight:750;padding:16px;color:var(--ink)}
