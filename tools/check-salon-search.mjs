@@ -9,7 +9,7 @@ const origin = 'https://wecocompany.com/';
 const files = ['hair-salon-interior-process-guide.html', 'daegu-hair-salon-interior.html'];
 for (const file of files) {
   const html = read(file);
-  const expectedDate = file === 'hair-salon-interior-process-guide.html' ? '2026-09-29' : '2026-11-05';
+  const expectedDate = '2026-11-11';
   assert.equal((html.match(/<h1>/g) || []).length, 1, `${file}: one heading`);
   assert.ok(html.includes(`rel="canonical" href="${origin}${file}"`));
   assert.ok(html.includes('width=device-width,initial-scale=1'));
