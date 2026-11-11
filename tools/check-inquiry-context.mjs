@@ -53,9 +53,11 @@ assert.match(read('studio-refresh.css'), /grid-template-areas:"intro" "form" "he
 // Execute the actual submit handler with mocked transport: never send a test lead.
 const submitCode = main.slice(main.indexOf("form.addEventListener('submit'"), main.indexOf('// Keep mobile keyboard'));
 assert.ok(submitCode.length > 1000);
-for (const outcome of ['success', 'failure', 'network', 'timeout', 'whitespace', 'busy']) {
+for (const outcome of ['success', 'success-tracking-failure', 'failure', 'failure-tracking-failure', 'network', 'timeout', 'whitespace', 'busy']) {
   let handler, payload, resetCount = 0;
   const events = [];
+  const statuses = [];
+  const accepted = outcome.startsWith('success');
   const form = {
     name: { value: outcome === 'whitespace' ? '   ' : '테스트 이름' }, phone: { value: '01000000000' },
     message: { value: '고객이 직접 쓴 문의' }, budget: { value: '' },
@@ -75,9 +77,13 @@ for (const outcome of ['success', 'failure', 'network', 'timeout', 'whitespace',
       payload = JSON.parse(opts.body);
       if (outcome === 'network') throw new TypeError('network unavailable');
       if (outcome === 'timeout') throw Object.assign(new Error('timeout'), { name: 'AbortError' });
-      return { ok: outcome === 'success', json: async () => ({ success: outcome === 'success' }) };
+      return { ok: accepted, json: async () => ({ success: accepted }) };
     },
-    trackEvent: (name, params) => events.push({ name, params }), setStatus() {},
+    trackEvent: (name, params) => {
+      if (outcome.endsWith('tracking-failure')) throw new Error('Analytics unavailable');
+      events.push({ name, params });
+    },
+    setStatus(message, ok) { statuses.push({ message, ok }); },
     applyInquiryContext() {}, document: { documentElement: { lang: 'ko' } }, location: { search: '' },
     AbortController, setTimeout, clearTimeout, console: { error() {} }
   };
@@ -95,10 +101,13 @@ for (const outcome of ['success', 'failure', 'network', 'timeout', 'whitespace',
   assert.equal(payload.최초유입, 'naver / organic');
   assert.equal(submitBtn.disabled, false);
   assert.equal(label.textContent, '문의 보내기');
-  assert.equal(resetCount, outcome === 'success' ? 1 : 0);
-  assert.equal(events.some(e => e.name === 'generate_lead'), outcome === 'success');
-  if (outcome === 'success') assert.equal(events[0].params.inquiry_topic, 'cafe-startup');
-  else {
+  assert.equal(resetCount, accepted ? 1 : 0);
+  assert.equal(statuses.at(-1).message, accepted ? 'ok' : 'err');
+  assert.equal(statuses.at(-1).ok, accepted);
+  assert.equal(events.some(e => e.name === 'generate_lead'), accepted && !outcome.endsWith('tracking-failure'));
+  if (accepted) {
+    if (events.length) assert.equal(events[0].params.inquiry_topic, 'cafe-startup');
+  } else if (!outcome.endsWith('tracking-failure')) {
     assert.equal(events[0].name, 'form_submit_error');
     assert.equal(events[0].params.error_type, outcome === 'timeout' ? 'timeout' : outcome === 'network' ? 'network_error' : 'response_error');
     assert.equal(form.message.value, '고객이 직접 쓴 문의', 'retain message on failed submission');

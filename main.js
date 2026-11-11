@@ -621,25 +621,29 @@ form.addEventListener('submit', async (e) => {
       context: inquiryContext,
       leadContext: getLeadContext()
     }), controller.signal)
-    trackEvent('generate_lead', {
-      ...inquiryTracking.params(),
-      lead_status: 'accepted_by_form_service',
-      form_name: 'project_inquiry',
-      ...inquiryEventParams(inquiryContext),
-      lead_type: selectedType || 'unspecified',
-      page_language: document.documentElement.lang || 'ko'
-    })
+    try {
+      trackEvent('generate_lead', {
+        ...inquiryTracking.params(),
+        lead_status: 'accepted_by_form_service',
+        form_name: 'project_inquiry',
+        ...inquiryEventParams(inquiryContext),
+        lead_type: selectedType || 'unspecified',
+        page_language: document.documentElement.lang || 'ko'
+      })
+    } catch (_) { /* The inquiry is already accepted. */ }
     form.reset()
     applyInquiryContext(document, location.search)
     setStatus(FORM_MSG.ok, true)
   } catch (err) {
     console.error(err)
-    trackEvent('form_submit_error', {
-      ...inquiryTracking.params(),
-      form_name: 'project_inquiry',
-      error_type: err?.name === 'AbortError' ? 'timeout' : err?.name === 'TypeError' ? 'network_error' : 'response_error',
-      page_language: document.documentElement.lang || 'ko'
-    })
+    try {
+      trackEvent('form_submit_error', {
+        ...inquiryTracking.params(),
+        form_name: 'project_inquiry',
+        error_type: err?.name === 'AbortError' ? 'timeout' : err?.name === 'TypeError' ? 'network_error' : 'response_error',
+        page_language: document.documentElement.lang || 'ko'
+      })
+    } catch (_) { /* Tracking cannot prevent the error notice or a retry. */ }
     setStatus(FORM_MSG.err, false)
   } finally {
     clearTimeout(timeout)
