@@ -53,7 +53,7 @@ assert.match(read('studio-refresh.css'), /grid-template-areas:"intro" "form" "he
 // Execute the actual submit handler with mocked transport: never send a test lead.
 const submitCode = main.slice(main.indexOf("form.addEventListener('submit'"), main.indexOf('// Keep mobile keyboard'));
 assert.ok(submitCode.length > 1000);
-for (const outcome of ['success', 'success-tracking-failure', 'failure', 'failure-tracking-failure', 'network', 'timeout', 'whitespace', 'busy']) {
+for (const mode of ['customer', 'test']) for (const outcome of ['success', 'success-tracking-failure', 'failure', 'failure-tracking-failure', 'network', 'timeout', 'whitespace', 'busy']) {
   let handler, payload, resetCount = 0;
   const events = [];
   const statuses = [];
@@ -69,7 +69,7 @@ for (const outcome of ['success', 'success-tracking-failure', 'failure', 'failur
   const context = getInquiryContext('?inquiry=cafe-startup');
   const sandbox = {
     form, submitBtn, inquiryContext: context, inquiryEventParams, selectedType: '', typeCards: null,
-    inquiryTracking: { attempt() {}, validationError() {}, params: () => ({ attempt_number: 1 }) },
+    inquiryTracking: { attempt() {}, validationError() {}, params: () => ({ attempt_number: 1, inquiry_mode: mode }) },
     FORM_MSG: { need: 'need', ok: 'ok', err: 'err' }, inquiryPayload,
     sendInquiry: (data, signal) => sendInquiry(data, signal, sandbox.fetch),
     getLeadContext: () => ({ first_touch: 'naver / organic' }),
@@ -96,6 +96,7 @@ for (const outcome of ['success', 'success-tracking-failure', 'failure', 'failur
     continue;
   }
   assert.equal(payload.문의내용, '고객이 직접 쓴 문의');
+  assert.equal(payload.접수구분.startsWith('테스트'), mode === 'test');
   assert.equal(payload.상담주제, context.topic);
   assert.equal(payload.상담연결글, 'https://wecocompany.com/cafe-startup-interior.html');
   assert.equal(payload.최초유입, 'naver / organic');
@@ -104,7 +105,9 @@ for (const outcome of ['success', 'success-tracking-failure', 'failure', 'failur
   assert.equal(resetCount, accepted ? 1 : 0);
   assert.equal(statuses.at(-1).message, accepted ? 'ok' : 'err');
   assert.equal(statuses.at(-1).ok, accepted);
-  assert.equal(events.some(e => e.name === 'generate_lead'), accepted && !outcome.endsWith('tracking-failure'));
+  assert.equal(events.some(e => e.name === 'generate_lead'), mode === 'customer' && accepted && !outcome.endsWith('tracking-failure'));
+  assert.equal(events.some(e => e.name === 'test_inquiry'), mode === 'test' && accepted && !outcome.endsWith('tracking-failure'));
+  for (const event of events) assert.equal(event.params.inquiry_mode, mode);
   if (accepted) {
     if (events.length) assert.equal(events[0].params.inquiry_topic, 'cafe-startup');
   } else if (!outcome.endsWith('tracking-failure')) {
@@ -114,5 +117,31 @@ for (const outcome of ['success', 'success-tracking-failure', 'failure', 'failur
   }
   assert.ok(!JSON.stringify(events).includes('01000000000'), 'no phone in analytics');
   assert.ok(!JSON.stringify(events).includes('고객이 직접 쓴 문의'), 'no message in analytics');
+}
+// Both inquiry entry points must separate tests without changing delivery or customer conversions.
+const quickCode = read('quick-consult.mjs');
+const quickSubmit = quickCode.slice(quickCode.indexOf("form.addEventListener('submit'"), quickCode.indexOf("\nif (!form.hasAttribute"));
+for (const mode of ['customer', 'test']) for (const accepted of [true, false]) {
+  let handler, payload;
+  const events = [];
+  const status = [];
+  const submit = { disabled: false, textContent: '보내기' };
+  const form = { addEventListener: (_, fn) => { handler = fn; }, setAttribute() {}, removeAttribute() {}, reset() {} };
+  const sandbox = {
+    form, submit, tracking: { attempt() {}, validationError() {}, params: () => ({ inquiry_mode: mode, form_name: 'quick_consult' }) },
+    nameInput: { value: 'Fixture' }, phoneInput: { value: '01000000000' }, consent: { checked: true }, fields: [], context: null,
+    getLeadContext: () => ({}), inquiryPayload,
+    sendInquiry: async data => { payload = data; if (!accepted) throw new TypeError('offline'); },
+    emit: (event, params) => events.push({event, params}), showStatus: (...args) => status.push(args), syncSpace() {},
+    AbortController, setTimeout, clearTimeout
+  };
+  vm.runInNewContext(quickSubmit, sandbox);
+  await handler({ preventDefault() {} });
+  assert.equal(payload.접수구분.startsWith('테스트'), mode === 'test');
+  assert.equal(events[0].event, accepted ? (mode === 'test' ? 'test_inquiry' : 'generate_lead') : 'form_submit_error');
+  assert.equal(events[0].params.inquiry_mode, mode);
+  assert.equal(status.at(-1)[1], accepted ? 'success' : 'error');
+  assert.equal(submit.disabled, false);
+  assert.doesNotMatch(JSON.stringify(events), /01000000000|Fixture/);
 }
 console.log(`PASS: ${Object.keys(INQUIRY_GUIDES).length} contextual guide routes, safe URL allowlist, preserved input/attribution, submit success/failure and analytics privacy (mocked, no email sent).`);

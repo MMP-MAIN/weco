@@ -18,13 +18,14 @@ export function getLeadContext() {
   }
 }
 
-export function inquiryPayload({ name, phone, budget, message, preferredWork, context, leadContext, quick = false }) {
+export function inquiryPayload({ name, phone, budget, message, preferredWork, context, leadContext, quick = false, inquiryMode = 'customer' }) {
   return {
     _subject: '[위코컴퍼니] 새 프로젝트 문의',
     _template: 'table',
     _captcha: 'false',
     이름: name,
     연락처: phone,
+    접수구분: inquiryMode === 'test' ? '테스트 접수 (실제 고객 아님)' : '일반 접수 (고객 여부 별도 확인)',
     ...(preferredWork ? { 희망업무: preferredWork } : {}),
     개인정보동의: '동의',
     프로젝트예상총예산: budget || '미입력',

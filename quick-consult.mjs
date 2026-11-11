@@ -1,6 +1,6 @@
 import { getInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=11'
-import { createInquiryTracking } from './inquiry-tracking.mjs?v=1'
-import { getLeadContext, inquiryPayload, sendInquiry } from './inquiry-delivery.mjs?v=1'
+import { createInquiryTracking } from './inquiry-tracking.mjs?v=2'
+import { getLeadContext, inquiryPayload, sendInquiry } from './inquiry-delivery.mjs?v=2'
 
 const bar = document.getElementById('quick-consult')
 const form = bar.querySelector('form')
@@ -80,12 +80,17 @@ form.addEventListener('submit', async event => {
   showStatus('', '')
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), 20000)
+  let submissionParams = { inquiry_mode: 'customer' }
+  try { submissionParams = tracking.params() } catch (_) { /* Tracking cannot block delivery. */ }
   try {
     await sendInquiry(inquiryPayload({
-      name, phone, context, leadContext: getLeadContext(), quick: true
+      name, phone, context, leadContext: getLeadContext(), quick: true,
+      inquiryMode: submissionParams.inquiry_mode
     }), controller.signal)
     try {
-      emit('generate_lead', { ...tracking.params(), lead_status: 'accepted_by_form_service' })
+      emit(submissionParams.inquiry_mode === 'test' ? 'test_inquiry' : 'generate_lead', {
+        ...submissionParams, lead_status: 'accepted_by_form_service'
+      })
     } catch (_) { /* The inquiry is already accepted. */ }
     form.reset()
     showStatus('상담 요청이 접수됐어요. 남겨주신 번호로 안내드릴게요.', 'success')
@@ -93,7 +98,7 @@ form.addEventListener('submit', async event => {
     showStatus('접수를 확인하지 못했어요. 입력값은 남아 있으니 다시 시도하기 전에 접수 여부를 확인해 주세요.', 'error')
     try {
       emit('form_submit_error', {
-        ...tracking.params(),
+        ...submissionParams,
         error_type: error?.name === 'AbortError' ? 'timeout' : error?.name === 'TypeError' ? 'network_error' : 'response_error'
       })
     } catch (_) { /* Tracking cannot prevent a retry. */ }

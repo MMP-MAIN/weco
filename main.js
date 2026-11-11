@@ -1,7 +1,7 @@
 // ===== 위코컴퍼니 홈페이지 스크립트 =====
 import { applyInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=11'
-import { createInquiryTracking } from './inquiry-tracking.mjs?v=1'
-import { getLeadContext, inquiryPayload, sendInquiry } from './inquiry-delivery.mjs?v=1'
+import { createInquiryTracking } from './inquiry-tracking.mjs?v=2'
+import { getLeadContext, inquiryPayload, sendInquiry } from './inquiry-delivery.mjs?v=2'
 
 const PHONE = '010-8606-2119'
 
@@ -612,9 +612,12 @@ form.addEventListener('submit', async (e) => {
   form.setAttribute('aria-busy', 'true')
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 20000)
+  let submissionParams = { inquiry_mode: 'customer' }
+  try { submissionParams = inquiryTracking.params() } catch (_) { /* Tracking cannot block delivery. */ }
   try {
     await sendInquiry(inquiryPayload({
       name, phone,
+      inquiryMode: submissionParams.inquiry_mode,
       preferredWork: typeCards && selectedType,
       budget: form.budget.value.trim(),
       message: form.message.value.trim(),
@@ -622,8 +625,8 @@ form.addEventListener('submit', async (e) => {
       leadContext: getLeadContext()
     }), controller.signal)
     try {
-      trackEvent('generate_lead', {
-        ...inquiryTracking.params(),
+      trackEvent(submissionParams.inquiry_mode === 'test' ? 'test_inquiry' : 'generate_lead', {
+        ...submissionParams,
         lead_status: 'accepted_by_form_service',
         form_name: 'project_inquiry',
         ...inquiryEventParams(inquiryContext),
@@ -638,7 +641,7 @@ form.addEventListener('submit', async (e) => {
     console.error(err)
     try {
       trackEvent('form_submit_error', {
-        ...inquiryTracking.params(),
+        ...submissionParams,
         form_name: 'project_inquiry',
         error_type: err?.name === 'AbortError' ? 'timeout' : err?.name === 'TypeError' ? 'network_error' : 'response_error',
         page_language: document.documentElement.lang || 'ko'

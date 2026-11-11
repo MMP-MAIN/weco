@@ -1,3 +1,12 @@
+// Inspect explicit test markers locally; never send names, messages or phone numbers to analytics.
+export function inquiryMode(form, search = globalThis.location?.search || '') {
+  if (new URLSearchParams(search).get('weco_test') === '1') return 'test'
+  const value = name => String(form.elements?.namedItem(name)?.value || '').trim()
+  if (/^WECO\s+.*테스트$/i.test(value('name'))
+    || /^\[테스트 접수\s*\/\s*실제 고객 아님\]/.test(value('message'))) return 'test'
+  return 'customer'
+}
+
 // Emit only fixed field identifiers and states, never values or validation messages.
 export function createInquiryTracking(form, emit, baseParams = {}) {
   const textFields = new Set(['name', 'phone', 'message', 'budget'])
@@ -7,7 +16,7 @@ export function createInquiryTracking(form, emit, baseParams = {}) {
   let attemptNumber = 0
   let validationCycle = false
   const seenErrors = new Set()
-  const params = () => ({ ...baseParams, attempt_number: attemptNumber })
+  const params = () => ({ ...baseParams, attempt_number: attemptNumber, inquiry_mode: inquiryMode(form) })
   const send = (event, extra = {}) => {
     try { emit(event, { ...params(), ...extra }) } catch (_) { /* Tracking must not block an inquiry. */ }
   }

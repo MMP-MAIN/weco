@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { createInquiryTracking } from '../inquiry-tracking.mjs';
+import { createInquiryTracking, inquiryMode } from '../inquiry-tracking.mjs';
 
 const handlers = {};
 const controls = Object.fromEntries(['name', 'phone', 'message', 'budget', 'privacyConsent'].map(name => [name, { name, value: '', validity: {} }]));
@@ -11,6 +11,17 @@ const form = {
 const events = [];
 const tracking = createInquiryTracking(form, (event, params) => events.push({ event, params }), { form_name: 'project_inquiry' });
 const fire = (event, name) => handlers[event]?.({ target: controls[name] });
+assert.equal(inquiryMode(form, '?weco_test=1'), 'test');
+assert.equal(inquiryMode(form, '?weco_test=0'), 'customer');
+controls.name.value = 'WECO 문의폼 수정 테스트';
+assert.equal(inquiryMode(form), 'test');
+assert.equal(tracking.params().inquiry_mode, 'test');
+controls.name.value = '일반 고객';
+controls.message.value = '[테스트 접수 / 실제 고객 아님] 점검';
+assert.equal(inquiryMode(form), 'test');
+controls.message.value = '테스트 매장 디자인 상담';
+assert.equal(inquiryMode(form), 'customer', 'ordinary customer text must not be excluded');
+controls.name.value = controls.message.value = '';
 assert.equal(handlers.focusin, undefined, 'focus alone is not actual input');
 fire('input', 'name');
 controls.name.value = '   ';
