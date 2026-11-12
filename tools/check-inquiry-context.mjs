@@ -120,8 +120,27 @@ for (const mode of ['customer', 'test']) for (const outcome of ['success', 'succ
 }
 // Both inquiry entry points must separate tests without changing delivery or customer conversions.
 const quickCode = read('quick-consult.mjs');
+// The common quick form keeps the guide topic when a visitor arrives from an apartment or shop page.
+const quickInit = quickCode.slice(quickCode.indexOf("const bar ="), quickCode.indexOf('\nfunction showStatus'));
+for (const [fixedId, search, expected] of [
+  [undefined, '?inquiry=daegu-apartment', 'daegu-apartment'],
+  [undefined, '?inquiry=apartment', 'apartment'],
+  [undefined, '?inquiry=daegu-commercial', 'daegu-commercial'],
+  ['daegu-bbq', '?inquiry=apartment', 'daegu-bbq'],
+  [undefined, '?inquiry=unknown', null], [undefined, '', null]
+]) {
+  let trackedContext;
+  const quickForm = {dataset: {inquiry:fixedId}, querySelector() {return {};}, elements:{namedItem() {return {};}}};
+  const quickBar = {querySelector: () => quickForm};
+  vm.runInNewContext(quickInit, {
+    document:{getElementById:()=>quickBar,documentElement:{lang:'ko'}}, location:{search},
+    getInquiryContext, inquiryEventParams,
+    createInquiryTracking: (_,emit,params) => {trackedContext=params; return {};}
+  });
+  assert.equal(trackedContext.inquiry_topic || null, expected);
+}
 const quickSubmit = quickCode.slice(quickCode.indexOf("form.addEventListener('submit'"), quickCode.indexOf("\nif (!form.hasAttribute"));
-for (const mode of ['customer', 'test']) for (const accepted of [true, false]) {
+for (const contextId of [null, 'daegu-apartment', 'daegu-commercial']) for (const mode of ['customer', 'test']) for (const accepted of [true, false]) {
   let handler, payload;
   const events = [];
   const status = [];
@@ -129,7 +148,7 @@ for (const mode of ['customer', 'test']) for (const accepted of [true, false]) {
   const form = { addEventListener: (_, fn) => { handler = fn; }, setAttribute() {}, removeAttribute() {}, reset() {} };
   const sandbox = {
     form, submit, tracking: { attempt() {}, validationError() {}, params: () => ({ inquiry_mode: mode, form_name: 'quick_consult' }) },
-    nameInput: { value: 'Fixture' }, phoneInput: { value: '01000000000' }, consent: { checked: true }, fields: [], context: null,
+    nameInput: { value: 'Fixture' }, phoneInput: { value: '01000000000' }, consent: { checked: true }, fields: [], context: getInquiryContext(`?inquiry=${contextId}`),
     getLeadContext: () => ({}), inquiryPayload,
     sendInquiry: async data => { payload = data; if (!accepted) throw new TypeError('offline'); },
     emit: (event, params) => events.push({event, params}), showStatus: (...args) => status.push(args), syncSpace() {},
@@ -138,6 +157,8 @@ for (const mode of ['customer', 'test']) for (const accepted of [true, false]) {
   vm.runInNewContext(quickSubmit, sandbox);
   await handler({ preventDefault() {} });
   assert.equal(payload.접수구분.startsWith('테스트'), mode === 'test');
+  assert.equal(payload.상담주제, contextId ? INQUIRY_GUIDES[contextId].topic : undefined);
+  assert.equal(payload.상담연결글, contextId ? `https://wecocompany.com/${INQUIRY_GUIDES[contextId].page}` : undefined);
   assert.equal(events[0].event, accepted ? (mode === 'test' ? 'test_inquiry' : 'generate_lead') : 'form_submit_error');
   assert.equal(events[0].params.inquiry_mode, mode);
   assert.equal(status.at(-1)[1], accepted ? 'success' : 'error');

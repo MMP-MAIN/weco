@@ -5,7 +5,7 @@ import { getLeadContext, inquiryPayload, sendInquiry } from './inquiry-delivery.
 const bar = document.getElementById('quick-consult')
 const form = bar.querySelector('form')
 const inquiryId = form.dataset.inquiry
-const context = inquiryId ? getInquiryContext(`?inquiry=${inquiryId}`) : null
+const context = getInquiryContext(inquiryId ? `?inquiry=${inquiryId}` : location.search)
 const submit = form.querySelector('button[type="submit"]')
 const status = form.querySelector('[role="status"]')
 const nameInput = form.elements.namedItem('name')
