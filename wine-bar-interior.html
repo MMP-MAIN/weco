@@ -2,6 +2,8 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; script-src 'self' https://www.googletagmanager.com https://connect.facebook.net https://cdn.jsdelivr.net 'sha256-3XTUMbfchqD6ba5PkDir/X7bLvSsTIc1j2AZH1T9B7A='; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://accounts.google.com; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: blob: https:; media-src 'self' https://videos.pexels.com; connect-src 'self' https://formsubmit.co https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://www.google.com https://*.doubleclick.net https://*.facebook.com https://connect.facebook.net https://cdn.jsdelivr.net https://mpc-pilot-3-s6uit34pua-ew.a.run.app https://kw-f5e5ef3e54fb4122a3ba09a55357f9ab.ecs.us-west-1.on.aws; frame-src 'self' https://www.facebook.com https://www.googletagmanager.com; form-action 'self' https://formsubmit.co https://www.facebook.com/tr/; worker-src 'self' blob:" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
   <script src="lead-attribution.js?v=1"></script>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>와인바 인테리어 | 금나리 실제 사례·대구 견적 상담 | 위코컴퍼니</title>
@@ -23,6 +25,7 @@
   <link rel="stylesheet" href="local-case-studies.css?v=1">
   <link rel="stylesheet" href="quick-consult.css?v=2">
   <script defer src="insight-tracking.js?v=6"></script>
+<script src="inquiry-guard.js?v=1"></script>
 </head>
 <body class="local-service-page">
   <header class="insight-top">
@@ -149,6 +152,7 @@
   </script>
   <aside class="quick-consult" id="quick-consult" aria-labelledby="quick-consult-title" hidden>
   <form class="quick-consult-form" method="post" data-inquiry="bar-startup">
+      <label hidden style="display:none" aria-hidden="true">이 칸은 비워 두세요.<input type="text" name="_honey" tabindex="-1" autocomplete="off" data-lpignore="true" /></label>
     <strong id="quick-consult-title">와인바 빠른 상담</strong>
     <div class="quick-consult-fields">
       <input type="text" name="name" aria-label="이름" placeholder="이름" autocomplete="name" maxlength="50" required>
@@ -162,6 +166,6 @@
     <p class="quick-consult-status" role="status" aria-live="polite"></p>
   </form>
 </aside>
-<script type="module" src="quick-consult.mjs?v=3"></script>
+<script type="module" src="quick-consult.mjs?v=5"></script>
 </body>
 </html>

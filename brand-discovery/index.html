@@ -2,6 +2,8 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; script-src 'self' https://www.googletagmanager.com https://connect.facebook.net https://cdn.jsdelivr.net 'sha256-TfF6JDKVtdiwoAcI7rXBG0uq1PAAC7/3nEEeL6r45eA=' 'sha256-kE10tqrQcbvTonWab2CAKYLcV+CMr7v1GaEVyN+OT0Y='; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://accounts.google.com; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: blob: https:; media-src 'self' https://videos.pexels.com; connect-src 'self' https://formsubmit.co https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://www.google.com https://*.doubleclick.net https://*.facebook.com https://connect.facebook.net https://cdn.jsdelivr.net https://mpc-pilot-3-s6uit34pua-ew.a.run.app https://kw-f5e5ef3e54fb4122a3ba09a55357f9ab.ecs.us-west-1.on.aws; frame-src 'self' https://www.facebook.com https://www.googletagmanager.com; form-action 'self' https://formsubmit.co https://www.facebook.com/tr/; worker-src 'self' blob:" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
   <script src="../lead-attribution.js?v=1"></script>
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
     <meta name="description" content="간단한 프로젝트 문의부터 9단계 상세 브랜드 점검까지. 현재 고민을 위코컴퍼니에 전하거나, 약 15–20분 동안 브랜드·고객·운영 조건을 정리해보세요." />
@@ -45,14 +47,15 @@
       fbq('track', 'ViewContent', {content_name: 'Brand Discovery'});
     </script>
     <script defer src="/performance-tracking.js?v=1"></script>
-    <script src="/brand-discovery/assets/client-email-delivery.js?v=2"></script>
+    <script src="/brand-discovery/assets/client-email-delivery.js?v=3"></script>
     <script defer src="/brand-discovery/assets/progressive-discovery.js?v=2"></script>
     <script defer src="/brand-discovery/assets/discovery-entry.js?v=1"></script>
     <script type="module" crossorigin src="/brand-discovery/assets/index-DqdqLdJ6.js"></script>
     <link rel="stylesheet" crossorigin href="/brand-discovery/assets/index-DDmeuyuh.css">
     <link rel="stylesheet" href="/brand-discovery/assets/comfort-overrides.css?v=2">
     <link rel="stylesheet" href="/brand-discovery/assets/discovery-entry.css?v=1">
-  </head>
+  <script src="/inquiry-guard.js?v=1"></script>
+</head>
   <body>
     <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscript=1" /></noscript>
     <!-- This entry is outside React's root, so returning from the questionnaire preserves its state. -->

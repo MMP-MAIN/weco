@@ -1,7 +1,7 @@
 // ===== 위코컴퍼니 홈페이지 스크립트 =====
 import { applyInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=11'
 import { createInquiryTracking } from './inquiry-tracking.mjs?v=2'
-import { getLeadContext, inquiryPayload, sendInquiry } from './inquiry-delivery.mjs?v=2'
+import { getLeadContext, inquiryPayload, sendInquiry } from './inquiry-delivery.mjs?v=3'
 
 const PHONE = '010-8606-2119'
 
@@ -543,6 +543,7 @@ tick()
 
 // ===== 의뢰 폼 =====
 const form = document.getElementById('inquiryForm')
+const submissionGuard = window.WECO_FORM_GUARD?.attach(form)
 const submitBtn = document.getElementById('submitBtn')
 const formStatus = document.getElementById('formStatus')
 const inquiryContext = applyInquiryContext(document, location.search)
@@ -597,10 +598,17 @@ form.addEventListener('submit', async (e) => {
   const name = form.name.value.trim()
   const phone = form.phone.value.trim()
 
-  if (!name || !phone) {
+  const phoneDigits = phone.replace(/\D/g, '').length
+  if (!name || !phone || !/^\+?[0-9 ()-]+$/.test(phone) || phoneDigits < 7 || phoneDigits > 15) {
     if (!name) inquiryTracking.validationError('name', 'value_missing')
     if (!phone) inquiryTracking.validationError('phone', 'value_missing')
     setStatus(FORM_MSG.need, false)
+    return
+  }
+
+  const guardResult = submissionGuard?.begin()
+  if (guardResult && !guardResult.allowed) {
+    setStatus(guardResult.message, false)
     return
   }
 
@@ -617,6 +625,7 @@ form.addEventListener('submit', async (e) => {
   try {
     await sendInquiry(inquiryPayload({
       name, phone,
+      honeypot: submissionGuard?.honeypot() || '',
       inquiryMode: submissionParams.inquiry_mode,
       preferredWork: typeCards && selectedType,
       budget: form.budget.value.trim(),
@@ -624,6 +633,7 @@ form.addEventListener('submit', async (e) => {
       context: inquiryContext,
       leadContext: getLeadContext()
     }), controller.signal)
+    submissionGuard?.accepted()
     try {
       trackEvent(submissionParams.inquiry_mode === 'test' ? 'test_inquiry' : 'generate_lead', {
         ...submissionParams,
@@ -649,6 +659,7 @@ form.addEventListener('submit', async (e) => {
     } catch (_) { /* Tracking cannot prevent the error notice or a retry. */ }
     setStatus(FORM_MSG.err, false)
   } finally {
+    submissionGuard?.release()
     clearTimeout(timeout)
     form.removeAttribute('aria-busy')
     if (submitLabel) submitLabel.textContent = originalLabel

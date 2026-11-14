@@ -18,11 +18,12 @@ export function getLeadContext() {
   }
 }
 
-export function inquiryPayload({ name, phone, budget, message, preferredWork, context, leadContext, quick = false, inquiryMode = 'customer' }) {
+export function inquiryPayload({ name, phone, budget, message, preferredWork, context, leadContext, honeypot = '', quick = false, inquiryMode = 'customer' }) {
   return {
     _subject: '[위코컴퍼니] 새 프로젝트 문의',
     _template: 'table',
     _captcha: 'false',
+    _honey: String(honeypot),
     이름: name,
     연락처: phone,
     접수구분: inquiryMode === 'test' ? '테스트 접수 (실제 고객 아님)' : '일반 접수 (고객 여부 별도 확인)',
@@ -54,6 +55,14 @@ export function inquiryPayload({ name, phone, budget, message, preferredWork, co
 }
 
 export async function sendInquiry(payload, signal, request = fetch) {
+  const phone = String(payload.연락처 || '').trim()
+  const digits = phone.replace(/\D/g, '').length
+  if (String(payload._honey || '').trim() || !String(payload.이름 || '').trim()
+    || String(payload.이름).length > 50 || !/^\+?[0-9 ()-]+$/.test(phone)
+    || digits < 7 || digits > 15 || phone.length > 30
+    || String(payload.문의내용 || '').length > 2000 || String(payload.프로젝트예상총예산 || '').length > 30) {
+    throw new Error('Invalid inquiry fields')
+  }
   const response = await request(INQUIRY_ENDPOINT, {
     method: 'POST',
     signal,

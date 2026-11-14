@@ -127,7 +127,7 @@ const form = {
 };
 const submitBtn = {disabled: false, classList: {add() {}, remove() {}}, querySelector: () => ({textContent: '문의 보내기'})};
 const sandbox = {
-  form, submitBtn, window: {WECO_JOURNEY: inquiry},
+  submissionGuard: undefined, form, submitBtn, window: {WECO_JOURNEY: inquiry},
   sessionStorage: {getItem() { throw new Error('Storage denied'); }},
   location: new URL('https://wecocompany.com/index.html'), navigator: {platform: 'fixture'}, innerWidth: 390,
   inquiryTracking: {attempt() {}, params: () => ({attempt_number: 1})},

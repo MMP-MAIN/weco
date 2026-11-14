@@ -68,7 +68,7 @@ for (const mode of ['customer', 'test']) for (const outcome of ['success', 'succ
   const submitBtn = { disabled: outcome === 'busy', classList: { add() {}, remove() {} }, querySelector: () => label };
   const context = getInquiryContext('?inquiry=cafe-startup');
   const sandbox = {
-    form, submitBtn, inquiryContext: context, inquiryEventParams, selectedType: '', typeCards: null,
+    submissionGuard: undefined, form, submitBtn, inquiryContext: context, inquiryEventParams, selectedType: '', typeCards: null,
     inquiryTracking: { attempt() {}, validationError() {}, params: () => ({ attempt_number: 1, inquiry_mode: mode }) },
     FORM_MSG: { need: 'need', ok: 'ok', err: 'err' }, inquiryPayload,
     sendInquiry: (data, signal) => sendInquiry(data, signal, sandbox.fetch),
@@ -133,7 +133,7 @@ for (const [fixedId, search, expected] of [
   const quickForm = {dataset: {inquiry:fixedId}, querySelector() {return {};}, elements:{namedItem() {return {};}}};
   const quickBar = {querySelector: () => quickForm};
   vm.runInNewContext(quickInit, {
-    document:{getElementById:()=>quickBar,documentElement:{lang:'ko'}}, location:{search},
+    window: {}, document:{getElementById:()=>quickBar,documentElement:{lang:'ko'}}, location:{search},
     getInquiryContext, inquiryEventParams,
     createInquiryTracking: (_,emit,params) => {trackedContext=params; return {};}
   });
@@ -147,7 +147,7 @@ for (const contextId of [null, 'daegu-apartment', 'daegu-commercial']) for (cons
   const submit = { disabled: false, textContent: '보내기' };
   const form = { addEventListener: (_, fn) => { handler = fn; }, setAttribute() {}, removeAttribute() {}, reset() {} };
   const sandbox = {
-    form, submit, tracking: { attempt() {}, validationError() {}, params: () => ({ inquiry_mode: mode, form_name: 'quick_consult' }) },
+    submissionGuard: undefined, form, submit, tracking: { attempt() {}, validationError() {}, params: () => ({ inquiry_mode: mode, form_name: 'quick_consult' }) },
     nameInput: { value: 'Fixture' }, phoneInput: { value: '01000000000' }, consent: { checked: true }, fields: [], context: getInquiryContext(`?inquiry=${contextId}`),
     getLeadContext: () => ({}), inquiryPayload,
     sendInquiry: async data => { payload = data; if (!accepted) throw new TypeError('offline'); },

@@ -11,10 +11,14 @@
   const authBtn = $('authBtn')
   const loginBtn = $('loginBtn')
   const refreshBtn = $('refreshBtn')
+  // Analytics dimensions and campaign names are external data, not trusted HTML.
+  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[character])
 
   function setStatus(text, connected = false) {
     $('status').className = `status${connected ? ' connected' : ''}`
-    $('status').innerHTML = `<i></i>${text}`
+    $('status').innerHTML = `<i></i>${escapeHtml(text)}`
   }
 
   function waitForGoogle() {
@@ -41,7 +45,7 @@
   }
 
   const metric = (row, i = 0) => Number(row?.metricValues?.[i]?.value || 0)
-  const dimension = (row, i = 0) => row?.dimensionValues?.[i]?.value || '–'
+  const dimension = (row, i = 0) => escapeHtml(row?.dimensionValues?.[i]?.value || '–')
 
   async function loadDashboard() {
     setStatus('데이터 불러오는 중', true)
@@ -136,6 +140,9 @@
   const button = $('metaAuthBtn')
   const number = new Intl.NumberFormat('ko-KR')
   const won = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW', maximumFractionDigits: 0 })
+  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[character])
   const hasWecoMetaAccount = Boolean(
     config.metaAppId && !config.metaAppId.startsWith('YOUR_') &&
     config.metaAdAccountId && !config.metaAdAccountId.startsWith('YOUR_')
@@ -199,7 +206,7 @@
       $('metaCpl').textContent = totals.leads ? won.format(totals.spend / totals.leads) : '–'
       $('metaCampaignTable').innerHTML = '<div class="table-row"><span>캠페인</span><span>광고비</span><span>노출</span><span>클릭</span><span>문의</span></div>' + rows.map(row => {
         const leads = actionCount(row.actions, ['lead', 'onsite_conversion.lead_grouped', 'offsite_conversion.fb_pixel_lead'])
-        return `<div class="table-row"><span>${row.campaign_name || '이름 없음'}</span><span>${won.format(Number(row.spend || 0))}</span><span>${number.format(Number(row.impressions || 0))}</span><span>${number.format(Number(row.clicks || 0))}</span><span>${number.format(leads)}</span></div>`
+        return `<div class="table-row"><span>${escapeHtml(row.campaign_name || '이름 없음')}</span><span>${won.format(Number(row.spend || 0))}</span><span>${number.format(Number(row.impressions || 0))}</span><span>${number.format(Number(row.clicks || 0))}</span><span>${number.format(leads)}</span></div>`
       }).join('')
       button.textContent = 'Meta 다시 연결'
       metaStatus('Meta 광고 연결됨')

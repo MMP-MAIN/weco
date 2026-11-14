@@ -5,6 +5,20 @@
   var MAX_FILE_COUNT = 5;
   var MAX_TOTAL_BYTES = 9 * 1024 * 1024;
   var emailValue = '';
+  var discoveryGuard;
+
+  function showSecurityStatus(message) {
+    var card = document.querySelector('.contact-card');
+    if (!card) return;
+    var status = card.querySelector('[data-security-status]');
+    if (!status) {
+      status = document.createElement('p');
+      status.setAttribute('data-security-status', 'true');
+      status.setAttribute('role', 'status');
+      card.appendChild(status);
+    }
+    status.textContent = message;
+  }
 
   function trackSubmitError(reason, extra) {
     var params = Object.assign({ form_name: 'brand_discovery', error_reason: reason }, extra || {});
@@ -35,6 +49,7 @@
 
   function addEmailField() {
     var contactCard = document.querySelector('.contact-card');
+    if (contactCard) discoveryGuard = window.WECO_FORM_GUARD?.attach(contactCard);
     if (!contactCard || contactCard.querySelector('[data-client-email]')) return;
 
     var twoColumn = contactCard.querySelector('.two');
@@ -61,7 +76,14 @@
     if (!button) return;
     var input = document.querySelector('[data-client-email] input');
     emailValue = input ? input.value.trim() : emailValue;
-    if (validEmail(emailValue)) return;
+    if (validEmail(emailValue)) {
+      var security = discoveryGuard?.check();
+      if (!security || security.allowed) { showSecurityStatus(''); return; }
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      showSecurityStatus(security.message);
+      return;
+    }
 
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -91,6 +113,21 @@
   }, true);
 
   var originalFetch = window.fetch.bind(window);
+  function sendForm(resource, options) {
+    var security = discoveryGuard?.begin();
+    if (security && !security.allowed) {
+      showSecurityStatus(security.message);
+      return Promise.reject(new Error('Submission blocked by local form guard'));
+    }
+    return originalFetch(resource, options).then(async function (response) {
+      var result = await response.clone().json().catch(function () { return {}; });
+      if (response.ok && (result.success === true || result.success === 'true')) {
+        discoveryGuard?.accepted();
+        try { sessionStorage.removeItem('weco_discovery_pending'); } catch (_) {}
+      }
+      return response;
+    }).finally(function () { discoveryGuard?.release(); });
+  }
   window.fetch = function (resource, options) {
     var url = typeof resource === 'string' ? resource : (resource && resource.url) || '';
     var nextOptions = options ? Object.assign({}, options) : {};
@@ -108,26 +145,27 @@
         var mailBody = JSON.parse(nextOptions.body);
         mailBody['고객 이메일'] = emailValue;
         mailBody._replyto = emailValue;
+        mailBody._honey = discoveryGuard?.honeypot() || '';
         nextOptions.body = JSON.stringify(mailBody);
       } catch (_) {}
+      return sendForm(resource, nextOptions);
     }
 
     if (url === FORM_ENDPOINT && nextOptions.body instanceof FormData) {
       var formData = nextOptions.body;
       formData.set('고객 이메일', emailValue);
       formData.set('_replyto', emailValue);
+      formData.set('_honey', discoveryGuard?.honeypot() || '');
       var files = Array.from(formData.values()).filter(function (value) { return value instanceof File; });
       var totalBytes = files.reduce(function (sum, file) { return sum + file.size; }, 0);
-      sessionStorage.setItem('weco_discovery_pending', JSON.stringify({
+      try { sessionStorage.setItem('weco_discovery_pending', JSON.stringify({
         at: new Date().toISOString(),
-        email: emailValue,
         fileCount: files.length,
         totalBytes: totalBytes
-      }));
+      })); } catch (_) {}
 
-      return originalFetch(resource, nextOptions).then(function (response) {
+      return sendForm(resource, nextOptions).then(function (response) {
         if (response.ok) {
-          sessionStorage.removeItem('weco_discovery_pending');
           return response;
         }
         if (!files.length) {
@@ -140,7 +178,7 @@
           if (!(value instanceof File)) textOnly.append(key, value);
         });
         textOnly.append('첨부파일 상태', '첨부 전송 문제로 설문 원문을 우선 접수했습니다. 고객에게 파일을 별도로 요청해주세요.');
-        return originalFetch(resource, Object.assign({}, nextOptions, { body: textOnly }));
+        return sendForm(resource, Object.assign({}, nextOptions, { body: textOnly }));
       }).catch(function (error) {
         trackSubmitError('network', { file_count: files.length });
         throw error;

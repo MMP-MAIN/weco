@@ -1,9 +1,10 @@
 import { getInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=11'
 import { createInquiryTracking } from './inquiry-tracking.mjs?v=2'
-import { getLeadContext, inquiryPayload, sendInquiry } from './inquiry-delivery.mjs?v=2'
+import { getLeadContext, inquiryPayload, sendInquiry } from './inquiry-delivery.mjs?v=3'
 
 const bar = document.getElementById('quick-consult')
 const form = bar.querySelector('form')
+const submissionGuard = window.WECO_FORM_GUARD?.attach(form)
 const inquiryId = form.dataset.inquiry
 const context = getInquiryContext(inquiryId ? `?inquiry=${inquiryId}` : location.search)
 const submit = form.querySelector('button[type="submit"]')
@@ -73,6 +74,12 @@ form.addEventListener('submit', async event => {
     return
   }
 
+  const guardResult = submissionGuard?.begin()
+  if (guardResult && !guardResult.allowed) {
+    showStatus(guardResult.message, 'error')
+    return
+  }
+
   submit.disabled = true
   fields.forEach(field => { field.disabled = true })
   submit.textContent = '전송 중'
@@ -85,8 +92,10 @@ form.addEventListener('submit', async event => {
   try {
     await sendInquiry(inquiryPayload({
       name, phone, context, leadContext: getLeadContext(), quick: true,
+      honeypot: submissionGuard?.honeypot() || '',
       inquiryMode: submissionParams.inquiry_mode
     }), controller.signal)
+    submissionGuard?.accepted()
     try {
       emit(submissionParams.inquiry_mode === 'test' ? 'test_inquiry' : 'generate_lead', {
         ...submissionParams, lead_status: 'accepted_by_form_service'
@@ -103,6 +112,7 @@ form.addEventListener('submit', async event => {
       })
     } catch (_) { /* Tracking cannot prevent a retry. */ }
   } finally {
+    submissionGuard?.release()
     clearTimeout(timer)
     fields.forEach(field => { field.disabled = false })
     submit.disabled = false
