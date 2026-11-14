@@ -75,6 +75,9 @@ html.studio-root.studio-menu-open{overflow:hidden}
 .studio-home .studio-about-copy .studio-about-definition{color:#f7f7f5;font-size:19px;line-height:1.65}
 .studio-home .studio-about-copy .studio-about-vision{margin-bottom:0}
 .studio-home .studio-about-context{max-width:440px;margin:20px 0 0;color:#aaa;font:400 15px/1.8 Pretendard,Arial,sans-serif;word-break:keep-all;overflow-wrap:anywhere}
+.studio-home .studio-about-links{display:flex;flex-wrap:wrap;gap:8px 22px;max-width:500px;margin-top:22px}
+.studio-home .studio-about-links a{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:#f7f7f5;font-size:14px;line-height:1.6;text-decoration:underline;text-underline-offset:5px;word-break:keep-all}
+.studio-home .studio-about-links a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
 .studio-home .studio-about-copy strong{color:#f7f7f5;font-weight:500}
 .studio-home .contact-next-step{margin:16px 0;color:#aaa;font:400 14px/1.8 Pretendard,Arial,sans-serif;word-break:keep-all;overflow-wrap:anywhere}
 .studio-home .selected-vision{padding:clamp(48px,6vw,88px) 0;border:0}

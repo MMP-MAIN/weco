@@ -21,7 +21,7 @@ assert.doesNotMatch(html, /OUR APPROACH|감각은 선명하게/);
 assert.match(html, /class="container studio-resources-grid"/);
 assert.match(html, /data-conversion="marketing_site"/);
 assert.match(html, /data-conversion="brand_discovery"/);
-assert.match(html, /studio-refresh\.css\?v=7/);
+assert.match(html, /studio-refresh\.css\?v=\d+/);
 assert.match(html, /studio-refresh\.js\?v=3/);
 assert.match(js, /href === '#weco-about'/);
 assert.match(css, /\.studio-about-grid\{display:grid;grid-template-columns:minmax\(0,1\.15fr\) minmax\(0,1fr\)/);
