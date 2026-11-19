@@ -141,7 +141,7 @@ export function applyInquiryContext(doc, search) {
   const note = doc.getElementById('inquiryContextNote')
   const message = doc.getElementById('inquiryMessage')
   if (!context || !note || !message) return null
-  note.textContent = `${context.topic} · 읽은 글: ${context.title}`
+  note.textContent = `${context.topic} · 관련 안내: ${context.title}`
   note.hidden = false
   // Keep the visitor's message untouched, including browser-restored input.
   message.placeholder = context.placeholder

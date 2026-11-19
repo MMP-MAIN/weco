@@ -1,5 +1,5 @@
 // ===== 위코컴퍼니 홈페이지 스크립트 =====
-import { applyInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=11'
+import { applyInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=12'
 import { createInquiryTracking } from './inquiry-tracking.mjs?v=2'
 import { getLeadContext, inquiryPayload, sendInquiry } from './inquiry-delivery.mjs?v=3'
 

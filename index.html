@@ -8,7 +8,7 @@
   <script src="lead-attribution.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <link rel="alternate" type="application/rss+xml" title="위코컴퍼니 인사이트" href="https://wecocompany.com/rss.xml" />
-<title>브랜드 기획·디자인·사업 컨설팅 | 위코컴퍼니</title>
+<title>대구 인테리어·공간·브랜드 디자인 | 위코컴퍼니</title>
 <meta name="description" content="대구 중구 기반 위코컴퍼니. 브랜드 기획·디자인과 상가·식당, 아파트·주택의 인테리어 공간기획을 상담합니다. 실제 프로젝트 사진과 위코가 맡은 업무를 확인하세요." />
 <meta name="naver-site-verification" content="7144d98a3e32ba20cb3eabcf0b0c1a2730cf5df1" />
 <meta name="keywords" content="브랜드 컨설팅, 공간 브랜딩, 상업공간 인테리어, 공간 기획, 식당 인테리어, 미용실 인테리어, 사무실 인테리어, 프로젝트 디렉팅" />
@@ -35,7 +35,7 @@
 <!-- 오픈그래프 (카카오톡·네이버 공유 미리보기) -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="위코컴퍼니" />
-<meta property="og:title" content="위코컴퍼니 | 브랜드 기획·디자인" />
+<meta property="og:title" content="위코컴퍼니 | 상업·주거공간과 브랜드 디자인" />
 <meta property="og:description" content="대구에서 브랜드 방향과 인테리어 공간기획·디자인을 함께합니다. 실제 프로젝트와 수행 범위를 확인하세요." />
 <meta property="og:url" content="https://wecocompany.com/" />
 <meta property="og:image" content="https://wecocompany.com/images/og-card-v4.jpg" />
@@ -48,7 +48,7 @@
 
 <!-- 트위터 카드 -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="위코컴퍼니 | 브랜드 기획·디자인" />
+<meta name="twitter:title" content="위코컴퍼니 | 상업·주거공간과 브랜드 디자인" />
 <meta name="twitter:description" content="대구에서 브랜드 방향과 인테리어 공간기획·디자인을 함께합니다. 실제 프로젝트와 수행 범위를 확인하세요." />
 <meta name="twitter:image" content="https://wecocompany.com/images/og-card-v4.jpg" />
 <meta name="twitter:image:alt" content="흰 배경에 검정 위코컴퍼니 로고" />
@@ -65,6 +65,7 @@
   <link rel="stylesheet" href="home-neutral.css?v=4" />
 <link rel="stylesheet" href="studio-refresh.css?v=10" />
   <link rel="stylesheet" href="quick-consult.css?v=2" />
+  <link rel="stylesheet" href="home-spaces.css?v=1" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-45Q0B2B2XR"></script>
 <script src="analytics-init.js?v=1"></script>
@@ -87,7 +88,7 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
 <!-- End Meta Pixel Code -->
 <script src="inquiry-guard.js?v=1"></script>
 </head>
-<body class="studio-home">
+<body class="studio-home" data-home-layout="spaces">
 <a class="skip-link" href="#weco-about">본문 바로가기</a>
 
 <!-- ===== 상단 내비게이션 (중앙 로고 · 미니멀) ===== -->
@@ -96,6 +97,8 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
     <button class="menu-toggle" id="menuToggle" type="button" aria-label="메뉴 열기" aria-controls="gnb" aria-expanded="false"><span></span><span></span><span></span></button>
     <a href="/" class="brand brand-official" aria-label="위코컴퍼니"><img src="brand-assets/Weco_weco-transparent.png" alt="" width="852" height="192" decoding="async" fetchpriority="high" /><span>위코컴퍼니</span></a>
     <nav class="gnb" id="gnb" data-lenis-prevent>
+      <a href="#studioWork">Commercial / 상업공간</a>
+      <a href="#residential-design">Residential / 주거공간</a>
       <a href="#weco-about">About / 위코 소개</a>
       <a href="#portfolio">Work / 프로젝트</a>
       <a href="insights.html">Insight / 인사이트</a>
@@ -108,33 +111,89 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
   </div>
 </header>
 
-<!-- ===== 타이포그래피 중심 첫 화면 ===== -->
+<!-- ===== 상업공간과 주거공간 ===== -->
 <section class="hero">
   <div class="hero-video" id="heroVideo" aria-hidden="true"></div>
   <div class="container hero-inner">
-    <div class="studio-hero-message">
-      <p class="studio-display" data-studio-display aria-hidden="true">
-        <span class="studio-display-line"><span data-studio-verb>Growing</span></span>
-        <span class="studio-display-line"><span data-studio-noun>Brands.</span></span>
-      </p>
-      <div class="studio-hero-value">
-        <p class="studio-hero-question">창업부터 브랜드·공간의 변화까지</p>
-        <p class="studio-hero-answer">무엇을 바꿀지보다,<br />왜 바꿔야 하는지부터.</p>
-        <p class="studio-hero-description">현재 고민과 예산을 바탕으로 필요한 일부터 정리하고,<br /> 기획·디자인·공간을 하나의 방향으로 연결합니다.</p>
-      </div>
+    <div class="home-space-intro">
+      <div><p class="section-eyebrow">WECO · SPACE &amp; BRAND DESIGN</p><h1>일하는 공간도,<br />살아가는 공간도.</h1></div>
+      <p class="home-space-definition">가게의 개성과 집의 일상을 생각합니다.<br />공간과 브랜드를 설계하는<br />디자인 스튜디오, 위코입니다.</p>
     </div>
-    <div class="studio-hero-bottom">
-      <div>
-        <p class="hero-eyebrow">브랜드 기획 · 디자인 · 상업공간 · 디렉팅</p>
-        <p class="hero-reassurance">무엇을 맡길지 정하지 못했어도 괜찮습니다.</p>
-        <button class="studio-motion-control" type="button" data-studio-motion aria-pressed="false" hidden>움직임 멈춤 Ⅱ</button>
-      </div>
-      <div class="hero-actions">
-        <a href="#contact" class="btn btn-cream btn-lg hero-primary-action" data-conversion="project_inquiry">내 상황 상담하기 <span>↗</span></a>
-        <button type="button" class="btn btn-gl btn-lg hero-secondary-action" data-open-projects>실제 작업 보기</button>
-        <a href="https://open.kakao.com/o/sBasXuKi" target="_blank" rel="noopener noreferrer" class="btn btn-gl btn-lg hero-secondary-action" data-conversion="kakao_openchat">카카오 상담</a>
-      </div>
+    <div class="home-space-entries">
+      <a class="home-space-entry" href="#studioWork" aria-label="상업공간 프로젝트 보기"><figure><img src="images/caveu-07-seating-real-web.webp" alt="까브유랑 와인바의 조명과 좌석이 보이는 상업공간" width="1536" height="1024" decoding="async" fetchpriority="high" /><figcaption><div><h2>상업공간</h2><p>식당 · 카페 · 와인바 · 매장</p></div><span aria-hidden="true">↗</span></figcaption></figure></a>
+      <a class="home-space-entry" href="#residential-design" aria-label="아파트·주택 평형별 디자인 보기"><figure><img src="images/residential-design/apartment-30-1440.webp" srcset="images/residential-design/apartment-30-768.webp 768w, images/residential-design/apartment-30-1440.webp 1440w" sizes="(max-width: 640px) calc(50vw - 22px), (max-width: 1664px) calc(50vw - 40px), 788px" alt="가구 없이 정리한 아파트 거실과 주방 공간 디자인" width="1440" height="960" decoding="async" /><figcaption><div><h2>주거공간</h2><p>아파트 · 주택 · 리모델링</p></div><span aria-hidden="true">↗</span></figcaption></figure></a>
     </div>
+    <div class="hero-actions home-space-actions">
+      <a href="#contact" class="btn btn-cream btn-lg hero-primary-action" data-conversion="project_inquiry">상담 문의 <span>↗</span></a>
+      <button type="button" class="btn btn-gl btn-lg hero-secondary-action" data-open-projects>실제 작업 보기</button>
+      <a href="https://open.kakao.com/o/sBasXuKi" target="_blank" rel="noopener noreferrer" class="btn btn-gl btn-lg hero-secondary-action" data-conversion="kakao_openchat">카카오 상담</a>
+    </div>
+  </div>
+</section>
+
+<section class="home-residential" id="residential-design" aria-labelledby="residentialDesignTitle" tabindex="-1">
+  <div class="container">
+    <header class="home-residential-head"><p class="section-eyebrow">RESIDENTIAL DESIGN</p><h2 id="residentialDesignTitle">우리 집에 맞는 공간.</h2><p>아파트 평형과 주택 구조에 맞춰 공간의 방향을 살펴보세요.</p></header>
+    <div class="home-residential-tabs" role="tablist" aria-label="주거 디자인 유형">
+      <button type="button" id="home-tab-20" role="tab" aria-controls="home-panel-20" aria-selected="false" tabindex="-1">아파트 20평대</button>
+      <button type="button" id="home-tab-30" role="tab" aria-controls="home-panel-30" aria-selected="true">30평대</button>
+      <button type="button" id="home-tab-40" role="tab" aria-controls="home-panel-40" aria-selected="false" tabindex="-1">40평대</button>
+      <button type="button" id="home-tab-single" role="tab" aria-controls="home-panel-single" aria-selected="false" tabindex="-1">단층 주택</button>
+      <button type="button" id="home-tab-duplex" role="tab" aria-controls="home-panel-duplex" aria-selected="false" tabindex="-1">복층 주택</button>
+    </div>
+    <figure class="home-residential-panel" id="home-panel-20" role="tabpanel" aria-labelledby="home-tab-20" tabindex="0" hidden>
+      <img src="images/residential-design/apartment-20-1440.webp" srcset="images/residential-design/apartment-20-768.webp 768w, images/residential-design/apartment-20-1440.webp 1440w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1664px) calc(100vw - 64px), 1600px" alt="20평대 아파트를 위한 밝은 거실과 작은 주방 공간 디자인" width="1440" height="960" loading="lazy" decoding="async" />
+      <figcaption><div><h3>20평대 아파트</h3><p>작은 공간을 넓게 쓰는 동선과 밝은 마감.</p></div><a href="index.html?inquiry=small-apartment#contact" data-conversion="project_inquiry">이런 공간으로 상담하기 <span aria-hidden="true">↗</span></a></figcaption>
+    </figure>
+    <figure class="home-residential-panel" id="home-panel-30" role="tabpanel" aria-labelledby="home-tab-30" tabindex="0">
+      <img src="images/residential-design/apartment-30-1440.webp" srcset="images/residential-design/apartment-30-768.webp 768w, images/residential-design/apartment-30-1440.webp 1440w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1664px) calc(100vw - 64px), 1600px" alt="30평대 아파트의 거실과 주방, 벽면 수납 공간 디자인" width="1440" height="960" loading="lazy" decoding="async" />
+      <figcaption><div><h3>30평대 아파트</h3><p>거실과 주방을 이어주는 개방감, 벽면에 정리한 수납.</p></div><a href="index.html?inquiry=apartment-cost#contact" data-conversion="project_inquiry">이런 공간으로 상담하기 <span aria-hidden="true">↗</span></a></figcaption>
+    </figure>
+    <figure class="home-residential-panel" id="home-panel-40" role="tabpanel" aria-labelledby="home-tab-40" tabindex="0" hidden>
+      <img src="images/residential-design/apartment-40-1440.webp" srcset="images/residential-design/apartment-40-768.webp 768w, images/residential-design/apartment-40-1440.webp 1440w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1664px) calc(100vw - 64px), 1600px" alt="40평대 아파트의 넓은 거실과 우드 벽면 공간 디자인" width="1440" height="960" loading="lazy" decoding="async" />
+      <figcaption><div><h3>40평대 아파트</h3><p>넉넉한 거실과 차분한 우드 마감으로 잡은 공간의 균형.</p></div><a href="index.html?inquiry=large-apartment#contact" data-conversion="project_inquiry">이런 공간으로 상담하기 <span aria-hidden="true">↗</span></a></figcaption>
+    </figure>
+    <figure class="home-residential-panel" id="home-panel-single" role="tabpanel" aria-labelledby="home-tab-single" tabindex="0" hidden>
+      <img src="images/residential-design/house-single-1440.webp" srcset="images/residential-design/house-single-768.webp 768w, images/residential-design/house-single-1440.webp 1440w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1664px) calc(100vw - 64px), 1600px" alt="정원으로 이어지는 창과 주방이 있는 단층 주택 공간 디자인" width="1440" height="960" loading="lazy" decoding="async" />
+      <figcaption><div><h3>단층 주택</h3><p>정원으로 이어지는 창과 한 층 안에서 편하게 움직이는 동선.</p></div><a href="index.html?inquiry=house-remodeling#contact" data-conversion="project_inquiry">이런 공간으로 상담하기 <span aria-hidden="true">↗</span></a></figcaption>
+    </figure>
+    <figure class="home-residential-panel" id="home-panel-duplex" role="tabpanel" aria-labelledby="home-tab-duplex" tabindex="0" hidden>
+      <img src="images/residential-design/house-duplex-1440.webp" srcset="images/residential-design/house-duplex-768.webp 768w, images/residential-design/house-duplex-1440.webp 1440w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1664px) calc(100vw - 64px), 1600px" alt="계단과 높은 창으로 위아래 공간을 잇는 복층 주택 공간 디자인" width="1440" height="960" loading="lazy" decoding="async" />
+      <figcaption><div><h3>복층 주택</h3><p>위아래 공간을 잇는 계단과 높은 창으로 들어오는 자연광.</p></div><a href="index.html?inquiry=house-remodeling#contact" data-conversion="project_inquiry">이런 공간으로 상담하기 <span aria-hidden="true">↗</span></a></figcaption>
+    </figure>
+    <nav class="home-residential-guides" aria-label="주거 인테리어 준비 안내"><a href="residential.html">주거공간 안내 ↗</a><a href="daegu-apartment-interior.html">대구 아파트 인테리어 ↗</a><a href="house-remodeling-guide.html">주택 리모델링 준비 ↗</a></nav>
+  </div>
+</section>
+
+<section class="studio-work" id="studioWork" aria-labelledby="studioWorkTitle" tabindex="-1">
+  <div class="container">
+    <div class="studio-section-head">
+      <h2 id="studioWorkTitle">상업공간 프로젝트</h2>
+      <p>공간과 브랜드의 실제 작업을 확인하세요.</p>
+    </div>
+    <div class="home-commercial-projects">
+      <a href="project-gasik.html#role"><figure><img src="images/gasik-01.jpg" alt="레스토랑 가식의 실제 매장 외관" width="966" height="644" loading="lazy" decoding="async" /><figcaption><h3>레스토랑 가식</h3><p>기획 · 디자인 · 공간 · 광고</p></figcaption></figure></a>
+      <a href="wine-bar-interior.html#case"><figure><img src="images/caveu-07-seating-real-web.webp" alt="까브유랑의 실제 실내 좌석과 조명" width="1536" height="1024" loading="lazy" decoding="async" /><figcaption><h3>까브유랑</h3><p>와인바 · 공간과 브랜드</p></figcaption></figure></a>
+    </div>
+    <ul class="studio-client-list">
+      <li class="studio-case-highlight"><strong>레스토랑 가식</strong><span>대구 · 삼덕 / 더현대 / 범어</span><span class="studio-case-role">수행 범위 · 기획 / 디자인 / 공간 / 광고</span><a href="project-gasik.html#role">위코가 맡은 일 보기 <span aria-hidden="true">↗</span></a></li>
+      <li><strong>청우해장</strong><span>해장국 브랜드</span></li>
+      <li><strong>구미 쌀알</strong><span>한식 · 구미 문성</span></li>
+      <li><strong>의료기기</strong><span>브랜드 전략 · 아이덴티티 · 고객 경험</span></li>
+      <li><strong>스시해리</strong><span>스시 오마카세</span></li>
+      <li><strong>ACT 호텔</strong><span>호텔 · 게스트 경험</span></li>
+    </ul>
+    <div class="selected-vision-foot">
+      <button type="button" data-open-projects>전체 프로젝트 보기 <span aria-hidden="true">↗</span></button>
+      <nav class="project-story-links" aria-label="프로젝트 상세 사례">
+        <a href="daegu-interior-space-branding.html#cases">대구 인테리어 실제 사례 ↗</a>
+        <a href="project-gasik.html">가식 사례 ↗</a>
+        <a href="project-gmnari.html">금나리 사례 ↗</a>
+        <a href="wine-bar-interior.html">와인바 인테리어 ↗</a>
+        <a href="project-act-hotel.html">ACT 호텔 사례 ↗</a>
+      </nav>
+    </div>
+    <p class="project-scope-note">프로젝트에는 브랜드 기획·디자인, 공간, 광고·마케팅 작업이 함께 포함되어 있습니다. 참여 범위는 프로젝트마다 다르며, 모든 업무를 일괄 수행한 것은 아닙니다.</p>
   </div>
 </section>
 
@@ -162,7 +221,7 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
   <div class="container studio-intro-grid" id="scope" tabindex="-1">
     <div class="studio-intro-copy hero-copy">
       <p class="section-eyebrow">HOW WE HELP — 맡기면 정리되는 것</p>
-      <h1 class="hero-en" id="heroHeadline">브랜드를 바꾸기 전,<br /><strong>해야 할 일부터 명확하게.</strong></h1>
+      <h2 class="hero-en" id="heroHeadline">브랜드를 바꾸기 전,<br /><strong>해야 할 일부터 명확하게.</strong></h2>
       <p class="hero-promise">현재 상황에 맞춰 필요한 업무와 순서를 정합니다. 진행 범위는 상담 후 함께 정합니다.</p>
     </div>
     <div class="service-summary-grid">
@@ -172,34 +231,6 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
       <article><h3><a href="#contact" aria-label="프로젝트 디렉팅 상담">실행·조율 <span aria-hidden="true">↗</span></a></h3><p>업무별 역할·진행 순서·협의할 사항.</p></article>
       <article class="service-education"><h3><a href="#contact" aria-label="창업 강의·창업 교육 문의">창업 교육 <span aria-hidden="true">↗</span></a></h3><p>창업 강의·창업 교육 — 준비 단계에서 확인할 기준.</p></article>
     </div>
-  </div>
-</section>
-
-<section class="studio-work" id="studioWork" aria-labelledby="studioWorkTitle">
-  <div class="container">
-    <div class="studio-section-head">
-      <h2 id="studioWorkTitle">Selected Work</h2>
-      <p>설명보다 실제 작업으로 확인하세요.</p>
-    </div>
-    <ul class="studio-client-list">
-      <li class="studio-case-highlight"><strong>레스토랑 가식</strong><span>대구 · 삼덕 / 더현대 / 범어</span><span class="studio-case-role">수행 범위 · 기획 / 디자인 / 공간 / 광고</span><a href="project-gasik.html#role">위코가 맡은 일 보기 <span aria-hidden="true">↗</span></a></li>
-      <li><strong>청우해장</strong><span>해장국 브랜드</span></li>
-      <li><strong>구미 쌀알</strong><span>한식 · 구미 문성</span></li>
-      <li><strong>의료기기</strong><span>브랜드 전략 · 아이덴티티 · 고객 경험</span></li>
-      <li><strong>스시해리</strong><span>스시 오마카세</span></li>
-      <li><strong>ACT 호텔</strong><span>호텔 · 게스트 경험</span></li>
-    </ul>
-    <div class="selected-vision-foot">
-      <button type="button" data-open-projects>전체 프로젝트 보기 <span aria-hidden="true">↗</span></button>
-      <nav class="project-story-links" aria-label="프로젝트 상세 사례">
-        <a href="daegu-interior-space-branding.html#cases">대구 인테리어 실제 사례 ↗</a>
-        <a href="project-gasik.html">가식 사례 ↗</a>
-        <a href="project-gmnari.html">금나리 사례 ↗</a>
-        <a href="wine-bar-interior.html">와인바 인테리어 ↗</a>
-        <a href="project-act-hotel.html">ACT 호텔 사례 ↗</a>
-      </nav>
-    </div>
-    <p class="project-scope-note">프로젝트에는 브랜드 기획·디자인, 공간, 광고·마케팅 작업이 함께 포함되어 있습니다. 참여 범위는 프로젝트마다 다르며, 모든 업무를 일괄 수행한 것은 아닙니다.</p>
   </div>
 </section>
 
@@ -642,8 +673,9 @@ src="https://www.facebook.com/tr?id=1330320655850964&amp;ev=PageView&amp;noscrip
   "inLanguage": "ko"
 }
 </script>
-  <script type="module" src="main.js?v=162"></script>
-  <script type="module" src="quick-consult.mjs?v=5"></script>
+  <script type="module" src="main.js?v=163"></script>
+  <script type="module" src="quick-consult.mjs?v=6"></script>
   <script type="module" src="studio-refresh.js?v=3"></script>
+  <script type="module" src="home-spaces.mjs?v=1"></script>
 </body>
 </html>

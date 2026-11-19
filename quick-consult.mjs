@@ -1,4 +1,4 @@
-import { getInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=11'
+import { getInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v=12'
 import { createInquiryTracking } from './inquiry-tracking.mjs?v=2'
 import { getLeadContext, inquiryPayload, sendInquiry } from './inquiry-delivery.mjs?v=3'
 

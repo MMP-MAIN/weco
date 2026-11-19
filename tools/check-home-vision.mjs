@@ -12,11 +12,12 @@ assert.ok(start >= 0 && end > start, 'The production introduction handler must e
 const introduction = main.slice(start, end);
 const hero = html.match(/<section class="hero">([\s\S]*?)<\/section>/)?.[1];
 assert.ok(hero, 'The homepage hero must exist.');
-assert.match(hero, /창업부터 브랜드·공간의 변화까지/);
-assert.match(hero, /무엇을 바꿀지보다,<br\s*\/>왜 바꿔야 하는지부터\./);
-assert.match(hero, /현재 고민과 예산을 바탕으로 필요한 일부터 정리하고/);
+assert.match(hero, /일하는 공간도,<br\s*\/>살아가는 공간도\./);
+assert.match(hero, /공간과 브랜드를 설계하는/);
+assert.match(hero, /href="#studioWork"/);
+assert.match(hero, /href="#residential-design"/);
 assert.doesNotMatch(hero, /수익\s*보장|부동산\s*가격\s*상승/);
-assert.match(hero, /data-studio-display aria-hidden="true"/);
+assert.doesNotMatch(hero, /data-studio-display/);
 assert.match(hero, /href="#contact"[^>]*data-conversion="project_inquiry"/);
 assert.match(hero, /data-open-projects/);
 assert.match(hero, /href="https:\/\/open\.kakao\.com\/o\/sBasXuKi"/);
