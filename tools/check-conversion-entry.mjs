@@ -8,7 +8,7 @@ const hero = html.match(/<section class="hero">([\s\S]*?)<\/section>/)?.[1];
 const contact = html.match(/<section[^>]+id="contact"[\s\S]*?<\/section>/)?.[0];
 assert.ok(hero && contact);
 assert.match(hero, /class="company-intro"/);
-assert.match(hero, /사업·브랜드·공간을/);
+assert.match(hero, /창업·브랜드·공간을/);
 assert.match(hero, /기획 회사, 위코입니다/);
 assert.match(hero, /상담 문의/);
 assert.match(hero, /실제 작업 보기/);

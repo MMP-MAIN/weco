@@ -12,7 +12,7 @@ assert.ok(start >= 0 && end > start, 'The production introduction handler must e
 const introduction = main.slice(start, end);
 const hero = html.match(/<section class="hero">([\s\S]*?)<\/section>/)?.[1];
 assert.ok(hero, 'The homepage hero must exist.');
-assert.match(hero, /사업·브랜드·공간을<br\s*\/>함께 기획합니다\./);
+assert.match(hero, /창업·브랜드·공간을<br\s*\/>함께 기획합니다\./);
 assert.match(hero, /기획 회사, 위코입니다/);
 assert.match(hero, /href="#scope"/);
 const spacePaths = html.match(/<section class="company-space-paths"[\s\S]*?<\/section>/)?.[0];
