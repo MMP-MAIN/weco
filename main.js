@@ -3,8 +3,6 @@ import { applyInquiryContext, inquiryEventParams } from './inquiry-context.mjs?v
 import { createInquiryTracking } from './inquiry-tracking.mjs?v=2'
 import { getLeadContext, inquiryPayload, sendInquiry } from './inquiry-delivery.mjs?v=3'
 
-const PHONE = '010-8606-2119'
-
 // 이미지가 없는 프로젝트는 깨진 썸네일 대신 작업 내용을 텍스트로 표시합니다.
 document.addEventListener('error', (event) => {
   const image = event.target
@@ -573,10 +571,10 @@ typeCards?.addEventListener('click', (e) => {
 const FORM_MSG = ({
   en: { need: 'Please enter your name and phone number.',
         ok: 'Your request has been received. We will get back to you shortly.',
-        err: `Something went wrong. Please call ${PHONE}.` },
+        err: 'We could not confirm receipt. Your entries are still here. Please check with us on KakaoTalk before submitting again.' },
   vi: { need: 'Vui lòng nhập họ tên và số điện thoại.',
         ok: 'Yêu cầu của bạn đã được gửi. Chúng tôi sẽ liên hệ lại sớm.',
-        err: `Có lỗi xảy ra. Vui lòng gọi ${PHONE}.` }
+        err: 'Chúng tôi chưa xác nhận được yêu cầu. Thông tin bạn đã nhập vẫn còn trên biểu mẫu. Vui lòng hỏi qua KakaoTalk trước khi gửi lại.' }
 })[document.documentElement.lang] || {
   need: '이름과 연락처를 입력해주세요.',
   ok: '문의가 접수되었습니다. 평일 상담시간에 내용을 확인한 뒤 남겨주신 번호로 문자 안내를 드립니다.',

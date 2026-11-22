@@ -31,10 +31,10 @@ for (const path of ['index.html', 'en.html', 'vi.html']) {
   assert.ok(org, `${path}: company record`);
   assert.equal(org['@id'], `${origin}/#organization`, `${path}: company identity`);
   assert.equal(org.url, `${origin}/`, `${path}: official company URL`);
-  assert.equal(org.telephone, '+82-10-8606-2119', `${path}: telephone`);
+  assert.ok(!Object.hasOwn(org, 'telephone'), `${path}: no public telephone in company data`);
   assert.equal(org.image, `${origin}/images/og-card-v4.jpg`, `${path}: official image`);
   assert.deepEqual(org.address, primary.address, `${path}: address`);
-  assert.equal(org.email, primary.email, `${path}: email`);
+  assert.ok(!Object.hasOwn(org, 'email'), `${path}: project inquiries go through the form`);
   assert.deepEqual(org.sameAs, primary.sameAs, `${path}: official profiles`);
   assert.equal(org.hasOfferCatalog.itemListElement.length, path === 'index.html' ? 5 : 4, `${path}: listed WECO service areas`);
   assert.doesNotMatch(JSON.stringify(org.hasOfferCatalog), /marketing|마케팅/i, `${path}: marketing stays external`);
@@ -51,7 +51,7 @@ assert.ok(primary.hasOfferCatalog.itemListElement.some((item) => item.itemOffere
 assert.match(documents.get('index.html'), /href="#contact" aria-label="창업 강의·창업 교육 문의"/);
 assert.ok(llms.includes('창업 강의·창업 교육'));
 assert.ok(llms.includes(`${origin}/#scope`));
-assert.ok(llms.includes('010-8606-2119'));
+assert.ok(llms.includes(`${origin}/#contact`));
 assert.ok(llms.includes('https://mpmarketing.co.kr/'));
 assert.ok(llms.includes(`${origin}/residential.html`), 'apartment consultation is a separate guide');
 assert.ok(llms.includes('현장별 가능 범위와 시공 담당은 별도 협의'), 'do not promise unverified construction scope');
