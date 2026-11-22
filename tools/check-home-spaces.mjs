@@ -13,8 +13,12 @@ assert.equal((gallery.match(/role="tabpanel"/g) || []).length, 5);
 assert.equal((gallery.match(/ tabindex="0" hidden/g) || []).length, 4);
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
 assert.equal(ids.length, new Set(ids).size, 'New sections do not duplicate existing IDs.');
-assert.ok(html.indexOf('id="residential-design"') < html.indexOf('id="studioWork"'));
-assert.ok(html.indexOf('id="studioWork"') < html.indexOf('id="weco-about"'));
+assert.ok(html.indexOf('id="companyHeadline"') < html.indexOf('id="scope"'), 'Company identity precedes service details.');
+assert.ok(html.indexOf('id="scope"') < html.indexOf('id="company-case"'), 'Services precede their project evidence.');
+assert.ok(html.indexOf('id="company-case"') < html.indexOf('id="company-spaces"'), 'A verified case precedes spatial service selection.');
+assert.ok(html.indexOf('id="company-spaces"') < html.indexOf('id="studioWork"'));
+assert.ok(html.indexOf('id="studioWork"') < html.indexOf('id="residential-design"'));
+assert.ok(html.indexOf('id="residential-design"') < html.indexOf('id="weco-about"'));
 for (const match of gallery.matchAll(/href="(index\.html\?inquiry=[^"]+)"/g)) {
   const url = new URL(match[1], 'https://wecocompany.com/');
   assert.ok(getInquiryContext(url.search), 'Consultation goes to an existing recognized topic.');

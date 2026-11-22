@@ -12,10 +12,13 @@ assert.ok(start >= 0 && end > start, 'The production introduction handler must e
 const introduction = main.slice(start, end);
 const hero = html.match(/<section class="hero">([\s\S]*?)<\/section>/)?.[1];
 assert.ok(hero, 'The homepage hero must exist.');
-assert.match(hero, /일하는 공간도,<br\s*\/>살아가는 공간도\./);
-assert.match(hero, /공간과 브랜드를 설계하는/);
-assert.match(hero, /href="#studioWork"/);
-assert.match(hero, /href="#residential-design"/);
+assert.match(hero, /사업·브랜드·공간을<br\s*\/>함께 기획합니다\./);
+assert.match(hero, /기획 회사, 위코입니다/);
+assert.match(hero, /href="#scope"/);
+const spacePaths = html.match(/<section class="company-space-paths"[\s\S]*?<\/section>/)?.[0];
+assert.ok(spacePaths, 'Both spatial service paths follow the company introduction.');
+assert.match(spacePaths, /href="#studioWork"/);
+assert.match(spacePaths, /href="#residential-design"/);
 assert.doesNotMatch(hero, /수익\s*보장|부동산\s*가격\s*상승/);
 assert.doesNotMatch(hero, /data-studio-display/);
 assert.match(hero, /href="#contact"[^>]*data-conversion="project_inquiry"/);
